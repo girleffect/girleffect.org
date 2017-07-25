@@ -1,0 +1,57 @@
+  # This is sample YAML metadata for a new-style WSGI app.  You should
+  # edit this and provide it to sysadmin to create a new production site.
+  #
+  # Please remove the explanatory comments and CHANGEME markers while
+  # editing it.  Any metadata submitted to sysadmin with 'CHANGEME'
+  # comments still in place will be rejected.
+  #
+  # You must edit, or at least verify, everything marked with CHANGEME.
+  # For detailed documentation on the contents of thes file, refer to
+  # https://projects.torchbox.com/projects/sysadmin/repositories/puppet/blob/master/modules/wsgi/manifests/app.pp
+
+  girleffect:
+    python: '3.6' # CHANGEME
+    module: 'girleffect.wsgi:application'
+
+    dbtype: postgres
+    postgres: remote
+    dbhost: 'postgres-2.itl.rslon.torchbox.net'
+
+    hostnames:
+      __default__:
+        # CHANGEME: Remove the next two lines if you don't want SSL.
+        force_ssl: true
+        letsencrypt: true
+      girleffect-production.torchboxapps.com:
+
+    labels:
+      client: someclient  # CHANGEME
+
+    # CHANGEME
+    # Configure HTTP authentication here.  Usually, production sites have
+    # HTTP auth enabled prior to launch; if you don't want it, remove this
+    # entire 'auth' section.
+    auth:
+      enabled: true
+      users:
+        girleffect: 'password'  # CHANGEME
+      # CHANGEME: to allow client IP addresses to bypass htauth,
+      # uncomment this and add the appropriate hosts.
+      #hosts:
+      #- tbx # leave this to allow Torchbox access
+      #- 1.2.3.0/24 # replace this
+
+    no_default_cron: true
+
+    # CHANGEME:
+    # Set this to 'true' if Wagtail still requires special handling for
+    # its media directory; as of 1.8, this is still the case.
+    legacy_wagtail_media: true
+
+    # CHANGEME:
+    # If you have configuration that differs between staging and production,
+    # you can configure it here as an enviranment variable.  It's also
+    # possible to store secrets (like API tokens) as environment variables;
+    # ask sysadmin if you need that.
+    env:
+      DJANGO_SETTINGS_MODULE: 'girleffect.settings.production'

@@ -1,0 +1,164 @@
+# vim:set sw=2 ts=2 et:
+# This is a sample .gitlab-ci.yml created by wagtail-kit.  You should review
+# it for any necessary changes.
+#
+# This will set up the following:
+#
+# - Test stage: code style, migration and basic configuration checks.
+# - Build stage: build of static assets and Docker image on push.
+# - Deploy stage:
+#   - Automatic setup of a Kubernetes-hosted staging site from the "staging"
+#     branch, if it exists.
+#   - Automatic setup and cleanup of review apps for branches and merge requests.
+
+stages:
+  - test
+  - assets
+  - build
+  - deploy
+
+
+
+image: docker:latest
+variables:
+  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_BUILD_REF
+  DEPLOY_FLAGS: >
+    -eDJANGO_SETTINGS_MODULE=girleffect.settings.production
+    -eCFG_APP_NAME=girleffect
+    --cpu-limit=1
+    --memory-request=128m
+    --memory-limit=128m
+    # Edit this:
+    --htauth-user=girleffect:changethispassword
+    --htauth-address=78.32.251.192/28
+    --htauth-address=193.227.244.0/23
+    --htauth-address=2001:41c8:103::/48
+    --htauth-address=89.197.53.244/30
+    --htauth-address=172.28.0.0/14
+    --htauth-address=::1/32
+    --htauth-address=127.0.0.0/8
+  REVIEW_FLAGS: >
+    -eREVIEW_APP=true
+    -eSECRET_KEY=none
+    -eDATABASE_URL=sqlite:////data/wagtail.sqlite
+
+
+# Check python code style.
+flake8:
+  image: python:3.6
+  stage: test
+  script:
+    - XDG_CACHE_HOME=./tmp/pip-cache pip install flake8
+    - flake8 girleffect --ignore=E501,C901 --exclude=*/migrations/*,girleffect/settings/*
+    - flake8 girleffect/settings --ignore=E501,F405
+
+
+# Check JavaScript code style.
+jscs:
+  image: node:4.2.4
+  stage: test
+  script:
+    - npm install --quiet
+    - npm run jscs
+
+
+# Check settings, migrations and run tests.
+test:
+  image: python:3.6
+  stage: test
+  variables:
+    DJANGO_SETTINGS_MODULE: girleffect.settings.production
+    CFG_SECRET_KEY: fake_secret_key_to_run_tests
+    DATABASE_URL: sqlite:////tmp/girleffect.sqlite
+  script:
+    # Install requirements
+    - XDG_CACHE_HOME=./tmp/pip-cache pip install wheel
+    - XDG_CACHE_HOME=./tmp/pip-cache pip install -r requirements.txt
+
+    # Run system checks
+    - python manage.py check
+
+    # Check for missing migrations
+    - python manage.py makemigrations --check --noinput
+
+    # Run tests
+    - python manage.py test
+# Build assets.  This is done in a separate job so we can use the node image;
+# this works better with libsass than the Alpine-based 'docker' image.
+assets:
+  stage: assets
+  image: node:6
+  script:
+    - npm install --quiet
+    - npm run prod
+  artifacts:
+    name: "assets-$CI_JOB_ID"
+    expire_in: '1 hour'
+    paths:
+      - girleffect/static_compiled
+
+# Build the Docker image.  Requires 'tags: docker' so it runs on a
+# Docker-capable CI runner.
+build:
+  stage: build
+  dependencies:
+    - assets
+  tags:
+    - docker
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+  script:
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+
+# Deploy the staging site.
+deploy:
+  stage: deploy
+  only:
+    - staging
+  environment:
+    name: staging
+    url: http://$CI_PROJECT_PATH_SLUG.staging.t6x.uk/
+  image: torchbox/gitlab-kube-deploy:latest
+  script:
+    - deploy -G -A -Dpostgresql -vdata:/data $DEPLOY_FLAGS -sSECRET_KEY="${SECRET_KEY}" --hostname=$CI_ENVIRONMENT_URL $IMAGE_TAG $CI_ENVIRONMENT_SLUG
+
+# Deploy review apps.  If you don't want review apps, delete the review and
+# stop_review sections.
+review:
+  stage: deploy
+  only:
+    - branches
+  except:
+    - master
+    - staging
+  environment:
+    name: review/$CI_BUILD_REF_NAME
+    url: http://$CI_PROJECT_PATH_SLUG-$CI_BUILD_REF_SLUG.staging.t6x.uk/
+    on_stop: stop_review
+  image: torchbox/gitlab-kube-deploy:latest
+  script:
+    - deploy -G -vdata:/data $DEPLOY_FLAGS $REVIEW_FLAGS --hostname=$CI_ENVIRONMENT_URL $IMAGE_TAG $CI_ENVIRONMENT_SLUG
+
+# Cleanup review apps.  GitLab will run this job,
+# when you merge or delete your branch or deployment environment.
+stop_review:
+  stage: deploy
+  when: manual
+  only:
+    - branches
+  except:
+    - master
+    - staging
+  environment:
+    name: review/$CI_BUILD_REF_NAME
+    action: stop
+  image: torchbox/gitlab-kube-deploy:latest
+  script:
+    - deploy -G --undeploy -vdata:/data $DEPLOY_FLAGS $REVIEW_FLAGS --hostname=$CI_ENVIRONMENT_URL $IMAGE_TAG $CI_ENVIRONMENT_SLUG
+
+cache:
+  key: "girleffect/$CI_BUILD_STAGE"
+  paths:
+    - ./node_modules
+    - ./tmp/pip-cache

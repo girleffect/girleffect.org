@@ -1,0 +1,43 @@
+build:
+  flake8:
+    image: python:3.5
+    commands:
+      - XDG_CACHE_HOME=/drone/pip-cache pip install flake8
+      - flake8 girleffect --ignore=E501,F405 --exclude=*/migrations/*
+  jscs:
+    image: node:4.2.4
+    commands:
+      - npm install --quiet
+      - ./node_modules/.bin/gulp jscs
+  test:
+    image: python:3.4
+    commands:
+      # Install requirements
+      - XDG_CACHE_HOME=/drone/pip-cache pip install wheel
+      - XDG_CACHE_HOME=/drone/pip-cache pip install -r requirements.txt
+
+      # Run system checks
+      - python manage.py check
+
+      # Check for missing migrations
+      - bash -c "! python manage.py makemigrations -e --dry-run --noinput"
+
+      # Run tests
+      - python manage.py test
+
+    environment:
+      - PGHOST=127.0.0.1
+      - PGUSER=postgres
+
+cache:
+  mount:
+    - node_modules
+    - /drone/pip-cache
+
+compose:
+  db:
+    image: postgres:9.4
+    environment:
+     - POSTGRES_DB=girleffect
+  cache:
+    image: redis:2.8
