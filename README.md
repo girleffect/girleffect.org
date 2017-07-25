@@ -7,8 +7,6 @@ Girl Effect Wagtail site
 1. Push your branch to the remote.
 1. Edit details as necessary.
 
-
-
 If you need to preview work on `staging`, this can be merged and deployed manually without making a merge request. You can still make the merge request as above, but add a note to say that this is on `staging`, and not yet ready to be merged to `master`.
 
 # Setting up a local build
@@ -19,7 +17,7 @@ a fabfile for running common commands with Fabric.
 To set up a new build:
 
 ``` bash
-git clone [URL TO GIT REMOTE]
+git clone git@git.torchbox.com:praekelt/girleffect.git
 cd girleffect
 vagrant up
 vagrant ssh
