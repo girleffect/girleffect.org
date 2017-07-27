@@ -121,7 +121,7 @@ deploy:
     url: http://$CI_PROJECT_PATH_SLUG.staging.t6x.uk/
   image: torchbox/gitlab-kube-deploy:latest
   script:
-    - deploy -G -A -Dpostgresql -vdata:/data $DEPLOY_FLAGS -sSECRET_KEY="${SECRET_KEY}" -H=$CI_ENVIRONMENT_URL $IMAGE_TAG $CI_ENVIRONMENT_SLUG
+    - deploy -G -A -Dpostgresql -vdata:/data $DEPLOY_FLAGS -sSECRET_KEY="${SECRET_KEY}" -H$CI_ENVIRONMENT_URL $IMAGE_TAG $CI_ENVIRONMENT_SLUG
 
 # Deploy review apps.  If you don't want review apps, delete the review and
 # stop_review sections.
