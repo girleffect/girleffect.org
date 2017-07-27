@@ -28,8 +28,7 @@ variables:
     --cpu-limit=1
     --memory-request=128m
     --memory-limit=128m
-    # Edit this:
-    --htauth-user=girleffect:changethispassword
+    --htauth-user=girleffect:girleffectshowme
     --htauth-address=78.32.251.192/28
     --htauth-address=193.227.244.0/23
     --htauth-address=2001:41c8:103::/48
@@ -121,7 +120,7 @@ deploy:
     url: http://$CI_PROJECT_PATH_SLUG.staging.t6x.uk/
   image: torchbox/gitlab-kube-deploy:latest
   script:
-    - deploy -G -A -Dpostgresql -vdata:/data $DEPLOY_FLAGS -sSECRET_KEY="${SECRET_KEY}" -H$CI_ENVIRONMENT_URL $IMAGE_TAG $CI_ENVIRONMENT_SLUG
+    - deploy -G -A -Dpostgresql -vdata:/data $DEPLOY_FLAGS -sSECRET_KEY="${SECRET_KEY}" --hostname=$CI_ENVIRONMENT_URL $IMAGE_TAG $CI_ENVIRONMENT_SLUG
 
 # Deploy review apps.  If you don't want review apps, delete the review and
 # stop_review sections.
