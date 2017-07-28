@@ -25,7 +25,6 @@ variables:
   DEPLOY_FLAGS: >
     -eDJANGO_SETTINGS_MODULE=girleffect.settings.production
     -eCFG_APP_NAME=girleffect
-    --cpu-limit=1
     --memory-request=128m
     --memory-limit=128m
     --htauth-user=girleffect:girleffectshowme
