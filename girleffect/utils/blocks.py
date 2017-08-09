@@ -5,7 +5,6 @@ from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
 from .models import CallToActionSnippet
 
-
 class ImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     caption = blocks.CharBlock(required=False)
