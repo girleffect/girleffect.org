@@ -2,7 +2,7 @@ import os
 
 import django_cache_url
 import dj_database_url
-# import raven
+import raven
 
 from .base import *  # noqa
 
@@ -16,14 +16,14 @@ DEBUG = False
 # See instructions on the intranet:
 # https://intranet.torchbox.com/delivering-projects/tech/starting-new-project/#sentry
 
-# INSTALLED_APPS += (
-#     'raven.contrib.django.raven_compat',
-# )
+INSTALLED_APPS += (
+    'raven.contrib.django.raven_compat',
+)
 
-# RAVEN_CONFIG = {
-#     'dsn': '<PUT DSN URL HERE>?verify_ssl=0',
-#     'release': raven.fetch_git_sha(BASE_DIR),
-# }
+RAVEN_CONFIG = {
+    'dsn': 'https://cc32e609c8ac42a88761fdc1cbae7b43:ff20cd1373ba4b818bb379720ad501fc@sentry.torchbox.com/182?verify_ssl=0',
+    'release': raven.fetch_git_sha(BASE_DIR),
+}
 
 
 # Cache everything for 10 minutes
