@@ -45,6 +45,8 @@ class CountryIndex(Page, SocialFields):
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels
 
+    subpage_types = ['CountryPage']
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         subpages = self.get_children().live()
