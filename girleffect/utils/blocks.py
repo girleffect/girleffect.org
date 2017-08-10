@@ -1,9 +1,10 @@
 from wagtail.wagtailcore import blocks
-from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
+from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
 from .models import CallToActionSnippet
+
 
 class ImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
@@ -31,7 +32,8 @@ class StoryBlock(blocks.StreamBlock):
     image = ImageBlock()
     quote = QuoteBlock()
     embed = EmbedBlock()
-    call_to_action = SnippetChooserBlock(CallToActionSnippet, template="includes/call_to_action.html")
+    call_to_action = SnippetChooserBlock(CallToActionSnippet,
+                                         template="includes/call_to_action.html")
 
     class Meta:
         template = "blocks/stream_block.html"
