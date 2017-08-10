@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'girleffect.news',
     'girleffect.people',
     'girleffect.search',
+    'girleffect.solutions',
     'girleffect.standardpage',
     'girleffect.utils',
 
