@@ -6,7 +6,6 @@ from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
     ListingFields,
     RelatedDocument,
-    RelatedPage,
     SocialFields,
 )
 
@@ -28,7 +27,12 @@ class CountryPageRelatedDocument(RelatedDocument):
 
 
 class CountryPageRelatedPage(Orderable, models.Model):
-    page = models.ForeignKey('solutions.SolutionPage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    page = models.ForeignKey(
+        'solutions.SolutionPage',
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
     source_page = ParentalKey('countries.CountryPage',
                               related_name='related_pages')
 
