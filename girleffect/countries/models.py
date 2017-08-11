@@ -32,7 +32,7 @@ class CountryPageRelatedPage(Orderable, models.Model):
         'solutions.SolutionPage',
         null=True, blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name='country_relationships'
     )
     source_page = ParentalKey('countries.CountryPage',
                               related_name='related_pages')
