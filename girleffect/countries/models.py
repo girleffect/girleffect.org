@@ -77,7 +77,7 @@ class CountryIndex(Page, SocialFields):
 
 
 class CountryPage(Page, SocialFields, ListingFields):
-    introduction = models.TextField(blank=True)
+    context = models.TextField(blank=True)
     body = StreamField(StoryBlock())
     call_to_action = models.ForeignKey(
         'utils.CallToActionSnippet',
@@ -88,12 +88,12 @@ class CountryPage(Page, SocialFields, ListingFields):
     )
 
     search_fields = Page.search_fields + [
-        index.SearchField('introduction'),
+        index.SearchField('context'),
         index.SearchField('body'),
     ]
 
     content_panels = Page.content_panels + [
-        FieldPanel('introduction'),
+        FieldPanel('context'),
         StreamFieldPanel('body'),
         InlinePanel('related_documents', label="Related documents"),
         InlinePanel('related_pages', label="Related pages"),
