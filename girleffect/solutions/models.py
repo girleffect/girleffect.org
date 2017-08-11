@@ -87,7 +87,7 @@ class SolutionPage(Page, SocialFields, ListingFields):
         return countries
 
     search_fields = Page.search_fields + [
-        index.SearchField('introduction'),
+        index.SearchField('summary'),
         index.SearchField('body'),
     ]
 
