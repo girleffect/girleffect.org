@@ -14,11 +14,11 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel, InlinePanel,
-    StreamFieldPanel
+    PageChooserPanel, StreamFieldPanel
 )
 
 from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Page
+from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailsearch import index
 
 
@@ -27,9 +27,14 @@ class CountryPageRelatedDocument(RelatedDocument):
                        related_name='related_documents')
 
 
-class CountryPageRelatedPage(RelatedPage):
+class CountryPageRelatedPage(Orderable, models.Model):
+    page = models.ForeignKey('solutions.SolutionPage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     source_page = ParentalKey('countries.CountryPage',
                               related_name='related_pages')
+
+    panels = [
+        PageChooserPanel('page'),
+    ]
 
 
 class CountryIndex(Page, SocialFields):
