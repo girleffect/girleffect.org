@@ -19,6 +19,7 @@ from wagtail.wagtailadmin.edit_handlers import (
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailsearch import index
+from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 
 class CountryPageRelatedDocument(RelatedDocument):
@@ -78,6 +79,13 @@ class CountryIndex(Page, SocialFields):
 class CountryPage(Page, SocialFields, ListingFields):
     introduction = models.TextField(blank=True)
     body = StreamField(StoryBlock())
+    call_to_action = models.ForeignKey(
+        'utils.CallToActionSnippet',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     search_fields = Page.search_fields + [
         index.SearchField('introduction'),
@@ -89,6 +97,7 @@ class CountryPage(Page, SocialFields, ListingFields):
         StreamFieldPanel('body'),
         InlinePanel('related_documents', label="Related documents"),
         InlinePanel('related_pages', label="Related pages"),
+        SnippetChooserPanel('call_to_action'),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels \
