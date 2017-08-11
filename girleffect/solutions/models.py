@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
+from django.utils.functional import cached_property
 
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
@@ -20,6 +21,7 @@ from wagtail.wagtailadmin.edit_handlers import (
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
+from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 
 class SolutionPageRelatedDocument(RelatedDocument):
@@ -67,8 +69,22 @@ class SolutionIndex(Page, SocialFields):
 
 
 class SolutionPage(Page, SocialFields, ListingFields):
-    introduction = models.TextField(blank=True)
+    summary = models.TextField(blank=True)
     body = StreamField(StoryBlock())
+    call_to_action = models.ForeignKey(
+        'utils.CallToActionSnippet',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    @cached_property
+    def countries(self):
+        countries = [
+            n.source_page for n in self.country_relationships.all()
+        ]
+        return countries
 
     search_fields = Page.search_fields + [
         index.SearchField('introduction'),
@@ -76,10 +92,11 @@ class SolutionPage(Page, SocialFields, ListingFields):
     ]
 
     content_panels = Page.content_panels + [
-        FieldPanel('introduction'),
+        FieldPanel('summary'),
         StreamFieldPanel('body'),
         InlinePanel('related_documents', label="Related documents"),
         InlinePanel('related_pages', label="Related pages"),
+        SnippetChooserPanel('call_to_action'),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels \
