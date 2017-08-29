@@ -28,7 +28,6 @@ variables:
     --cpu-limit=1
     --memory-request=128m
     --memory-limit=128m
-    # Edit this:
     --htauth-user=girleffect:changethispassword
     --htauth-address=78.32.251.192/28
     --htauth-address=193.227.244.0/23
