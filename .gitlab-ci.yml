@@ -38,7 +38,6 @@ variables:
   REVIEW_FLAGS: >
     -eREVIEW_APP=true
     -eSECRET_KEY=none
-    -eDATABASE_URL=sqlite:////data/wagtail.sqlite
 
 
 # Check python code style.
@@ -72,6 +71,10 @@ test:
     # Install requirements
     - XDG_CACHE_HOME=./tmp/pip-cache pip install wheel
     - XDG_CACHE_HOME=./tmp/pip-cache pip install -r requirements.txt
+
+    # We need to run the collectstatic command, because we use ManifestStaticFilesStorage.
+    # Otherwise the check command will fail
+    - python manage.py collectstatic --verbosity 0 --noinput --clear
 
     # Run system checks
     - python manage.py check
@@ -136,7 +139,7 @@ review:
     on_stop: stop_review
   image: torchbox/gitlab-kube-deploy:latest
   script:
-    - deploy -G -vdata:/data $DEPLOY_FLAGS $REVIEW_FLAGS --hostname=$CI_ENVIRONMENT_URL $IMAGE_TAG $CI_ENVIRONMENT_SLUG
+    - deploy -G -Dpostgresql -vdata:/data $DEPLOY_FLAGS $REVIEW_FLAGS --hostname=$CI_ENVIRONMENT_URL $IMAGE_TAG $CI_ENVIRONMENT_SLUG
 
 # Cleanup review apps.  GitLab will run this job,
 # when you merge or delete your branch or deployment environment.
@@ -153,7 +156,7 @@ stop_review:
     action: stop
   image: torchbox/gitlab-kube-deploy:latest
   script:
-    - deploy -G --undeploy -vdata:/data $DEPLOY_FLAGS $REVIEW_FLAGS --hostname=$CI_ENVIRONMENT_URL $IMAGE_TAG $CI_ENVIRONMENT_SLUG
+    - deploy -G -Dpostgresql --undeploy -vdata:/data $DEPLOY_FLAGS $REVIEW_FLAGS --hostname=$CI_ENVIRONMENT_URL $IMAGE_TAG $CI_ENVIRONMENT_SLUG
 
 cache:
   key: "girleffect/$CI_BUILD_STAGE"
