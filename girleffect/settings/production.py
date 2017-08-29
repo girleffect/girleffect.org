@@ -21,13 +21,9 @@ INSTALLED_APPS += (
 )
 
 RAVEN_CONFIG = {
-<<<<<<< HEAD
     'dsn': 'https://cc32e609c8ac42a88761fdc1cbae7b43:ff20cd1373ba4b818bb379720ad501fc@sentry.torchbox.com/182?verify_ssl=0',
-=======
-    'dsn': 'https://cc32e609c8ac42a88761fdc1cbae7b43:ff20cd1373ba4b818bb379720ad501fc@sentry.torchbox.com/182',
     # If you are using git, you can also automatically configure the
     # release based on the git info.
->>>>>>> wagtail-upgrade-1.12
     'release': raven.fetch_git_sha(BASE_DIR),
 }
 
