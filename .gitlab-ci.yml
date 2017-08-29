@@ -75,6 +75,10 @@ test:
     - XDG_CACHE_HOME=./tmp/pip-cache pip install wheel
     - XDG_CACHE_HOME=./tmp/pip-cache pip install -r requirements.txt
 
+    # We need to run the collectstatic command, because we use ManifestStaticFilesStorage.
+    # Otherwise the check command will fail
+    - python manage.py collectstatic --verbosity 0 --noinput --clear
+
     # Run system checks
     - python manage.py check
 
