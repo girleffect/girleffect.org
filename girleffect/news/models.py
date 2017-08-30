@@ -7,6 +7,7 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
+from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailadmin.edit_handlers import (
     StreamFieldPanel, FieldPanel, InlinePanel
@@ -20,13 +21,28 @@ from girleffect.utils.models import (
 from girleffect.utils.blocks import StoryBlock
 
 
+@register_snippet
+class NewsCategory(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(
+        blank=True,
+        help_text='Not currently shown to the end user but may be in the future.'
+    )
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = 'news categories'
+
+
 class NewsPageCategory(models.Model):
     page = ParentalKey(
         'news.NewsPage',
         related_name='categories'
     )
     category = models.ForeignKey(
-        'categories.Category',
+        'news.NewsCategory',
         related_name='+',
         on_delete=models.CASCADE
     )
@@ -112,7 +128,7 @@ class NewsIndex(Page, SocialFields):
             news=news,
             # Only show categories that have been used
             categories=NewsPageCategory.objects.all().values_list(
-                'category__pk', 'category__name'
+                'category__pk', 'category__title'
             ).distinct()
         )
         return context
