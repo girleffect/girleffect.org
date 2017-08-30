@@ -27,15 +27,15 @@ class CountryPageRelatedDocument(RelatedDocument):
                        related_name='related_documents')
 
 
-class CountryPageRelatedPage(Orderable, models.Model):
+class CountryPageRelatedSolution(Orderable, models.Model):
     page = models.ForeignKey(
         'solutions.SolutionPage',
         null=True, blank=True,
         on_delete=models.SET_NULL,
-        related_name='country_relationships'
+        related_name='country_solutions'
     )
     source_page = ParentalKey('countries.CountryPage',
-                              related_name='related_pages')
+                              related_name='solutions')
 
     panels = [
         PageChooserPanel('page'),
@@ -130,7 +130,7 @@ class CountryPage(Page, SocialFields, ListingFields):
         FieldPanel('context'),
         StreamFieldPanel('body'),
         InlinePanel('related_documents', label="Related documents"),
-        InlinePanel('related_pages', label="Related pages"),
+        InlinePanel('solutions', label="Related solutions"),
         SnippetChooserPanel('call_to_action'),
     ]
 
