@@ -1,30 +1,47 @@
 {% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
 
-    <div class="intro">
-        <div class="container">
-            <h1>{{ page.title }}</h1>
-        </div>
-    </div>
+    <h1>{{ page.title }}</h1>
+    <p>{{ page.introduction }}</p>
 
-    <section class="main-body">
-        <div class="container">
-            {% if people.paginator.count %}
-                {% for person in people %}
-                    <article class="person">
-                        <h2><a href="{{ person.url }}">{{ person.first_name }} {{ person.last_name }}</a></h2>
-                        <p>{{ person.introduction }}</p>
-                    </article>
-                {% endfor %}
-
-                {% if people.paginator.count > 1 %}
-                    {% include "includes/pagination.html" with subpages=people %}
-                {% endif %}
+    <section class="listing">
+        {% if subpages.paginator.count %}
+            {% if subpages.object_list.exists %}
+                <ul role="list">
+                    {% for subpage in subpages.object_list.specific %}
+                        <li>
+                            <a href="{% pageurl subpage %}">
+                                {% if subpage.listing_image %}
+                                    {% image subpage.listing_image fill-450x300 %}
+                                {% endif %}
+                                <div>
+                                    <h2 role="listitem">
+                                        {% if subpage.listing_title %}
+                                            {{ subpage.listing_title }}
+                                        {% else %}
+                                            {{ subpage.title }}
+                                        {% endif %}
+                                    </h2>
+                                    {% if subpage.listing_summary %}
+                                        <p>{{ subpage.listing_summary }}</p>
+                                    {% endif %}
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
             {% else %}
-                {# no results #}
+                {# no items on this page #}
             {% endif %}
-        </div>
+
+            {% include "includes/pagination.html" %}
+
+        {% else %}
+            {# no items on any page #}
+        {% endif %}
+
     </section>
 
 {% endblock %}
