@@ -22,13 +22,11 @@
             <h2>Solutions</h2>
             <ul>
             {% for solution in page.solutions.all %}
-                {% with solution.solution_page as specific_solution_page %}
                 <li>
                     <a href="{% pageurl specific_solution_page %}">
-                        {{ specific_solution_page.title }}
+                        {{ solution.solution_page.title }}
                     </a>
                 </li>
-                {% endwith %}
             {% endfor %}
             </ul>
         </div>
