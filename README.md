@@ -35,11 +35,10 @@ This will make the site available on the host machine at: http://127.0.0.1:8000/
 
 # Available Fabric commands
 
-To populate your local database with the content of staging/production:
+To populate your local database with the content of staging:
 
 ``` bash
 fab pull_staging_data
-fab pull_production_data
 ```
 
 Additionally, to fetch images from staging:
@@ -51,11 +50,6 @@ fab pull_staging_media
 (This will only take the "original" images. New versions of the other renditions will be recreated on the fly.)
 
 
+# Deployment
 
-To deploy the site to staging/production:
-
-
-``` bash
-fab deploy_staging
-fab deploy_production
-```
+We are using Kubernetes for our staging environment. We use GitLab CI (see `.gitlab-ci.yaml`) for deployment tasks. When a branch is merged with `staging`, a deployment pipeline runs.
