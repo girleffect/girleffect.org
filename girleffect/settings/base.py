@@ -26,7 +26,6 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     'girleffect.categories',
     'girleffect.esi',
-    'girleffect.faqs',
     'girleffect.forms',
     'girleffect.home',
     'girleffect.images',
