@@ -55,7 +55,7 @@ class RegionIndex(Page, SocialFields):
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels
 
-    subpage_types = ['CountryIndex', 'standardpage.StandardPage']
+    subpage_types = ['CountryIndex']
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
