@@ -28,17 +28,18 @@ class CountryPageRelatedDocument(RelatedDocument):
 
 
 class CountryPageRelatedSolution(Orderable, models.Model):
-    page = models.ForeignKey(
+    page = ParentalKey('countries.CountryPage',
+                            related_name='solutions',
+                            blank=True, null=True)
+    solution_page = models.ForeignKey(
         'solutions.SolutionPage',
         null=True, blank=True,
         on_delete=models.SET_NULL,
         related_name='country_solutions'
     )
-    source_page = ParentalKey('countries.CountryPage',
-                              related_name='solutions')
 
     panels = [
-        PageChooserPanel('page'),
+        PageChooserPanel('solution_page'),
     ]
 
 

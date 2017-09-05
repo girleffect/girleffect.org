@@ -82,7 +82,7 @@ class SolutionPage(Page, SocialFields, ListingFields):
     @cached_property
     def countries(self):
         countries = [
-            n.source_page for n in self.country_solutions.all()
+            n.page for n in self.country_solutions.all()
         ]
         return countries
 
