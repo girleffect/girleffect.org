@@ -13,7 +13,6 @@
 
 stages:
   - test
-  - assets
   - build
   - deploy
 
@@ -85,26 +84,11 @@ test:
 
     # Run tests
     - python manage.py test
-# Build assets.  This is done in a separate job so we can use the node image;
-# this works better with libsass than the Alpine-based 'docker' image.
-assets:
-  stage: assets
-  image: node:6
-  script:
-    - npm install --quiet
-    - npm run prod
-  artifacts:
-    name: "assets-$CI_JOB_ID"
-    expire_in: '1 hour'
-    paths:
-      - girleffect/static_compiled
 
 # Build the Docker image.  Requires 'tags: docker' so it runs on a
 # Docker-capable CI runner.
 build:
   stage: build
-  dependencies:
-    - assets
   tags:
     - docker
   before_script:
