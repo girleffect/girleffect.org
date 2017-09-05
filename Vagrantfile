@@ -1,6 +1,15 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require 'yaml'
+
+# Output utils
+def colorize(text, color_code)
+  "\e[#{color_code}m#{text}\e[0m"
+end
+def red(text); colorize(text, 31); end
+
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -70,6 +79,58 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get install -y apache2
   # SHELL
   config.vm.provision :shell, :path => "vagrant/provision.sh", :args => "girleffect"
+
+  # Kubectl setup
+  # Note that you must have `~/.kube/config` with a valid token
+  kubectl_config_path = File.expand_path('~/.kube/config')
+  kubectl_version = '1.7.2'
+  kubectl_username = 'torchbox'
+  kubectl_staging_apiserver = 'https://apiserver.staging.torchkube.gce.torchbox.net:8443'
+  kubectl_staging_cert_url = 'https://account.torchbox.com/static/acctmgr/misc/torchbox-staging-ca.pem'
+  kubectl_staging_namespace = 'girleffect-staging'
+
+  if not File.exist? kubectl_config_path
+    $stderr.puts(
+      red("Unable to find kubeconfig on the host machine: #{kubectl_config_path}")
+    )
+  else
+
+    # Get a list of kubectl users
+    kubectl_users = YAML::load(File.read(kubectl_config_path)).fetch('users', [])
+
+    # We need only one user with a name `kubectl_username`
+    kubectl_users = kubectl_users.select{ |user| user['name'] == kubectl_username }
+
+    if kubectl_users.empty?
+      $stderr.puts(
+        red(
+            "Unable to find the user \"#{kubectl_username}\" in kubeconfig " \
+            "on the host machine: #{kubectl_config_path}"
+        )
+      )
+    else
+
+      kubectl_token = kubectl_users[0].fetch('user', {}).fetch('token', '')
+      if kubectl_token.empty?
+        $stderr.puts(
+          red(
+            "Unable to find a valid token for the user \"#{kubectl_username}\" " \
+            "in kubeconfig: #{kubectl_config_path}"
+          )
+        )
+      else
+
+        config.vm.provision :shell, run: "always", :path => "vagrant/kubernetes.sh",
+          :args => [
+            kubectl_version,
+            kubectl_username, kubectl_token,
+            kubectl_staging_apiserver, kubectl_staging_cert_url,
+            kubectl_staging_namespace
+          ]
+
+      end
+    end
+  end
 
   # Enable agent forwarding over SSH connections.
   config.ssh.forward_agent = true

@@ -1,0 +1,42 @@
+# Build static assets.
+FROM node:6 AS assets
+WORKDIR /app
+COPY . /app
+RUN npm install --quiet
+RUN npm run prod
+
+# Build the application itself.
+FROM python:3.6.2-jessie
+
+# Install non-python dependencies
+# Step 1: Add the PGDG repo into the sources list
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
+    # Step 2: Install wget and ca-certificates to be able to add a cert for PGDG
+    apt-get install -y --no-install-recommends wget ca-certificates && \
+    # Step 3: Add the PDGD cert
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
+    # Step 4: Install the postgresql-client package
+    apt-get update && apt-get install -y --no-install-recommends \
+    # We need postgresql-client to be able to use
+    # `kubectl exec pg_dump` and `kubectl djnago-admin dbshell`
+    postgresql-client-9.6
+
+
+WORKDIR /app
+ENV PYTHONPATH /app
+
+# Install requirements - done in a separate step so Docker can cache it.
+COPY requirements.txt /
+RUN pip install -r /requirements.txt
+
+# A wrapper script to run in the correct way (production/staging/review).
+COPY kubernetes/run.sh /
+ENTRYPOINT [ "/run.sh" ]
+
+# Install application code.
+COPY . /app
+
+# Install assets
+COPY --from=assets /app/girleffect/static_compiled /app/girleffect/static_compiled
+
+RUN CFG_SECRET_KEY=none django-admin.py collectstatic --noinput --settings=girleffect.settings.production
