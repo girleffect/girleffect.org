@@ -28,9 +28,8 @@ class CountryPageRelatedDocument(RelatedDocument):
 
 
 class CountryPageRelatedSolution(Orderable, models.Model):
-    page = ParentalKey('countries.CountryPage',
-                            related_name='solutions',
-                            blank=True, null=True)
+    page = ParentalKey('countries.CountryPage', related_name='solutions',
+                       blank=True, null=True)
     solution_page = models.ForeignKey(
         'solutions.SolutionPage',
         null=True, blank=True,
