@@ -110,6 +110,26 @@ def pull_staging_media():
     )
 
 
+def _restore_db(local_db_name, local_dump_path):
+    params = {
+        'local_db_name': local_db_name,
+        'local_dump_path': local_dump_path,
+    }
+
+    local('dropdb {local_db_name}'.format(**params))
+    local('createdb {local_db_name}'.format(**params))
+    local('psql {local_db_name} -f {local_dump_path}'.format(**params))
+    local('rm {local_dump_path}'.format(**params))
+
+    newsuperuser = prompt(
+        'Any superuser accounts you previously created locally will'
+        ' have been wiped. Do you wish to create a new superuser? (Y/n): ',
+        default="Y"
+    )
+    if newsuperuser == 'Y':
+        local('django-admin createsuperuser')
+
+
 @runs_once
 def _pull_media_from_k8s(kube_app_label, remote_media_dir, local_media_dir):
     # Get a pod name. We would need it for `kubectl cp` and `kubectl exec` calls
