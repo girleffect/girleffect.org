@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+
+    <div class="intro">
+        <div class="container">
+            {% include "includes/share.html" %}
+            <h1>{{ page.title }}</h1>
+            <p>{{ page.context }}</p>
+            {% if page.logo %}
+                {% image page.logo original %}
+            {% endif %}
+        </div>
+    </div>
+
+    <section class="main-body">
+        <div class="container">
+            {{ page.body }}
+        </div>
+    </section>
+
+    {% if page.call_to_action %}
+    <section class="country-cta">
+        <div class="container">
+        <h2>Call to Action</h2>
+        <a href="{{ page.call_to_action.link_url }}">
+            {{ page.call_to_action.title }}
+        </a>
+        </div>
+    </section>
+    {% endif %}
+
+{% endblock %}
