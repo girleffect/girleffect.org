@@ -27,19 +27,53 @@ class CountryPageRelatedDocument(RelatedDocument):
                        related_name='related_documents')
 
 
-class CountryPageRelatedPage(Orderable, models.Model):
-    page = models.ForeignKey(
+class CountryPageRelatedSolution(Orderable, models.Model):
+    page = ParentalKey('countries.CountryPage', related_name='solutions',
+                       blank=True, null=True)
+    solution_page = models.ForeignKey(
         'solutions.SolutionPage',
         null=True, blank=True,
         on_delete=models.SET_NULL,
-        related_name='country_relationships'
+        related_name='country_solutions'
     )
-    source_page = ParentalKey('countries.CountryPage',
-                              related_name='related_pages')
 
     panels = [
-        PageChooserPanel('page'),
+        PageChooserPanel('solution_page'),
     ]
+
+
+class RegionIndex(Page, SocialFields):
+    introduction = models.TextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('introduction'),
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField('introduction'),
+    ]
+
+    promote_panels = Page.promote_panels + SocialFields.promote_panels
+
+    subpage_types = ['CountryIndex']
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        subpages = self.get_children().live()
+        per_page = settings.DEFAULT_PER_PAGE
+        page_number = request.GET.get('page')
+        paginator = Paginator(subpages, per_page)
+
+        try:
+            subpages = paginator.page(page_number)
+        except PageNotAnInteger:
+            subpages = paginator.page(1)
+        except EmptyPage:
+            subpages = paginator.page(paginator.num_pages)
+
+        context['subpages'] = subpages
+
+        return context
 
 
 class CountryIndex(Page, SocialFields):
@@ -77,7 +111,7 @@ class CountryIndex(Page, SocialFields):
 
 
 class CountryPage(Page, SocialFields, ListingFields):
-    context = models.TextField(blank=True)
+    introduction = models.TextField(blank=True)
     body = StreamField(StoryBlock())
     call_to_action = models.ForeignKey(
         'utils.CallToActionSnippet',
@@ -93,10 +127,10 @@ class CountryPage(Page, SocialFields, ListingFields):
     ]
 
     content_panels = Page.content_panels + [
-        FieldPanel('context'),
+        FieldPanel('introduction'),
         StreamFieldPanel('body'),
         InlinePanel('related_documents', label="Related documents"),
-        InlinePanel('related_pages', label="Related pages"),
+        InlinePanel('solutions', label="Related solutions"),
         SnippetChooserPanel('call_to_action'),
     ]
 
