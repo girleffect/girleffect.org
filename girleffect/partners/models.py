@@ -3,10 +3,6 @@ from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from modelcluster.fields import ParentalKey
-from wagtail.wagtailadmin.edit_handlers import (
-    FieldPanel, StreamFieldPanel,
-    InlinePanel
-)
 
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
@@ -14,12 +10,6 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
 from girleffect.utils.blocks import StoryBlock
-from girleffect.utils.models import (
-    ListingFields,
-    SocialFields,
-    RelatedDocument,
-    RelatedPage
-)
 
 
 class Partner(Orderable):
