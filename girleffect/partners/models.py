@@ -9,7 +9,7 @@ from wagtail.wagtailadmin.edit_handlers import (
 )
 
 from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Page
+from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
@@ -22,15 +22,8 @@ from girleffect.utils.models import (
 )
 
 
-class PartnerPageRelatedDocument(RelatedDocument):
-    page = ParentalKey('partners.PartnerPage', related_name='related_documents')
-
-
-class PartnerPageRelatedPage(RelatedPage):
-    source_page = ParentalKey('partners.PartnerPage', related_name='related_pages')
-
-
-class PartnerPage(Page, SocialFields, ListingFields):
+class Partner(Orderable):
+    page = ParentalKey('PartnerIndexPage', related_name='partners')
     logo = models.ForeignKey(
         'images.CustomImage',
         null=True,
@@ -38,25 +31,17 @@ class PartnerPage(Page, SocialFields, ListingFields):
         related_name='+',
         on_delete=models.SET_NULL
     )
-    introduction = models.TextField(blank=True)
-    body = StreamField(StoryBlock())
 
-    search_fields = Page.search_fields + [
-        index.SearchField('introduction'),
-        index.SearchField('body'),
-    ]
+    link = models.ForeignKey('wagtailcore.Page', related_name='+',
+                             on_delete=models.SET_NULL, null=True)
+
+    external_link = models.URLField(blank=True)
 
     content_panels = Page.content_panels + [
         ImageChooserPanel('logo'),
-        FieldPanel('introduction'),
-        StreamFieldPanel('body'),
-        InlinePanel('related_documents', label="Related documents"),
-        InlinePanel('related_pages', label="Related pages"),
+        FieldPanel('external_url'),
+        InlinePanel('link'),
     ]
-
-    promote_panels = Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels
-
-    parent_page_types = ['PartnerIndexPage']
 
 
 class PartnerIndexPage(Page, SocialFields):
@@ -64,6 +49,7 @@ class PartnerIndexPage(Page, SocialFields):
 
     content_panels = Page.content_panels + [
         FieldPanel('introduction'),
+        InlinePanel('partners')
     ]
 
     search_fields = Page.search_fields + [
@@ -71,8 +57,6 @@ class PartnerIndexPage(Page, SocialFields):
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels
-
-    subpage_types = ['PartnerPage']
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
