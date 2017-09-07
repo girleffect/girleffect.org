@@ -19,12 +19,7 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" > /etc/
     apt-get update && apt-get install -y --no-install-recommends \
     # We need postgresql-client to be able to use
     # `kubectl exec pg_dump` and `kubectl djnago-admin dbshell`
-    postgresql-client-9.6 \
-    # Install rsync to be able to fetch media files
-    rsync && \
-    # Step 5: Cleanup apt cache and lists
-    rm -rf /var/cache/apt/* /var/lib/apt/lists/*
-
+    postgresql-client-9.6
 
 
 WORKDIR /app

@@ -1,31 +1,15 @@
 from datetime import datetime
-
+import os
 from fabric.api import *
 
 env.roledefs = {
-    'production': [],  # CHANGEME
-    'staging': [],  # CHANGEME
+    'production': []  # CHANGEME
 }
 
 
+# Production tasks
 @roles('production')
 def deploy_production():
-    # Remove this line when you're happy that this task is correct
-    raise RuntimeError("Please check the fabfile before using it")
-
-    run('git pull')
-    run('pip install -r requirements.txt')
-    _run_migrate()
-    run('django-admin collectstatic --noinput')
-
-    # 'restart' should be an alias to a script that restarts the web server
-    run('restart')
-
-    _post_deploy()
-
-
-@roles('staging')
-def deploy_staging():
     # Remove this line when you're happy that this task is correct
     raise RuntimeError("Please check the fabfile before using it")
 
@@ -54,31 +38,9 @@ def pull_production_data():
         local_dump_path='/tmp/',
     )
 
-
-@runs_once
-@roles('staging')
-def pull_staging_data():
-    # Remove this line when you're happy that this task is correct
-    raise RuntimeError("Please check the fabfile before using it")
-
-    _pull_data(
-        env_name='staging',
-        remote_db_name='girleffect',
-        local_db_name='girleffect',
-        remote_dump_path='/usr/local/django/girleffect/tmp/',
-        local_dump_path='/tmp/',
-    )
-
-
 @runs_once
 @roles('production')
 def pull_production_media():
-    local('rsync -avz %s:\'%s\' /vagrant/media/' % (env['host_string'], '$CFG_MEDIA_DIR'))
-
-
-@runs_once
-@roles('staging')
-def pull_staging_media():
     local('rsync -avz %s:\'%s\' /vagrant/media/' % (env['host_string'], '$CFG_MEDIA_DIR'))
 
 
@@ -131,3 +93,83 @@ def _post_deploy():
 
     # update search index
     run('django-admin update_index')
+
+# Staging tasks from k8s
+def pull_staging_data():
+    _pull_data_from_k8s(
+        kube_app_label='staging',
+        local_db_name='girleffect',
+    )
+
+
+def pull_staging_media():
+    _pull_media_from_k8s(
+        kube_app_label='staging',
+        local_media_dir='/vagrant/media/',
+        remote_media_dir='/data/media/',
+    )
+
+
+def _restore_db(local_db_name, local_dump_path):
+    params = {
+        'local_db_name': local_db_name,
+        'local_dump_path': local_dump_path,
+    }
+
+    local('dropdb {local_db_name}'.format(**params))
+    local('createdb {local_db_name}'.format(**params))
+    local('psql {local_db_name} -f {local_dump_path}'.format(**params))
+    local('rm {local_dump_path}'.format(**params))
+
+    newsuperuser = prompt(
+        'Any superuser accounts you previously created locally will'
+        ' have been wiped. Do you wish to create a new superuser? (Y/n): ',
+        default="Y"
+    )
+    if newsuperuser == 'Y':
+        local('django-admin createsuperuser')
+
+
+@runs_once
+def _pull_media_from_k8s(kube_app_label, remote_media_dir, local_media_dir):
+    # Get a pod name. We would need it for `kubectl cp` and `kubectl exec` calls
+    kube_pod_name = _get_pod_name(kube_app_label)
+
+    params = {
+        'kube_pod_name': kube_pod_name,
+        'remote_media_dir': remote_media_dir,
+        'local_media_dir': local_media_dir,
+    }
+
+    local(
+        'rsync -a --delete --blocking-io -e kubernetes/kube-rsync.sh'
+        ' {kube_pod_name}:{remote_media_dir} {local_media_dir}'.format(**params)
+    )
+
+
+@runs_once
+def _pull_data_from_k8s(kube_app_label, local_db_name):
+    timestamp = datetime.now().strftime('%Y%m%d-%I%M%S')
+    filename = '.'.join([local_db_name, timestamp, 'sql'])
+    dump_path = os.path.abspath(os.path.join(os.sep, 'tmp', filename))
+
+    kube_pod_name = _get_pod_name(kube_app_label)
+
+    # Dump DB from Kubernetes
+    local(
+        'kubectl exec {kube_pod_name} -- bash -c \'pg_dump $DATABASE_URL -xO\' > {dump_path}'.format(
+            dump_path=dump_path,
+            kube_pod_name=kube_pod_name
+        )
+    )
+
+    _restore_db(local_db_name, dump_path)
+
+
+def _get_pod_name(kube_app_label):
+    return local(
+        'kubectl get pods -l app={kube_app_label} -o=jsonpath={{.items[0].metadata.name}}'.format(
+            kube_app_label=kube_app_label,
+        ),
+        capture=True
+    ).strip()
