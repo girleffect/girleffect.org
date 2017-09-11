@@ -122,7 +122,7 @@ class CountryPage(Page, SocialFields, ListingFields):
     )
 
     search_fields = Page.search_fields + [
-        index.SearchField('context'),
+        index.SearchField('introduction'),
         index.SearchField('body'),
     ]
 
