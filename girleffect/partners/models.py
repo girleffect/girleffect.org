@@ -6,7 +6,8 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
-    InlinePanel
+    InlinePanel,
+    PageChooserPanel
 )
 
 from wagtail.wagtailcore.models import Orderable, Page
@@ -18,7 +19,7 @@ from girleffect.utils.models import (
 )
 
 
-class Partner(Orderable):
+class Partner(Orderable, models.Model):
     page = ParentalKey('PartnerIndexPage', related_name='partners')
     logo = models.ForeignKey(
         'images.CustomImage',
@@ -28,15 +29,20 @@ class Partner(Orderable):
         on_delete=models.SET_NULL
     )
 
-    link = models.ForeignKey('wagtailcore.Page', related_name='+',
-                             on_delete=models.SET_NULL, null=True)
+    internal_link = models.ForeignKey('wagtailcore.Page', related_name='+',
+                                      on_delete=models.SET_NULL, null=True,
+                                      blank=True)
 
     external_link = models.URLField(blank=True)
 
-    content_panels = Page.content_panels + [
+    panels = [
         ImageChooserPanel('logo'),
-        FieldPanel('external_url'),
-        InlinePanel('link'),
+        PageChooserPanel('internal_link', ['countries.CountryPage',
+                                           'countries.CountryIndex',
+                                           'solutions.SolutionPage',
+                                           'news.NewsPage',
+                                           'standardpage.StandardPage']),
+        FieldPanel('external_link')
     ]
 
 
@@ -45,7 +51,7 @@ class PartnerIndexPage(Page, SocialFields):
 
     content_panels = Page.content_panels + [
         FieldPanel('introduction'),
-        InlinePanel('partners')
+        InlinePanel('partners', label="Partners")
     ]
 
     search_fields = Page.search_fields + [
