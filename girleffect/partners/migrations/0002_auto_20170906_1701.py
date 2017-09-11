@@ -15,7 +15,6 @@ class Migration(migrations.Migration):
         ('utils', '0001_initial'),
         ('wagtailredirects', '0005_capitalizeverbose'),
         ('wagtailforms', '0003_capitalizeverbose'),
-        ('wagtailcore', '0040_page_draft_title'),
         ('partners', '0001_initial'),
     ]
 
