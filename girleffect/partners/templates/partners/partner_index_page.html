@@ -6,42 +6,21 @@
     <h1>{{ page.title }}</h1>
     <p>{{ page.introduction }}</p>
 
-    <section class="listing">
-        {% if subpages.paginator.count %}
-            {% if subpages.object_list.exists %}
-                <ul role="list">
-                    {% for subpage in subpages.object_list.specific %}
-                        <li>
-                            <a href="{% pageurl subpage %}">
-                                {% if subpage.listing_image %}
-                                    {% image subpage.listing_image fill-450x300 %}
-                                {% endif %}
-                                <div>
-                                    <h2 role="listitem">
-                                        {% if subpage.listing_title %}
-                                            {{ subpage.listing_title }}
-                                        {% else %}
-                                            {{ subpage.title }}
-                                        {% endif %}
-                                    </h2>
-                                    {% if subpage.listing_summary %}
-                                        <p>{{ subpage.listing_summary }}</p>
-                                    {% endif %}
-                                </div>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                {# no items on this page #}
-            {% endif %}
-
-            {% include "includes/pagination.html" %}
-
+    <section class="partners">
+        {% if page.partners.count > 0 %}
+            {# Partners exist #}
+            {% for partner in page.partners.all %}
+                {% image partner.logo original as partner_logo %}
+                {% if partner.internal_link %}
+                    {# There are two link field options, PageChooser and URL Field. This checks for one of either #}
+                    {% include "partners/includes/partner_logo_item.html" with href=partner.internal_link.url src=partner_logo.url %}
+                {% elif partner.external_link %}
+                    {% include "partners/includes/partner_logo_item.html" with href=partner.external_link src=partner_logo.url %}
+                {% endif %}
+            {% endfor %}
         {% else %}
-            {# no items on any page #}
+            {# No Partners Yet #}
         {% endif %}
-
     </section>
-
+    
 {% endblock %}
