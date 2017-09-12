@@ -7,7 +7,7 @@
     <p>{{ page.introduction }}</p>
 
     <section class="partners">
-        {% if page.partners.count > 0 %}
+        {% if page.partners.exists %}
             {# Partners exist #}
             {% for partner in page.partners.all %}
                 {% image partner.logo original as partner_logo %}
