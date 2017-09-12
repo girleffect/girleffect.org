@@ -63,6 +63,10 @@ class PartnerIndexPage(Page, SocialFields):
 
     search_fields = Page.search_fields + [
         index.SearchField('introduction'),
+
+        index.RelatedFields('partners', [
+                            index.SearchField('title')
+                            ])
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels
