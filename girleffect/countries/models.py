@@ -111,6 +111,7 @@ class CountryIndex(Page, SocialFields):
 
 
 class CountryPage(Page, SocialFields, ListingFields):
+    sub_title = models.CharField(blank=True, max_length=80)
     introduction = models.TextField(blank=True)
     body = StreamField(StoryBlock())
     call_to_action = models.ForeignKey(
@@ -127,6 +128,7 @@ class CountryPage(Page, SocialFields, ListingFields):
     ]
 
     content_panels = Page.content_panels + [
+        FieldPanel('sub_title'),
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
         InlinePanel('related_documents', label="Related documents"),
