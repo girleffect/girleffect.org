@@ -17,6 +17,10 @@
         </div>
     </section>
 
+    {% if page.feature_video_url or page.feature_image %}
+        {% include "includes/feature_media.html" %}
+    {% endif %}
+
     <section class="country-solutions">
         <div class="container">
             <h2>Solutions</h2>

@@ -1,0 +1,21 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<section class="feature-media">
+	<div class="container">
+		{% if page.feature_video_url %}
+			{# We can load the video #}
+			<video src="{{ page.feature_video_url }}" autoplay loop muted controls>
+                {% if page.feature_image %}
+                	{# the feature image can be used as a fallback #}
+                	{% image page.feature_image original as feature_image %}
+                	<img src="{{ feature_image.url }}">
+            	{% endif %}
+            </video>
+		{% elif page.feature_image %}
+			{% image page.feature_image original as feature_image %}
+			<img src="{{ feature_image.url }}">
+		{% else %}
+			{# Nothing is here #}
+		{% endif %}
+	</div>
+</section>

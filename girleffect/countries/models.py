@@ -4,6 +4,7 @@ from django.db import models
 
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
+    FeatureMediaFields,
     ListingFields,
     RelatedDocument,
     SocialFields,
@@ -110,7 +111,7 @@ class CountryIndex(Page, SocialFields):
         return context
 
 
-class CountryPage(Page, SocialFields, ListingFields):
+class CountryPage(Page, FeatureMediaFields, SocialFields, ListingFields):
     sub_title = models.CharField(blank=True, max_length=80)
     introduction = models.TextField(blank=True)
     body = StreamField(StoryBlock())
@@ -127,14 +128,15 @@ class CountryPage(Page, SocialFields, ListingFields):
         index.SearchField('body'),
     ]
 
-    content_panels = Page.content_panels + [
-        FieldPanel('sub_title'),
-        FieldPanel('introduction'),
-        StreamFieldPanel('body'),
-        InlinePanel('related_documents', label="Related documents"),
-        InlinePanel('solutions', label="Related solutions"),
-        SnippetChooserPanel('call_to_action'),
-    ]
+    content_panels = Page.content_panels \
+        + FeatureMediaFields.content_panels + [
+            FieldPanel('sub_title'),
+            FieldPanel('introduction'),
+            StreamFieldPanel('body'),
+            InlinePanel('related_documents', label="Related documents"),
+            InlinePanel('solutions', label="Related solutions"),
+            SnippetChooserPanel('call_to_action'),
+        ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels \
         + ListingFields.promote_panels

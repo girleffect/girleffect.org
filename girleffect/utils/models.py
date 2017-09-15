@@ -83,7 +83,6 @@ class RelatedDocument(Orderable, models.Model):
         DocumentChooserPanel('document'),
     ]
 
-
 # Generic social fields abstract class to add social image/text to any new content type easily.
 class SocialFields(models.Model):
     social_image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
@@ -165,3 +164,16 @@ class SocialMediaSettings(BaseSetting):
         default='Girl Effect',
         help_text='Site name, used by Open Graph.',
     )
+
+
+class FeatureMediaFields(models.Model):
+    feature_video_url = models.URLField(blank=True)
+    feature_image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+
+    class Meta:
+        abstract = True
+
+    content_panels = [
+        FieldPanel('feature_video_url'),
+        FieldPanel('feature_image')
+    ]
