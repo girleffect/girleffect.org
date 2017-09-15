@@ -83,6 +83,7 @@ class RelatedDocument(Orderable, models.Model):
         DocumentChooserPanel('document'),
     ]
 
+
 # Generic social fields abstract class to add social image/text to any new content type easily.
 class SocialFields(models.Model):
     social_image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
