@@ -1,0 +1,11 @@
+.heading {
+    &--related {
+        @include font-size(18px, 26px);
+        font-weight: $weight-bold;
+        margin: 3rem 0 2rem;
+
+        span {
+            font-weight: $weight-light;
+        }
+    }
+}

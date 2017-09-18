@@ -1,0 +1,24 @@
+.input {
+    padding: 10px;
+    color: $color--captions;
+    margin-bottom: 10px;
+    width: 100%;
+
+    @include media-query(mob-landscape) {
+        margin-bottom: 0;
+        width: auto;
+    }
+
+    &--button {
+        transition: background 0.25s ease;
+        border: 0;
+        background: $dark-orange;
+        color: $white;
+        padding: 12px 40px;
+
+        &:hover {
+            cursor: pointer;
+            background: lighten($dark-orange, 10%);
+        }
+    }
+}

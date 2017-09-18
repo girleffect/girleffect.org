@@ -1,0 +1,15 @@
+.grid {
+    &--listings {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        max-width: 990px;
+        margin: 2rem auto;
+        padding: 0 20px;
+
+        @include media-query(tablet-landscape) {
+            justify-content: space-between;
+            padding: 0;
+        }
+    }
+}

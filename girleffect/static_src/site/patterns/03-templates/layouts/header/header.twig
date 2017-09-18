@@ -1,0 +1,32 @@
+<header class="header">
+    <div class="header__inner header__inner--logos">
+        <div class="header__logos">
+            <img class="header__logos__logo header__logos__logo--bsg" src="../../../images/bsg-logo.svg" alt="Blavatnik School of Government logo" />
+            <img class="header__logos__logo header__logos__logo--ox" src="../../../images/ox-logo.svg" alt="University of Oxford logo" />
+
+            {% if (context == 'listings-page') %}
+                <img class="header__logos__logo header__logos__logo--golab" src="../../../images/golab-white.svg" alt="Government Outcomes Lab text" />
+            {% else %}
+                <img class="header__logos__logo header__logos__logo--golab" src="../../../images/golab-blue.svg" alt="Government Outcomes Lab text" />
+            {% endif %}
+        </div>
+
+        <div class="header__icons">
+            <button class="header__search-button header__icons__icon" aria-label="search"></button>
+            
+            <div class="header__icons__icon">
+                {% include "atoms-hamburger" %}
+            </div>
+        </div>
+    </div>
+
+    <div class="header__inner header__inner--nav">
+        {% include "organisms-main-nav" %}
+    </div>
+
+    {% include "molecules-breadcrumbs" %}
+
+    <h1 class="header__heading">
+        Header
+    </h1>
+</header>

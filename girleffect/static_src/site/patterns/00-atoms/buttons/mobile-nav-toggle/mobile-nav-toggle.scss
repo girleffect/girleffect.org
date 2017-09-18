@@ -1,0 +1,30 @@
+.mobile-nav-toggle {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 50px;
+    background: rgba($white, 0.3);
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    @include media-query(tablet-portrait) {
+        display: none;
+    }
+
+    &.open {
+        > svg {
+            transform: rotate(180deg);
+        }
+    }
+
+    > svg {
+        transition: transform 0.2s ease;
+        width: 15px;
+    }
+}

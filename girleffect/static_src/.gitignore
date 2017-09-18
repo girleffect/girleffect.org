@@ -1,0 +1,12 @@
+dploy.yaml
+node_modules
+.sass-cache
+.tmp
+.DS_Store
+*.zip
+patternlab/source/_patterns/**
+patternlab/source/images/**
+
+/dist/patternlab
+
+npm-debug.log

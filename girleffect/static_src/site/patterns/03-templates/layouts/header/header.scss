@@ -1,0 +1,212 @@
+.header {
+    height: 300px;
+    position: relative;
+
+    .template--standard-page & {
+        background: no-repeat url('../images/purple-header-swirls.svg');
+        background-size: auto 100%;
+
+        @include media-query(tablet-portrait) {
+            height: 500px;
+            background-position: 0 50px;
+            background-size: 100% auto;
+        }
+
+        @include media-query(desktop) {
+            background-position: 0 0;
+        }
+    }
+
+    .template--listings-page & {
+        background-image: url('../images/news-header.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+
+        @include media-query(tablet-portrait) {
+            height: 450px;
+        }
+    }
+    
+    @include media-query(mob-landscape) {
+        height: 400px;
+    }
+
+    @include media-query(tablet-portrait) {    
+        padding-top: 30px;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    @include media-query(desktop) {
+        padding-left: 120px;
+        padding-right: 120px;
+    }
+
+    &__heading {
+        position: absolute;
+        left: 35px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0;
+
+        .template--listings-page & {
+            font-size: 72px;
+        }
+
+        @include media-query(tablet-portrait) {
+            left: 10%;
+        }
+
+        @include media-query(desktop) {
+            left: 120px;
+        }
+    }
+
+    &__inner {
+        &--logos {
+            margin-left: 35px;
+            margin-right: 35px;
+            padding-bottom: 30px;
+            padding-top: 30px;
+
+            @include media-query(tablet-portrait) {
+                padding-top: 0;
+                margin: 0;
+            }
+        }
+
+        &--nav {
+            background: linear-gradient($black, $navy-blue 25%);
+            float: right;
+            left: 0;
+            padding-bottom: 30px;
+            padding-top: 85px;
+            position: absolute;
+            right: 0;
+            top: -1000px;
+            transition: all 0ms ease;
+            z-index: 99;
+
+            @include media-query(tablet-portrait) {
+                background: transparent;
+                display: inline-block;
+                padding: 0;
+                position: static;
+            }
+        }
+    }
+
+    &__logos {
+        align-items: center;
+        display: inline-flex;
+
+        &__logo {
+            &--bsg {
+                margin-right: 7px;
+                height: 40px;
+                width: 40px;
+
+                @include media-query(mob-landscape) {
+                    height: 60px;
+                    width: 60px;
+                }
+
+                @include media-query(desktop) {
+                    margin-right: 10px;
+                    height: 75px;
+                    width: 75px;
+                }
+            }
+
+            &--ox {
+                margin-right: 12px;
+                height: 40px;
+                width: 40px;
+
+                @include media-query(mob-landscape) {
+                    height: 60px;
+                    width: 60px;
+                }
+
+                @include media-query(desktop) {
+                    margin-right: 17px;
+                    height: 75px;
+                    width: 75px;
+                }
+            }
+
+            &--golab {
+                height: 32px;
+                width: 88px;
+
+                @include media-query(mob-landscape) {
+                    height: 48px;
+                    width: 132px;
+                }
+
+                @include media-query(desktop) {
+                    height: 70px;
+                    width: 165px;
+                }
+            }
+        }
+    }
+
+    &__icons {
+        display: flex;
+        float: right;
+
+        &__icon {
+            width: 20px;
+
+            &:nth-child(2) {
+                margin-left: 10px;
+                z-index: 777;
+
+                @include media-query(mob-landscape) {
+                    margin-left: 25px;
+                }
+
+                @include media-query(tablet-portrait) {
+                    display: none;
+                }
+            }
+
+            @include media-query(mob-landscape) {
+                width: 30px;
+            }
+
+            @include media-query(tablet-portrait) {
+                width: 14px;
+            }
+        }
+    }
+
+    &__search-button {
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        padding: 0;
+        z-index: 88;
+        width: 20px;
+        height: 22px;
+        
+        @include media-query(mob-landscape) {
+            width: 30px;
+            height: 33px;
+        }
+
+        @include media-query(tablet-portrait) {
+            width: 14px;
+            height: 15px
+        }
+
+        .template--standard-page & {
+            background: url('../images/search-icon-dark.svg');
+        }
+
+        .template--listings-page & {
+            background: url('../images/search-icon-light.svg');
+        }
+    }
+}

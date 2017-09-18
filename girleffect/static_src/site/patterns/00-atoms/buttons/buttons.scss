@@ -1,0 +1,61 @@
+.button {
+    transition: background 0.2s ease;
+    color: $orange;
+    background: transparent;
+    border: 2px solid $orange;
+    padding: 15px;
+    display: inline-block;
+
+    &:hover {
+        background: $orange;
+        color: $white;
+
+        path,
+        line,
+        polyline {
+            stroke: $white;
+        }
+
+        .button__icon {
+            &,
+            * {
+                fill: $white;
+            }
+        }
+    }
+
+    &--download {
+        display: inline-flex;
+        font-weight: $weight-semibold;
+        font-size: 16px;
+        align-items: center;
+
+        > svg {
+            margin-left: 15px;
+
+            path,
+            line,
+            polyline {
+                stroke: $orange;
+                fill: none;
+            }
+
+            line {
+                opacity: 0.5;
+            }
+        }
+    }
+
+   &__icon {
+        transition: background 0.2s ease;
+        width: 16px;
+        height: 16px;
+        fill: $orange;
+        vertical-align: bottom;
+
+        &--right {
+            margin-left: 15px;
+        }
+    }
+
+}

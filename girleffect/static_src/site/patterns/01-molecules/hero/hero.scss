@@ -1,0 +1,24 @@
+.hero {
+    position: relative;
+    margin-bottom: 2.5rem;
+
+    &__caption {
+        left: 0;
+        font-size: 13px;
+        background: $navy-blue;
+        color: $white;
+        margin: 0;
+        font-weight: bold;
+        padding: 10px;
+        text-align: center;
+        width: 100%;
+
+        @include media-query(mob-landscape) {
+            position: absolute;
+            bottom: -13px;
+            text-align: left;
+            padding: 5px 50px 5px 10px;
+            width: auto;
+        }
+    }
+}

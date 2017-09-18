@@ -1,0 +1,93 @@
+.search {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $light-blue;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+
+    &.open {
+        display: flex;
+    }
+
+    &__close {
+        cursor: pointer;
+        border: none;
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        top: 35px;
+        right: 15%;
+        background: url('../images/cross.svg') no-repeat;
+
+        @include media-query(mob-landscape) {
+            right: 60px;
+        }
+    }
+
+    &__inner {
+        width: 70%;
+    }
+
+    &__input-section {
+        position: relative;
+    }
+
+    &__input {
+        @include font-size(24px, 36px);
+        width: 100%;
+        background: transparent;
+        border: none;
+        color: $blue-lagoon;
+        border-bottom: 3px solid $blue-lagoon;
+        font-weight: bold;
+        padding: 7px 0;
+        margin-bottom: 60px;
+
+        &::placeholder {
+            opacity: 1;
+            color: $blue-lagoon;
+        }
+    }
+
+    &__submit {
+        cursor: pointer;
+        width: 21px;
+        height: 24px;
+        background: url('../images/search-icon.svg') no-repeat;
+        border: none;
+        position: absolute;
+        right: 0;
+        top: calc(50% - 30px);
+        transform: translateY(-50%);
+    }
+
+    &__results-heading {
+        @include font-size(16px, 18px);
+        color: $aqua;
+        font-weight: 600;
+        margin: 0;
+        padding-bottom: 6px;
+    }
+
+    &__results {
+        margin: 0;
+
+        &__result {
+            padding: 3px 0;
+
+            a {
+                @include font-size(18px, 26px);
+                color: $white;
+
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
+}

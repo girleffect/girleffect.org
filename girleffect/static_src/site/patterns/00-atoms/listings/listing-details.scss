@@ -1,0 +1,19 @@
+.listing-detail {
+    font-size: 15px;
+    font-weight: 300;
+    margin: 0;
+
+    .news-tile & {
+        color: $white;
+    }
+
+    &__icon {
+        width: 18px;
+        height: 18px;
+        margin-right: 5px;
+    }
+
+    &--posted {
+        margin-bottom: 10px;
+    }
+}

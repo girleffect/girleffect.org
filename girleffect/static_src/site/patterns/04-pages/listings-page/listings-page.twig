@@ -1,0 +1,23 @@
+<div class="template template--listings-page">
+    {% include "organisms-search" %}
+    {% include "templates-header" with { context: 'listings-page' } %}
+
+    <div class="wrapper wrapper--single-line-bg">
+        {% include "molecules-carousel--featured-listing" %}
+    </div>
+
+    <div class="wrapper wrapper--content">
+        <h2>Latest News</h2>
+    </div>
+
+    <div class="wrapper wrapper--single-line-bg">
+        <div class="grid grid--listings">
+            {% include "organisms-news-tile" %}
+            {% include "organisms-news-tile" %}
+            {% include "organisms-news-tile" %}
+            {% include "organisms-news-tile" %}
+        </div>
+    </div>
+
+    {% include "templates-footer" %}
+</div>

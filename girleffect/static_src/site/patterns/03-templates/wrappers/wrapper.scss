@@ -1,0 +1,31 @@
+.wrapper {
+    &--content {
+        max-width: $content-wrapper;
+        margin: 0 auto;
+        line-height: 1.5;
+        padding: 0 20px;
+
+        @include media-query(tablet-landscape) {
+            padding: 0;
+        }
+
+        a:not(.button) {
+            color: $light-blue;
+            font-weight: $weight-semibold;
+        }
+
+        p {
+            font-weight: $weight-light;
+        }
+    }
+
+    &--overlap-top {
+        margin-top: -100px;
+    }
+
+    &--single-line-bg {
+        background: url('../images/background-line-listings-page.svg') no-repeat;
+        background-size: contain;
+        background-position: bottom;
+    }
+}

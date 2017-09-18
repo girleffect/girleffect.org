@@ -1,0 +1,15 @@
+.list {
+    margin: 2rem 0;
+
+    &--bulleted {
+        list-style: disc outside;
+        padding-left: 2rem;
+
+        > li {
+            color: inherit;
+            font-weight: $weight-bold;
+            padding-left: 1rem;
+            margin-bottom: 0.2rem;
+        }
+    }
+}

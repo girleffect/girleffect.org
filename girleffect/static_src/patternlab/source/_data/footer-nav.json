@@ -1,0 +1,122 @@
+{
+  "footerNavPrimary": [
+    {
+      "title": "The Basics",
+      "href" : "#",
+      "children" : [
+        {
+          "title": "Intro to OBC/SIBs",
+          "href" : "#"
+        },
+        {
+          "title": "Glossary of Key Terms",
+          "href" : "#"
+        },
+        {
+          "title": "FAQs",
+          "href" : "#"
+        }
+      ]
+    },
+    {
+      "title": "Journey Map",
+      "href" : "#",
+      "children": [
+        {
+          "title": "Test Feasibility",
+          "href" : "#"
+        },
+        {
+          "title": "Develop the Business Case",
+          "href" : "#"
+        },
+        {
+          "title": "Manage the Contract",
+          "href" : "#"
+        },
+        {
+          "title": "Implementation",
+          "href" : "#"
+        }
+      ]
+    },
+    {
+      "title": "Resources",
+      "href" : "#",
+      "children": [
+        {
+          "title": "Databases",
+          "href" : "#"
+        },
+        {
+          "title": "GO Lab Technical Guides",
+          "href" : "#"
+        },
+        {
+          "title": "Templates",
+          "href" : "#"
+        },
+        {
+          "title": "Policy Briefs",
+          "href" : "#"
+        }
+      ]
+    },
+    {
+      "title": "Projects & Case Studies",
+      "href" : "#",
+      "children": [
+        {
+          "title": "Database of SIB projects",
+          "href" : "#"
+        },
+        {
+          "title": "Case Studies",
+          "href" : "#"
+        }
+      ]
+    },
+    {
+      "title": "Advice",
+      "href" : "#",
+      "children": [
+        {
+          "title": "Book for Advice Surgeries",
+          "href" : "#"
+        }
+      ]
+    },
+    {
+      "title": "Our Research",
+      "href" : "#",
+      "children": [
+        {
+          "title": "Approach and Research",
+          "href" : "#"
+        },
+        {
+          "title": "Questions",
+          "href" : "#"
+        },
+        {
+          "title": "Publications",
+          "href" : "#"
+        }
+      ]
+    }
+  ],
+  "footerNavSecondary": [
+    {
+      "title": "Privacy Policy",
+      "href" : "#"
+    },
+    {
+      "title": "Terms of Use",
+      "href" : "#"
+    },
+    {
+      "title": "Contact Us",
+      "href" : "#"
+    }
+  ]
+}
