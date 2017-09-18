@@ -49,15 +49,6 @@ flake8:
     - flake8 girleffect/settings --ignore=E501,F405
 
 
-# Check JavaScript code style.
-jscs:
-  image: node:4.2.4
-  stage: test
-  script:
-    - npm install --quiet
-    - npm run jscs
-
-
 # Check settings, migrations and run tests.
 test:
   image: python:3.6
