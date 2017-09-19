@@ -14,8 +14,7 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel, InlinePanel,
-    MultiFieldPanel, PageChooserPanel,
-    StreamFieldPanel
+    PageChooserPanel, StreamFieldPanel
 )
 
 from wagtail.wagtailcore.fields import StreamField
