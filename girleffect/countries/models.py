@@ -13,7 +13,7 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel, InlinePanel,
-    PageChooserPanel, StreamFieldPanel
+    StreamFieldPanel
 )
 
 from wagtail.wagtailcore.fields import StreamField
@@ -25,21 +25,6 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 class CountryPageRelatedDocument(RelatedDocument):
     page = ParentalKey('countries.CountryPage',
                        related_name='related_documents')
-
-
-class CountryPageRelatedSolution(Orderable, models.Model):
-    page = ParentalKey('countries.CountryPage', related_name='solutions',
-                       blank=True, null=True)
-    solution_page = models.ForeignKey(
-        'solutions.SolutionPage',
-        null=True, blank=True,
-        on_delete=models.SET_NULL,
-        related_name='country_solutions'
-    )
-
-    panels = [
-        PageChooserPanel('solution_page'),
-    ]
 
 
 class RegionIndex(Page, SocialFields):
@@ -121,6 +106,13 @@ class CountryPage(Page, SocialFields, ListingFields):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    solution = models.ForeignKey(
+        'solutions.SolutionSnippet',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     search_fields = Page.search_fields + [
         index.SearchField('introduction'),
@@ -132,8 +124,8 @@ class CountryPage(Page, SocialFields, ListingFields):
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
         InlinePanel('related_documents', label="Related documents"),
-        InlinePanel('solutions', label="Related solutions"),
         SnippetChooserPanel('call_to_action'),
+        SnippetChooserPanel('solution'),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels \
