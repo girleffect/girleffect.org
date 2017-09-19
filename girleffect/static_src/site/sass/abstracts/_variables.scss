@@ -1,0 +1,122 @@
+/*------------------------------------*\
+    $VARIABLES
+\*------------------------------------*/
+
+/* ============================================
+   Colours
+*/
+
+// Colour variables
+$black:        #000;
+$white:        #fff;
+$purple:       #633180;
+$turquoise:    #80ddd9;
+$dark-orange:  #ff4800;
+$grey:         #a79c94;
+$light-green:  #73984a;
+$light-blue:   #26a2c8;
+$light-orange: #ff9203;
+$navy-blue:    #041e41;
+$aqua:         #34ddd9;
+$blue-lagoon:  #006D7F;
+$blue:         #035cdd;
+
+// Additional colors
+$regent-grey:  #878fa1;
+$concrete:     #f4f2f2;
+$mercury:      #e7e7e7;
+$parchment:    #f3edf4;
+
+// Section colours
+$color--events:    $purple;
+$color--about:     $turquoise;
+$color--blog:      $dark-orange;
+$color--advice:    $grey;
+$color--journey:   $light-green;
+$color--resources: $light-blue;
+$color--projects:  $light-orange;
+
+// Type colours
+$color--body-link:  $light-blue;
+$color--body:       $navy-blue;
+$color--cta:        $dark-orange;
+$color--captions:   $grey;
+$color--highlights: $aqua;
+
+// Colour vars
+$teal:       #2eb1b0;
+$green:      #68aa6c;
+$orange:     #fb5a40;
+$yellow:     #f5c157;
+$dark-grey:  #2b3033;
+
+$black: #000;
+$black-90: rgba($black, 0.9);
+$black-80: rgba($black, 0.8);
+$black-70: rgba($black, 0.7);
+$black-60: rgba($black, 0.6);
+$black-50: rgba($black, 0.5);
+$black-40: rgba($black, 0.4);
+$black-30: rgba($black, 0.3);
+$black-20: rgba($black, 0.2);
+$black-10: rgba($black, 0.1);
+$black-05: rgba($black, 0.05);
+
+$white: #fff;
+$white-90: rgba($white, 0.9);
+$white-80: rgba($white, 0.8);
+$white-70: rgba($white, 0.7);
+$white-60: rgba($white, 0.6);
+$white-50: rgba($white, 0.5);
+$white-40: rgba($white, 0.4);
+$white-30: rgba($white, 0.3);
+$white-20: rgba($white, 0.2);
+$white-10: rgba($white, 0.1);
+$white-05: rgba($white, 0.05);
+
+/* ============================================
+   Typography
+   :: Default to system font stack
+*/
+$font-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+$font-serif: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif;
+
+$weight-bold: 700;
+$weight-semibold: 600;
+$weight-normal: 400;
+$weight-light: 300;
+
+/* ============================================
+   Grid Dimentions
+*/
+$gutter--mobile:        10px;
+$gutter--tablet:        20px;
+$gutter--desktop:       26px;
+$gutter--desktop-wide:  40px;
+
+/* ============================================
+   Max widths and wrappers
+*/
+$max-width: 1350px;
+$content-wrapper: 790px;
+
+/* ============================================
+   Breakpoints
+*/
+$breakpoints: (
+    'mob-potrait'       '(min-width: 320px)',
+    'mob-landscape'     '(min-width: 480px)',
+    'tablet-portrait'   '(min-width: 768px)',
+    'tablet-landscape'  '(min-width: 1024px)',
+    'desktop'           '(min-width: 1280px)',
+    'deskop-wide'       '(min-width: 2556px)'
+);
+
+/* ============================================
+   Transition speeds
+*/
+
+$anim--speed: 600ms;
+$anim--ease: ease-in-out;
+
+$transition: 0.25s ease-out;

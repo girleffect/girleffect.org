@@ -1,10 +1,3 @@
-# Build static assets.
-FROM node:6 AS assets
-WORKDIR /app
-COPY . /app
-RUN npm install --quiet
-RUN npm run prod
-
 # Build the application itself.
 FROM python:3.6.2-jessie
 
@@ -40,8 +33,3 @@ ENTRYPOINT [ "/run.sh" ]
 
 # Install application code.
 COPY . /app
-
-# Install assets
-COPY --from=assets /app/girleffect/static_compiled /app/girleffect/static_compiled
-
-RUN CFG_SECRET_KEY=none django-admin.py collectstatic --noinput --settings=girleffect.settings.production
