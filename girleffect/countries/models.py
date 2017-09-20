@@ -41,6 +41,7 @@ class CountryPageRelatedSolution(Orderable, models.Model):
         PageChooserPanel('solution_page'),
     ]
 
+
 class RegionIndex(Page, SocialFields):
     introduction = models.TextField(blank=True)
 
