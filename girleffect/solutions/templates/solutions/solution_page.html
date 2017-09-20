@@ -17,21 +17,6 @@
         </div>
     </section>
 
-    <section class="solution-countries">
-        <div class="container">
-            <h2>Countries we are active in</h2>
-            <ul>
-            {% for country in page.countries %}
-                <li>
-                    <a href="{% pageurl country %}">
-                        {{ country.title }}
-                    </a>
-                </li>
-            {% endfor %}
-            </ul>
-        </div>
-    </section>
-
     {% if page.call_to_action %}
     <section class="country-cta">
         <div class="container">

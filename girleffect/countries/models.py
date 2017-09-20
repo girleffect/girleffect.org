@@ -17,7 +17,7 @@ from wagtail.wagtailadmin.edit_handlers import (
 )
 
 from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Orderable, Page
+from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
@@ -25,21 +25,6 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 class CountryPageRelatedDocument(RelatedDocument):
     page = ParentalKey('countries.CountryPage',
                        related_name='related_documents')
-
-
-class CountryPageRelatedSolution(Orderable, models.Model):
-    page = ParentalKey('countries.CountryPage', related_name='solutions',
-                       blank=True, null=True)
-    solution_page = models.ForeignKey(
-        'solutions.SolutionPage',
-        null=True, blank=True,
-        on_delete=models.SET_NULL,
-        related_name='country_solutions'
-    )
-
-    panels = [
-        PageChooserPanel('solution_page'),
-    ]
 
 
 class RegionIndex(Page, SocialFields):
@@ -111,6 +96,7 @@ class CountryIndex(Page, SocialFields):
 
 
 class CountryPage(Page, SocialFields, ListingFields):
+    subtitle = models.CharField(blank=True, max_length=80)
     introduction = models.TextField(blank=True)
     body = StreamField(StoryBlock())
     call_to_action = models.ForeignKey(
@@ -120,18 +106,26 @@ class CountryPage(Page, SocialFields, ListingFields):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    solution = models.ForeignKey(
+        'solutions.SolutionPage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     search_fields = Page.search_fields + [
-        index.SearchField('context'),
+        index.SearchField('introduction'),
         index.SearchField('body'),
     ]
 
     content_panels = Page.content_panels + [
+        FieldPanel('subtitle'),
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
         InlinePanel('related_documents', label="Related documents"),
-        InlinePanel('solutions', label="Related solutions"),
         SnippetChooserPanel('call_to_action'),
+        PageChooserPanel('solution'),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels \

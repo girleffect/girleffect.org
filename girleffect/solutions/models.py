@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
-from django.utils.functional import cached_property
 
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
@@ -78,13 +77,6 @@ class SolutionPage(Page, SocialFields, ListingFields):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-
-    @cached_property
-    def countries(self):
-        countries = [
-            n.page for n in self.country_solutions.all()
-        ]
-        return countries
 
     search_fields = Page.search_fields + [
         index.SearchField('summary'),

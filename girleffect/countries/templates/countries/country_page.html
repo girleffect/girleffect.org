@@ -17,21 +17,6 @@
         </div>
     </section>
 
-    <section class="country-solutions">
-        <div class="container">
-            <h2>Solutions</h2>
-            <ul>
-            {% for solution in page.solutions.all %}
-                <li>
-                    <a href="{% pageurl specific_solution_page %}">
-                        {{ solution.solution_page.title }}
-                    </a>
-                </li>
-            {% endfor %}
-            </ul>
-        </div>
-    </section>
-
     {% if page.call_to_action %}
     <section class="country-cta">
         <div class="container">
@@ -41,6 +26,18 @@
         </a>
         </div>
     </section>
+    {% endif %}
+
+    {% if page.solution %}
+        <section class="country-solution">
+            <div class="container">
+                <h2>Solution</h2>
+                <a href="{{ page.solution.url }}">
+                    {{ page.solution.title }}
+                </a>
+                <p>{{ page.solution.summary }}</p>
+            </div>
+        </section>
     {% endif %}
 
 {% endblock %}
