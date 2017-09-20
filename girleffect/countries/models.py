@@ -13,7 +13,7 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel, InlinePanel,
-    StreamFieldPanel
+    PageChooserPanel, StreamFieldPanel
 )
 
 from wagtail.wagtailcore.fields import StreamField
@@ -107,7 +107,7 @@ class CountryPage(Page, SocialFields, ListingFields):
         related_name='+'
     )
     solution = models.ForeignKey(
-        'solutions.SolutionSnippet',
+        'solutions.SolutionPage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -125,7 +125,7 @@ class CountryPage(Page, SocialFields, ListingFields):
         StreamFieldPanel('body'),
         InlinePanel('related_documents', label="Related documents"),
         SnippetChooserPanel('call_to_action'),
-        SnippetChooserPanel('solution'),
+        PageChooserPanel('solution'),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels \

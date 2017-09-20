@@ -14,14 +14,13 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel, InlinePanel,
-    PageChooserPanel, StreamFieldPanel
+    StreamFieldPanel
 )
 
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtail.wagtailsnippets.models import register_snippet
 
 
 class SolutionPageRelatedDocument(RelatedDocument):
@@ -94,25 +93,3 @@ class SolutionPage(Page, SocialFields, ListingFields):
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels \
         + ListingFields.promote_panels
-
-
-@register_snippet
-class SolutionSnippet(models.Model):
-    solution_title = models.CharField(blank=True, max_length=80)
-    solution_page = models.ForeignKey(
-        'solutions.SolutionPage',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-    )
-    solution_summary = models.CharField(blank=True, max_length=255)
-
-    def __str__(self):
-        return self.solution_title
-
-    panels = [
-        FieldPanel('solution_title'),
-        PageChooserPanel('solution_page', 'solutions.SolutionPage'),
-        FieldPanel('solution_summary'),
-    ]

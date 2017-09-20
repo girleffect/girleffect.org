@@ -29,7 +29,15 @@
     {% endif %}
 
     {% if page.solution %}
-        {% include "includes/solution_snippet.html" %}
+        <section class="country-solution">
+            <div class="container">
+                <h2>Solution</h2>
+                <a href="{{ page.solution.url }}">
+                    {{ page.solution.title }}
+                </a>
+                <p>{{ page.solution.summary }}</p>
+            </div>
+        </section>
     {% endif %}
 
 {% endblock %}
