@@ -28,16 +28,18 @@
     </section>
     {% endif %}
 
-    {% if page.solution %}
-        <section class="country-solution">
-            <div class="container">
-                <h2>Solution</h2>
-                <a href="{{ page.solution.url }}">
-                    {{ page.solution.title }}
-                </a>
-                <p>{{ page.solution.summary }}</p>
-            </div>
-        </section>
+    {% if page.solutions.exists %}
+        {% for solution in page.solutions.all %}
+            <section class="country-solution">
+                <div class="container">
+                    <h2>Solution</h2>
+                    <a href="{{ solution.page.url }}">
+                        {{ solution.page.title }}
+                    </a>
+                    <p>{{ solution.page.summary }}</p>
+                </div>
+            </section>
+        {% endfor %}
     {% endif %}
 
 {% endblock %}
