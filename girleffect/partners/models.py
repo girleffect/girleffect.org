@@ -21,6 +21,8 @@ from girleffect.utils.models import (
 
 class Partner(Orderable, models.Model):
     page = ParentalKey('PartnerIndexPage', related_name='partners')
+    title = models.CharField(blank=False, max_length=80)
+    description = models.TextField(blank=True)
     logo = models.ForeignKey(
         'images.CustomImage',
         null=True,
@@ -37,6 +39,8 @@ class Partner(Orderable, models.Model):
 
     panels = [
         ImageChooserPanel('logo'),
+        FieldPanel('title'),
+        FieldPanel('description'),
         PageChooserPanel('internal_link', ['countries.CountryPage',
                                            'countries.CountryIndex',
                                            'solutions.SolutionPage',
@@ -44,6 +48,9 @@ class Partner(Orderable, models.Model):
                                            'standardpage.StandardPage']),
         FieldPanel('external_link')
     ]
+
+    def __str__(self):
+        return self.title
 
 
 class PartnerIndexPage(Page, SocialFields):
@@ -56,6 +63,9 @@ class PartnerIndexPage(Page, SocialFields):
 
     search_fields = Page.search_fields + [
         index.SearchField('introduction'),
+        index.RelatedFields('partners', [
+                            index.SearchField('title')
+                            ])
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels
