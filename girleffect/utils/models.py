@@ -165,3 +165,17 @@ class SocialMediaSettings(BaseSetting):
         default='Girl Effect',
         help_text='Site name, used by Open Graph.',
     )
+
+
+@register_snippet
+class PartnerWithUsSnippet(CallToActionSnippet):
+    email = models.EmailField()
+    phone = models.CharField(max_length=18)
+
+    panels = CallToActionSnippet.panels + [
+        FieldPanel('email'),
+        FieldPanel('phone'),
+    ]
+
+    def __str__(self):
+        return self.title

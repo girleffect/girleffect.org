@@ -42,6 +42,21 @@ class CountryPageRelatedSolution(Orderable, models.Model):
     ]
 
 
+class CountryPageRelatedPartner(Orderable, models.Model):
+    page = ParentalKey('countries.CountryPage', related_name='partners',
+                       blank=True, null=True)
+    related_partner = models.ForeignKey(
+        'partners.Partner',
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        related_name='country_partners'
+    )
+
+    panels = [
+        FieldPanel('related_partner'),
+    ]
+
+
 class RegionIndex(Page, SocialFields):
     introduction = models.TextField(blank=True)
 
@@ -134,6 +149,7 @@ class CountryPage(Page, SocialFields, ListingFields):
         InlinePanel('related_documents', label="Related documents"),
         SnippetChooserPanel('call_to_action'),
         InlinePanel('solutions', label="Related solutions"),
+        InlinePanel('partners', label="Related partners"),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels \

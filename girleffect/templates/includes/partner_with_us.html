@@ -1,0 +1,21 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="partner-with-us">
+
+    {{ page.partner_with_us.title }}
+
+    {{ page.partner_with_us.summary|richtext }}
+
+    {% with page.partner_with_us.image original as partner_image %}
+    <img src="{{ partner_image.url }}">
+
+    Email: <a href="mailto:{{ page.partner_with_us.email }}">{{ page.partner_with_us.email }}</a><br/>
+    Telephone: <a href="tel:{{ page.partner_with_us.phone }}">{{ page.partner_with_us.phone }}</a><br/>
+    
+    {% if page.partner_with_us.internal_link %}
+        <a href="{{ page.partner_with_us.get_internal_link.href }}">{{ page.partner_with_us.get_internal_link.text }}</a>
+    {% elif partner_with_us.external_link  %}
+        <a href="{{ page.partner_with_us.get_external_link.href }}">{{ page.partner_with_us.get_external_link.text }}</a>
+    {% endif %}
+
+</div>
