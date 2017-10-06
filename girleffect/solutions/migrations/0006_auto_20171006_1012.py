@@ -14,7 +14,7 @@ import wagtail.wagtailsnippets.blocks
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('solutions', '0005_auto_20171006_0933'),
+        ('solutions', '0006_auto_20170920_1024'),
     ]
 
     operations = [
