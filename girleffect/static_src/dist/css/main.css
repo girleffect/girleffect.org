@@ -1,0 +1,1220 @@
+/*------------------------------------*	$VENDOR
+\*------------------------------------*/
+/*! normalize.css v4.2.0 | MIT License | github.com/necolas/normalize.css */
+/**
+ * 1. Change the default font family in all browsers (opinionated).
+ * 2. Correct the line height in all browsers.
+ * 3. Prevent adjustments of font size after orientation changes in IE and iOS.
+ */
+html {
+  font-family: sans-serif;
+  /* 1 */
+  line-height: 1.15;
+  /* 2 */
+  -ms-text-size-adjust: 100%;
+  /* 3 */
+  -webkit-text-size-adjust: 100%;
+  /* 3 */
+}
+
+/**
+ * Remove the margin in all browsers (opinionated).
+ */
+body {
+  margin: 0;
+}
+
+/* HTML5 display definitions
+   ========================================================================== */
+/**
+ * Add the correct display in IE 9-.
+ * 1. Add the correct display in Edge, IE, and Firefox.
+ * 2. Add the correct display in IE.
+ */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+  /* 1 */
+  display: block;
+}
+
+/**
+ * Add the correct display in IE 9-.
+ */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+}
+
+/**
+ * Add the correct display in iOS 4-7.
+ */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Add the correct display in IE 10-.
+ * 1. Add the correct display in IE.
+ */
+template,
+[hidden] {
+  display: none;
+}
+
+/* Links
+   ========================================================================== */
+/**
+ * 1. Remove the gray background on active links in IE 10.
+ * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
+ */
+a {
+  background-color: transparent;
+  /* 1 */
+  -webkit-text-decoration-skip: objects;
+  /* 2 */
+}
+
+/**
+ * Remove the outline on focused links when they are also active or hovered
+ * in all browsers (opinionated).
+ */
+a:active,
+a:hover {
+  outline-width: 0;
+}
+
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * 1. Remove the bottom border in Firefox 39-.
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+abbr[title] {
+  border-bottom: none;
+  /* 1 */
+  text-decoration: underline;
+  /* 2 */
+  text-decoration: underline dotted;
+  /* 2 */
+}
+
+/**
+ * Prevent the duplicate application of `bolder` by the next rule in Safari 6.
+ */
+b,
+strong {
+  font-weight: inherit;
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * Add the correct font style in Android 4.3-.
+ */
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/**
+ * Add the correct background and color in IE 9-.
+ */
+mark {
+  background-color: #ff0;
+  color: #000;
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+/**
+ * Remove the border on images inside links in IE 10-.
+ */
+img {
+  border-style: none;
+}
+
+/**
+ * Hide the overflow in IE.
+ */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */
+}
+
+/**
+ * Add the correct margin in IE 8.
+ */
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+hr {
+  box-sizing: content-box;
+  /* 1 */
+  height: 0;
+  /* 1 */
+  overflow: visible;
+  /* 2 */
+}
+
+/* Forms
+   ========================================================================== */
+/**
+ * 1. Change font properties to `inherit` in all browsers (opinionated).
+ * 2. Remove the margin in Firefox and Safari.
+ */
+button,
+input,
+optgroup,
+select,
+textarea {
+  font: inherit;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+}
+
+/**
+ * Restore the font weight unset by the previous rule.
+ */
+optgroup {
+  font-weight: bold;
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+button,
+input {
+  /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+button,
+select {
+  /* 1 */
+  text-transform: none;
+}
+
+/**
+ * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
+ *    controls in Android 4.
+ * 2. Correct the inability to style clickable types in iOS and Safari.
+ */
+button,
+html [type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Change the border, margin, and padding in all browsers (opinionated).
+ */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+legend {
+  box-sizing: border-box;
+  /* 1 */
+  color: inherit;
+  /* 2 */
+  display: table;
+  /* 1 */
+  max-width: 100%;
+  /* 1 */
+  padding: 0;
+  /* 3 */
+  white-space: normal;
+  /* 1 */
+}
+
+/**
+ * Remove the default vertical scrollbar in IE.
+ */
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10-.
+ * 2. Remove the padding in IE 10-.
+ */
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  outline-offset: -2px;
+  /* 2 */
+}
+
+/**
+ * Remove the inner padding and cancel buttons in Chrome and Safari on OS X.
+ */
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Correct the text style of placeholders in Chrome, Edge, and Safari.
+ */
+::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.54;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+}
+
+/*------------------------------------*	$Abstracts
+\*------------------------------------*/
+/*------------------------------------*    $VARIABLES
+\*------------------------------------*/
+/* ============================================
+   Colours
+*/
+/* ============================================
+   Typography
+   :: Default to system font stack
+*/
+/* ============================================
+   Grid Dimentions
+*/
+/* ============================================
+   Max widths and wrappers
+*/
+/* ============================================
+   Breakpoints
+*/
+/* ============================================
+   Transition speeds
+*/
+/*------------------------------------*    $MIXINS
+\*------------------------------------*/
+/* ============================================
+    Media Query mixin
+*/
+/* ============================================
+  Placeholder text
+*/
+/* ============================================
+  iOS Native vertical scroll
+*/
+/* ============================================
+   Aligner: placeholder class used to align
+   components at the template-level
+   For want of a better place to put this I've left it here:
+*/
+/* ============================================
+   Gutter spacing
+*/
+/* ============================================
+   Viewport sized typography mixin that takes a min and max pixel-based value
+*/
+/*------------------------------------*        $BASE DEFAULTS
+\*------------------------------------*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+img,
+svg {
+  vertical-align: top;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+svg * {
+  fill: inherit;
+  stroke: inherit;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'lato';
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 36px;
+  color: #fff;
+}
+
+h2 {
+  font-size: 2.38095vw;
+  color: #041e41;
+}
+
+@media (max-width: 840px) {
+  h2 {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1260px) {
+  h2 {
+    font-size: 30px;
+  }
+}
+
+b,
+strong {
+  font-weight: 800;
+}
+
+/*------------------------------------*	$Tachyons
+\*------------------------------------*/
+/*
+
+   FONT STYLE
+   Docs: http://tachyons.io/docs/typography/font-style/
+
+   Media Query Extensions:
+     -ns = not-small
+     -m  = medium
+     -l  = large
+
+*/
+.i {
+  font-style: italic;
+}
+
+.fs-normal {
+  font-style: normal;
+}
+
+@media only screen and (min-width: 768px) {
+  .i-ns {
+    font-style: italic;
+  }
+  .fs-normal-ns {
+    font-style: normal;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .i-m {
+    font-style: italic;
+  }
+  .fs-normal-m {
+    font-style: normal;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .i-l {
+    font-style: italic;
+  }
+  .fs-normal-l {
+    font-style: normal;
+  }
+}
+
+/*
+
+   FONT WEIGHT
+   Docs: http://tachyons.io/docs/typography/font-weight/
+
+   Base
+     fw = font-weight
+
+   Modifiers:
+     1 = literal value 100
+     2 = literal value 200
+     3 = literal value 300
+     4 = literal value 400
+     5 = literal value 500
+     6 = literal value 600
+     7 = literal value 700
+     8 = literal value 800
+     9 = literal value 900
+
+   Media Query Extensions:
+     -ns = not-small
+     -m  = medium
+     -l  = large
+
+*/
+.normal {
+  font-weight: normal;
+}
+
+.b {
+  font-weight: bold;
+}
+
+.fw1 {
+  font-weight: 100;
+}
+
+.fw2 {
+  font-weight: 200;
+}
+
+.fw3 {
+  font-weight: 300;
+}
+
+.fw4 {
+  font-weight: 400;
+}
+
+.fw5 {
+  font-weight: 500;
+}
+
+.fw6 {
+  font-weight: 600;
+}
+
+.fw7 {
+  font-weight: 700;
+}
+
+.fw8 {
+  font-weight: 800;
+}
+
+.fw9 {
+  font-weight: 900;
+}
+
+@media only screen and (min-width: 768px) {
+  .normal-ns {
+    font-weight: normal;
+  }
+  .b-ns {
+    font-weight: bold;
+  }
+  .fw1-ns {
+    font-weight: 100;
+  }
+  .fw2-ns {
+    font-weight: 200;
+  }
+  .fw3-ns {
+    font-weight: 300;
+  }
+  .fw4-ns {
+    font-weight: 400;
+  }
+  .fw5-ns {
+    font-weight: 500;
+  }
+  .fw6-ns {
+    font-weight: 600;
+  }
+  .fw7-ns {
+    font-weight: 700;
+  }
+  .fw8-ns {
+    font-weight: 800;
+  }
+  .fw9-ns {
+    font-weight: 900;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .normal-m {
+    font-weight: normal;
+  }
+  .b-m {
+    font-weight: bold;
+  }
+  .fw1-m {
+    font-weight: 100;
+  }
+  .fw2-m {
+    font-weight: 200;
+  }
+  .fw3-m {
+    font-weight: 300;
+  }
+  .fw4-m {
+    font-weight: 400;
+  }
+  .fw5-m {
+    font-weight: 500;
+  }
+  .fw6-m {
+    font-weight: 600;
+  }
+  .fw7-m {
+    font-weight: 700;
+  }
+  .fw8-m {
+    font-weight: 800;
+  }
+  .fw9-m {
+    font-weight: 900;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .normal-l {
+    font-weight: normal;
+  }
+  .b-l {
+    font-weight: bold;
+  }
+  .fw1-l {
+    font-weight: 100;
+  }
+  .fw2-l {
+    font-weight: 200;
+  }
+  .fw3-l {
+    font-weight: 300;
+  }
+  .fw4-l {
+    font-weight: 400;
+  }
+  .fw5-l {
+    font-weight: 500;
+  }
+  .fw6-l {
+    font-weight: 600;
+  }
+  .fw7-l {
+    font-weight: 700;
+  }
+  .fw8-l {
+    font-weight: 800;
+  }
+  .fw9-l {
+    font-weight: 900;
+  }
+}
+
+/*
+
+   LINE HEIGHT / LEADING
+   Docs: http://tachyons.io/docs/typography/line-height
+
+   Media Query Extensions:
+     -ns = not-small
+     -m  = medium
+     -l  = large
+
+*/
+.lh-solid {
+  line-height: 1;
+}
+
+.lh-title {
+  line-height: 1.25;
+}
+
+.lh-copy {
+  line-height: 1.5;
+}
+
+@media only screen and (min-width: 768px) {
+  .lh-solid-ns {
+    line-height: 1;
+  }
+  .lh-title-ns {
+    line-height: 1.25;
+  }
+  .lh-copy-ns {
+    line-height: 1.5;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .lh-solid-m {
+    line-height: 1;
+  }
+  .lh-title-m {
+    line-height: 1.25;
+  }
+  .lh-copy-m {
+    line-height: 1.5;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .lh-solid-l {
+    line-height: 1;
+  }
+  .lh-title-l {
+    line-height: 1.25;
+  }
+  .lh-copy-l {
+    line-height: 1.5;
+  }
+}
+
+/*
+
+   TYPE SCALE
+   Docs: http://tachyons.io/docs/typography/scale/
+
+   Base:
+    f = font-size
+
+   Modifiers
+     1 = 1st step in size scale
+     2 = 2nd step in size scale
+     3 = 3rd step in size scale
+     4 = 4th step in size scale
+     5 = 5th step in size scale
+     6 = 6th step in size scale
+     7 = 7th step in size scale
+
+   Media Query Extensions:
+     -ns = not-small
+     -m  = medium
+     -l  = large
+*/
+/*
+ * For Hero/Marketing Titles
+ *
+ * These generally are too large for mobile
+ * so be careful using them on smaller screens.
+ * */
+.f-6,
+.f-headline {
+  font-size: 6rem;
+}
+
+.f-5,
+.f-subheadline {
+  font-size: 5rem;
+}
+
+/* Type Scale */
+.f1 {
+  font-size: 3rem;
+}
+
+.f2 {
+  font-size: 2.25rem;
+}
+
+.f3 {
+  font-size: 1.5rem;
+}
+
+.f4 {
+  font-size: 1.25rem;
+}
+
+.f5 {
+  font-size: 1rem;
+}
+
+.f6 {
+  font-size: 0.875rem;
+}
+
+.f7 {
+  font-size: 0.75rem;
+}
+
+/* Small and hard to read for many people so use with extreme caution */
+@media only screen and (min-width: 768px) {
+  .f-6-ns,
+  .f-headline-ns {
+    font-size: 6rem;
+  }
+  .f-5-ns,
+  .f-subheadline-ns {
+    font-size: 5rem;
+  }
+  .f1-ns {
+    font-size: 3rem;
+  }
+  .f2-ns {
+    font-size: 2.25rem;
+  }
+  .f3-ns {
+    font-size: 1.5rem;
+  }
+  .f4-ns {
+    font-size: 1.25rem;
+  }
+  .f5-ns {
+    font-size: 1rem;
+  }
+  .f6-ns {
+    font-size: 0.875rem;
+  }
+  .f7-ns {
+    font-size: 0.75rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .f-6-m,
+  .f-headline-m {
+    font-size: 6rem;
+  }
+  .f-5-m,
+  .f-subheadline-m {
+    font-size: 5rem;
+  }
+  .f1-m {
+    font-size: 3rem;
+  }
+  .f2-m {
+    font-size: 2.25rem;
+  }
+  .f3-m {
+    font-size: 1.5rem;
+  }
+  .f4-m {
+    font-size: 1.25rem;
+  }
+  .f5-m {
+    font-size: 1rem;
+  }
+  .f6-m {
+    font-size: 0.875rem;
+  }
+  .f7-m {
+    font-size: 0.75rem;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .f-6-l,
+  .f-headline-l {
+    font-size: 6rem;
+  }
+  .f-5-l,
+  .f-subheadline-l {
+    font-size: 5rem;
+  }
+  .f1-l {
+    font-size: 3rem;
+  }
+  .f2-l {
+    font-size: 2.25rem;
+  }
+  .f3-l {
+    font-size: 1.5rem;
+  }
+  .f4-l {
+    font-size: 1.25rem;
+  }
+  .f5-l {
+    font-size: 1rem;
+  }
+  .f6-l {
+    font-size: 0.875rem;
+  }
+  .f7-l {
+    font-size: 0.75rem;
+  }
+}
+
+/*
+
+   FONT FAMILY GROUPS
+   Docs: http://tachyons.io/docs/typography/font-family/
+
+*/
+.sans-serif {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.serif {
+  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+}
+
+/*
+
+ SKINS
+ Docs: http://tachyons.io/docs/themes/skins/
+
+ Classes for setting foreground and background colors on elements.
+ If you haven't declared a border color, but set border on an element, it will 
+ be set to the current text color. 
+
+*/
+/* Text colors */
+.black {
+  color: #000;
+}
+
+.black-90 {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.black-80 {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.black-70 {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.black-60 {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.black-50 {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.black-40 {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.black-30 {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.black-20 {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.black-10 {
+  color: rgba(0, 0, 0, 0.1);
+}
+
+.black-05 {
+  color: rgba(0, 0, 0, 0.05);
+}
+
+.white {
+  color: #fff;
+}
+
+.white-90 {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.white-80 {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.white-70 {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.white-60 {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.white-50 {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.white-40 {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.white-30 {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.white-20 {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.white-10 {
+  color: rgba(255, 255, 255, 0.1);
+}
+
+.white-05 {
+  color: rgba(255, 255, 255, 0.05);
+}
+
+.teal {
+  color: #2eb1b0;
+}
+
+.green {
+  color: #68aa6c;
+}
+
+.orange {
+  color: #fb5a40;
+}
+
+.yellow {
+  color: #f5c157;
+}
+
+.dark-grey {
+  color: #2b3033;
+}
+
+/* Background colors */
+.bg-black {
+  background-color: #000;
+}
+
+.bg-black-90 {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.bg-black-80 {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.bg-black-70 {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.bg-black-60 {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.bg-black-50 {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.bg-black-40 {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.bg-black-30 {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.bg-black-20 {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.bg-black-10 {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.bg-black-05 {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+.bg-white-90 {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.bg-white-80 {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.bg-white-70 {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.bg-white-60 {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.bg-white-50 {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.bg-white-40 {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.bg-white-30 {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.bg-white-20 {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.bg-white-10 {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.bg-white-05 {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.bg-teal {
+  background-color: #2eb1b0;
+}
+
+.bg-green {
+  background-color: #68aa6c;
+}
+
+.bg-orange {
+  background-color: #fb5a40;
+}
+
+.bg-yellow {
+  background-color: #f5c157;
+}
+
+.bg-dark-grey {
+  background-color: #2b3033;
+}
+
+/*------------------------------------*	$Patterns
+\*------------------------------------*/
+
+/*# sourceMappingURL=main.css.map */
