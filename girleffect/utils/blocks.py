@@ -29,6 +29,14 @@ class QuoteBlock(blocks.StructBlock):
 class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
     paragraph = blocks.RichTextBlock()
+    large_text = blocks.RichTextBlock(
+        classname="large-text",
+        label="Large Text",
+        max_length=350,
+        features=["bold", "italic", "link", "document-link"],
+        required=False,
+        icon="pilcrow"
+    )
     image = ImageBlock()
     quote = QuoteBlock()
     embed = EmbedBlock()
