@@ -16,11 +16,11 @@
 env/
 build/
 develop-eggs/
-dist/
+/dist/
 downloads/
 eggs/
 .eggs/
-lib/
+/lib/
 lib64/
 parts/
 sdist/
@@ -29,4 +29,3 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-

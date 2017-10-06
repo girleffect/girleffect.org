@@ -1,0 +1,67 @@
+/*------------------------------------*\
+        $BASE DEFAULTS
+\*------------------------------------*/
+
+// Box Sizing
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+// Prevent text size change on orientation change.
+// sass-lint:disable no-vendor-prefixes
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+// Prevent empty space below images appearing
+img,
+svg {
+    vertical-align: top;
+}
+
+// Make images scale
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+// Allow sprite svg colors to be changed
+svg * {
+    fill: inherit;
+    stroke: inherit;
+}
+
+// 100% wrapper hight
+html,
+body {
+    // Breaks position sticky
+    height: 100%;
+    font-family: 'lato';
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+// Heading styling
+h1 {
+    font-size: 36px;
+    color: $white;
+}
+
+h2 {
+    @include font-size(20px, 30px);
+    color: $navy-blue;
+}
+
+b,
+strong {
+    font-weight: 800;
+}
