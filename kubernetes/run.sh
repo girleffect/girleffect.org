@@ -46,4 +46,5 @@ else
     django-admin.py migrate --noinput
 fi
 
+django-admin.py collectstatic --noinput --clear
 exec uwsgi --ini kubernetes/uwsgi.ini "$@"
