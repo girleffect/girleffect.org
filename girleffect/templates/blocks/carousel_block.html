@@ -1,0 +1,8 @@
+{% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
+
+<div class="carousel carousel--full-width">
+{% for carousel_item in value %}
+    {% include_block carousel_item %}
+    {# found in carousel_item_block.html #}
+{% endfor %}
+</div>
