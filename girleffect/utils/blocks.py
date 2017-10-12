@@ -30,7 +30,11 @@ class LinkBlock(blocks.StructBlock):
         required=False,
         label="Internal Link"
     )
-    link_text = blocks.CharBlock(max_length=255)
+    link_text = blocks.CharBlock(
+        required=False,
+        max_length=255,
+        label="Link Text"
+    )
 
     def get_context(self, value, **kwargs):
         item_link = value["internal_link"].url if value.get("internal_link") \
@@ -52,7 +56,11 @@ class CarouselItemBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     label = blocks.CharBlock(
         max_length=30,
-        help_text="Carousel item title"
+        help_text="Carousel item small label, for example Our Reach"
+    )
+    title = blocks.CharBlock(
+        max_length=30,
+        help_text="Carousel item large title"
     )
     text = blocks.RichTextBlock(
         max_length=75,
