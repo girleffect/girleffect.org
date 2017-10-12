@@ -125,32 +125,6 @@ class ListingFields(models.Model):
     ]
 
 
-class CarouselItemFields(models.Model, LinkFields):
-    carousel_image = models.ForeignKey(
-        CustomImage,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-        help_text="Choose the image you wish to appear as the carousel item"
-    )
-    carousel_label = models.CharField(
-        max_length=255, help_text="Label for the carousel item"
-    )
-    carousel_text = RichTextField(
-        blank=True, max_length=255, help_text="Text for carousel item"
-    )
-
-    panels = [
-        ImageChooserPanel('carousel_image'),
-        FieldPanel('carousel_label'),
-        FieldPanel('carousel_text'),
-    ] + LinkFields.content_panels
-
-    class Meta:
-        abstract = True
-
-
 @register_snippet
 class CallToActionSnippet(LinkFields):
     title = models.CharField(max_length=255)
