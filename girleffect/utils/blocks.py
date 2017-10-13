@@ -74,6 +74,25 @@ class CarouselItemBlock(blocks.StructBlock):
         icon = "plus"
         template = "blocks/carousel_item_block.html"
 
+
+class MediaTextOverlayBlock(blocks.StructBlock):
+    image = ImageChooserBlock()
+    label = blocks.CharBlock(
+        required=False,
+        max_length=30,
+        help_text="A short label or title, e.g. 'Our Reach'"
+    )
+    text = blocks.RichTextBlock(
+        max_length=75,
+        required=False,
+        features=["bold", "italic", "ol", "ul", "link", "document-link"]
+    )
+    link = LinkBlock(required=False)
+
+    class Meta:
+        icon = "image"
+        template = "blocks/media_text_overlay_block.html"
+
 # Main streamfield block to be inherited by Pages
 
 
@@ -81,7 +100,6 @@ class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
     body_text = blocks.RichTextBlock(label="Body Text")
     large_text = blocks.RichTextBlock(
-        classname="large-text",
         label="Large Text",
         max_length=350,
         features=["bold", "italic", "link", "document-link"],
@@ -95,6 +113,9 @@ class StoryBlock(blocks.StreamBlock):
         CarouselItemBlock(),
         template="blocks/carousel_block.html",
         icon="image"
+    )
+    media_text_overlay = MediaTextOverlayBlock(
+        label="Full Width Media with Text Overlay"
     )
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="includes/call_to_action.html")
 
