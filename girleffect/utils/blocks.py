@@ -80,12 +80,11 @@ class MediaTextOverlayBlock(blocks.StructBlock):
     label = blocks.CharBlock(
         required=False,
         max_length=30,
-        help_text="Full width media with text overlay block label, for example Our Reach"
+        help_text="A short label or title, e.g. 'Our Reach'"
     )
     text = blocks.RichTextBlock(
         max_length=75,
         required=False,
-        help_text="Full width media with text overlay block text",
         features=["bold", "italic", "ol", "ul", "link", "document-link"]
     )
     link = LinkBlock(required=False)
@@ -116,7 +115,7 @@ class StoryBlock(blocks.StreamBlock):
         icon="image"
     )
     media_text_overlay = MediaTextOverlayBlock(
-        label="Full Width Media Text Overlay"
+        label="Full Width Media with Text Overlay"
     )
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="includes/call_to_action.html")
 
