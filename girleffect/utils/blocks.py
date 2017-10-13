@@ -79,7 +79,7 @@ class CarouselItemBlock(blocks.StructBlock):
 
 class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
-    paragraph = blocks.RichTextBlock()
+    body_text = blocks.RichTextBlock(label="Body Text")
     large_text = blocks.RichTextBlock(
         classname="large-text",
         label="Large Text",
