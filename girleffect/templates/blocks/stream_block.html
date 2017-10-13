@@ -1,6 +1,12 @@
 {% for block in value %}
     {% if block.block_type == 'heading' %}
         <h2>{{ block.value }}</h2>
+    {% elif block.block_type == 'body_text' %}
+        {# body_text is a rich text field #}
+        <div class="body-text">{{ block }}</p>
+    {% elif block.block_type == 'large_text' %}
+        {# large_text is a rich text field, limited to bold, italic, link, document link #}
+        <div class="large-text">{{ block }}</p>
     {% else %}
         {{ block }}
     {% endif %}

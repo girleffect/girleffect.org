@@ -1,0 +1,13 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<div class="media-text-overlay media-text-overlay--full-width">
+    {% image value.image original as fw_image %}
+    <img src="{{ fw_image.url }}" alt="{{ fw_image.alt }}" class="media-text-overlay__image">
+
+    <p>{{ value.label }}</p>
+
+    {# text is RichText #}
+    <p>{{ value.text }}</p>
+
+    {# template for this is in link_block.html #}
+    <p>{% include_block value.link %}</p>
+</div>
