@@ -15,15 +15,6 @@ class ImageBlock(blocks.StructBlock):
         template = "blocks/image_block.html"
 
 
-class QuoteBlock(blocks.StructBlock):
-    quote = blocks.CharBlock(classname="title")
-    citation_link = blocks.URLBlock(required=False)
-
-    class Meta:
-        icon = "openquote"
-        template = "blocks/quote_block.html"
-
-
 class LinkBlock(blocks.StructBlock):
     external_link = blocks.URLBlock(required=False, label="External Link")
     internal_link = blocks.PageChooserBlock(
@@ -93,6 +84,24 @@ class MediaTextOverlayBlock(blocks.StructBlock):
         icon = "image"
         template = "blocks/media_text_overlay_block.html"
 
+
+class QuoteBlock(blocks.StructBlock):
+    image = ImageChooserBlock(required=False)
+    text = blocks.RichTextBlock(
+        max_length=255,
+        required=False,
+        features=["bold", "italic", "ol", "ul", "link", "document-link"]
+    )
+    citation = blocks.CharBlock(
+        required=False,
+        max_length=80,
+    )
+    link = blocks.URLBlock(required=False, label="Citation Link")
+
+    class Meta:
+        icon = "openquote"
+        template = "blocks/quote_item_block.html"
+
 # Main streamfield block to be inherited by Pages
 
 
@@ -107,7 +116,11 @@ class StoryBlock(blocks.StreamBlock):
         icon="pilcrow"
     )
     image = ImageBlock()
-    quote = QuoteBlock()
+    quote = blocks.ListBlock(
+        QuoteBlock(),
+        template="blocks/quote_block.html",
+        icon="openquote"
+    )
     embed = EmbedBlock()
     carousel = blocks.ListBlock(
         CarouselItemBlock(),
