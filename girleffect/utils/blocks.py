@@ -93,6 +93,23 @@ class MediaTextOverlayBlock(blocks.StructBlock):
         icon = "image"
         template = "blocks/media_text_overlay_block.html"
 
+
+class ListColumnBlock(blocks.StructBlock):
+    image = ImageChooserBlock(required=False)
+    title = blocks.CharBlock(max_length=80)
+    description = blocks.RichTextBlock(
+        label="Large Text",
+        max_length=250,
+        features=["bold", "italic", "link", "document-link"],
+        required=False,
+        icon="pilcrow"
+    )
+    link = LinkBlock(required=False)
+
+    class Meta:
+        icon = "list-ul"
+        template = "blocks/list_column_item_block.html"
+
 # Main streamfield block to be inherited by Pages
 
 
@@ -116,6 +133,11 @@ class StoryBlock(blocks.StreamBlock):
     )
     media_text_overlay = MediaTextOverlayBlock(
         label="Full Width Media with Text Overlay"
+    )
+    list_block = blocks.ListBlock(
+        ListColumnBlock(),
+        template="blocks/list_column_block.html",
+        icon="list-ul"
     )
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="includes/call_to_action.html")
 
