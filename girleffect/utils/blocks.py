@@ -90,7 +90,9 @@ class QuoteBlock(blocks.StructBlock):
     text = blocks.RichTextBlock(
         max_length=255,
         required=False,
-        features=["bold", "italic", "ol", "ul", "link", "document-link"]
+        features=["bold", "italic", "ol", "ul", "link", "document-link"],
+        help_text="The maximum number of quotes that will be \
+            displayed in one block is two"
     )
     citation = blocks.CharBlock(
         required=False,
