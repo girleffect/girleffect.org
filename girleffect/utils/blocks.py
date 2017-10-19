@@ -110,7 +110,15 @@ class ListColumnBlock(blocks.StructBlock):
         icon = "list-ul"
         template = "blocks/list_column_item_block.html"
 
-# Main streamfield block to be inherited by Pages
+
+class ListColumnStream(blocks.StreamBlock):
+    list_block = ListColumnBlock(label="List Block Item")
+
+    class Meta:
+        icon = "list-ul"
+        template = "blocks/list_column_block.html"
+        max_num = 4
+        min_num = 2
 
 
 class StoryBlock(blocks.StreamBlock):
@@ -134,11 +142,7 @@ class StoryBlock(blocks.StreamBlock):
     media_text_overlay = MediaTextOverlayBlock(
         label="Full Width Media with Text Overlay"
     )
-    list_block = blocks.ListBlock(
-        ListColumnBlock(),
-        template="blocks/list_column_block.html",
-        icon="list-ul"
-    )
+    list_block = ListColumnStream()
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="includes/call_to_action.html")
 
     class Meta:
