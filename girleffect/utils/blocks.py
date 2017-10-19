@@ -105,20 +105,21 @@ class YouTubeEmbed(blocks.StructBlock):
         required=False,
         features=["bold", "italic", "ol", "ul", "link", "document-link"]
     )
-    youtube_url = EmbedBlock(
-        label="Video URL",
-        help_text="Only YouTube video URLs will be accepted"
+    youtube_embed = EmbedBlock(
+        label="YouTube Video URL",
+        help_text="Your YouTube URL goes here. Only YouTube video URLs will be accepted.\
+            The custom 'play' button will be created for valid YouTube URLs."
     )
 
     def clean(self, value):
         cleaned_data = super(YouTubeEmbed, self).clean(value)
         # Validating if URL is a valid YouTube URL
-        youtube_url = cleaned_data.get('youtube_url').url
+        youtube_embed = cleaned_data.get('youtube_embed').url
         youtube_finder = OEmbedFinder(providers=[oembed_providers.youtube])
-        if not youtube_finder.accept(youtube_url):
+        if not youtube_finder.accept(youtube_embed):
             e = ValidationError('URL must be a YouTube URL')
             raise ValidationError('Validation error in StructBlock', params={
-                                  'youtube_url': ErrorList([e])})
+                                  'youtube_embed': ErrorList([e])})
         return cleaned_data
 
     class Meta:
@@ -138,10 +139,8 @@ class StoryBlock(blocks.StreamBlock):
     )
     image = ImageBlock()
     quote = QuoteBlock()
-    embed = EmbedBlock(
-        label="YouTube Video"
-    )
-    video = YouTubeEmbed()
+    embed = EmbedBlock()
+    video = YouTubeEmbed(label="Girl Effect YouTube Video")
     carousel = blocks.ListBlock(
         CarouselItemBlock(),
         template="blocks/carousel_block.html",
