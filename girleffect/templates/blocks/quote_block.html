@@ -1,7 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
 <div class="quotes">
-    {# Currently limiting the quotes to 2 on the template. This isn't ideal. The intention is for the Quote ListBlock to be limited to two, so this will change soon #}
-    {% for quote_item in value|slice:":2" %}
+    {% for quote_item in value %}
         {% include_block quote_item %}
         {# found in quote_item_block.html #}
     {% endfor %}
