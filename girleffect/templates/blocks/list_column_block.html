@@ -1,8 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
 
 <div class="list">
-{# Up to four list items - slicing is temporary measure while custom validation is created for ListBlock #}
-{% for list_item in value|slice:":4" %}
+{% for list_item in value %}
     {% include_block list_item %}
     {# found in list_column_item_block.html #}
 {% endfor %}
