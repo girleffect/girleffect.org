@@ -6,7 +6,6 @@ from wagtail.wagtailembeds.finders.oembed import OEmbedFinder as OEmbedFinder
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
-from urllib.parse import urlparse, parse_qs
 
 from .models import CallToActionSnippet
 
