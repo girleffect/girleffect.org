@@ -104,7 +104,14 @@ class QuoteBlock(blocks.StructBlock):
         icon = "openquote"
         template = "blocks/quote_item_block.html"
 
-# Main streamfield block to be inherited by Pages
+
+class QuoteStream(blocks.StreamBlock):
+    quote = QuoteBlock()
+
+    class Meta:
+        icon = "openquote"
+        max_num = 4
+        min_num = 2
 
 
 class StoryBlock(blocks.StreamBlock):
@@ -118,11 +125,7 @@ class StoryBlock(blocks.StreamBlock):
         icon="pilcrow"
     )
     image = ImageBlock()
-    quote = blocks.ListBlock(
-        QuoteBlock(),
-        template="blocks/quote_block.html",
-        icon="openquote"
-    )
+    quote = QuoteStream()
     embed = EmbedBlock()
     carousel = blocks.ListBlock(
         CarouselItemBlock(),
