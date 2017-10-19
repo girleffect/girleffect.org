@@ -89,10 +89,8 @@ class QuoteBlock(blocks.StructBlock):
     image = ImageChooserBlock(required=False)
     text = blocks.RichTextBlock(
         max_length=255,
-        required=False,
-        features=["bold", "italic", "ol", "ul", "link", "document-link"],
-        help_text="The maximum number of quotes that will be \
-            displayed in one block is two"
+        required=True,
+        features=["bold", "italic", "ol", "ul", "link", "document-link"]
     )
     citation = blocks.CharBlock(
         required=False,
@@ -106,12 +104,13 @@ class QuoteBlock(blocks.StructBlock):
 
 
 class QuoteStream(blocks.StreamBlock):
-    quote = QuoteBlock()
+    quote = QuoteBlock(label="Quote Item")
 
     class Meta:
         icon = "openquote"
-        max_num = 4
-        min_num = 2
+        max_num = 2
+        min_num = 1
+        template = "blocks/quote_block.html"
 
 
 class StoryBlock(blocks.StreamBlock):
