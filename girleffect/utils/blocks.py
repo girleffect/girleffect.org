@@ -1,4 +1,8 @@
+from django.core.exceptions import ValidationError
+from django.forms.utils import ErrorList
 from wagtail.wagtailcore import blocks
+from wagtail.wagtailembeds import oembed_providers
+from wagtail.wagtailembeds.finders.oembed import OEmbedFinder as OEmbedFinder
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
@@ -93,7 +97,34 @@ class MediaTextOverlayBlock(blocks.StructBlock):
         icon = "image"
         template = "blocks/media_text_overlay_block.html"
 
-# Main streamfield block to be inherited by Pages
+
+class YouTubeEmbed(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False, max_length=30)
+    text = blocks.RichTextBlock(
+        max_length=255,
+        required=False,
+        features=["bold", "italic", "ol", "ul", "link", "document-link"]
+    )
+    youtube_embed = EmbedBlock(
+        label="YouTube Video URL",
+        help_text="Your YouTube URL goes here. Only YouTube video URLs will be accepted.\
+            The custom 'play' button will be created for valid YouTube URLs."
+    )
+
+    def clean(self, value):
+        cleaned_data = super(YouTubeEmbed, self).clean(value)
+        # Validating if URL is a valid YouTube URL
+        youtube_embed = cleaned_data.get('youtube_embed').url
+        youtube_finder = OEmbedFinder(providers=[oembed_providers.youtube])
+        if not youtube_finder.accept(youtube_embed):
+            e = ValidationError('URL must be a YouTube URL')
+            raise ValidationError('Validation error in StructBlock', params={
+                                  'youtube_embed': ErrorList([e])})
+        return cleaned_data
+
+    class Meta:
+        icon = "media"
+        template = "blocks/youtube_embed_block.html"
 
 
 class StoryBlock(blocks.StreamBlock):
@@ -108,7 +139,7 @@ class StoryBlock(blocks.StreamBlock):
     )
     image = ImageBlock()
     quote = QuoteBlock()
-    embed = EmbedBlock()
+    video = YouTubeEmbed(label="Girl Effect YouTube Video")
     carousel = blocks.ListBlock(
         CarouselItemBlock(),
         template="blocks/carousel_block.html",
