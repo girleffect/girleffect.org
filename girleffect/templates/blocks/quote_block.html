@@ -1,3 +1,7 @@
-<blockquote{% if value.citation_link %} cite="{{ value.citation_link }}"{% endif %}>
-    {{ value.quote }}
-</blockquote>
+{% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
+<div class="quotes">
+    {% for quote_item in value %}
+        {% include_block quote_item %}
+        {# found in quote_item_block.html #}
+    {% endfor %}
+</div>

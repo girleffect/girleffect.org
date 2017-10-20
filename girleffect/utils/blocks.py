@@ -19,15 +19,6 @@ class ImageBlock(blocks.StructBlock):
         template = "blocks/image_block.html"
 
 
-class QuoteBlock(blocks.StructBlock):
-    quote = blocks.CharBlock(classname="title")
-    citation_link = blocks.URLBlock(required=False)
-
-    class Meta:
-        icon = "openquote"
-        template = "blocks/quote_block.html"
-
-
 class LinkBlock(blocks.StructBlock):
     external_link = blocks.URLBlock(required=False, label="External Link")
     internal_link = blocks.PageChooserBlock(
@@ -127,6 +118,34 @@ class YouTubeEmbed(blocks.StructBlock):
         template = "blocks/youtube_embed_block.html"
 
 
+class QuoteBlock(blocks.StructBlock):
+    image = ImageChooserBlock(required=False)
+    text = blocks.RichTextBlock(
+        max_length=255,
+        required=True,
+        features=["bold", "italic", "ol", "ul", "link", "document-link"]
+    )
+    citation = blocks.CharBlock(
+        required=False,
+        max_length=80,
+    )
+    link = blocks.URLBlock(required=False, label="Citation Link")
+
+    class Meta:
+        icon = "openquote"
+        template = "blocks/quote_item_block.html"
+
+
+class QuoteStream(blocks.StreamBlock):
+    quote = QuoteBlock(label="Quote Item")
+
+    class Meta:
+        icon = "openquote"
+        max_num = 2
+        min_num = 1
+        template = "blocks/quote_block.html"
+
+
 class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
     body_text = blocks.RichTextBlock(label="Body Text")
@@ -138,7 +157,7 @@ class StoryBlock(blocks.StreamBlock):
         icon="pilcrow"
     )
     image = ImageBlock()
-    quote = QuoteBlock()
+    quote = QuoteStream()
     video = YouTubeEmbed(label="Girl Effect YouTube Video")
     carousel = blocks.ListBlock(
         CarouselItemBlock(),
