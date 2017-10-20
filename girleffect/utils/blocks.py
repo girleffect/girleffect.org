@@ -139,7 +139,6 @@ class StoryBlock(blocks.StreamBlock):
     )
     image = ImageBlock()
     quote = QuoteBlock()
-    embed = EmbedBlock()
     video = YouTubeEmbed(label="Girl Effect YouTube Video")
     carousel = blocks.ListBlock(
         CarouselItemBlock(),
