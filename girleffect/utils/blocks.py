@@ -162,16 +162,6 @@ class ListColumnBlock(blocks.StructBlock):
         template = "blocks/list_column_item_block.html"
 
 
-class ListColumnStream(blocks.StreamBlock):
-    list_block = ListColumnBlock(label="List Block Item")
-
-    class Meta:
-        icon = "list-ul"
-        template = "blocks/list_column_block.html"
-        max_num = 4
-        min_num = 2
-
-
 class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
     body_text = blocks.RichTextBlock(label="Body Text")
@@ -193,7 +183,11 @@ class StoryBlock(blocks.StreamBlock):
     media_text_overlay = MediaTextOverlayBlock(
         label="Full Width Media with Text Overlay"
     )
-    list_block = ListColumnStream()
+    list_block = blocks.ListBlock(
+        ListColumnBlock(),
+        template="blocks/list_column_block.html",
+        icon="list-ul"
+    )
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="includes/call_to_action.html")
 
     class Meta:
