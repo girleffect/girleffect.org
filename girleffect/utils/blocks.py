@@ -99,7 +99,7 @@ class ListColumnBlock(blocks.StructBlock):
     title = blocks.CharBlock(max_length=80)
     description = blocks.RichTextBlock(
         max_length=250,
-        features=["bold", "italic", "link", "document-link"],
+        features=["bold", "italic"],
         required=False,
         icon="pilcrow"
     )
@@ -126,7 +126,7 @@ class StoryBlock(blocks.StreamBlock):
     large_text = blocks.RichTextBlock(
         label="Large Text",
         max_length=350,
-        features=["bold", "italic"],
+        features=["bold", "italic", "link", "document-link"],
         required=False,
         icon="pilcrow"
     )
