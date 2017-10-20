@@ -1,0 +1,7 @@
+<div{% if embed.is_responsive %} style="padding-bottom: {{ embed.ratio_css }};" class="responsive-object"{% endif %}>
+    {{ embed.html|safe }}
+</div>
+
+{# Cover image for overlay renders hqdefault version #}
+<img src="{{ embed.thumbnail_url }}">
+
