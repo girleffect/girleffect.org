@@ -1,8 +1,14 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
 
 <div class="list">
+{# Rows are to have a maximum of 4 list items per row #}
+{# Pseudo code #}
+<div class="list-row">
 {% for list_item in value %}
-    {% include_block list_item %}
-    {# found in list_column_item_block.html #}
+        {% include_block list_item %}
+        {# found in list_column_item_block.html #}
+    {% if forloop.counter|divisibleby:"3" and not forloop.last %}
+    </div><div class="list-row">
+    {% endif %}
 {% endfor %}
 </div>
