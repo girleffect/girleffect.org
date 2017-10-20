@@ -1,4 +1,8 @@
+from django.core.exceptions import ValidationError
+from django.forms.utils import ErrorList
 from wagtail.wagtailcore import blocks
+from wagtail.wagtailembeds import oembed_providers
+from wagtail.wagtailembeds.finders.oembed import OEmbedFinder as OEmbedFinder
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
@@ -13,15 +17,6 @@ class ImageBlock(blocks.StructBlock):
     class Meta:
         icon = "image"
         template = "blocks/image_block.html"
-
-
-class QuoteBlock(blocks.StructBlock):
-    quote = blocks.CharBlock(classname="title")
-    citation_link = blocks.URLBlock(required=False)
-
-    class Meta:
-        icon = "openquote"
-        template = "blocks/quote_block.html"
 
 
 class LinkBlock(blocks.StructBlock):
@@ -93,7 +88,88 @@ class MediaTextOverlayBlock(blocks.StructBlock):
         icon = "image"
         template = "blocks/media_text_overlay_block.html"
 
-# Main streamfield block to be inherited by Pages
+
+class YouTubeEmbed(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False, max_length=30)
+    text = blocks.RichTextBlock(
+        max_length=255,
+        required=False,
+        features=["bold", "italic", "ol", "ul", "link", "document-link"]
+    )
+    youtube_embed = EmbedBlock(
+        label="YouTube Video URL",
+        help_text="Your YouTube URL goes here. Only YouTube video URLs will be accepted.\
+            The custom 'play' button will be created for valid YouTube URLs."
+    )
+
+    def clean(self, value):
+        cleaned_data = super(YouTubeEmbed, self).clean(value)
+        # Validating if URL is a valid YouTube URL
+        youtube_embed = cleaned_data.get('youtube_embed').url
+        youtube_finder = OEmbedFinder(providers=[oembed_providers.youtube])
+        if not youtube_finder.accept(youtube_embed):
+            e = ValidationError('URL must be a YouTube URL')
+            raise ValidationError('Validation error in StructBlock', params={
+                                  'youtube_embed': ErrorList([e])})
+        return cleaned_data
+
+    class Meta:
+        icon = "media"
+        template = "blocks/youtube_embed_block.html"
+
+
+class QuoteBlock(blocks.StructBlock):
+    image = ImageChooserBlock(required=False)
+    text = blocks.RichTextBlock(
+        max_length=255,
+        required=True,
+        features=["bold", "italic", "ol", "ul", "link", "document-link"]
+    )
+    citation = blocks.CharBlock(
+        required=False,
+        max_length=80,
+    )
+    link = blocks.URLBlock(required=False, label="Citation Link")
+
+    class Meta:
+        icon = "openquote"
+        template = "blocks/quote_item_block.html"
+
+
+class QuoteStream(blocks.StreamBlock):
+    quote = QuoteBlock(label="Quote Item")
+
+    class Meta:
+        icon = "openquote"
+        max_num = 2
+        min_num = 1
+        template = "blocks/quote_block.html"
+
+
+class ListColumnBlock(blocks.StructBlock):
+    image = ImageChooserBlock(required=False)
+    title = blocks.CharBlock(max_length=80)
+    description = blocks.RichTextBlock(
+        max_length=250,
+        features=["bold", "italic"],
+        required=False,
+        icon="pilcrow"
+    )
+    link = LinkBlock(required=False)
+
+    class Meta:
+        icon = "list-ul"
+        template = "blocks/list_column_item_block.html"
+
+
+class ListColumnStream(blocks.StreamBlock):
+    list_block = ListColumnBlock(label="List Block Item")
+
+    class Meta:
+        icon = "list-ul"
+        template = "blocks/list_column_block.html"
+        max_num = 4
+        min_num = 2
 
 
 class StoryBlock(blocks.StreamBlock):
@@ -107,8 +183,8 @@ class StoryBlock(blocks.StreamBlock):
         icon="pilcrow"
     )
     image = ImageBlock()
-    quote = QuoteBlock()
-    embed = EmbedBlock()
+    quote = QuoteStream()
+    video = YouTubeEmbed(label="Girl Effect YouTube Video")
     carousel = blocks.ListBlock(
         CarouselItemBlock(),
         template="blocks/carousel_block.html",
@@ -117,6 +193,7 @@ class StoryBlock(blocks.StreamBlock):
     media_text_overlay = MediaTextOverlayBlock(
         label="Full Width Media with Text Overlay"
     )
+    list_block = ListColumnStream()
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="includes/call_to_action.html")
 
     class Meta:
