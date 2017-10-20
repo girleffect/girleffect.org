@@ -146,6 +146,32 @@ class QuoteStream(blocks.StreamBlock):
         template = "blocks/quote_block.html"
 
 
+class ListColumnBlock(blocks.StructBlock):
+    image = ImageChooserBlock(required=False)
+    title = blocks.CharBlock(max_length=80)
+    description = blocks.RichTextBlock(
+        max_length=250,
+        features=["bold", "italic"],
+        required=False,
+        icon="pilcrow"
+    )
+    link = LinkBlock(required=False)
+
+    class Meta:
+        icon = "list-ul"
+        template = "blocks/list_column_item_block.html"
+
+
+class ListColumnStream(blocks.StreamBlock):
+    list_block = ListColumnBlock(label="List Block Item")
+
+    class Meta:
+        icon = "list-ul"
+        template = "blocks/list_column_block.html"
+        max_num = 4
+        min_num = 2
+
+
 class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
     body_text = blocks.RichTextBlock(label="Body Text")
@@ -167,6 +193,7 @@ class StoryBlock(blocks.StreamBlock):
     media_text_overlay = MediaTextOverlayBlock(
         label="Full Width Media with Text Overlay"
     )
+    list_block = ListColumnStream()
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="includes/call_to_action.html")
 
     class Meta:
