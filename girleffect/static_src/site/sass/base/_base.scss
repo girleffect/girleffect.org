@@ -15,6 +15,15 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
+html,
+body {
+    // Breaks position sticky
+    height: 100%;
+    font-family: 'lineto-circular';
+    font-size: 16px;
+    line-height: 1.4;
+}
+
 // Prevent empty space below images appearing
 img,
 svg {
@@ -28,17 +37,11 @@ img {
 }
 
 // Allow sprite svg colors to be changed
-svg * {
-    fill: inherit;
-    stroke: inherit;
-}
-
-// 100% wrapper hight
-html,
-body {
-    // Breaks position sticky
-    height: 100%;
-    font-family: 'lato';
+svg {
+    * {
+        fill: inherit;
+        stroke: inherit;
+    }
 }
 
 ul {
@@ -50,18 +53,7 @@ a {
     text-decoration: none;
 }
 
-// Heading styling
-h1 {
-    font-size: 36px;
-    color: $white;
-}
-
-h2 {
-    @include font-size(20px, 30px);
-    color: $navy-blue;
-}
-
 b,
 strong {
-    font-weight: 800;
+    font-weight: 700;
 }

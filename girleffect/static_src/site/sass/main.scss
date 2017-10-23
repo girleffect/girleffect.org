@@ -10,13 +10,11 @@
 \*------------------------------------*/
 @import 'abstracts/variables';
 @import 'abstracts/mixins';
-@import 'abstracts/base';
-
 
 /*------------------------------------*\
-	$Tachyons
+    $Base
 \*------------------------------------*/
-
+@import 'base/base';
 
 /*------------------------------------*\
 	$Patterns
