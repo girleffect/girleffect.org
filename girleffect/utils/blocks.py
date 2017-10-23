@@ -201,7 +201,7 @@ class ContentSectionBlock(blocks.StructBlock):
     link = LinkBlock(required=False)
 
     class Meta:
-        icon="fa-newspaper-o"
+        icon = "fa-newspaper-o"
 
 
 class StoryBlock(blocks.StreamBlock):
