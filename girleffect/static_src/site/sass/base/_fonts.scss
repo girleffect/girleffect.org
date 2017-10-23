@@ -1,0 +1,17 @@
+// Book
+@font-face {
+    font-family: 'lineto-circular';
+    src: url('./../fonts/lineto-circular/lineto-circular-book.eot'), url('./../fonts/lineto-circular/lineto-circular-book.eot?#iefix') format('embedded-opentype'), url('./../fonts/lineto-circular/lineto-circular-book.woff') format('woff');
+    font-style: normal;
+    font-weight: 400;
+    text-rendering: optimizeLegibility;
+}
+
+// Bold
+@font-face {
+    font-family: 'lineto-circular';
+    src: url('./../fonts/lineto-circular/lineto-circular-bold.eot'), url('./../fonts/lineto-circular/lineto-circular-bold.eot?#iefix') format('embedded-opentype'), url('./../fonts/lineto-circular/lineto-circular-bold.woff') format('woff');
+    font-style: normal;
+    font-weight: 700;
+    text-rendering: optimizeLegibility;
+}
