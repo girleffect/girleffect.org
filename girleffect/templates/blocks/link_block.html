@@ -1,1 +1,1 @@
-<a href="{{ item_link }}" target="{{ item_target }}">{{ value.link_text }}</a>
+<a href="{{ link_url }}" {% if link_is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ value.link_text }}</a>

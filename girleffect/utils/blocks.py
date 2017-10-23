@@ -1,6 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
+
 from wagtail.wagtailcore import blocks
+from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.wagtailembeds import oembed_providers
 from wagtail.wagtailembeds.finders.oembed import OEmbedFinder as OEmbedFinder
 from wagtail.wagtailimages.blocks import ImageChooserBlock
@@ -21,27 +23,57 @@ class ImageBlock(blocks.StructBlock):
 
 class LinkBlock(blocks.StructBlock):
     external_link = blocks.URLBlock(required=False, label="External Link")
-    internal_link = blocks.PageChooserBlock(
-        required=False,
-        label="Internal Link"
-    )
-    link_text = blocks.CharBlock(
-        required=False,
-        max_length=255,
-        label="Link Text"
-    )
+    internal_link = blocks.PageChooserBlock(required=False, label="Internal Link")
+    document_link = DocumentChooserBlock(required=False, label="Document Link")
+
+    link_text = blocks.CharBlock(max_length=255, label="Link Text")
 
     def get_context(self, value, **kwargs):
-        item_link = value["internal_link"].url if value.get("internal_link") \
-            else value["external_link"]
-        item_target = "_self" if value.get("internal_link") else "_blank"
+        context = super(LinkBlock, self).get_context(value, **kwargs)
 
-        context = super(LinkBlock, self).get_context(value)
-        context.update({
-            "item_link": item_link,
-            "item_target": item_target
-        })
+        external_link = value.get('external_link')
+        internal_link = value.get('internal_link')
+        document_link = value.get('document_link')
+
+        # URL
+        if external_link:
+            context['link_url'] = external_link
+        elif internal_link:
+            context['link_url'] = internal_link.url
+        elif document_link:
+            context['link_url'] = document_link.url
+
+        # External link?
+        if external_link:
+            context['link_is_external'] = True
+        else:
+            context['link_is_external'] = False
+
         return context
+
+    def clean(self, value):
+        """
+        Validate that exactly one of the link destination blocks is populated if the link text is populated
+        """
+        link_dest_block_names = [
+            'internal_link',
+            'document_link',
+            'external_link',
+        ]
+        num_populated_blocks = 0
+
+        for block_name in link_dest_block_names:
+            if value[block_name]:
+                num_populated_blocks += 1
+
+        if num_populated_blocks != 1:
+            error_messages = ["Link can only have one destination"]
+            raise ValidationError(
+                "Validation error in LinkBlock",
+                params={block_name: error_messages for block_name in link_dest_block_names},
+            )
+
+        return super(LinkBlock, self).clean(value)
 
     class Meta:
         template = "blocks/link_block.html"
@@ -162,6 +194,16 @@ class ListColumnBlock(blocks.StructBlock):
         template = "blocks/list_column_item_block.html"
 
 
+class ContentSectionBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(classname="full title", required=False)
+    body_text = blocks.RichTextBlock(label="Body Text")
+    image = ImageChooserBlock(required=False)
+    link = LinkBlock(required=False)
+
+    class Meta:
+        icon="fa-newspaper-o"
+
+
 class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
     body_text = blocks.RichTextBlock(label="Body Text")
@@ -189,6 +231,7 @@ class StoryBlock(blocks.StreamBlock):
         icon="list-ul"
     )
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="includes/call_to_action.html")
+    content_section = ContentSectionBlock(label="Content section")
 
     class Meta:
         template = "blocks/stream_block.html"
