@@ -1,7 +1,5 @@
-
-
 /*------------------------------------*\
-	$VENDOR
+	$Vendor
 \*------------------------------------*/
 @import 'vendor/normalize';
 
@@ -15,9 +13,10 @@
     $Base
 \*------------------------------------*/
 @import 'base/base';
+@import 'base/fonts';
+@import 'base/typography';
 
 /*------------------------------------*\
 	$Patterns
 \*------------------------------------*/
-
-@import '../patterns/**/*.scss';
+@import '../patterns/**/*.scss'; // sass-lint:disable-line clean-import-paths
