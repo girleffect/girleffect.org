@@ -22,7 +22,7 @@ from girleffect.utils.blocks import StoryBlock
 
 
 @register_snippet
-class NewsCategory(models.Model):
+class ArticleCategory(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(
         blank=True,
@@ -33,7 +33,7 @@ class NewsCategory(models.Model):
         return self.title
 
     class Meta:
-        verbose_name_plural = 'news categories'
+        verbose_name_plural = 'article categories'
 
 
 class NewsPageCategory(models.Model):
@@ -42,7 +42,7 @@ class NewsPageCategory(models.Model):
         related_name='categories'
     )
     category = models.ForeignKey(
-        'news.NewsCategory',
+        'news.ArticleCategory',
         related_name='+',
         on_delete=models.CASCADE
     )
