@@ -1,0 +1,27 @@
+// Heading styling
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $color--primary;
+    margin: 0;
+}
+
+h1 {
+    @include font-size(40px, 85px);
+    color: $white;
+}
+
+h2 {
+    @include font-size(34px, 65px);
+}
+
+h3 {
+    @include font-size(24px, 45px);
+}
+
+h4 {
+    @include font-size(20px, 25px);
+}

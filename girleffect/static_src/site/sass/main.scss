@@ -1,7 +1,5 @@
-
-
 /*------------------------------------*\
-	$VENDOR
+	$Vendor
 \*------------------------------------*/
 @import 'vendor/normalize';
 
@@ -10,22 +8,15 @@
 \*------------------------------------*/
 @import 'abstracts/variables';
 @import 'abstracts/mixins';
-@import 'abstracts/base';
-
 
 /*------------------------------------*\
-	$Tachyons
+    $Base
 \*------------------------------------*/
-@import 'tachyons/font-style';
-@import 'tachyons/font-weight';
-@import 'tachyons/line-height';
-@import 'tachyons/type-scale';
-@import 'tachyons/font-families';
-@import 'tachyons/skins';
-
+@import 'base/base';
+@import 'base/fonts';
+@import 'base/typography';
 
 /*------------------------------------*\
 	$Patterns
 \*------------------------------------*/
-
-@import '../patterns/**/*.scss';
+@import '../patterns/**/*.scss'; // sass-lint:disable-line clean-import-paths

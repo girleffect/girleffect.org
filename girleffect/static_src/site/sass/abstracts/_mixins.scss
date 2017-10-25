@@ -2,9 +2,6 @@
     $MIXINS
 \*------------------------------------*/
 
-
-
-
 /* ============================================
     Media Query mixin
 */
@@ -24,7 +21,6 @@
     }
 }
 
-
 /* ============================================
   Placeholder text
 */
@@ -39,7 +35,6 @@
     // sass-lint:enddisable
 };
 
-
 /* ============================================
   iOS Native vertical scroll
 */
@@ -51,7 +46,6 @@
     -webkit-overflow-scrolling: touch; // sass-lint:disable-line no-misspelled-properties
 }
 
-
 /* ============================================
    Aligner: placeholder class used to align
    components at the template-level
@@ -62,7 +56,6 @@
     max-width: $max-width;
     margin: 0 auto;
 }
-
 
 /* ============================================
    Gutter spacing
