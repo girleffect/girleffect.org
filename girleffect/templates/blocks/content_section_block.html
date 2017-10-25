@@ -1,0 +1,15 @@
+{% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
+<div class="content-section">
+    {% image value.image original as content_section_image %}
+    {% if content_section_image %}
+        <img src="{{ content_section_image.url }}" alt="{{ content_section_image.alt }}" class="content-section__image"/>
+    {% endif %}
+
+    <h4>{{ value.heading }}</h4>
+
+    {# body_text is RichText #}
+    <p>{{ value.body_text }}</p>
+
+    {# template for this is in link_block.html #}
+    <p>{% include_block value.link %}</p>
+</div>
