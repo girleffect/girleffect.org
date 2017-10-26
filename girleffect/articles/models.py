@@ -38,11 +38,11 @@ class ArticleCategory(models.Model):
 
 class NewsPageCategory(models.Model):
     page = ParentalKey(
-        'news.NewsPage',
+        'articles.NewsPage',
         related_name='categories'
     )
     category = models.ForeignKey(
-        'news.ArticleCategory',
+        'articles.ArticleCategory',
         related_name='+',
         on_delete=models.CASCADE
     )
@@ -54,14 +54,14 @@ class NewsPageCategory(models.Model):
 
 class NewsPageRelatedDocument(RelatedDocument):
     page = ParentalKey(
-        'news.NewsPage',
+        'articles.NewsPage',
         related_name='related_documents'
     )
 
 
 class NewsPageRelatedPage(RelatedPage):
     source_page = ParentalKey(
-        'news.NewsPage',
+        'articles.NewsPage',
         related_name='related_pages'
     )
 

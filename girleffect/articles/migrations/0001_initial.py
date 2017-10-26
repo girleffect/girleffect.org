@@ -17,6 +17,8 @@ class Migration(migrations.Migration):
 
     initial = True
 
+    replaces = [('news', '0001_initial')]
+
     dependencies = [
         ('images', '0001_initial'),
         ('wagtailcore', '0032_add_bulk_delete_page_permission'),
@@ -60,7 +62,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='+', to='categories.Category')),
-                ('page', modelcluster.fields.ParentalKey(on_delete=django.db.models.deletion.CASCADE, related_name='categories', to='news.NewsPage')),
+                ('page', modelcluster.fields.ParentalKey(on_delete=django.db.models.deletion.CASCADE, related_name='categories', to='articles.NewsPage')),
             ],
         ),
         migrations.CreateModel(
@@ -70,7 +72,7 @@ class Migration(migrations.Migration):
                 ('sort_order', models.IntegerField(blank=True, editable=False, null=True)),
                 ('title', models.CharField(help_text='Document name', max_length=255)),
                 ('document', models.ForeignKey(blank=True, help_text='Please upload related documents', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtaildocs.Document')),
-                ('page', modelcluster.fields.ParentalKey(on_delete=django.db.models.deletion.CASCADE, related_name='related_documents', to='news.NewsPage')),
+                ('page', modelcluster.fields.ParentalKey(on_delete=django.db.models.deletion.CASCADE, related_name='related_documents', to='articles.NewsPage')),
             ],
             options={
                 'ordering': ['sort_order'],
@@ -83,7 +85,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('sort_order', models.IntegerField(blank=True, editable=False, null=True)),
                 ('page', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailcore.Page')),
-                ('source_page', modelcluster.fields.ParentalKey(on_delete=django.db.models.deletion.CASCADE, related_name='related_pages', to='news.NewsPage')),
+                ('source_page', modelcluster.fields.ParentalKey(on_delete=django.db.models.deletion.CASCADE, related_name='related_pages', to='articles.NewsPage')),
             ],
             options={
                 'ordering': ['sort_order'],

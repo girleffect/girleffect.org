@@ -44,7 +44,7 @@ class Partner(Orderable, models.Model):
         PageChooserPanel('internal_link', ['countries.CountryPage',
                                            'countries.CountryIndex',
                                            'solutions.SolutionPage',
-                                           'news.NewsPage',
+                                           'articles.NewsPage',
                                            'standardpage.StandardPage']),
         FieldPanel('external_link')
     ]
