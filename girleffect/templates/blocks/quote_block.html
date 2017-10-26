@@ -1,5 +1,5 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
-<div class="quotes">
+<div class="quote-container">
     {% for quote_item in value %}
         {% include_block quote_item %}
         {# found in quote_item_block.html #}
