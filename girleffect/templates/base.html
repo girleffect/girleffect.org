@@ -73,8 +73,6 @@
 
                     {% primarynav %}
 
-                    {% secondarynav %}
-
                     <form action="{% url 'search' %}" method="get" role="search">
                         <input type="text" placeholder="Search…" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
                         <input type="submit" value="Search">
@@ -93,29 +91,34 @@
             {% block content %}{% endblock %}
         </main>
 
-        <footer>
+        <footer class="footer">
 
-            <div class="newsletter">
-                <h1>Stay up to date</h1>
-                <p>Sign up to receive our quarterly newsletter</p>
+            <div class="footer-row">
+                {% secondarynav %}
+
+                <div>
+                    <a class="footer__link" href="https://www.facebook.com/girleffect/">
+                        <svg class="footer__icon"><use xlink:href="#facebook"></use></svg>
+                    </a>
+                    <a class="footer__link" href="https://www.instagram.com/girleffect/">
+                        <svg class="footer__icon"><use xlink:href="#instagram"></use></svg>
+                    </a>
+                    <a class="footer__link" href="https://twitter.com/girleffect/">
+                        <svg class="footer__icon"><use xlink:href="#twitter"></use></svg>
+                    </a>
+                    <a class="footer__link" href="https://www.linkedin.com/company/girl-effect/">
+                        <svg class="footer__icon"><use xlink:href="#linkedin"></use></svg>
+                    </a>
+                </div>
             </div>
 
-            <section>
-                <h2> Follow us </h2>
-                <a href="https://twitter.com/{{ TWITTER_HANDLE }}"> <i class="ion-social-twitter"></i> </a>
-                <a href="https://www.linkedin.com/company/{{ LINKEDIN_COMPANY_ID }}"> <i class="ion-social-linkedin"></i> </a>
-            </section>
-
-            <section>
+            <div class="footer-row footer-row--small">
                 {% footernav %}
-            </section>
 
-            <div class="container copyright" role="contentinfo">
-                {% if COPYRIGHT %}
-                    <p>© {% now "Y" %} {{ COPYRIGHT }}</p>
-                {% endif %}
-
-                <div class="site-credit">Site by <a href="https://torchbox.com/">Torchbox</a></div>
+                <div class="footer-row" role="contentinfo">
+                    <p>Company No.07516619</p>
+                    <p>Charity No.1141155</p>
+                </div>
             </div>
 
         </footer>
