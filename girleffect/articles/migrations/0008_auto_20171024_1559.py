@@ -7,8 +7,10 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
+    replaces = [('news', '0008_auto_20171024_1559')]
+
     dependencies = [
-        ('news', '0007_auto_20171020_1640'),
+        ('articles', '0007_auto_20171020_1640'),
     ]
 
     operations = [
