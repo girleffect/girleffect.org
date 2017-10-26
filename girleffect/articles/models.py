@@ -36,9 +36,9 @@ class ArticleCategory(models.Model):
         verbose_name_plural = 'article categories'
 
 
-class NewsPageCategory(models.Model):
+class ArticlePageCategory(models.Model):
     page = ParentalKey(
-        'articles.NewsPage',
+        'articles.ArticlePage',
         related_name='categories'
     )
     category = models.ForeignKey(
@@ -52,26 +52,25 @@ class NewsPageCategory(models.Model):
     ]
 
 
-class NewsPageRelatedDocument(RelatedDocument):
+class ArticlePageRelatedDocument(RelatedDocument):
     page = ParentalKey(
-        'articles.NewsPage',
+        'articles.ArticlePage',
         related_name='related_documents'
     )
 
 
-class NewsPageRelatedPage(RelatedPage):
+class ArticlePageRelatedPage(RelatedPage):
     source_page = ParentalKey(
-        'articles.NewsPage',
+        'articles.ArticlePage',
         related_name='related_pages'
     )
 
 
-class NewsPage(Page, SocialFields, ListingFields):
+class ArticlePage(Page, SocialFields, ListingFields):
     # It's datetime for easy comparison with first_published_at
     publication_date = models.DateTimeField(
         null=True, blank=True,
-        help_text="Use this field to override the date that the "
-        "news item appears to have been published."
+        help_text="Use this field to override the date that the article appears to have been published."
     )
     introduction = models.TextField(blank=True)
     body = StreamField(StoryBlock())
@@ -94,7 +93,7 @@ class NewsPage(Page, SocialFields, ListingFields):
         ListingFields.promote_panels
 
     subpage_types = []
-    parent_page_types = ['NewsIndex']
+    parent_page_types = ['ArticleIndex']
 
     @property
     def display_date(self):
@@ -104,34 +103,34 @@ class NewsPage(Page, SocialFields, ListingFields):
             return self.first_published_at
 
 
-class NewsIndex(Page, SocialFields):
+class ArticleIndex(Page, SocialFields):
     def get_context(self, request, *args, **kwargs):
-        news = NewsPage.objects.live().public().descendant_of(self).annotate(
+        articles = ArticlePage.objects.live().public().descendant_of(self).annotate(
             date=Coalesce('publication_date', 'first_published_at')
         ).order_by('-date')
 
         if request.GET.get('category'):
-            news = news.filter(categories=request.GET.get('category'))
+            articles = articles.filter(categories=request.GET.get('category'))
 
         # Pagination
         page = request.GET.get('page', 1)
-        paginator = Paginator(news, settings.DEFAULT_PER_PAGE)
+        paginator = Paginator(articles, settings.DEFAULT_PER_PAGE)
         try:
-            news = paginator.page(page)
+            articles = paginator.page(page)
         except PageNotAnInteger:
-            news = paginator.page(1)
+            articles = paginator.page(1)
         except EmptyPage:
-            news = paginator.page(paginator.num_pages)
+            articles = paginator.page(paginator.num_pages)
 
         context = super().get_context(request, *args, **kwargs)
         context.update(
-            news=news,
+            articles=articles,
             # Only show categories that have been used
-            categories=NewsPageCategory.objects.all().values_list(
+            categories=ArticlePageCategory.objects.all().values_list(
                 'category__pk', 'category__title'
             ).distinct()
         )
         return context
 
-    subpage_types = ['NewsPage']
+    subpage_types = ['ArticlePage']
     parent_page_types = ['home.HomePage']

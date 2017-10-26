@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% if page.related_documents.exists or page.related_content.exists or page.related_news.exists %}
+{% if page.related_documents.exists or page.related_pages.exists %}
     <section class="related">
         <div class="container">
             <ul>
@@ -22,9 +22,9 @@
                     {% endwith %}
                 {% endfor %}
 
-                {% for related_content in page.related_content.live %}
-                    {# a related_content object links to the original page (related_content.source_page) and a related one (related_content.page) #}
-                    {% with related_content.page as specific_related_page %}
+                {% for related_page in page.related_pages.live %}
+                    {# a related_page object links to the original page (related_page.source_page) and a related one (related_page.page) #}
+                    {% with related_page.page as specific_related_page %}
                         <li>
                             <a href="{% pageurl specific_related_page %}">
                                 {% if specific_related_page.listing_image %}
