@@ -38,6 +38,10 @@
             padding: 0;
             flex-direction: row;
         }
+
+        form {
+            display: none; // until functionality is decided
+        }
     }
 
     &__nav {
