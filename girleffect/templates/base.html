@@ -61,23 +61,44 @@
 
         {% wagtailuserbar %}
 
-        <header>
-            <div class="container logo-container">
-                <a href="/" class="logo">
-                    Girl Effect
+        <header class="header">
+
+            <a href="/" class="header__logo">
+                Girl Effect
+            </a>
+
+            <button class="js-hamburger hamburger" aria-haspopup="true">
+                <span class="hamburger__line"></span>
+                <span class="hamburger__line"></span>
+                <span class="hamburger__line"></span>
+                <span class="hamburger__line"></span>
+            </button>
+
+            <div class="header__row">
+                {% primarynav %}
+
+                <form action="{% url 'search' %}" method="get" role="search">
+                    <input type="text" placeholder="Search…" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+                    <input type="submit" value="Search">
+                </form>
+
+                <a class="header__link header__link--search" aria-label="search">
+                    <svg class="header__icon"><use xlink:href="#magnifying-glass"></use></svg>
                 </a>
-            </div>
-            <section>
-                <a href="#" class="menu-button">Menu</a>
-                <div class="container">
 
-                    {% primarynav %}
-
-                    <form action="{% url 'search' %}" method="get" role="search">
-                        <input type="text" placeholder="Search…" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
-                        <input type="submit" value="Search">
-                    </form>
-
+                <div>
+                    <a class="header__link" href="https://www.facebook.com/girleffect/">
+                        <svg class="header__icon"><use xlink:href="#facebook"></use></svg>
+                    </a>
+                    <a class="header__link" href="https://www.instagram.com/girleffect/">
+                        <svg class="header__icon"><use xlink:href="#instagram"></use></svg>
+                    </a>
+                    <a class="header__link" href="https://twitter.com/girleffect/">
+                        <svg class="header__icon"><use xlink:href="#twitter"></use></svg>
+                    </a>
+                    <a class="header__link" href="https://www.linkedin.com/company/girl-effect/">
+                        <svg class="header__icon"><use xlink:href="#linkedin"></use></svg>
+                    </a>
                 </div>
             </section>
 
