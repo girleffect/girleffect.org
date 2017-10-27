@@ -13,8 +13,10 @@ import wagtail.wagtailsnippets.blocks
 
 class Migration(migrations.Migration):
 
+    replaces = [('news', '0004_auto_20171013_1058')]
+
     dependencies = [
-        ('news', '0003_auto_20171013_1010'),
+        ('articles', '0003_auto_20171013_1010'),
     ]
 
     operations = [

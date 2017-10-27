@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'girleffect.home',
     'girleffect.images',
     'girleffect.navigation',
-    'girleffect.news',
+    'girleffect.articles',
     'girleffect.partners',
     'girleffect.people',
     'girleffect.search',

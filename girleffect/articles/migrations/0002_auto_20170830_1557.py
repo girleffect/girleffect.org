@@ -8,8 +8,10 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
+    replaces = [('news', '0002_auto_20170830_1557')]
+
     dependencies = [
-        ('news', '0001_initial'),
+        ('articles', '0001_initial'),
     ]
 
     operations = [
@@ -27,6 +29,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='newspagecategory',
             name='category',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='+', to='news.NewsCategory'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='+', to='articles.NewsCategory'),
         ),
     ]
