@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'template_debug',
     'captcha',
     'wagtailcaptcha',
+    'wagtailfontawesome',
 
     'django.contrib.admin',
     'django.contrib.auth',
