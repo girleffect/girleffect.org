@@ -1,15 +1,19 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
-    <div class="carousel-row carousel-row--full-width">
+    <div class="carousel__item">
         {% image value.image original as carousel_image %}
-        <img src="{{ carousel_image.url }}" alt="{{ carousel_image.alt }}" class="carousel-row__image">
+        <img src="{{ carousel_image.url }}" alt="{{ carousel_image.alt }}" class="carousel__image">
 
-        <p>{{ value.label }}</p>
+        <div class="carousel__content">
+            <h3 class="carousel__label">{{ value.label }}</h3>
 
-        <h2>{{ value.title }}</h2>
+            <div>
+                <h2 class="carousel__title">{{ value.title }}</h2>
 
-        {# text is RichText #}
-        <p>{{ value.text }}</p>
+                {# text is RichText #}
+                <p>{{ value.text }}</p>
 
-        {# template for this is in link_block.html #}
-        <p>{% include_block value.link %}</p>
+                {# template for this is in link_block.html #}
+                {% include_block value.link %}
+            </div>
+        </div>
     </div>
