@@ -1,0 +1,86 @@
+.carousel-container {
+    position: relative;
+}
+
+.carousel {
+    &__item {
+        position: relative;
+
+        &::before {
+            content: '';
+            background: linear-gradient(to top, $black-40, $black-05 35%);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    }
+
+    &__image {
+        max-height: 800px;
+    }
+
+    &__content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1rem;
+        z-index: 2;
+
+        @include media-query(tablet-portrait) {
+            padding: 2rem;
+        }
+
+        p,
+        a {
+            color: $white;
+        }
+    }
+
+    &__title {
+        @include font-size(18px, 65px);
+        color: $white;
+    }
+
+    &__label {
+        @include font-size(16px, 45px);
+        color: $yellow;
+    }
+
+    &__nav {
+        > div {
+            transition: color $transition;
+
+            &:hover {
+                cursor: pointer;
+                color: darken($yellow, 10%);
+            }
+        }
+
+        &--full-width {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            color: $yellow;
+            font-size: 2rem;
+            display: none;
+            top: 50%;
+            transform: translate(0, -50%);
+
+            @include media-query(tablet-portrait) {
+                display: flex;
+                font-size: 4rem;
+                padding: 2rem;
+            }
+        }
+    }
+}
