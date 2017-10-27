@@ -1,19 +1,22 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
-    <div class="quotes-column">
+    <div class="quote">
         {% image value.image original as quote_image %}
-        <img src="{{ quote_image.url }}" alt="{{ quote_image.alt }}" class="quotes-column__image">
+        <img src="{{ quote_image.url }}" alt="{{ quote_image.alt }}">
 
-        <blockquote{% if value.link %} cite="{{ value.link }}"{% endif %}>
-            {{ value.text }}
-        </blockquote>
+        <div class="quote-content">
+            {# <h4 class="quote__title"></h4> #}
+            <blockquote class="quote__copy"{% if value.link %} cite="{{ value.link }}"{% endif %}>
+                {{ value.text }}
+            </blockquote>
 
-        {% if value.citation %}
-            {% if value.link and value.citation %}
-                <a href="{{ value.link }}"> {{ value.citation }} </a>
-            {% elif value.citation %}
-                {{ value.citation }}
-            {% else %}
-                {# No citation or citation link included #}
+            {% if value.citation %}
+                {% if value.link and value.citation %}
+                    <a class="quote__cite" href="{{ value.link }}"> {{ value.citation }} </a>
+                {% elif value.citation %}
+                    {{ value.citation }}
+                {% else %}
+                    {# No citation or citation link included #}
+                {% endif %}
             {% endif %}
-        {% endif %}
+        </div>
     </div>

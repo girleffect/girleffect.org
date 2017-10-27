@@ -1,0 +1,98 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    position: relative;
+
+    &__logo {
+        margin-right: 20px;
+
+        @include media-query(tablet-landscape) {
+            flex-basis: 20%;
+            margin-right: 0;
+        }
+    }
+
+    &__row {
+        display: none;
+        position: absolute;
+        top: 0;
+        background: $light-grey;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        left: 0;
+        flex-direction: column;
+        text-align: center;
+
+        @include media-query(tablet-landscape) {
+            justify-content: flex-end;
+            align-items: flex-end;
+            display: flex;
+            padding-left: 20px;
+            position: relative;
+            bottom: initial;
+            left: initial;
+            background: transparent;
+            padding: 0;
+            flex-direction: row;
+        }
+
+        form {
+            display: none; // until functionality is decided
+        }
+    }
+
+    &__nav {
+        display: flex;
+        margin: 0;
+        flex-direction: column;
+
+        @include media-query(tablet-landscape) {
+            flex-direction: row;
+        }
+    }
+
+    &__nav-item {
+        margin-right: 15px;
+
+        @include media-query(tablet-landscape) {
+            margin-right: 20px;
+        }
+
+        @include media-query(desktop) {
+            margin-right: 30px;
+        }
+    }
+
+    &__link {
+        margin-right: 10px;
+
+        @include media-query(desktop) {
+            margin-right: 20px;
+        }
+
+        &--search {
+            border-left: 2px solid lighten($steel, 20%);
+            border-right: 2px solid lighten($steel, 20%);
+            padding: 0 10px;
+
+            @include media-query(desktop) {
+                padding: 0 20px;
+            }
+        }
+    }
+
+    &__icon {
+        fill: $steel;
+        width: 20px;
+        height: 20px;
+        transition: fill $transition;
+
+        .header__link:hover & {
+            fill: $green;
+            cursor: pointer;
+        }
+    }
+}

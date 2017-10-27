@@ -13,6 +13,8 @@ $green:        #2f6165;
 $yellow:       #ffc700;
 $light-grey:   #f4f4f3;
 $mid-grey:     #767676;
+$concrete:     #e5e5e5;
+$steel:        #afafaf;
 
 // Asignment
 $color--primary: $green;
@@ -66,7 +68,7 @@ $gutter--desktop-wide:  40px;
 /* ============================================
    Max widths and wrappers
 */
-$max-width: 1350px;
+$max-width: 1400px;
 
 $wrapper--medium: 1200px;
 $wrapper--small: 790px;
@@ -75,7 +77,7 @@ $wrapper--small: 790px;
    Breakpoints
 */
 $breakpoints: (
-    'mob-potrait'       '(min-width: 320px)',
+    'mob-portrait'      '(min-width: 320px)',
     'mob-landscape'     '(min-width: 480px)',
     'tablet-portrait'   '(min-width: 768px)',
     'tablet-landscape'  '(min-width: 1024px)',
