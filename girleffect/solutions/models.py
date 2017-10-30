@@ -20,6 +20,7 @@ from wagtail.wagtailadmin.edit_handlers import (
 
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtailmedia.edit_handlers import MediaChooserPanel
@@ -78,6 +79,14 @@ class SolutionPage(Page, SocialFields, ListingFields):
         help_text="Hero Video. Recommended size 12Mb or under.",
         related_name='+'
     )
+    hero_fallback_image = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        related_name='+',
+        help_text="Hero Image to be used as fallback for video.",
+        on_delete=models.SET_NULL
+    )
     summary = models.TextField(blank=True)
     body = StreamField(StoryBlock())
     call_to_action = models.ForeignKey(
@@ -102,6 +111,7 @@ class SolutionPage(Page, SocialFields, ListingFields):
 
     content_panels = Page.content_panels + [
         MediaChooserPanel('hero_video'),
+        ImageChooserPanel('hero_fallback_image'),
         FieldPanel('summary'),
         StreamFieldPanel('body'),
         InlinePanel('related_documents', label="Related documents"),
