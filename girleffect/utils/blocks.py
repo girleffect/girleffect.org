@@ -230,7 +230,11 @@ class StoryBlock(blocks.StreamBlock):
         template="blocks/list_column_block.html",
         icon="list-ul"
     )
-    statistic = SnippetChooserBlock(Statistic, template="blocks/statistic_block.html")
+    statistic = blocks.ListBlock(
+        SnippetChooserBlock(Statistic, label="Statistics"),
+        template="blocks/statistic_block.html",
+        icon="snippet"
+    )
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="includes/call_to_action.html")
     content_section = ContentSectionBlock(label="Content section")
 

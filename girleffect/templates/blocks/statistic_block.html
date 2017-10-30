@@ -1,17 +1,14 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
 
-<div class="statistic">
-    {{ value.title }}
-
-    <span>{{ value.statistic_value }} {{ value.statistic_units }}</span>
-
-    {# RichText #}
-    {{ value.description }}
-
-    {% if value.link_page %}
-        <a href="{{ value.link_page.href }}">{{ value.get_link_text }}</a>
-    {% elif value.link_url  %}
-        <a href="{{ value.link_url.href }}">{{ value.get_link_text }}</a>
+<div class="statistics">
+{# Rows are to have a maximum of 4 list items per row #}
+{# Pseudo code #}
+<div class="statistics-row">
+{% for item in value %}
+        {% include "blocks/statistic_item_block.html" with value=item %}
+        {# found in statistic_item_block.html #}
+    {% if forloop.counter|divisibleby:"3" and not forloop.last %}
+    </div><div class="statistics-row">
     {% endif %}
-
+{% endfor %}
 </div>
