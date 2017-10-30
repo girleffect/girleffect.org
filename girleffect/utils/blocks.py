@@ -9,7 +9,7 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
-from .models import CallToActionSnippet
+from .models import CallToActionSnippet, Statistic
 
 
 class ImageBlock(blocks.StructBlock):
@@ -230,6 +230,7 @@ class StoryBlock(blocks.StreamBlock):
         template="blocks/list_column_block.html",
         icon="list-ul"
     )
+    statistic = SnippetChooserBlock(Statistic, template="blocks/statistic_block.html")
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="includes/call_to_action.html")
     content_section = ContentSectionBlock(label="Content section")
 

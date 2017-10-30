@@ -1,0 +1,17 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="statistic">
+    {{ value.title }}
+
+    <span>{{ value.statistic_value }} {{ value.statistic_units }}</span>
+
+    {# RichText #}
+    {{ value.description }}
+
+    {% if value.link_page %}
+        <a href="{{ value.link_page.href }}">{{ value.get_link_text }}</a>
+    {% elif value.link_url  %}
+        <a href="{{ value.link_url.href }}">{{ value.get_link_text }}</a>
+    {% endif %}
+
+</div>
