@@ -22,6 +22,7 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
+from wagtailmedia.edit_handlers import MediaChooserPanel
 
 
 class SolutionPageRelatedDocument(RelatedDocument):
@@ -69,6 +70,14 @@ class SolutionIndex(Page, SocialFields):
 
 
 class SolutionPage(Page, SocialFields, ListingFields):
+    hero_video = models.ForeignKey(
+        'wagtailmedia.Media',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        help_text="Hero Video. Recommended size 12Mb or under.",
+        related_name='+'
+    )
     summary = models.TextField(blank=True)
     body = StreamField(StoryBlock())
     call_to_action = models.ForeignKey(
@@ -92,6 +101,7 @@ class SolutionPage(Page, SocialFields, ListingFields):
     ]
 
     content_panels = Page.content_panels + [
+        MediaChooserPanel('hero_video'),
         FieldPanel('summary'),
         StreamFieldPanel('body'),
         InlinePanel('related_documents', label="Related documents"),
