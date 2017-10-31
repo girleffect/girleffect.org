@@ -7,8 +7,6 @@ from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
     PageLinkFields,
     ListingFields,
-    RelatedDocument,
-    RelatedPage,
     SocialFields,
 )
 from girleffect.articles.models import ArticlePage
