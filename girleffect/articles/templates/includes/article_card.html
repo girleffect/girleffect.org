@@ -1,6 +1,10 @@
+{% load wagtailimages_tags %}
     <div class="article-column">
         {# Single article #}
-        {# Image will go here? #}
+        {% if article.listing_image %}
+            {% image article.listing_image original as article_image %}
+            <img src="{{ article_image.url }}" alt="{{ article.listing_title }}">
+        {% endif %}
         <u>{{ article.categories.first.category }}</u> {{ article.publication_date|date:"d.m.y" }}<br/>
         <a href="{{ article.url }}">{{ article.title }}</a><br/>
     </div>

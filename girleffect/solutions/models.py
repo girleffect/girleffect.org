@@ -5,6 +5,7 @@ from django.utils.functional import cached_property
 
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
+    PageLinkFields,
     ListingFields,
     RelatedDocument,
     RelatedPage,
@@ -25,16 +26,6 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtailmedia.edit_handlers import MediaChooserPanel
-
-
-class SolutionPageRelatedDocument(RelatedDocument):
-    page = ParentalKey('solutions.SolutionPage',
-                       related_name='related_documents')
-
-
-class SolutionPageRelatedPage(RelatedPage):
-    source_page = ParentalKey('solutions.SolutionPage',
-                              related_name='related_pages')
 
 
 class SolutionPageRelatedPartner(Orderable, models.Model):
@@ -86,13 +77,13 @@ class SolutionIndex(Page, SocialFields):
         return context
 
 
-class SolutionPage(Page, SocialFields, ListingFields):
+class SolutionPage(Page, PageLinkFields, SocialFields, ListingFields):
     hero_video = models.ForeignKey(
         'wagtailmedia.Media',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        help_text="Hero Video. Recommended size 12Mb or under.",
+        help_text="Hero Video to show on top of page. Recommended size 12Mb or under.",
         related_name='+'
     )
     hero_fallback_image = models.ForeignKey(
@@ -103,14 +94,23 @@ class SolutionPage(Page, SocialFields, ListingFields):
         help_text="Hero Image to be used as fallback for video.",
         on_delete=models.SET_NULL
     )
-    summary = models.TextField(blank=True)
+    strapline = models.TextField(blank=True, max_length=80)
+    logo = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        related_name='+',
+        help_text="Logo for brands",
+        on_delete=models.SET_NULL
+    )
     body = StreamField(StoryBlock())
     person_category = models.ForeignKey(
         'people.PersonCategory',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        help_text="Select a person category to display its team members.",
+        related_name='+',
     )
     call_to_action = models.ForeignKey(
         'utils.CallToActionSnippet',
@@ -122,9 +122,8 @@ class SolutionPage(Page, SocialFields, ListingFields):
 
     @cached_property
     def articles(self):
-        ''' returns articles that have solution selected as a related page'''
-        articles = ArticlePage.objects.filter(related_pages__page=self).live().order_by('-publication_date')[:3]
-        return articles
+        # returns articles that have solution selected as a related page
+        return ArticlePage.objects.filter(related_pages__page=self).live().order_by('-publication_date')[:3]
 
     @cached_property
     def countries(self):
@@ -148,19 +147,18 @@ class SolutionPage(Page, SocialFields, ListingFields):
             return None
 
     search_fields = Page.search_fields + [
-        index.SearchField('summary'),
         index.SearchField('body'),
     ]
 
     content_panels = Page.content_panels + [
         MediaChooserPanel('hero_video'),
         ImageChooserPanel('hero_fallback_image'),
-        FieldPanel('summary'),
+        FieldPanel('strapline'),
+        ImageChooserPanel('logo')
+    ] + PageLinkFields.content_panels + [
         StreamFieldPanel('body'),
         InlinePanel('related_partners', label="Related partners"),
         SnippetChooserPanel('person_category'),
-        InlinePanel('related_documents', label="Related documents"),
-        InlinePanel('related_pages', label="Related pages"),
         SnippetChooserPanel('call_to_action'),
     ]
 
