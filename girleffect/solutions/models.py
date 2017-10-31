@@ -10,7 +10,7 @@ from girleffect.utils.models import (
     RelatedPage,
     SocialFields,
 )
-from girleffect.articles.models import ArticlePage, ArticlePageRelatedPage
+from girleffect.articles.models import ArticlePage
 
 from modelcluster.fields import ParentalKey
 
