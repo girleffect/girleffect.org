@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('wagtailmedia', '0003_copy_media_permissions_to_collections'),
         ('images', '0001_initial'),
-        ('solutions', '0012_auto_20171023_1417'),
+        ('solutions', '0013_auto_20171030_1410'),
         ('people', '0007_auto_20171023_1417'),
     ]
 
