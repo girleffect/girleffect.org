@@ -35,6 +35,17 @@
     </div>   
     {% endif %}
 
+    {% if page.articles %}
+    <div class="articles">
+        <h2>Latest News &amp; Stories</h2>
+        {% for article in page.articles %}
+            {# Article card here #}
+            {% include "includes/article_card.html" %}
+        {% endfor %}
+        <a href="/articles">See all news</a>
+    </div>
+    {% endif %}
+
     <section class="main-body">
         <div class="container">
             {{ page.body }}

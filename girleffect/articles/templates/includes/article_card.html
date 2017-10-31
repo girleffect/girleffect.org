@@ -1,0 +1,6 @@
+    <div class="article-column">
+        {# Single article #}
+        {# Image will go here? #}
+        <u>{{ article.categories.first.category }}</u> {{ article.publication_date|date:"d.m.y" }}<br/>
+        <a href="{{ article.url }}">{{ article.title }}</a><br/>
+    </div>
