@@ -56,6 +56,13 @@ class PersonCategory(models.Model):
         help_text='Not currently shown to the end user but may be in the future.'
     )
 
+    @cached_property
+    def people(self):
+        people = [
+            p.page for p in self.person_relationships.all()
+        ]
+        return people
+
     def __str__(self):
         return self.title
 
@@ -70,7 +77,7 @@ class PersonPagePersonCategory(models.Model):
     )
     category = models.ForeignKey(
         'PersonCategory',
-        related_name='+'
+        related_name='person_relationships'
     )
 
     panels = [

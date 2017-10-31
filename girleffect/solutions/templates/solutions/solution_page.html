@@ -14,6 +14,15 @@
     {# Hero video and fallback image #}
     {% include "includes/hero_video.html" with video=page.hero_video %}
 
+    {# People #}
+    {% if page.person_category and page.people %}
+        <h3>{{ page.person_category }}</h3>
+        {% for person in page.people %}
+            {# Person card here #}
+            {% include "includes/person_index_card.html" with person=person %}
+        {% endfor %}    
+    {% endif %}
+
     <section class="main-body">
         <div class="container">
             {{ page.body }}

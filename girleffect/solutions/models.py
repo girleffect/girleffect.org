@@ -89,6 +89,13 @@ class SolutionPage(Page, SocialFields, ListingFields):
     )
     summary = models.TextField(blank=True)
     body = StreamField(StoryBlock())
+    person_category = models.ForeignKey(
+        'people.PersonCategory',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
     call_to_action = models.ForeignKey(
         'utils.CallToActionSnippet',
         null=True,
@@ -104,6 +111,13 @@ class SolutionPage(Page, SocialFields, ListingFields):
         ]
         return countries
 
+    @cached_property
+    def people(self):
+        if self.person_category:
+            return self.person_category.people
+        else:
+            return None
+
     search_fields = Page.search_fields + [
         index.SearchField('summary'),
         index.SearchField('body'),
@@ -114,6 +128,7 @@ class SolutionPage(Page, SocialFields, ListingFields):
         ImageChooserPanel('hero_fallback_image'),
         FieldPanel('summary'),
         StreamFieldPanel('body'),
+        SnippetChooserPanel('person_category'),
         InlinePanel('related_documents', label="Related documents"),
         InlinePanel('related_pages', label="Related pages"),
         SnippetChooserPanel('call_to_action'),
