@@ -10,6 +10,7 @@ from girleffect.utils.models import (
     RelatedPage,
     SocialFields,
 )
+from girleffect.articles.models import ArticlePage, ArticlePageRelatedPage
 
 from modelcluster.fields import ParentalKey
 
@@ -118,6 +119,12 @@ class SolutionPage(Page, SocialFields, ListingFields):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+
+    @cached_property
+    def articles(self):
+        ''' returns articles that have solution selected as a related page'''
+        articles = ArticlePage.objects.filter(related_pages__page=self).live().order_by('-publication_date')[:3]
+        return articles
 
     @cached_property
     def countries(self):
