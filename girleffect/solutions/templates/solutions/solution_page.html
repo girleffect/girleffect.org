@@ -14,13 +14,25 @@
     {# Hero video and fallback image #}
     {% include "includes/hero_video.html" with video=page.hero_video %}
 
+    {# Partners #}
+    {% if page.partners %}
+    <div class="partners">
+        {% for partner in page.partners %}
+            {# Partner card here #}
+            {% include "includes/partner_card.html" with partner=partner %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
     {# People #}
     {% if page.person_category and page.people %}
+    <div class="people">
         <h3>{{ page.person_category }}</h3>
         {% for person in page.people %}
             {# Person card here #}
             {% include "includes/person_index_card.html" with person=person %}
-        {% endfor %}    
+        {% endfor %} 
+    </div>   
     {% endif %}
 
     <section class="main-body">

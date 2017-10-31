@@ -1,15 +1,16 @@
-{% load wagtailcore_tags wagtailimages_tags %}
-
-<h4>{{ person.first_name }} {{ person.last_name }}</h4>
-{% if person.introduction %}
-    <p>{{ person.introduction }}</p>
-{% endif %}
-{% if person.photo %}
-    {% image person.photo original %}
-{% endif %}
-{% if person.job_title %}
-    <p>{{ person.job_title }}</p>
-{% endif %}
-{% if person.email %}
-    <p>{{ person.email }}</p>
-{% endif %}
+{% load wagtailimages_tags %}
+    <div class="person-column">
+        <h4>{{ person.first_name }} {{ person.last_name }}</h4>
+        {% if person.introduction %}
+            <p>{{ person.introduction }}</p>
+        {% endif %}
+        {% if person.photo %}
+            {% image person.photo original %}
+        {% endif %}
+        {% if person.job_title %}
+            <p>{{ person.job_title }}</p>
+        {% endif %}
+        {% if person.email %}
+            <p>{{ person.email }}</p>
+        {% endif %}
+    </div>

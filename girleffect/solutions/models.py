@@ -19,7 +19,7 @@ from wagtail.wagtailadmin.edit_handlers import (
 )
 
 from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Page
+from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
@@ -34,6 +34,21 @@ class SolutionPageRelatedDocument(RelatedDocument):
 class SolutionPageRelatedPage(RelatedPage):
     source_page = ParentalKey('solutions.SolutionPage',
                               related_name='related_pages')
+
+
+class SolutionPageRelatedPartner(Orderable, models.Model):
+    page = ParentalKey('solutions.SolutionPage', related_name='related_partners',
+                       blank=True, null=True)
+    solution_partner = models.ForeignKey(
+        'partners.Partner',
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        related_name='solution_partners'
+    )
+
+    panels = [
+        FieldPanel('solution_partner'),
+    ]
 
 
 class SolutionIndex(Page, SocialFields):
@@ -112,6 +127,13 @@ class SolutionPage(Page, SocialFields, ListingFields):
         return countries
 
     @cached_property
+    def partners(self):
+        partners = [
+            p.solution_partner for p in self.related_partners.all()
+        ]
+        return partners
+
+    @cached_property
     def people(self):
         if self.person_category:
             return self.person_category.people
@@ -128,6 +150,7 @@ class SolutionPage(Page, SocialFields, ListingFields):
         ImageChooserPanel('hero_fallback_image'),
         FieldPanel('summary'),
         StreamFieldPanel('body'),
+        InlinePanel('related_partners', label="Related partners"),
         SnippetChooserPanel('person_category'),
         InlinePanel('related_documents', label="Related documents"),
         InlinePanel('related_pages', label="Related pages"),
