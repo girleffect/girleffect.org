@@ -12,6 +12,7 @@ class Migration(migrations.Migration):
         ('wagtailmedia', '0003_copy_media_permissions_to_collections'),
         ('images', '0001_initial'),
         ('solutions', '0012_auto_20171023_1417'),
+        ('people', '0007_auto_20171023_1417'),
     ]
 
     operations = [
@@ -24,5 +25,10 @@ class Migration(migrations.Migration):
             model_name='solutionpage',
             name='hero_video',
             field=models.ForeignKey(blank=True, help_text='Hero Video. Recommended size 12Mb or under.', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailmedia.Media'),
+        ),
+        migrations.AddField(
+            model_name='solutionpage',
+            name='person_category',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='people.PersonCategory'),
         ),
     ]
