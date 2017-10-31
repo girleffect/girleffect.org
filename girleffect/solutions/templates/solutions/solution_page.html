@@ -3,66 +3,77 @@
 
 {% block content %}
 
-    <div class="intro">
-        <div class="container">
-            {% include "includes/share.html" %}
-            <h1>{{ page.title }}</h1>
-            <p>{{ page.summary }}</p>
-        </div>
-    </div>
+    {# Hero section - section includes links #}
+    <section class="hero">
+        <h1>{{ page.title }}</h1>
+        {% if page.logo %}
+            {% image page.logo original as solution_logo %}
+            <img src="{{ solution_logo.url }}" alt="{{ page.title }}">
+        {% endif %}
 
-    {# Hero video and fallback image #}
-    {% include "includes/hero_video.html" with video=page.hero_video %}
+        <h2>{{ page.strapline }}</h2>
 
-    {# Partners #}
+        {% if page.link_page or page.link_url %}
+            {% if page.link_page %}
+                <a href="{{ page.link_page.url }}">{{ page.link_text }}</a>
+            {% elif page.link_url  %}
+                <a href="{{ page.link_url }}" target="_blank">{{ page.link_text }}</a>
+            {% endif %}
+        {% endif %}
+
+        {# Hero video include #}
+        {% include "includes/hero_video.html" with video=page.hero_video feature=page.hero_fallback_image %}
+    </section>
+
+    {# Streamfield options #}
+    <section class="body">
+        {{ page.body }}
+    </section>
+
+    {# Related partners #}
     {% if page.partners %}
-    <div class="partners">
+    <section class="partners">
+        <h2>Partners</h2>
         {% for partner in page.partners %}
             {# Partner card here #}
             {% include "includes/partner_card.html" with partner=partner %}
         {% endfor %}
-    </div>
+    </section>
     {% endif %}
 
-    {# People #}
+    {# Related people #}
     {% if page.person_category and page.people %}
-    <div class="people">
+    <section class="people">
+        <h2>People</h2>
         <h3>{{ page.person_category }}</h3>
         {% for person in page.people %}
             {# Person card here #}
             {% include "includes/person_index_card.html" with person=person %}
         {% endfor %} 
-    </div>   
+    </section>   
     {% endif %}
 
-    {% if page.articles %}
-    <div class="articles">
-        <h2>Latest News &amp; Stories</h2>
-        {% for article in page.articles %}
-            {# Article card here #}
-            {% include "includes/article_card.html" %}
-        {% endfor %}
-        <a href="/articles">See all news</a>
-    </div>
-    {% endif %}
-
-    <section class="main-body">
-        <div class="container">
-            {{ page.body }}
-        </div>
-    </section>
-
+    {# Call to Action, link is likely external #}
     {% if page.call_to_action %}
-    <section class="country-cta">
-        <div class="container">
+    <section class="cta">
         <h2>Call to Action</h2>
         <a href="{{ page.call_to_action.link_url }}">
             {{ page.call_to_action.title }}
         </a>
-        </div>
+    </section>
+    {% endif %}
+
+    {# Latest articles, limited to three most recent, link to all articles index #}
+    {% if page.articles %}
+    <section class="articles">
+        <h2>Latest in {{ page.title }}</h2>
+        {% for article in page.articles %}
+            {% include "includes/article_card.html" %}
+        {% endfor %}
+        <a href="/articles">See all news</a>
     </section>
     {% endif %}
     
-    {% include "includes/relatedcontent.html" %}
+    {% include "includes/share.html" %}
 
 {% endblock %}
