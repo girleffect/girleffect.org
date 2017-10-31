@@ -1,13 +1,13 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
-    <div class="list-column">
+    <div class="list-item">
         {% image value.image original as column_image %}
-        <img src="{{ column_image.url }}" alt="{{ column_image.alt }}" class="list-column__image">
+        <img class="list-item__image" src="{{ column_image.url }}" alt="{{ column_image.alt }}">
 
-        <h4>{{ value.title }}</h4>
+        <h4 class="list-item__title">{{ value.title }}</h4>
 
         {# description is RichText #}
         <p>{{ value.description }}</p>
 
         {# template for this is in link_block.html #}
-        <p>{% include_block value.link %}</p>
+        {% include_block value.link %}
     </div>
