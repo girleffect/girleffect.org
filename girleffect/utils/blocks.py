@@ -229,7 +229,7 @@ class StoryBlock(blocks.StreamBlock):
         template="blocks/statistic_block.html",
         icon="snippet"
     )
-    call_to_action = SnippetChooserBlock(CallToActionSnippet, template="includes/call_to_action.html")
+    call_to_action = SnippetChooserBlock(CallToActionSnippet, template="blocks/call_to_action.html")
     content_section = ContentSectionBlock(label="Content section")
 
     class Meta:
