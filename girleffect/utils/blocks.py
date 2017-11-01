@@ -168,16 +168,6 @@ class QuoteBlock(blocks.StructBlock):
         template = "blocks/quote_item_block.html"
 
 
-class QuoteStream(blocks.StreamBlock):
-    quote = QuoteBlock(label="Quote Item")
-
-    class Meta:
-        icon = "openquote"
-        max_num = 2
-        min_num = 1
-        template = "blocks/quote_block.html"
-
-
 class ListColumnBlock(blocks.StructBlock):
     image = ImageChooserBlock(required=False)
     title = blocks.CharBlock(max_length=80)
@@ -215,7 +205,11 @@ class StoryBlock(blocks.StreamBlock):
         icon="pilcrow"
     )
     image = ImageBlock()
-    quote = QuoteStream()
+    quote = blocks.ListBlock(
+        QuoteBlock(),
+        template="blocks/quote_block.html",
+        icon="openquote"
+    )
     video = YouTubeEmbed(label="Girl Effect YouTube Video")
     carousel = blocks.ListBlock(
         CarouselItemBlock(),
