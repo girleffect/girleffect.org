@@ -1,0 +1,49 @@
+.cta {
+    position: relative;
+    max-width: 1800px;
+    margin: 0 auto;
+
+    &__image {
+        display: block;
+
+        @supports (object-fit: cover) {
+            object-fit: cover;
+            min-height: 400px;
+        }
+
+        @include media-query(tablet-landscape) {
+            min-height: auto;
+        }
+    }
+
+    &__content {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        padding: 10px;
+        text-align: center;
+    }
+
+    &__title {
+        color: $white;
+    }
+
+    &__summary {
+        color: $yellow;
+
+        .rich-text {
+            font-size: inherit;
+        }
+    }
+
+    .link {
+        color: $white;
+    }
+}
