@@ -92,13 +92,17 @@ class SolutionPage(Page, PageLinkFields, SocialFields, ListingFields):
         help_text="Hero Image to be used as fallback for video.",
         on_delete=models.SET_NULL
     )
-    strapline = models.TextField(blank=True, max_length=80)
+    strapline = models.TextField(
+        blank=True,
+        max_length=80,
+        help_text="The strapline will show over the hero image if a logo is not selected."
+    )
     logo = models.ForeignKey(
         'images.CustomImage',
         null=True,
         blank=True,
         related_name='+',
-        help_text="Logo for brands",
+        help_text="The logo will show over the hero image.",
         on_delete=models.SET_NULL
     )
     body = StreamField(StoryBlock())
@@ -151,8 +155,8 @@ class SolutionPage(Page, PageLinkFields, SocialFields, ListingFields):
     content_panels = Page.content_panels + [
         MediaChooserPanel('hero_video'),
         ImageChooserPanel('hero_fallback_image'),
-        FieldPanel('strapline'),
-        ImageChooserPanel('logo')
+        ImageChooserPanel('logo'),
+        FieldPanel('strapline')
     ] + PageLinkFields.content_panels + [
         StreamFieldPanel('body'),
         InlinePanel('related_partners', label="Related partners"),
