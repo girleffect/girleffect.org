@@ -1,4 +1,87 @@
 .link {
+    &--boxed {
+        display: inline-block;
+        padding: 1rem;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            height: 2px;
+            background: $yellow;
+            left: 28px;
+            right: 28px;
+            transition: left, right, width, $transition--link-boxed 0.4s;
+        }
+
+        &:hover {
+            &::after {
+                left: 0;
+                right: 0;
+                transition: left, right, width, $transition--link-boxed 0s;
+            }
+
+            span::before {
+                height: 100%;
+                transition: height $transition--link-boxed 0.2s;
+            }
+
+            span::after {
+                width: 100%;
+                transition: width $transition--link-boxed 0.4s;
+            }
+        }
+
+        span {
+            display: block;
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            bottom: 0;
+
+            &::before,
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                background: $yellow;
+            }
+
+            &::before {
+                width: 2px;
+                height: 0;
+                bottom: 0;
+                transition: height $transition--link-boxed 0.2s;
+            }
+
+            &::after  {
+                width: 0;
+                height: 2px;
+                top: 0;
+                transition: width $transition--link-boxed 0s;
+            }
+
+            &:first-child {
+                left: 0;
+
+                &::after,
+                &::before {
+                    left: 0;
+                }
+            }
+
+            &:last-child {
+                right: 0;
+
+                &::after,
+                &::before {
+                    right: 0;
+                }
+            }
+        }
+    }
+
     &--with-arrow {
         font-weight: $weight-bold;
         display: flex;
