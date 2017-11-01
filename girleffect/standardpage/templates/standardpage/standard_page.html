@@ -3,20 +3,31 @@
 
 {% block content %}
 
-    <div class="intro">
-        <div class="container">
-            {% include "includes/share.html" %}
-            <h1>{{ page.title }}</h1>
-            <p>{{ page.introduction }}</p>
-        </div>
-    </div>
-
-    <section class="main-body">
-        <div class="container">
-            {{ page.body }}
-        </div>
+    {# Hero section #}
+    <section class="hero">
+        <h1>{{ page.hero_heading }}</h1>
+        {% image page.hero_image original as hero_image %}
+        <img src="{{ hero_image.url }}">
     </section>
 
+    {# Introduction (to be in hero section?) #}
+    <section class="introduction">
+        <p>{{ page.introduction }}</p>
+    </section>
+
+    {# Streamfield options - rich text #}
+    <section class="body">
+        {{ page.body }}
+    </section>
+
+    {# Call to action #}
+    {% if page.call_to_action %}
+        <section class="cta">
+            {% include "includes/call_to_action.html" %}
+        </section>
+    {% endif %}
+
+    {% include "includes/share.html" %}
     {% include "includes/relatedcontent.html" %}
 
 {% endblock %}
