@@ -1,0 +1,16 @@
+{% load wagtailimages_tags %}
+    <div class="partner-column">
+        <h4>{{ partner.title }}</h4>
+        <p>{{ partner.description }}</p>
+
+        {% if partner.logo %}
+            {% image partner.logo original as partner_logo %}
+            <img src="{{ partner_logo.url }}" alt="{{ partner.title }}">
+        {% endif %}
+
+        {% if partner.internal_link %}
+            <a href="{{ partner.internal_link.url }}">Learn more about {{ partner.title }}</a>
+        {% elif partner.external_link %}
+            <a href="{{ partner.external_link }}" target="_blank">Learn more about {{ partner.title }}</a>
+        {% endif %}
+    </div>

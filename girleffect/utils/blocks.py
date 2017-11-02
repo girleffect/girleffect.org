@@ -9,7 +9,7 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
-from .models import CallToActionSnippet
+from .models import CallToActionSnippet, Statistic
 
 
 class ImageBlock(blocks.StructBlock):
@@ -168,16 +168,6 @@ class QuoteBlock(blocks.StructBlock):
         template = "blocks/quote_item_block.html"
 
 
-class QuoteStream(blocks.StreamBlock):
-    quote = QuoteBlock(label="Quote Item")
-
-    class Meta:
-        icon = "openquote"
-        max_num = 2
-        min_num = 1
-        template = "blocks/quote_block.html"
-
-
 class ListColumnBlock(blocks.StructBlock):
     image = ImageChooserBlock(required=False)
     title = blocks.CharBlock(max_length=80)
@@ -215,7 +205,11 @@ class StoryBlock(blocks.StreamBlock):
         icon="pilcrow"
     )
     image = ImageBlock()
-    quote = QuoteStream()
+    quote = blocks.ListBlock(
+        QuoteBlock(),
+        template="blocks/quote_block.html",
+        icon="openquote"
+    )
     video = YouTubeEmbed(label="Girl Effect YouTube Video")
     carousel = blocks.ListBlock(
         CarouselItemBlock(),
@@ -230,7 +224,12 @@ class StoryBlock(blocks.StreamBlock):
         template="blocks/list_column_block.html",
         icon="list-ul"
     )
-    call_to_action = SnippetChooserBlock(CallToActionSnippet, template="includes/call_to_action.html")
+    statistic = blocks.ListBlock(
+        SnippetChooserBlock(Statistic, label="Statistics"),
+        template="blocks/statistic_block.html",
+        icon="snippet"
+    )
+    call_to_action = SnippetChooserBlock(CallToActionSnippet, template="blocks/call_to_action.html")
     content_section = ContentSectionBlock(label="Content section")
 
     class Meta:
