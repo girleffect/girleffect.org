@@ -84,7 +84,7 @@ class ArticlePage(Page, SocialFields, ListingFields):
         FieldPanel('publication_date'),
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
-        InlinePanel('categories', label="Categories"),
+        InlinePanel('categories', label="Categories", max_num=1),
         InlinePanel('related_documents', label="Related documents"),
         InlinePanel('related_pages', label="Related pages"),
     ]
