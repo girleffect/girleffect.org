@@ -6,15 +6,14 @@ from django.utils.functional import cached_property
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
     ListingFields,
-    RelatedDocument,
-    SocialFields,
+    SocialFields
 )
 
 from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel, InlinePanel,
-    PageChooserPanel, StreamFieldPanel
+    StreamFieldPanel
 )
 
 from wagtail.wagtailcore.fields import StreamField
@@ -22,21 +21,6 @@ from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-
-
-class CountryPageRelatedSolution(Orderable, models.Model):
-    page = ParentalKey('countries.CountryPage', related_name='solutions',
-                       blank=True, null=True)
-    solution_page = models.ForeignKey(
-        'solutions.SolutionPage',
-        null=True, blank=True,
-        on_delete=models.SET_NULL,
-        related_name='country_solutions'
-    )
-
-    panels = [
-        PageChooserPanel('solution_page'),
-    ]
 
 
 class CountryPageRelatedPartner(Orderable, models.Model):
@@ -180,7 +164,6 @@ class CountryPage(Page, SocialFields, ListingFields):
         InlinePanel('related_partners', label="Related partners"),
         SnippetChooserPanel('person_category'),
         SnippetChooserPanel('call_to_action'),
-        InlinePanel('solutions', label="Related solutions"),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels \
