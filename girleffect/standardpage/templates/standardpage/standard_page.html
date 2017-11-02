@@ -6,7 +6,7 @@
     {# Hero section #}
     <section class="hero">
         <h1>{{ page.hero_heading }}</h1>
-        {% image page.hero_image original as hero_image %}
+        {% image page.hero_image fill-100x75 as hero_image %}
         <img src="{{ hero_image.url }}">
     </section>
 
