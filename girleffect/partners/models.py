@@ -41,11 +41,7 @@ class Partner(Orderable, models.Model):
         ImageChooserPanel('logo'),
         FieldPanel('title'),
         FieldPanel('description'),
-        PageChooserPanel('internal_link', ['countries.CountryPage',
-                                           'countries.CountryIndex',
-                                           'solutions.SolutionPage',
-                                           'articles.ArticlePage',
-                                           'standardpage.StandardPage']),
+        PageChooserPanel('internal_link'),
         FieldPanel('external_link')
     ]
 

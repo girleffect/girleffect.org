@@ -66,18 +66,39 @@ class StandardPage(Page, SocialFields, ListingFields):
     promote_panels = Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels
 
 
-class StandardIndex(Page, SocialFields):
-    introduction = models.TextField(blank=True)
+class ParentPage(Page, SocialFields):
+    hero_image = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        related_name='+',
+        on_delete=models.SET_NULL
+    )
+    hero_heading = models.CharField(
+        max_length=80,
+        blank=True,
+        help_text="Heading that will appear over the hero image."
+    )
+    body = StreamField(StoryBlock())
 
     content_panels = Page.content_panels + [
-        FieldPanel('introduction'),
+        MultiFieldPanel(
+            [
+                ImageChooserPanel('hero_image'),
+                FieldPanel('hero_heading'),
+            ],
+            heading="Hero"
+        ),
+        StreamFieldPanel('body'),
+
     ]
 
     search_fields = Page.search_fields + [
-        index.SearchField('introduction'),
+        index.SearchField('hero_heading'),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels
+    subpage_types = ['solutions.SolutionPage', 'countries.CountryPage']
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)

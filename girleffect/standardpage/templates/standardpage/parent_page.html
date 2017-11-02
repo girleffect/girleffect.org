@@ -3,10 +3,19 @@
 
 {% block content %}
 
-    <h1>{{ page.title }}</h1>
-    <p>{{ page.introduction }}</p>
+    {# Hero section #}
+    <section class="hero">
+        <h1>{{ page.hero_heading }}</h1>
+        {% image page.hero_image fill-100x75 as hero_image %}
+        <img src="{{ hero_image.url }}">
+    </section>
 
-    <section class="listing">
+    {# Streamfield options #}
+    <section class="body">
+        {{ page.body }}
+    </section>
+
+    <!-- <section class="listing">
         {% if subpages.paginator.count %}
             {% if subpages.object_list.exists %}
                 <ul role="list">
@@ -40,7 +49,7 @@
 
         {% else %}
             {# no items on any page #}
-        {% endif %}
+        {% endif %} -->
 
     </section>
 
