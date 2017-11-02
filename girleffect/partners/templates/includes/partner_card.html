@@ -4,7 +4,7 @@
         <p>{{ partner.description }}</p>
 
         {% if partner.logo %}
-            {% image partner.logo original as partner_logo %}
+            {% image partner.logo fill-500x400 as partner_logo %}
             <img src="{{ partner_logo.url }}" alt="{{ partner.title }}">
         {% endif %}
 

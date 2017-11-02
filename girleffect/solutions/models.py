@@ -92,6 +92,7 @@ class SolutionPage(Page, PageLinkFields, SocialFields, ListingFields):
         help_text="Hero Image to be used as fallback for video.",
         on_delete=models.SET_NULL
     )
+    summary = models.TextField(blank=True)
     strapline = models.TextField(
         blank=True,
         max_length=80,
@@ -125,7 +126,7 @@ class SolutionPage(Page, PageLinkFields, SocialFields, ListingFields):
     @cached_property
     def articles(self):
         # returns articles that have solution selected as a related page
-        return ArticlePage.objects.filter(related_pages__page=self).live().order_by('-publication_date')[:3]
+        return ArticlePage.objects.filter(related_pages__page=self).live().public().order_by('-publication_date')[:3]
 
     @cached_property
     def countries(self):
@@ -149,12 +150,14 @@ class SolutionPage(Page, PageLinkFields, SocialFields, ListingFields):
             return None
 
     search_fields = Page.search_fields + [
+        index.SearchField('summary'),
         index.SearchField('body'),
     ]
 
     content_panels = Page.content_panels + [
         MediaChooserPanel('hero_video'),
         ImageChooserPanel('hero_fallback_image'),
+        FieldPanel('summary'),
         ImageChooserPanel('logo'),
         FieldPanel('strapline')
     ] + PageLinkFields.content_panels + [

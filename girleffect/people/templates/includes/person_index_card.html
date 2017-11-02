@@ -5,7 +5,8 @@
             <p>{{ person.introduction }}</p>
         {% endif %}
         {% if person.photo %}
-            {% image person.photo original %}
+            {% image person.photo fill-500x400 as person_photo %}
+            <img src='{{ person_photo.url }}'>
         {% endif %}
         {% if person.job_title %}
             <p>{{ person.job_title }}</p>
