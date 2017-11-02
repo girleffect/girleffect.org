@@ -690,6 +690,84 @@ h4 {
   }
 }
 
+.link--boxed {
+  display: inline-block;
+  padding: 1rem;
+  position: relative;
+}
+
+.link--boxed::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  height: 2px;
+  background: #ffc700;
+  left: 28px;
+  right: 28px;
+  transition: left, right, width, 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.4s;
+}
+
+.link--boxed:hover::after {
+  left: 0;
+  right: 0;
+  transition: left, right, width, 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+}
+
+.link--boxed:hover span::before {
+  height: 100%;
+  transition: height 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.2s;
+}
+
+.link--boxed:hover span::after {
+  width: 100%;
+  transition: width 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.4s;
+}
+
+.link--boxed span {
+  display: block;
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  bottom: 0;
+}
+
+.link--boxed span::before, .link--boxed span::after {
+  content: '';
+  display: block;
+  position: absolute;
+  background: #ffc700;
+}
+
+.link--boxed span::before {
+  width: 2px;
+  height: 0;
+  bottom: 0;
+  transition: height 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.2s;
+}
+
+.link--boxed span::after {
+  width: 0;
+  height: 2px;
+  top: 0;
+  transition: width 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+}
+
+.link--boxed span:first-child {
+  left: 0;
+}
+
+.link--boxed span:first-child::after, .link--boxed span:first-child::before {
+  left: 0;
+}
+
+.link--boxed span:last-child {
+  right: 0;
+}
+
+.link--boxed span:last-child::after, .link--boxed span:last-child::before {
+  right: 0;
+}
+
 .link--with-arrow {
   font-weight: 700;
   display: flex;
@@ -978,6 +1056,60 @@ h4 {
 
 .list-item__title {
   margin-bottom: 0.5rem;
+}
+
+.cta {
+  position: relative;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+.cta__image {
+  display: block;
+}
+
+@supports (object-fit: cover) {
+  .cta__image {
+    object-fit: cover;
+    min-height: 400px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .cta__image {
+    min-height: auto;
+  }
+}
+
+.cta__content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding: 10px;
+  text-align: center;
+}
+
+.cta__title {
+  color: #fff;
+}
+
+.cta__summary {
+  color: #ffc700;
+}
+
+.cta__summary .rich-text {
+  font-size: inherit;
+}
+
+.cta .link {
+  color: #fff;
 }
 
 .footer {
