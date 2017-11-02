@@ -7,13 +7,6 @@ node_modules
 patternlab/source/_patterns/**
 patternlab/source/images/**
 
-# Exclude dist apart from the patternlab styleguide
-/dist/*
-!/dist/patternlab/
-/dist/patternlab/*
-!/dist/patternlab/index.html
-!/dist/patternlab/styleguide/
-/dist/patternlab/styleguide/html/styleguide.html
-/dist/patternlab/styleguide/data/patternlab-data.js
+/dist/patternlab
 
 npm-debug.log
