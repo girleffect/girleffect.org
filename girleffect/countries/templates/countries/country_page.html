@@ -3,30 +3,67 @@
 
 {% block content %}
 
-    <div class="intro">
-        <div class="container">
-            {% include "includes/share.html" %}
-            <h1>{{ page.title }}</h1>
-            <p>{{ page.introduction }}</p>
-        </div>
-    </div>
-
-    <section class="main-body">
-        <div class="container">
-            {{ page.body }}
-        </div>
+    {# Hero section #}
+    <section class="hero">
+        <h1>{{ page.title }}</h1>
+        <h2>{{ page.heading }}</h2>
+        {% image page.hero_image fill-100x75 as hero_image %}
+        <img src="{{ hero_image.url }}">
     </section>
 
+    {# Streamfield options #}
+    <section class="body">
+        {{ page.body }}
+    </section>
+
+    {# Related partners #}
+    {% if page.partners %}
+    <section class="partners">
+        <h2>Partnerships in {{ page.title }}</h2>
+        <p>{{ page.partners_description }}</p>
+        {% for partner in page.partners %}
+            {# Partner card here #}
+            {% include "includes/partner_card.html" with partner=partner %}
+        {% endfor %}
+    </section>
+    {% endif %}
+
+    {# Related people #}
+    {% if page.people %}
+    <section class="people">
+        <h2>People</h2>
+        <h3>{{ page.person_category }}</h3>
+        {% for person in page.people %}
+            {# Person card here #}
+            {% include "includes/person_index_card.html" with person=person %}
+        {% endfor %} 
+    </section>   
+    {% endif %}
+
+    {# Call to Action, link is likely external #}
     {% if page.call_to_action %}
-    <section class="country-cta">
-        <div class="container">
+    <section class="cta">
         <h2>Call to Action</h2>
         <a href="{{ page.call_to_action.link_url }}">
             {{ page.call_to_action.title }}
         </a>
-        </div>
     </section>
     {% endif %}
+        {% endfor %}
+    </section>
+    {% endif %}
+
+    {# Related people #}
+    {% if page.person_category and page.people %}
+    <section class="people">
+        <h2>People</h2>
+        <h3>{{ page.person_category }}</h3>
+        {% for person in page.people %}
+            {# Person card here #}
+        {% endfor %} 
+    </section>   
+    {% endif %}
+
 
     {% if page.solutions.exists %}
         {% for solution in page.solutions.all %}
@@ -41,5 +78,20 @@
             </section>
         {% endfor %}
     {% endif %}
+>>>>>>> 52702c2b6e6537872e45015ef4105cffbb0f8977
+
+
+    {# Call to Action, link is likely external #}
+    {% if page.call_to_action %}
+    <section class="cta">
+        <h2>Call to Action</h2>
+        <a href="{{ page.call_to_action.link_url }}">
+            {{ page.call_to_action.title }}
+        </a>
+    </section>
+    {% endif %}
+
 
 {% endblock %}
+
+{% include "includes/share.html" %}
