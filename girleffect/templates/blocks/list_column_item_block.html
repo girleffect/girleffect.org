@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
     <div class="list-item">
-        {% image value.image original as column_image %}
+        {% image value.image fill-500x400 as column_image %}
         <img class="list-item__image" src="{{ column_image.url }}" alt="{{ column_image.alt }}">
 
         <h4 class="list-item__title">{{ value.title }}</h4>
