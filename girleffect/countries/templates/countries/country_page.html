@@ -23,6 +23,7 @@
         <p>{{ page.partners_description }}</p>
         {% for partner in page.partners %}
             {# Partner card here #}
+<<<<<<< HEAD
             {% include "includes/partner_card.html" with partner=partner %}
         {% endfor %}
     </section>
@@ -39,6 +40,49 @@
         {% endfor %} 
     </section>   
     {% endif %}
+
+    {# Call to Action, link is likely external #}
+    {% if page.call_to_action %}
+    <section class="cta">
+        <h2>Call to Action</h2>
+        <a href="{{ page.call_to_action.link_url }}">
+            {{ page.call_to_action.title }}
+        </a>
+    </section>
+    {% endif %}
+
+=======
+        {% endfor %}
+    </section>
+    {% endif %}
+
+    {# Related people #}
+    {% if page.person_category and page.people %}
+    <section class="people">
+        <h2>People</h2>
+        <h3>{{ page.person_category }}</h3>
+        {% for person in page.people %}
+            {# Person card here #}
+        {% endfor %} 
+    </section>   
+    {% endif %}
+
+
+    {% if page.solutions.exists %}
+        {% for solution in page.solutions.all %}
+            <section class="country-solution">
+                <div class="container">
+                    <h2>Solution</h2>
+                    <a href="{{ solution.page.url }}">
+                        {{ solution.page.title }}
+                    </a>
+                    <p>{{ solution.page.summary }}</p>
+                </div>
+            </section>
+        {% endfor %}
+    {% endif %}
+>>>>>>> 52702c2b6e6537872e45015ef4105cffbb0f8977
+
 
     {# Call to Action, link is likely external #}
     {% if page.call_to_action %}
