@@ -1,0 +1,17 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="call-to-action">
+
+    {{ value.title }}
+
+    {{ value.summary|richtext }}
+
+    {% image value.image fill-450x300 %}
+
+    {% if value.link_page %}
+        <a href="{{ value.link_page.href }}">{{ value.get_link_text }}</a>
+    {% elif value.link_url  %}
+        <a href="{{ value.link_url }}">{{ value.get_link_text }}</a>
+    {% endif %}
+
+</div>

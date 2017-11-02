@@ -30,7 +30,7 @@ class LinkFields(models.Model):
         Page,
         blank=True,
         null=True,
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
     )
     link_url = models.URLField(blank=True)
     link_text = models.CharField(blank=True, max_length=255)
@@ -54,6 +54,20 @@ class LinkFields(models.Model):
             FieldPanel('link_text'),
         ], 'Link'),
     ]
+
+
+# Linked fields for pages - includes related name
+class PageLinkFields(LinkFields):
+    link_page = models.ForeignKey(
+        Page,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="linked_page"
+    )
+
+    class Meta:
+        abstract = True
 
 
 # Related pages
