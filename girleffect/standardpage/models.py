@@ -33,13 +33,6 @@ class StandardPage(Page, SocialFields, ListingFields):
         blank=True,
         help_text="Heading that will appear over the hero image."
     )
-    call_to_action = models.ForeignKey(
-        'utils.CallToActionSnippet',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
     introduction = models.TextField(blank=True)
     body = StreamField(StoryBlock())
     call_to_action = models.ForeignKey(
