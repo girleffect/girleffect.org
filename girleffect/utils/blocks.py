@@ -133,6 +133,7 @@ class YouTubeEmbed(blocks.StructBlock):
         help_text="Your YouTube URL goes here. Only YouTube video URLs will be accepted.\
             The custom 'play' button will be created for valid YouTube URLs."
     )
+    link = LinkBlock(required=False)
 
     def clean(self, value):
         cleaned_data = super(YouTubeEmbed, self).clean(value)

@@ -2,6 +2,9 @@
 <div class="youtube-embed">
     <h3>{{ value.heading }}</h3>
 
+    {# template for this is in link_block.html #}
+    <p>{% include_block value.link %}</p>
+
     {# text is RichText #}
     {{ value.text }}
 
