@@ -1061,6 +1061,25 @@ h4 {
   display: block;
 }
 
+.hero {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.hero__heading:not(:only-child) {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+}
+
+.hero__heading:only-child {
+  color: #2f6165;
+  padding: 0 20px;
+}
+
 .list-item {
   padding: 0 20px;
   margin-bottom: 3rem;
