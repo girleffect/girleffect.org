@@ -1,0 +1,15 @@
+.wrapper {
+    margin: 0 auto;
+
+    &--site {
+        max-width: $site-width;
+    }
+
+    &--small {
+        max-width: $wrapper--small;
+    }
+
+    &--bottom-space {
+        margin: 0 auto 2rem;
+    }
+}
