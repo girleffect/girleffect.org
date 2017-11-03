@@ -66,7 +66,7 @@ class StandardPage(Page, SocialFields, ListingFields):
     promote_panels = Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels
 
 
-class ParentPage(Page, SocialFields):
+class StandardIndex(Page, SocialFields):
     hero_image = models.ForeignKey(
         'images.CustomImage',
         null=True,
@@ -79,7 +79,7 @@ class ParentPage(Page, SocialFields):
         blank=True,
         help_text="Heading that will appear over the hero image."
     )
-    body = StreamField(StoryBlock())
+    body = StreamField(StoryBlock(), blank=True)
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(

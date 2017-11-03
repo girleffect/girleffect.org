@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+
+    {# Hero section #}
+    <section class="hero">
+        <h1>{{ page.hero_heading }}</h1>
+        {% image page.hero_image fill-100x75 as hero_image %}
+        <img src="{{ hero_image.url }}">
+    </section>
+
+    {# Streamfield options #}
+    <section class="body">
+        {{ page.body }}
+    </section>
+    
+{% endblock %}

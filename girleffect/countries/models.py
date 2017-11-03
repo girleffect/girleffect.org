@@ -67,8 +67,6 @@ class CountryPage(Page, SocialFields, ListingFields):
         related_name='+'
     )
 
-    parent_page_types = ['standardpage.ParentPage']
-
     @cached_property
     def people(self):
         if self.person_category:

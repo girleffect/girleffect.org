@@ -87,8 +87,6 @@ class SolutionPage(Page, PageLinkFields, SocialFields, ListingFields):
         related_name='+'
     )
 
-    parent_page_types = ['standardpage.ParentPage']
-
     @cached_property
     def articles(self):
         # returns articles that have solution selected as a related page
