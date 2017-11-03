@@ -1,5 +1,3 @@
-from django.conf import settings
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils.functional import cached_property
 
@@ -39,40 +37,6 @@ class SolutionPageRelatedPartner(Orderable, models.Model):
     panels = [
         FieldPanel('solution_partner'),
     ]
-
-
-class SolutionIndex(Page, SocialFields):
-    introduction = models.TextField(blank=True)
-
-    content_panels = Page.content_panels + [
-        FieldPanel('introduction'),
-    ]
-
-    search_fields = Page.search_fields + [
-        index.SearchField('introduction'),
-    ]
-
-    promote_panels = Page.promote_panels + SocialFields.promote_panels
-
-    subpage_types = ['SolutionPage']
-
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        subpages = self.get_children().live()
-        per_page = settings.DEFAULT_PER_PAGE
-        page_number = request.GET.get('page')
-        paginator = Paginator(subpages, per_page)
-
-        try:
-            subpages = paginator.page(page_number)
-        except PageNotAnInteger:
-            subpages = paginator.page(1)
-        except EmptyPage:
-            subpages = paginator.page(paginator.num_pages)
-
-        context['subpages'] = subpages
-
-        return context
 
 
 class SolutionPage(Page, PageLinkFields, SocialFields, ListingFields):

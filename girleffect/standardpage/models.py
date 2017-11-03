@@ -1,6 +1,4 @@
 from django.db import models
-from django.conf import settings
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel, MultiFieldPanel,
@@ -67,32 +65,35 @@ class StandardPage(Page, SocialFields, ListingFields):
 
 
 class StandardIndex(Page, SocialFields):
-    introduction = models.TextField(blank=True)
+    hero_image = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        related_name='+',
+        on_delete=models.SET_NULL
+    )
+    hero_heading = models.CharField(
+        max_length=80,
+        blank=True,
+        help_text="Heading that will appear over the hero image."
+    )
+    body = StreamField(StoryBlock(), blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('introduction'),
+        MultiFieldPanel(
+            [
+                ImageChooserPanel('hero_image'),
+                FieldPanel('hero_heading'),
+            ],
+            heading="Hero"
+        ),
+        StreamFieldPanel('body'),
+
     ]
 
     search_fields = Page.search_fields + [
-        index.SearchField('introduction'),
+        index.SearchField('hero_heading'),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels
-
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        subpages = self.get_children().live()
-        per_page = settings.DEFAULT_PER_PAGE
-        page_number = request.GET.get('page')
-        paginator = Paginator(subpages, per_page)
-
-        try:
-            subpages = paginator.page(page_number)
-        except PageNotAnInteger:
-            subpages = paginator.page(1)
-        except EmptyPage:
-            subpages = paginator.page(paginator.num_pages)
-
-        context['subpages'] = subpages
-
-        return context
+    subpage_types = ['solutions.SolutionPage', 'countries.CountryPage']
