@@ -3,18 +3,18 @@
 
 {% block content %}
 
-    <div class="intro">
-        <div class="container">
-            {% include "includes/share.html" %}
-            <h1>{{ page.title }}</h1>
-            <p>{{ page.introduction }}</p>
-        </div>
-    </div>
+    {# Title and introduction section #}
+    <h1>{{ page.title }}</h1>
+    <p>{{ page.display_date }} by {% if page.author %}{{ page.author }}{% else %} Girl Effect Team.</p>
+    <u>{{ page.categories.first.category }}</u>
 
-    <section class="main-body">
-        <div class="container">
+    <section class="introduction">
+        <p>{{ page.introduction }}</p>
+    </section>
+
+    {# Streamfield options #}
+    <section class="body">
             {{ page.body }}
-        </div>
     </section>
 
     {% include "includes/relatedcontent.html" %}

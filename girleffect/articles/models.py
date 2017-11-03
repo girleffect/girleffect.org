@@ -72,7 +72,8 @@ class ArticlePage(Page, SocialFields, ListingFields):
         null=True, blank=True,
         help_text="Use this field to override the date that the article appears to have been published."
     )
-    introduction = models.TextField(blank=True)
+    author = models.CharField(blank=True, max_length=255)
+    introduction = models.TextField(blank=True, max_length=350)
     body = StreamField(StoryBlock())
 
     search_fields = Page.search_fields + [
@@ -82,9 +83,10 @@ class ArticlePage(Page, SocialFields, ListingFields):
 
     content_panels = Page.content_panels + [
         FieldPanel('publication_date'),
+        FieldPanel('author'),
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
-        InlinePanel('categories', label="Categories", max_num=1),
+        InlinePanel('categories', label="Category", max_num=1),
         InlinePanel('related_documents', label="Related documents"),
         InlinePanel('related_pages', label="Related pages"),
     ]
