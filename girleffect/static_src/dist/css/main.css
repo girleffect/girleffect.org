@@ -819,6 +819,22 @@ h4 {
   }
 }
 
+.large-text .rich-text {
+  font-size: 1.5873vw;
+}
+
+@media (max-width: 1134px) {
+  .large-text .rich-text {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1260px) {
+  .large-text .rich-text {
+    font-size: 20px;
+  }
+}
+
 .carousel-container {
   position: relative;
 }
