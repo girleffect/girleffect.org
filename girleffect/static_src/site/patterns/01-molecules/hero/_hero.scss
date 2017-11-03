@@ -1,0 +1,20 @@
+.hero {
+    position: relative;
+    margin-bottom: 20px;
+
+    &__heading {
+        &:not(:only-child) {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 100%;
+        }
+
+        &:only-child {
+            color: $green;
+            padding: 0 20px;
+        }
+    }
+}

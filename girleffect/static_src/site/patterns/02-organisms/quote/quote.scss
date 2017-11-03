@@ -1,0 +1,77 @@
+.quote-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: $max-width;
+    margin: 0 auto;
+    align-items: center;
+
+    @include media-query(tablet-landscape) {
+        flex-direction: row;
+    }
+}
+
+.quote {
+    position: relative;
+    max-width: 657px;
+    margin-bottom: 2rem;
+
+    &::before {
+        content: '';
+        background: linear-gradient(to top, $black-50, $black-05);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: block;
+    }
+
+    &:nth-child(odd) {
+        @include media-query(tablet-landscape) {
+            margin-right: 10px;
+        }
+    }
+
+    &:nth-child(even) {
+        @include media-query(tablet-landscape) {
+            margin-left: 10px;
+        }
+    }
+
+    &__copy {
+        @include font-size(16px, 25px);
+        color: $white;
+        margin: 0 0 10px;
+
+        * {
+            font-size: inherit;
+        }
+    }
+
+    &__cite {
+        font-size: 12px;
+        font-weight: 400;
+        color: $light-grey;
+    }
+}
+
+.quote-content {
+    position: relative;
+    padding: 10px;
+    background: $mid-grey;
+
+    @include media-query(mob-portrait) {
+        position: absolute;
+        bottom: 0;
+        background: transparent;
+    }
+
+    @include media-query(mob-landscape) {
+        padding: 1rem;
+    }
+
+    @include media-query(tablet-landscape) {
+        padding: 2rem;
+    }
+}

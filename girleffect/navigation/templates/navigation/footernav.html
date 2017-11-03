@@ -1,9 +1,9 @@
 {% load wagtailcore_tags %}
 <nav role="navigation" aria-label="Tertiary">
-    <ul class="footer-links">
+    <ul class="footer__nav footer-links">
         {% for snippet in footernav %}
             {% if snippet %}
-                <li>
+                <li class="footer__nav-item">
                     {% if snippet.menu_label %}
                         <a href="{% pageurl snippet.menu_item %}">{{ snippet.menu_label }}</a>
                     {% else %}

@@ -9,46 +9,16 @@
 // Colour variables
 $black:        #000;
 $white:        #fff;
-$purple:       #633180;
-$turquoise:    #80ddd9;
-$dark-orange:  #ff4800;
-$grey:         #a79c94;
-$light-green:  #73984a;
-$light-blue:   #26a2c8;
-$light-orange: #ff9203;
-$navy-blue:    #041e41;
-$aqua:         #34ddd9;
-$blue-lagoon:  #006D7F;
-$blue:         #035cdd;
+$green:        #2f6165;
+$yellow:       #ffc700;
+$light-grey:   #f4f4f3;
+$mid-grey:     #767676;
+$concrete:     #e5e5e5;
+$steel:        #afafaf;
 
-// Additional colors
-$regent-grey:  #878fa1;
-$concrete:     #f4f2f2;
-$mercury:      #e7e7e7;
-$parchment:    #f3edf4;
-
-// Section colours
-$color--events:    $purple;
-$color--about:     $turquoise;
-$color--blog:      $dark-orange;
-$color--advice:    $grey;
-$color--journey:   $light-green;
-$color--resources: $light-blue;
-$color--projects:  $light-orange;
-
-// Type colours
-$color--body-link:  $light-blue;
-$color--body:       $navy-blue;
-$color--cta:        $dark-orange;
-$color--captions:   $grey;
-$color--highlights: $aqua;
-
-// Colour vars
-$teal:       #2eb1b0;
-$green:      #68aa6c;
-$orange:     #fb5a40;
-$yellow:     #f5c157;
-$dark-grey:  #2b3033;
+// Asignment
+$color--primary: $green;
+$color--body:    $mid-grey;
 
 $black: #000;
 $black-90: rgba($black, 0.9);
@@ -83,6 +53,7 @@ $font-serif: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', G
 
 $weight-bold: 700;
 $weight-semibold: 600;
+$weight-medium: 500;
 $weight-normal: 400;
 $weight-light: 300;
 
@@ -97,14 +68,16 @@ $gutter--desktop-wide:  40px;
 /* ============================================
    Max widths and wrappers
 */
-$max-width: 1350px;
-$content-wrapper: 790px;
+$max-width: 1400px;
+
+$wrapper--medium: 1200px;
+$wrapper--small: 790px;
 
 /* ============================================
    Breakpoints
 */
 $breakpoints: (
-    'mob-potrait'       '(min-width: 320px)',
+    'mob-portrait'      '(min-width: 320px)',
     'mob-landscape'     '(min-width: 480px)',
     'tablet-portrait'   '(min-width: 768px)',
     'tablet-landscape'  '(min-width: 1024px)',
@@ -115,8 +88,9 @@ $breakpoints: (
 /* ============================================
    Transition speeds
 */
-
 $anim--speed: 600ms;
 $anim--ease: ease-in-out;
 
 $transition: 0.25s ease-out;
+$transition--link-boxed: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+

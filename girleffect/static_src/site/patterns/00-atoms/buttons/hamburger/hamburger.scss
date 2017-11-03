@@ -1,0 +1,70 @@
+.hamburger {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    height: 25px;
+    position: relative;
+    transform: rotate(0deg);
+    transition: $transition;
+    width: 30px;
+    display: block;
+    z-index: 10;
+
+    @include media-query(tablet-landscape) {
+        display: none;
+    }
+
+    &__line {
+        display: block;
+        height: 4px;
+        left: 0;
+        opacity: 1;
+        position: absolute;
+        transform: rotate(0deg);
+        transition: top, width, opacity, transform, left, $transition;
+        width: 100%;
+        background: $green;
+
+        &:nth-child(1) {
+            top: 0;
+
+            .open & {
+                top: 10px;
+                width: 0%;
+                left: 50%;
+            }
+        }
+
+        &:nth-child(2),
+        &:nth-child(3) {
+            top: 12px;
+            opacity: 0.25;
+
+            .open & {
+                opacity: 1;
+            }
+        }
+
+        &:nth-child(2) {
+            .open & {
+                transform: rotate(45deg);
+            }
+        }
+
+        &:nth-child(3) {
+            .open & {
+                transform: rotate(-45deg);
+            }
+        }
+
+        &:nth-child(4) {
+            top: 24px;
+
+            .open & {
+                top: 10px;
+                width: 0%;
+                left: 50%;
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+.grid {
+    max-width: $max-width;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+
+    &--three {
+
+        > div {
+            flex-basis: 100%;
+
+            @include media-query(mob-landscape) {
+                flex-basis: 50%;
+            }
+
+            @include media-query(tablet-landscape) {
+                flex-basis: 33%;
+            }
+        }
+    }
+}

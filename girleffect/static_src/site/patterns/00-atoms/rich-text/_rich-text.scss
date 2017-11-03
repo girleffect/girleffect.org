@@ -1,0 +1,7 @@
+.rich-text  {
+    @include font-size(16px, 18px);
+
+    .large-text & {
+        @include font-size(18px, 20px);
+    }
+}
