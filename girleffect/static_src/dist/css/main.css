@@ -606,6 +606,11 @@ h4 {
 
 /*------------------------------------*	$Patterns
 \*------------------------------------*/
+.body-text {
+  max-width: 790px;
+  margin: 0 auto 2rem;
+}
+
 .hamburger {
   background: transparent;
   border: 0;
@@ -674,8 +679,14 @@ h4 {
   left: 50%;
 }
 
+.heading--squashed {
+  line-height: 1.1;
+}
+
 .large-text {
   font-size: 1.5873vw;
+  max-width: 790px;
+  margin: 0 auto 2rem;
 }
 
 @media (max-width: 1134px) {
@@ -833,6 +844,22 @@ h4 {
   .large-text .rich-text {
     font-size: 20px;
   }
+}
+
+.wrapper {
+  margin: 0 auto;
+}
+
+.wrapper--site {
+  max-width: 1800px;
+}
+
+.wrapper--small {
+  max-width: 790px;
+}
+
+.wrapper--bottom-space {
+  margin: 0 auto 2rem;
 }
 
 .carousel-container {
@@ -1063,7 +1090,13 @@ h4 {
 
 .hero {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .hero {
+    margin-bottom: 4rem;
+  }
 }
 
 .hero__heading:not(:only-child) {
