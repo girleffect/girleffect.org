@@ -24,8 +24,8 @@ variables:
   DEPLOY_FLAGS: >
     -eDJANGO_SETTINGS_MODULE=girleffect.settings.production
     -eCFG_APP_NAME=girleffect
-    --memory-request=128m
-    --memory-limit=128m
+    --memory-request=512m
+    --memory-limit=1536m
     --htauth-user=girleffect:girleffectshowme
     --htauth-address=78.32.251.192/28
     --htauth-address=193.227.244.0/23
@@ -43,6 +43,8 @@ variables:
 flake8:
   image: python:3.6
   stage: test
+  tags:
+    - kubernetes-128
   script:
     - XDG_CACHE_HOME=./tmp/pip-cache pip install flake8
     - flake8 girleffect --ignore=E501,C901 --exclude=*/migrations/*,girleffect/settings/*
@@ -53,6 +55,8 @@ flake8:
 test:
   image: python:3.6
   stage: test
+  tags:
+    - kubernetes-512
   variables:
     DJANGO_SETTINGS_MODULE: girleffect.settings.production
     CFG_SECRET_KEY: fake_secret_key_to_run_tests
@@ -81,6 +85,8 @@ build:
   stage: build
   tags:
     - docker
+  only:
+    - staging
   before_script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
   script:
@@ -90,6 +96,8 @@ build:
 # Deploy the staging site.
 deploy:
   stage: deploy
+  tags:
+    - kubernetes-128
   only:
     - staging
   environment:
@@ -99,9 +107,26 @@ deploy:
   script:
     - deploy -G -A -Dpostgresql -vdata:/data $DEPLOY_FLAGS -sSECRET_KEY="${SECRET_KEY}" --hostname=$CI_ENVIRONMENT_URL $IMAGE_TAG $CI_ENVIRONMENT_SLUG
 
+# Build the Docker image for review apps.  Requires 'tags: docker' so it runs on a
+# Docker-capable CI runner.
+review_build:
+  stage: build
+  tags:
+    - docker
+  only:
+    - branches
+  except:
+    - master
+    - staging
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+
 # Deploy review apps.  If you don't want review apps, delete the review and
 # stop_review sections.
-review:
+review_deploy:
   stage: deploy
   only:
     - branches
@@ -111,14 +136,14 @@ review:
   environment:
     name: review/$CI_BUILD_REF_NAME
     url: http://$CI_PROJECT_PATH_SLUG-$CI_BUILD_REF_SLUG.staging.t6x.uk/
-    on_stop: stop_review
+    on_stop: review_stop
   image: torchbox/gitlab-kube-deploy:latest
   script:
     - deploy -G -Dpostgresql -vdata:/data $DEPLOY_FLAGS $REVIEW_FLAGS --hostname=$CI_ENVIRONMENT_URL $IMAGE_TAG $CI_ENVIRONMENT_SLUG
 
 # Cleanup review apps.  GitLab will run this job,
 # when you merge or delete your branch or deployment environment.
-stop_review:
+review_stop:
   stage: deploy
   when: manual
   only:
