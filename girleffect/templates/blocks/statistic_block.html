@@ -5,7 +5,7 @@
 {# Pseudo code #}
 <div class="statistics-row">
     <h3> {{ value.title }} </h3>
-    {% for item in value %}
+    {% for item in value.statistics %}
         {% include "blocks/statistic_item_block.html" with value=item %}
         {# found in statistic_item_block.html #}
     {% endfor %}

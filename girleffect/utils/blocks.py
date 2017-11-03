@@ -197,10 +197,10 @@ class ContentSectionBlock(blocks.StructBlock):
 
 class StatisticBlock(blocks.StructBlock):
     title = blocks.CharBlock(max_length=80, required=False)
-    link = LinkBlock(required=False)
     statistics = blocks.ListBlock(
         SnippetChooserBlock(Statistic),
     )
+    link = LinkBlock(required=False)
 
     class Meta:
         icon = "snippet"
