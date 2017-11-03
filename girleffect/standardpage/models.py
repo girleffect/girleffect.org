@@ -1,6 +1,4 @@
 from django.db import models
-from django.conf import settings
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel, MultiFieldPanel,
