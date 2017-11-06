@@ -1,0 +1,138 @@
+.video-container {
+    display: flex;
+    flex-direction: column;
+    max-width: $wrapper--small;
+    margin: 2rem auto;
+    align-items: center;
+
+    @include media-query(tablet-landscape) {
+        max-width: $wrapper--medium;
+        margin: 6rem auto;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+.video {
+    &__content {
+        background-color: $light-grey;
+        padding: 2rem;
+        color: $color--primary;
+        min-height: 315px;
+        width: 100%;
+
+        @include media-query(mob-landscape) {
+            width: 75%;
+        }
+
+        @include media-query(tablet-portrait) {
+            padding: 5.125rem 3.125rem 3.125rem;
+            align-self: flex-end;
+            margin-top: -2rem;
+        }
+
+        @include media-query(tablet-landscape) {
+            padding: 3.125rem;
+            flex-basis: 45%;
+            margin: 0;
+            align-self: center;
+        }
+    }
+
+    &__wrapper {
+        position: relative;
+        padding-bottom: 56.25%; // 16:9
+        padding-top: 25px;
+        height: 0;
+
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-width: 600px;
+            height: 100%;
+        }
+    }
+
+    &__player {
+        position: relative;
+        max-width: 600px;
+        width: 100%;
+        z-index: 5;
+    }
+
+    &__overlay {
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+
+        &::before {
+            content: '';
+            background: $black-30;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            z-index: 10;
+        }
+    }
+
+    &__poster {
+        top: 50%;
+        transform: translate(0, -50%);
+        position: relative;
+        width: 100%;
+    }
+
+    &__button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 11;
+
+        &:hover {
+            cursor: pointer;
+
+            .video__icon {
+                animation: rotate 1.5s infinite linear;
+            }
+        }
+
+        > p {
+            @include font-size(16px, 30px);
+            color: $white;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    &__icon {
+        fill: $white;
+        height: 100px;
+
+        @include media-query(mob-landscape) {
+            height: 150px;
+        }
+    }
+
+    &__title {
+        margin-bottom: 2rem;
+    }
+
+    &__copy {
+        @include font-size(16px, 18px);
+    }
+}
