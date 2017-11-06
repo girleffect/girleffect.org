@@ -72,7 +72,10 @@ class ArticlePage(Page, SocialFields, ListingFields):
         null=True, blank=True,
         help_text="Use this field to override the date that the article appears to have been published."
     )
-    author = models.CharField(blank=True, max_length=255)
+    author = models.CharField(
+        blank=True, 
+        max_length=255,
+        help_text="Optional Author name. Will default to 'Girl Effect Team' if empty.")
     introduction = models.TextField(blank=True, max_length=350)
     body = StreamField(StoryBlock())
 
