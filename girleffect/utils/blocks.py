@@ -152,6 +152,7 @@ class YouTubeEmbed(blocks.StructBlock):
 
 
 class QuoteBlock(blocks.StructBlock):
+    title = blocks.CharBlock(max_length=80, required=False)
     image = ImageChooserBlock(required=False)
     text = blocks.RichTextBlock(
         max_length=255,

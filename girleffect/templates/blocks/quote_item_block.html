@@ -1,6 +1,8 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
     <div class="quote">
-        {% image value.image original as quote_image %}
+        <h4>{{ value.title }}</h4>
+
+        {% image value.image fill-100x75 as quote_image %}
         <img src="{{ quote_image.url }}" alt="{{ quote_image.alt }}">
 
         <div class="quote-content">
