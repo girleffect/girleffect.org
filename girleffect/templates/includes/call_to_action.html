@@ -1,17 +1,24 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<div class="call-to-action">
+<div class="cta">
+    {% image page.call_to_action.image fill-1800x600 class="cta__image" %}
 
-    {{ page.call_to_action.title }}
+    <div class="cta__content">
+        <h2 class="cta__title">{{ page.call_to_action.title }}</h2>
+        <h2 class="cta__summary">{{ page.call_to_action.summary }}</h2>
 
-    <p>{{ page.call_to_action.summary }}</p>
-
-    {% image page.call_to_action.image fill-450x300 %}
-
-    {% if page.call_to_action.link_page %}
-        <a href="{{ page.call_to_action.link_page.href }}">{{ page.call_to_action.get_link_text }}</a>
-    {% elif call_to_action.link_url  %}
-        <a href="{{ page.call_to_action.link_url }}">{{ page.call_to_action.get_link_text }}</a>
-    {% endif %}
-
+        {% if page.call_to_action.link_page %}
+            <a class="link link--boxed" href="{{ page.call_to_action.link_page.href }}">
+                {{ page.call_to_action.get_link_text }}
+                <span></span>
+                <span></span>
+            </a>
+        {% elif call_to_action.link_url  %}
+            <a class="link link--boxed" href="{{ page.call_to_action.link_url }}">
+                {{ page.call_to_action.get_link_text }}
+                <span></span>
+                <span></span>
+            </a>
+        {% endif %}
+    </div>
 </div>
