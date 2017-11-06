@@ -1,6 +1,6 @@
 {% load wagtailimages_tags %}
 {% image feature fill-500x400 as feature_image %}
-<video autoplay loop muted preload poster="{{ feature_image.url }}">
+<video class="hero__video" autoplay loop muted preload poster="{{ feature_image.url }}">
     <source src="{{ video.file.url }}" type="video/mp4">
     <img src="{{ feature_image.url }}">
 </video>
