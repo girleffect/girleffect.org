@@ -43,13 +43,15 @@
 
     {# Related partners #}
     {% if page.partners %}
-    <section class="partners">
-        <h2>Partners</h2>
-        {% for partner in page.partners %}
-            {# Partner card here #}
-            {% include "includes/partner_card.html" with partner=partner %}
-        {% endfor %}
-    </section>
+        <section class="section section--partners">
+            <h2 class="section__title">Our partners</h2>
+            <div class="media-block-container">
+                {% for partner in page.partners %}
+                    {# Partner card here #}
+                    {% include "includes/partner_card.html" with partner=partner %}
+                {% endfor %}
+            </div>
+        </section>
     {% endif %}
 
     {# Related people #}
