@@ -412,27 +412,15 @@ textarea {
 
 /*------------------------------------*	$Abstracts
 \*------------------------------------*/
-/*------------------------------------*    $VARIABLES
-\*------------------------------------*/
-/* ============================================
-   Colours
-*/
-/* ============================================
-   Typography
-   :: Default to system font stack
-*/
-/* ============================================
-   Grid Dimentions
-*/
-/* ============================================
-   Max widths and wrappers
-*/
-/* ============================================
-   Breakpoints
-*/
-/* ============================================
-   Transition speeds
-*/
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
 /*------------------------------------*    $MIXINS
 \*------------------------------------*/
 /* ============================================
@@ -454,6 +442,27 @@ textarea {
 */
 /* ============================================
    Viewport sized typography mixin that takes a min and max pixel-based value
+*/
+/*------------------------------------*    $VARIABLES
+\*------------------------------------*/
+/* ============================================
+   Colours
+*/
+/* ============================================
+   Typography
+   :: Default to system font stack
+*/
+/* ============================================
+   Grid Dimentions
+*/
+/* ============================================
+   Max widths and wrappers
+*/
+/* ============================================
+   Breakpoints
+*/
+/* ============================================
+   Transition speeds
 */
 /*------------------------------------*    $Base
 \*------------------------------------*/
@@ -1495,6 +1504,177 @@ h4 {
 @media only screen and (min-width: 1024px) {
   .quote-content {
     padding: 2rem;
+  }
+}
+
+.video-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 790px;
+  margin: 2rem auto;
+  align-items: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .video-container {
+    max-width: 1200px;
+    margin: 6rem auto;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.video__content {
+  background-color: #f4f4f3;
+  padding: 2rem;
+  color: #2f6165;
+  min-height: 315px;
+  width: 100%;
+}
+
+@media only screen and (min-width: 480px) {
+  .video__content {
+    width: 75%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .video__content {
+    padding: 5.125rem 3.125rem 3.125rem;
+    align-self: flex-end;
+    margin-top: -2rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .video__content {
+    padding: 3.125rem;
+    flex-basis: 45%;
+    margin: 0;
+    align-self: center;
+  }
+}
+
+.video__wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
+}
+
+.video__wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 600px;
+  height: 100%;
+}
+
+.video__player {
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  z-index: 5;
+}
+
+.video__overlay {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.video__overlay::before {
+  content: '';
+  background: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.video__poster {
+  top: 50%;
+  transform: translate(0, -50%);
+  position: relative;
+  width: 100%;
+}
+
+.video__button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 11;
+}
+
+.video__button:hover {
+  cursor: pointer;
+}
+
+.video__button:hover .video__icon {
+  animation: rotate 1.5s infinite linear;
+}
+
+.video__button > p {
+  font-size: 2.38095vw;
+  color: #fff;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 672px) {
+  .video__button > p {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1260px) {
+  .video__button > p {
+    font-size: 30px;
+  }
+}
+
+.video__icon {
+  fill: #fff;
+  height: 100px;
+}
+
+@media only screen and (min-width: 480px) {
+  .video__icon {
+    height: 150px;
+  }
+}
+
+.video__title {
+  margin-bottom: 2rem;
+}
+
+.video__copy {
+  font-size: 1.42857vw;
+}
+
+@media (max-width: 1120px) {
+  .video__copy {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1260px) {
+  .video__copy {
+    font-size: 18px;
   }
 }
 
