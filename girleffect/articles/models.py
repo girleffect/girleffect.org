@@ -73,7 +73,7 @@ class ArticlePage(Page, SocialFields, ListingFields):
         help_text="Use this field to override the date that the article appears to have been published."
     )
     author = models.CharField(
-        blank=True, 
+        blank=True,
         max_length=255,
         help_text="Optional Author name. Will default to 'Girl Effect Team' if empty.")
     introduction = models.TextField(blank=True, max_length=350)
