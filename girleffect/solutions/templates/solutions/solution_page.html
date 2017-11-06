@@ -5,28 +5,39 @@
 
     {# Hero section - section includes links #}
     <section class="hero">
-        {% if page.logo %}
-            {% image page.logo original as solution_logo %}
-            <img src="{{ solution_logo.url }}" alt="{{ page.title }}">
-        {% elif page.strapline %}
-            <h2>{{ page.strapline }}</h2>
-        {% endif %}
-
-        {# Link field to video or page #}
-        {% if page.link_page or page.link_url %}
-            {% if page.link_page %}
-                <a href="{{ page.link_page.url }}">{{ page.link_text }}</a>
-            {% elif page.link_url  %}
-                <a href="{{ page.link_url }}" target="_blank">{{ page.link_text }}</a>
-            {% endif %}
-        {% endif %}
-
         {# Hero video include #}
         {% include "includes/hero_video.html" with video=page.hero_video feature=page.hero_fallback_image %}
+
+        <div class="hero__content hero__content--centered">
+            {% if page.logo %}
+                {% image page.logo original as solution_logo %}
+                <img class="hero__logo" src="{{ solution_logo.url }}" alt="{{ page.title }}">
+            {% elif page.strapline %}
+                <h2 class="hero__strapline">{{ page.strapline }}</h2>
+            {% endif %}
+
+            {# Link field to video or page #}
+            {% if page.link_page or page.link_url %}
+                {% if page.link_page %}
+
+                    <a class="link link--boxed" href="{{ page.link_page.url }}">
+                        {{ page.link_text }}
+                        <span></span>
+                        <span></span>
+                    </a>
+                {% elif page.link_url  %}
+                    <a class="link link--boxed" href="{{ page.link_url }}" target="_blank">
+                        {{ page.link_text }}
+                        <span></span>
+                        <span></span>
+                    </a>
+                {% endif %}
+            {% endif %}
+        </div>
     </section>
 
     {# Streamfield options #}
-    <section class="body">
+    <section class="body wrapper wrapper--small">
         {{ page.body }}
     </section>
 
@@ -49,8 +60,8 @@
         {% for person in page.people %}
             {# Person card here #}
             {% include "includes/person_index_card.html" with person=person %}
-        {% endfor %} 
-    </section>   
+        {% endfor %}
+    </section>
     {% endif %}
 
     {# Call to Action, link is likely external #}
@@ -73,7 +84,7 @@
         <a href="/articles">See all news</a>
     </section>
     {% endif %}
-    
+
     {% include "includes/share.html" %}
 
 {% endblock %}
