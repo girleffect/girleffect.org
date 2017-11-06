@@ -1,15 +1,15 @@
 {% load wagtailcore_tags wagtailimages_tags %}
-<div class="youtube-embed">
-    <h3>{{ value.heading }}</h3>
+<div class="video video-container">
+    <div class="video__player">
+        {# renders the YouTube video and cover photo #}
+        {# template is templates/wagtailembeds/embed_frontend.html #}
+        {% include_block value.youtube_embed %}
+    </div>
 
-    {# template for this is in link_block.html #}
-    <p>{% include_block value.link %}</p>
-
-    {# text is RichText #}
-    {{ value.text }}
-
-    {# renders the YouTube video and cover photo #}
-    {# template is templates/wagtailembeds/embed_frontend.html #}
-    {% include_block value.youtube_embed %}
-
+    <div class="video__content">
+        <h4 class="video__title">{{ value.heading }}</h4>
+        <p class="video__copy">{{ value.text }}</p>
+        {# template for this is in link_block.html #}
+        {% include_block value.link %}
+    </div>
 </div>
