@@ -1,7 +1,16 @@
-<div{% if embed.is_responsive %} style="padding-bottom: {{ embed.ratio_css }};" class="responsive-object"{% endif %}>
-    {{ embed.html|safe }}
+<div class="video__wrapper">
+    <div{% if embed.is_responsive %} style="padding-bottom: {{ embed.ratio_css }};" class="responsive-object"{% endif %}>
+        {{ embed.html|safe }}
+    </div>
 </div>
 
-{# Cover image for overlay renders hqdefault version #}
-<img src="{{ embed.thumbnail_url }}">
-
+{# Video overlay including cover image which renders hqdefault version #}
+<div class="video__overlay">
+    <img class="video__poster" src="{{ embed.thumbnail_url }}" alt="">
+    <div class="video__button">
+        <p>Play</p>
+        <svg class="video__icon">
+            <use xlink:href="#video-play"></use>
+        </svg>
+    </div>
+</div>
