@@ -26,7 +26,7 @@ class LinkBlock(blocks.StructBlock):
     internal_link = blocks.PageChooserBlock(required=False, label="Internal Link")
     document_link = DocumentChooserBlock(required=False, label="Document Link")
 
-    link_text = blocks.CharBlock(max_length=255, label="Link Text")
+    link_text = blocks.CharBlock(required=False, max_length=255, label="Link Text")
 
     def get_context(self, value, **kwargs):
         context = super(LinkBlock, self).get_context(value, **kwargs)
@@ -152,6 +152,7 @@ class YouTubeEmbed(blocks.StructBlock):
 
 
 class QuoteBlock(blocks.StructBlock):
+    title = blocks.CharBlock(max_length=80, required=False)
     image = ImageChooserBlock(required=False)
     text = blocks.RichTextBlock(
         max_length=255,
@@ -195,6 +196,18 @@ class ContentSectionBlock(blocks.StructBlock):
         icon = "fa-newspaper-o"
 
 
+class StatisticBlock(blocks.StructBlock):
+    title = blocks.CharBlock(max_length=80, required=False)
+    statistics = blocks.ListBlock(
+        SnippetChooserBlock(Statistic),
+    )
+    link = LinkBlock(required=False)
+
+    class Meta:
+        icon = "snippet"
+        template = "blocks/statistic_block.html"
+
+
 class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
     body_text = blocks.RichTextBlock(label="Body Text")
@@ -225,11 +238,7 @@ class StoryBlock(blocks.StreamBlock):
         template="blocks/list_column_block.html",
         icon="list-ul"
     )
-    statistic = blocks.ListBlock(
-        SnippetChooserBlock(Statistic, label="Statistics"),
-        template="blocks/statistic_block.html",
-        icon="snippet"
-    )
+    statistic = StatisticBlock(label="Statistic Block")
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="blocks/call_to_action.html")
     content_section = ContentSectionBlock(label="Content section")
 
