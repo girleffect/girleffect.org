@@ -20,6 +20,14 @@ $(function() {
         new Hamburger($(el), openHeader, closeHeader);
     });
 
+    $('.video__button').on('click', function(ev) {
+        const video = $(this).parent().siblings().find('iframe');
+        const overlay = $(this).parent('.video__overlay');
+        $(video)[0].src += '&autoplay=1';
+        $(overlay).hide();
+        ev.preventDefault();
+    });
+
     $('.js-carousel--full-width').owlCarousel({
         items: 1,
         nav: true,
