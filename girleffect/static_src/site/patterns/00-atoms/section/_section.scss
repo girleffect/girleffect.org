@@ -9,4 +9,13 @@
     &--partners {
         background: $light-grey;
     }
+
+    &--body {
+        h2 {
+            max-width: $wrapper--small;
+            margin: 0 auto;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+    }
 }
