@@ -1,10 +1,5 @@
 .hero {
     position: relative;
-    margin-bottom: 2rem;
-
-    @include media-query(tablet-landscape) {
-        margin-bottom: 4rem;
-    }
 
     &__heading {
         &:not(:only-child) {
