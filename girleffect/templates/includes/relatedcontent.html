@@ -2,50 +2,51 @@
 
 {% if page.related_documents.exists or page.related_pages.exists %}
     <section class="related">
-        <div class="container">
-            <ul>
+        {# Related Documents #}
+        <ul>
 
-                {% for related_document in page.related_documents.all %}
-                    {% with related_document.document as document %}
-                        <li>
-                            <a href="{{ document.url }}">
+            {% for related_document in page.related_documents.all %}
+                {% with related_document.document as document %}
+                    <li>
+                        <a href="{{ document.url }}">
+                            <h2>
+                                {% if related_document.title %}
+                                    {{ related_document.title }}
+                                    ({{ document.file_extension }})
+                                {% else %}
+                                    {{ document.filename }}
+                                {% endif %}
+                            </h2>
+                        </a>
+                    </li>
+                {% endwith %}
+            {% endfor %}
+
+            {# Related pages #}
+            {% for related_page in page.related_pages.live %}
+                {# a related_page object links to the original page (related_page.source_page) and a related one (related_page.page) #}
+                {% with related_page.page as specific_related_page %}
+                    <li>
+                        <a href="{% pageurl specific_related_page %}">
+                            {% if specific_related_page.listing_image %}
+                                {% image specific_related_page.listing_image fill-450x300 %}
+                            {% endif %}
+                            <div>
                                 <h2>
-                                    {% if related_document.title %}
-                                        {{ related_document.title }}
-                                        ({{ document.file_extension }})
+                                    {% if specific_related_page.listing_title %}
+                                        {{ specific_related_page.listing_title }}
                                     {% else %}
-                                        {{ document.filename }}
+                                        {{ specific_related_page.title }}
                                     {% endif %}
                                 </h2>
-                            </a>
-                        </li>
-                    {% endwith %}
-                {% endfor %}
-
-                {% for related_page in page.related_pages.live %}
-                    {# a related_page object links to the original page (related_page.source_page) and a related one (related_page.page) #}
-                    {% with related_page.page as specific_related_page %}
-                        <li>
-                            <a href="{% pageurl specific_related_page %}">
-                                {% if specific_related_page.listing_image %}
-                                    {% image specific_related_page.listing_image fill-450x300 %}
+                                {% if specific_related_page.listing_summary %}
+                                    <p>{{ specific_related_page.listing_summary }}</p>
                                 {% endif %}
-                                <div>
-                                    <h2>
-                                        {% if specific_related_page.listing_title %}
-                                            {{ specific_related_page.listing_title }}
-                                        {% else %}
-                                            {{ specific_related_page.title }}
-                                        {% endif %}
-                                    </h2>
-                                    {% if specific_related_page.listing_summary %}
-                                        <p>{{ specific_related_page.listing_summary }}</p>
-                                    {% endif %}
-                                </div>
-                            </a>
-                        </li>
-                    {% endwith %}
-                {% endfor %}
+                            </div>
+                        </a>
+                    </li>
+                {% endwith %}
+            {% endfor %}
 
             </ul>
         </div>
