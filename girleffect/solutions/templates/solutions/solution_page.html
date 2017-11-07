@@ -10,7 +10,7 @@
 
         <div class="hero__content hero__content--centered">
             {% if page.logo %}
-                {% image page.logo original as solution_logo %}
+                {% image page.logo max-700x120 as solution_logo %}
                 <img class="hero__logo" src="{{ solution_logo.url }}" alt="{{ page.title }}">
             {% elif page.strapline %}
                 <h2 class="hero__strapline">{{ page.strapline }}</h2>
