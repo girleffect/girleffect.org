@@ -5,26 +5,37 @@
 
     {# Hero section #}
     <section class="hero">
-        <h1>{{ page.title }}</h1>
-        <h2>{{ page.heading }}</h2>
-        {% image page.hero_image fill-100x75 as hero_image %}
-        <img src="{{ hero_image.url }}">
+        {% if page.hero_image %}
+            {% image page.hero_image fill-1800x400 as hero_image %}
+            <img class="hero__image" src="{{ hero_image.url }}">
+        {% endif %}
+
+        <h1 class="hero__heading">{{ page.title }}</h1>
+    </section>
+
+    <section class="wrapper wrapper--small wrapper--top-bottom-space">
+        <h2 class="heading heading--squashed">{{ page.heading }}</h2>
     </section>
 
     {# Streamfield options #}
-    <section class="body">
+    <section class="section section--body">
         {{ page.body }}
     </section>
 
     {# Related partners #}
     {% if page.partners %}
-    <section class="partners">
-        <h2>Partnerships in {{ page.title }}</h2>
-        <p>{{ page.partners_description }}</p>
-        {% for partner in page.partners %}
-            {# Partner card here #}
-            {% include "includes/partner_card.html" with partner=partner %}
-        {% endfor %}
+    <section class="section section--partners">
+        <h2 class="section__title">Partnerships in {{ page.title }}</h2>
+        <div class="wrapper wrapper--medium wrapper--bottom-space">
+            <p>{{ page.partners_description }}</p>
+        </div>
+
+        <div class="media-block-container">
+            {% for partner in page.partners %}
+                {# Partner card here #}
+                {% include "includes/partner_card.html" with partner=partner %}
+            {% endfor %}
+        </div>
     </section>
     {% endif %}
 
@@ -36,18 +47,15 @@
         {% for person in page.people %}
             {# Person card here #}
             {% include "includes/person_index_card.html" with person=person %}
-        {% endfor %} 
-    </section>   
+        {% endfor %}
+    </section>
     {% endif %}
 
     {# Call to Action, link is likely external #}
     {% if page.call_to_action %}
-    <section class="cta">
-        <h2>Call to Action</h2>
-        <a href="{{ page.call_to_action.link_url }}">
-            {{ page.call_to_action.title }}
-        </a>
-    </section>
+        <section class="cta">
+            {% include "includes/call_to_action.html" %}
+        </section>
     {% endif %}
 
 
