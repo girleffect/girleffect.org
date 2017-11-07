@@ -1,16 +1,22 @@
 {% load wagtailimages_tags %}
-    <div class="partner-column">
-        <h4>{{ partner.title }}</h4>
-        <p>{{ partner.description }}</p>
+    <div class="media-block">
 
         {% if partner.logo %}
-            {% image partner.logo fill-500x400 as partner_logo %}
-            <img src="{{ partner_logo.url }}" alt="{{ partner.title }}">
+            {% image partner.logo fill-600x400 as partner_logo %}
+            <img class="media-block__image" src="{{ partner_logo.url }}" alt="{{ partner.title }}">
         {% endif %}
 
-        {% if partner.internal_link %}
-            <a href="{{ partner.internal_link.url }}">Learn more about {{ partner.title }}</a>
-        {% elif partner.external_link %}
-            <a href="{{ partner.external_link }}" target="_blank">Learn more about {{ partner.title }}</a>
-        {% endif %}
+        <div class="media-block__content">
+            <h4>{{ partner.title }}</h4>
+            <p>{{ partner.description }}</p>
+            {% if partner.internal_link %}
+                <a class="link link--with-arrow" href="{{ partner.internal_link.url }}">Learn more about {{ partner.title }}
+                    <div class="link__arrow"></div>
+                </a>
+            {% elif partner.external_link %}
+                <a class="link link--with-arrow" href="{{ partner.external_link }}" target="_blank">Learn more about {{ partner.title }}
+                    <div class="link__arrow"></div>
+                </a>
+            {% endif %}
+        </div>
     </div>

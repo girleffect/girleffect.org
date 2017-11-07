@@ -4,6 +4,10 @@
         padding: 1rem;
         position: relative;
 
+        .hero & {
+            color: $white;
+        }
+
         &::after {
             content: '';
             position: absolute;
