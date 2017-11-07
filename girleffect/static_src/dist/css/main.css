@@ -1324,7 +1324,15 @@ h4 {
 
 .hero__heading:only-child {
   color: #2f6165;
-  padding: 0 20px;
+  background: #dad9d6;
+  text-align: center;
+  padding: 60px 0;
+}
+
+@media only screen and (min-width: 1024px) {
+  .hero__heading:only-child {
+    padding: 125px 0;
+  }
 }
 
 .hero__content--centered {
