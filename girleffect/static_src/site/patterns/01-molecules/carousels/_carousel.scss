@@ -19,6 +19,10 @@
 
     &__image {
         max-height: 800px;
+
+        @supports (object-fit: cover) {
+            object-fit: cover;
+        }
     }
 
     &__content {
