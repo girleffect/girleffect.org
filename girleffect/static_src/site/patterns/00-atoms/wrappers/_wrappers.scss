@@ -21,6 +21,10 @@
         max-width: $wrapper--large;
     }
 
+    &--top-bottom-space {
+        margin: 2rem auto;
+    }
+
     &--bottom-space {
         margin: 0 auto 2rem;
     }
