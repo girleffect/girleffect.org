@@ -210,7 +210,14 @@ class StatisticBlock(blocks.StructBlock):
 
 class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
-    body_text = blocks.RichTextBlock(label="Body Text")
+    body_text = blocks.RichTextBlock(
+        label="Body Text",
+        features=[
+            "h4", "h5", "h6",
+            "bold", "italic", "link",
+            "ol", "ul", "hr"
+        ],
+    )
     large_text = blocks.RichTextBlock(
         label="Large Text",
         max_length=350,
