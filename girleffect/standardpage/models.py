@@ -96,4 +96,3 @@ class StandardIndex(Page, SocialFields):
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels
-    subpage_types = ['solutions.SolutionPage', 'countries.CountryPage']
