@@ -8,7 +8,7 @@
 
         {% if page.hero_image %}
             {% image page.hero_image fill-1800x400 as hero_image %}
-            <img src="{{ hero_image.url }}">
+            <img class="hero__image" src="{{ hero_image.url }}">
         {% endif %}
 
         <h1 class="hero__heading">{{ page.hero_heading }}</h1>
