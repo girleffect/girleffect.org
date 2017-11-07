@@ -17,15 +17,22 @@ stages:
   - deploy
 
 
-
 image: docker:latest
 variables:
   IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_BUILD_REF
+  CFG_EMAIL_SUBJECT_PREFIX: "[{{ cookiecutter.project_name }}] "
+  CFG_ALLOWED_HOSTS: "*"
   DEPLOY_FLAGS: >
     -eDJANGO_SETTINGS_MODULE=girleffect.settings.production
     -eCFG_APP_NAME=girleffect
+    -eCFG_MEDIA_DIR=/data/media
+    -eCFG_ALLOWED_HOSTS
+    -eCFG_EMAIL_HOST=mailer.itl.svc.torchbox.net
+    -eCFG_SERVER_EMAIL=aeon@torchbox.com
+    -eCFG_EMAIL_SUBJECT_PREFIX
     --memory-request=512m
     --memory-limit=1536m
+    --strategy=recreate
     --htauth-user=girleffect:girleffectshowme
     --htauth-address=78.32.251.192/28
     --htauth-address=193.227.244.0/23
@@ -169,9 +176,3 @@ review_stop:
   image: torchbox/kdtool:latest
   script:
     - kdtool deploy -Dpostgresql --undeploy -vdata:/data $DEPLOY_FLAGS $REVIEW_FLAGS --hostname=$CI_ENVIRONMENT_URL $IMAGE_TAG $CI_ENVIRONMENT_SLUG
-
-cache:
-  key: "girleffect/$CI_BUILD_STAGE"
-  paths:
-    - ./node_modules
-    - ./tmp/pip-cache
