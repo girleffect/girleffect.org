@@ -4,19 +4,24 @@
 {% block content %}
 
     {# Title and introduction section #}
-    <h1>{{ page.title }}</h1>
-    <p>{{ page.display_date }} by {% if page.author %}{{ page.author }}{% else %} Girl Effect Team{% endif %}.</p>
-    <u>{{ page.categories.first.category }}</u>
 
-    <section class="introduction">
-        <p>{{ page.introduction }}</p>
+    <section class="hero">
+        <h1 class="hero__heading">{{ page.title }}</h1>
+    </section>
+
+    <section class="wrapper wrapper--small wrapper--top-bottom-space">
+        <p>{{ page.display_date }} by {% if page.author %}{{ page.author }}{% else %} Girl Effect Team{% endif %}.</p>
+        <u>{{ page.categories.first.category }}</u>
+        <h3 class="heading">{{ page.introduction }}</h3>
     </section>
 
     {# Streamfield options #}
     <section class="body">
-            {{ page.body }}
+        {{ page.body }}
     </section>
 
-    {% include "includes/relatedcontent.html" %}
+    <section class="wrapper wrapper--small">
+        {% include "includes/relatedcontent.html" %}
+    </section>
 
 {% endblock %}
