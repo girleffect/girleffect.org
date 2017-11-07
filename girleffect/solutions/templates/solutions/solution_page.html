@@ -68,12 +68,9 @@
 
     {# Call to Action, link is likely external #}
     {% if page.call_to_action %}
-    <section class="cta">
-        <h2>Call to Action</h2>
-        <a href="{{ page.call_to_action.link_url }}">
-            {{ page.call_to_action.title }}
-        </a>
-    </section>
+        <section class="cta">
+            {% include "includes/call_to_action.html" %}
+        </section>
     {% endif %}
 
     {# Latest articles, limited to three most recent, link to all articles index #}
