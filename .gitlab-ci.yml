@@ -57,14 +57,16 @@ test:
   stage: test
   tags:
     - kubernetes-512
+  services:
+    - postgres:9.6
   variables:
     DJANGO_SETTINGS_MODULE: girleffect.settings.production
     CFG_SECRET_KEY: fake_secret_key_to_run_tests
-    DATABASE_URL: sqlite:////tmp/girleffect.sqlite
+    DATABASE_URL: postgres://postgres@localhost/postgres
   script:
     # Install requirements
-    - XDG_CACHE_HOME=./tmp/pip-cache pip install wheel
-    - XDG_CACHE_HOME=./tmp/pip-cache pip install -r requirements.txt
+    - pip install wheel
+    - pip install -r requirements.txt
 
     # We need to run the collectstatic command, because we use ManifestStaticFilesStorage.
     # Otherwise the check command will fail
@@ -88,7 +90,7 @@ build:
   only:
     - staging
   before_script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
@@ -130,15 +132,16 @@ review_build:
 # stop_review sections.
 review_deploy:
   stage: deploy
-  when: manual
+  tags:
+    - kubernetes-128
   only:
     - branches
   except:
     - master
     - staging
   environment:
-    name: review/$CI_BUILD_REF_NAME
-    url: http://$CI_PROJECT_PATH_SLUG-$CI_BUILD_REF_SLUG.staging.t6x.uk/
+    name: review/$CI_COMMIT_REF_NAME
+    url: http://$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.staging.t6x.uk/
     on_stop: review_stop
   variables:
     GIT_STRATEGY: none
