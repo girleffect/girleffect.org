@@ -2,12 +2,42 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
+    {# Hero section - section includes links #}
+    <section class="hero">
+        {# Hero video include #}
+        {% include "includes/hero_video.html" with video=page.hero_video feature=page.hero_fallback_image %}
 
-    {{ page.strapline }}
+        <div class="hero__content hero__content--centered">
+            <h2 class="hero__strapline">{{ page.strapline }}</h2>
 
-    {% include "includes/call_to_action.html" %}
+            {# Link field to video or page #}
+            {% if page.link_page or page.link_url %}
+                {% if page.link_page %}
 
-    {% include "includes/share.html" %}
+                    <a class="link link--boxed" href="{{ page.link_page.url }}">
+                        {{ page.link_text }}
+                        <span></span>
+                        <span></span>
+                    </a>
+                {% elif page.link_url  %}
+                    <a class="link link--boxed" href="{{ page.link_url }}" target="_blank">
+                        {{ page.link_text }}
+                        <span></span>
+                        <span></span>
+                    </a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </section>
+
+    {# Call to Action, link is likely external #}
+    {% if page.call_to_action %}
+    <section class="cta">
+        <h2>Call to Action</h2>
+        <a href="{{ page.call_to_action.link_url }}">
+            {{ page.call_to_action.title }}
+        </a>
+    </section>
+    {% endif %}
 
 {% endblock %}
