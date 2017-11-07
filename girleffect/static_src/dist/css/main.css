@@ -946,8 +946,17 @@ h4 {
   margin-bottom: 3rem;
 }
 
-.section--partners {
+.section--statistics, .section--partners {
   background: #f4f4f3;
+}
+
+.section--statistics {
+  padding: 40px;
+}
+
+.section--statistics > h3 {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .section--body h2 {
@@ -965,6 +974,10 @@ h4 {
   text-align: center;
 }
 
+.wrapper--center .link--with-arrow {
+  display: inline-flex;
+}
+
 .wrapper--site {
   max-width: 1800px;
 }
@@ -979,6 +992,10 @@ h4 {
 
 .wrapper--large {
   max-width: 1400px;
+}
+
+.wrapper--top-bottom-space {
+  margin: 2rem auto;
 }
 
 .wrapper--bottom-space {
@@ -1335,6 +1352,43 @@ h4 {
   margin-bottom: 0.5rem;
 }
 
+.stat-block {
+  position: relative;
+  z-index: 10;
+  padding: 20px;
+  max-width: 260px;
+  margin: 0 20px;
+  background: #fff;
+  min-height: 350px;
+}
+
+.stat-block::after {
+  content: '';
+  border: 1px solid #2f6165;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  transition: top, left, 0.2s ease-in-out;
+}
+
+.stat-block:hover::after {
+  top: -5px;
+  left: -5px;
+}
+
+.stat-block__content {
+  z-index: 10;
+  position: relative;
+}
+
+.stat-block__label, .stat-block__cite {
+  font-size: 12px;
+}
+
 .cta {
   position: relative;
   max-width: 1800px;
@@ -1474,7 +1528,6 @@ h4 {
 }
 
 .grid {
-  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -1494,6 +1547,11 @@ h4 {
   .grid--three > div {
     flex-basis: 33%;
   }
+}
+
+.grid--center {
+  justify-content: center;
+  align-items: center;
 }
 
 .header {
