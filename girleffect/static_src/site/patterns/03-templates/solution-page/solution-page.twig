@@ -1,0 +1,32 @@
+{% include 'organisms-header' %}
+
+{% include 'molecules-hero--video' %}
+
+<section class="section section--partners">
+    <h2 class="section__title">Our partners</h2>
+    <div class="media-block-container">
+        {% include 'organisms-media-block' %}
+        {% include 'organisms-media-block' %}
+    </div>
+</section>
+
+<section class="section section--articles">
+    <h2 class="section__title">Lorem Ipsum</h2>
+
+    <div class="article-container wrapper wrapper--medium">
+        {% include 'molecules-article-card' %}
+        {% include 'molecules-article-card' %}
+        {% include 'molecules-article-card' %}
+    </div>
+
+    <div class="wrapper wrapper--center">
+        <a class="link link--boxed link--center" href="#">
+            See all news
+            <span></span>
+            <span></span>
+        </a>
+    </div>
+
+</section>
+
+{% include 'organisms-footer' %}

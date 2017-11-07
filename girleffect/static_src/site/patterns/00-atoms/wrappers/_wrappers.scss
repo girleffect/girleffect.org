@@ -1,12 +1,24 @@
 .wrapper {
     margin: 0 auto;
 
+    &--center {
+        text-align: center;
+    }
+
     &--site {
         max-width: $site-width;
     }
 
     &--small {
         max-width: $wrapper--small;
+    }
+
+    &--medium {
+        max-width: $wrapper--medium;
+    }
+
+    &--large {
+        max-width: $wrapper--large;
     }
 
     &--bottom-space {
