@@ -5,9 +5,9 @@
             <img class="quote__image" src="{{ quote_image.url }}" alt="{{ quote_image.alt }}">
         {% endif %}
 
+        <div class="quote__content">
             <h4 class="quote__title">{{ value.title }}</h4>
 
-        <div class="quote-content">
             <blockquote class="quote__copy"{% if value.link %} cite="{{ value.link }}"{% endif %}>
                 {{ value.text }}
             </blockquote>
