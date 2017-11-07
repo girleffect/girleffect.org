@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     'girleffect.categories',
     'girleffect.countries',
     'girleffect.esi',
-    'girleffect.forms',
     'girleffect.home',
     'girleffect.images',
     'girleffect.navigation',
