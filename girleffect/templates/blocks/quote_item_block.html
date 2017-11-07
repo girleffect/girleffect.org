@@ -1,11 +1,11 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
     <div class="quote">
-        <h4>{{ value.title }}</h4>
         {% if value.image %}
             {% image value.image fill-657x400 as quote_image %}
             <img class="quote__image" src="{{ quote_image.url }}" alt="{{ quote_image.alt }}">
         {% endif %}
 
+            <h4 class="quote__title">{{ value.title }}</h4>
 
         <div class="quote-content">
             <blockquote class="quote__copy"{% if value.link %} cite="{{ value.link }}"{% endif %}>
