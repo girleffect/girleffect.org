@@ -1,13 +1,16 @@
 {% load wagtailcore_tags wagtailimages_tags %}
-<div class="media-text-overlay media-text-overlay--full-width">
+<div class="media-card">
     {% image value.image original as fw_image %}
-    <img src="{{ fw_image.url }}" alt="{{ fw_image.alt }}" class="media-text-overlay__image">
+    <img src="{{ fw_image.url }}" alt="{{ fw_image.alt }}" class="media-card__image">
 
-    <p>{{ value.label }}</p>
+    <div class="media-card__content">
+        <h4 class="media-card__label">{{ value.label }}</h4>
 
-    {# text is RichText #}
-    <p>{{ value.text }}</p>
+        {# text is RichText #}
+        {{ value.text }}
 
-    {# template for this is in link_block.html #}
-    <p>{% include_block value.link %}</p>
+        {# template for this is in link_block.html #}
+        {% include_block value.link %}
+    </div>
+
 </div>
