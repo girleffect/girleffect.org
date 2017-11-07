@@ -19,11 +19,6 @@
     &::before {
         content: '';
         background: linear-gradient(to top, $black-50, $black-05);
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
         display: block;
     }
 
@@ -39,6 +34,28 @@
         }
     }
 
+    &__image {
+        + .quote__content {
+            position: absolute;
+            bottom: 0;
+            background: transparent;
+        }
+    }
+
+    &__content {
+        position: relative;
+        padding: 10px;
+        background: $mid-grey;
+
+        @include media-query(mob-landscape) {
+            padding: 1rem;
+        }
+
+        @include media-query(tablet-landscape) {
+            padding: 2rem;
+        }
+    }
+
     &__copy {
         @include font-size(16px, 25px);
         color: $white;
@@ -49,6 +66,10 @@
         }
     }
 
+    &__title {
+        color: $yellow;
+    }
+
     &__cite {
         font-size: 12px;
         font-weight: 400;
@@ -56,22 +77,3 @@
     }
 }
 
-.quote-content {
-    position: relative;
-    padding: 10px;
-    background: $mid-grey;
-
-    @include media-query(mob-portrait) {
-        position: absolute;
-        bottom: 0;
-        background: transparent;
-    }
-
-    @include media-query(mob-landscape) {
-        padding: 1rem;
-    }
-
-    @include media-query(tablet-landscape) {
-        padding: 2rem;
-    }
-}
