@@ -39,6 +39,20 @@
         }
     }
 
+    &__content {
+        position: relative;
+        padding: 10px;
+        background: $mid-grey;
+
+        @include media-query(mob-landscape) {
+            padding: 1rem;
+        }
+
+        @include media-query(tablet-landscape) {
+            padding: 2rem;
+        }
+    }
+
     &__copy {
         @include font-size(16px, 25px);
         color: $white;
@@ -56,22 +70,3 @@
     }
 }
 
-.quote-content {
-    position: relative;
-    padding: 10px;
-    background: $mid-grey;
-
-    @include media-query(mob-portrait) {
-        position: absolute;
-        bottom: 0;
-        background: transparent;
-    }
-
-    @include media-query(mob-landscape) {
-        padding: 1rem;
-    }
-
-    @include media-query(tablet-landscape) {
-        padding: 2rem;
-    }
-}
