@@ -5,6 +5,7 @@
 
     &__image {
         display: block;
+        width: 100%;
 
         @supports (object-fit: cover) {
             object-fit: cover;
