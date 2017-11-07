@@ -1302,10 +1302,6 @@ h4 {
   position: relative;
 }
 
-.hero img {
-  width: 100%;
-}
-
 .hero__heading:not(:only-child) {
   position: absolute;
   left: 50%;
@@ -1342,8 +1338,28 @@ h4 {
   margin-bottom: 1rem;
 }
 
+.hero__image {
+  width: 100%;
+}
+
 .hero__video {
   width: 100%;
+}
+
+.image-embed {
+  position: relative;
+}
+
+.image-embed--full-width {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.image-embed__caption {
+  position: absolute;
+  bottom: 0;
+  color: #fff;
+  left: 20px;
 }
 
 .list-item {
