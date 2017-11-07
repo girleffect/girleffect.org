@@ -240,6 +240,6 @@ class StoryBlock(blocks.StreamBlock):
     )
     statistic = StatisticBlock(label="Statistic Block")
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="blocks/call_to_action.html")
-    
+
     class Meta:
         template = "blocks/stream_block.html"
