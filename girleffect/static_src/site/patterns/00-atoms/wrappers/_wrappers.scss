@@ -3,6 +3,10 @@
 
     &--center {
         text-align: center;
+
+        .link--with-arrow {
+            display: inline-flex;
+        }
     }
 
     &--site {
@@ -19,6 +23,10 @@
 
     &--large {
         max-width: $wrapper--large;
+    }
+
+    &--top-bottom-space {
+        margin: 2rem auto;
     }
 
     &--bottom-space {

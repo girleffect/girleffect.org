@@ -6,8 +6,18 @@
         margin-bottom: 3rem;
     }
 
+    &--statistics,
     &--partners {
         background: $light-grey;
+    }
+
+    &--statistics {
+        padding: 40px;
+
+        > h3 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
     }
 
     &--body {
