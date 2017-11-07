@@ -19,11 +19,6 @@
     &::before {
         content: '';
         background: linear-gradient(to top, $black-50, $black-05);
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
         display: block;
     }
 
@@ -36,6 +31,14 @@
     &:nth-child(even) {
         @include media-query(tablet-landscape) {
             margin-left: 10px;
+        }
+    }
+
+    &__image {
+        + .quote__content {
+            position: absolute;
+            bottom: 0;
+            background: transparent;
         }
     }
 
