@@ -16,7 +16,7 @@
                 {% if value.link and value.citation %}
                     <a class="quote__cite" href="{{ value.link }}"> {{ value.citation }} </a>
                 {% elif value.citation %}
-                    {{ value.citation }}
+                    <span class="quote__cite">{{ value.citation }}</span>
                 {% else %}
                     {# No citation or citation link included #}
                 {% endif %}
