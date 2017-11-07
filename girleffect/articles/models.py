@@ -5,6 +5,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from modelcluster.fields import ParentalKey
 
+from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
@@ -109,6 +110,16 @@ class ArticlePage(Page, SocialFields, ListingFields):
 
 
 class ArticleIndex(Page, SocialFields):
+    heading = models.CharField(max_length=80, blank=True)
+    introduction = RichTextField(max_length=350, blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('heading'),
+        FieldPanel('introduction', classname="full"),
+    ]
+
+    promote_panels = Page.promote_panels + SocialFields.promote_panels
+
     def get_context(self, request, *args, **kwargs):
         articles = ArticlePage.objects.live().public().descendant_of(self).annotate(
             date=Coalesce('publication_date', 'first_published_at')
