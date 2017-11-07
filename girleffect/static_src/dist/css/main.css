@@ -1094,6 +1094,12 @@ h4 {
   max-height: 800px;
 }
 
+@supports (object-fit: cover) {
+  .carousel__image {
+    object-fit: cover;
+  }
+}
+
 .carousel__content {
   position: absolute;
   top: 0;
@@ -1111,6 +1117,11 @@ h4 {
   .carousel__content {
     padding: 2rem;
   }
+}
+
+.carousel__content h2 {
+  margin: 0;
+  max-width: 100%;
 }
 
 .carousel__content p,
