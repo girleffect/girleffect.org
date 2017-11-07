@@ -1,6 +1,10 @@
 .hero {
     position: relative;
 
+    img {
+        width: 100%;
+    }
+
     &__heading {
         &:not(:only-child) {
             position: absolute;
