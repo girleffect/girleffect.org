@@ -2,47 +2,51 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
+    <section class="hero">
+        <h1 class="hero__heading">{{ page.title }}</h1>
+    </section>
 
-    <h1>{{ page.title }}</h1>
+    <section class="wrapper wrapper--medium">
+        <section class="listing">
+            <form method="GET">
+                <select name="category">
+                    <option value="">All</option>
+                    {% for category in categories %}
+                        <option value="{{ category.0 }}" {% if request.GET.category == category.0|slugify %}selected="selected"{% endif %}>{{ category.1 }}</option>
+                    {% endfor %}
+                </select>
+            </form>
 
-    <section class="listing">
-        <form method="GET">
-            <select name="category">
-                <option value="">All</option>
-                {% for category in categories %}
-                    <option value="{{ category.0 }}" {% if request.GET.category == category.0|slugify %}selected="selected"{% endif %}>{{ category.1 }}</option>
-                {% endfor %}
-            </select>
-        </form>
+            {% if articles %}
 
-        {% if articles %}
-            <ul role="list">
-                {% for article in articles %}
-                    <li>
-                        <a href="{% pageurl article %}">
-                            {% if article.listing_image %}
-                                {% image article.listing_image fill-450x300 %}
-                            {% endif %}
-                            <div>
-                                <h2 role="listitem">
-                                    {% if article.listing_title %}
-                                        {{ article.listing_title }}
-                                    {% else %}
-                                        {{ article.title }}
+                <section class="section section--articles">
+                    <div class="article-container wrapper wrapper--medium grid grid--three">
+                        {% for article in articles %}
+                            <div class="article-card__copy">
+                                <a class="article-card__link" href="{% pageurl article %}">
+                                    {% if article.listing_image %}
+                                        {% image article.listing_image fill-450x300 %}
                                     {% endif %}
-                                </h2>
-                                <span>{{ article.display_date }}</span>
+
+                                    {% if article.listing_title %}
+                                        <div>{{ article.listing_title }}</div>
+                                    {% else %}
+                                        <div>{{ article.title }}</div>
+                                    {% endif %}
+                                </a>
+                                <span class="article-card__date">{{ article.display_date }}</span>
                                 {% if article.listing_summary %}
                                     <p>{{ article.listing_summary }}</p>
                                 {% endif %}
                             </div>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-            {% include "includes/pagination.html" %}
-        {% else %}
-            {# no items #}
-        {% endif %}
+                        {% endfor %}
+                    </div>
+                </section>
+
+                {% include "includes/pagination.html" %}
+            {% else %}
+                {# no items #}
+            {% endif %}
+        </section>
     </section>
 {% endblock %}
