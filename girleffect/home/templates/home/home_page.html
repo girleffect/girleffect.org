@@ -15,13 +15,13 @@
                 {% if page.link_page %}
 
                     <a class="link link--boxed" href="{{ page.link_page.url }}">
-                        {{ page.link_text }}
+                        {{ page.get_link_text }}
                         <span></span>
                         <span></span>
                     </a>
                 {% elif page.link_url  %}
                     <a class="link link--boxed" href="{{ page.link_url }}" target="_blank">
-                        {{ page.link_text }}
+                        {{ page.get_link_text }}
                         <span></span>
                         <span></span>
                     </a>
