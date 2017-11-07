@@ -959,11 +959,14 @@ h4 {
   margin-bottom: 40px;
 }
 
+.section--body {
+  padding: 0;
+}
+
 .section--body h2 {
   max-width: 790px;
-  margin: 0 auto;
+  margin: 3rem auto 2rem;
   line-height: 1.2;
-  margin-bottom: 1rem;
 }
 
 .wrapper {
@@ -1299,6 +1302,10 @@ h4 {
   position: relative;
 }
 
+.hero img {
+  width: 100%;
+}
+
 .hero__heading:not(:only-child) {
   position: absolute;
   left: 50%;
@@ -1397,6 +1404,7 @@ h4 {
 
 .cta__image {
   display: block;
+  width: 100%;
 }
 
 @supports (object-fit: cover) {
