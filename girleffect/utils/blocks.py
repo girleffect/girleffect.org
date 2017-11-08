@@ -66,7 +66,7 @@ class LinkBlock(blocks.StructBlock):
             if value[block_name]:
                 num_populated_blocks += 1
 
-        if num_populated_blocks != 1:
+        if num_populated_blocks > 1:
             error_messages = ["Link can only have one destination"]
             raise ValidationError(
                 "Validation error in LinkBlock",
