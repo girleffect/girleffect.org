@@ -1431,6 +1431,40 @@ h4 {
   font-size: 12px;
 }
 
+.stat-block__figure {
+  font-size: 5.15873vw;
+  font-weight: 700;
+}
+
+@media (max-width: 659.07692px) {
+  .stat-block__figure {
+    font-size: 34px;
+  }
+}
+
+@media (min-width: 1260px) {
+  .stat-block__figure {
+    font-size: 65px;
+  }
+}
+
+.stat-block__unit {
+  font-size: 3.57143vw;
+  font-weight: 400;
+}
+
+@media (max-width: 672px) {
+  .stat-block__unit {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 1260px) {
+  .stat-block__unit {
+    font-size: 45px;
+  }
+}
+
 .cta {
   position: relative;
   max-width: 1800px;
@@ -1468,6 +1502,10 @@ h4 {
   z-index: 10;
   padding: 10px;
   text-align: center;
+}
+
+.cta__content > h2 {
+  margin: 0;
 }
 
 .cta__title {
