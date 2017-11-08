@@ -1,15 +1,16 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
 
-<div class="statistics">
-{# Rows are to have a maximum of 4 list items per row #}
-{# Pseudo code #}
-<div class="statistics-row">
-    <h3> {{ value.title }} </h3>
-    {% for item in value.statistics %}
-        {% include "blocks/statistic_item_block.html" with value=item %}
-        {# found in statistic_item_block.html #}
-    {% endfor %}
-
-    {# template for this is in link_block.html #}
-    <p>{% include_block value.link %}</p>
-</div>
+<section class="section section--statistics">
+{# Rows are to have a maximum of 3 list items per row #}
+    <h3>{{ value.title }}</h3>
+    <div class="grid grid--three grid--center">
+        {% for item in value.statistics %}
+            {% include "blocks/statistic_item_block.html" with value=item %}
+            {# found in statistic_item_block.html #}
+        {% endfor %}
+    </div>
+    <div class="wrapper wrapper--center wrapper--top-bottom-space">
+        {# template for this is in link_block.html #}
+        {% include_block value.link %}
+    </div>
+</section>
