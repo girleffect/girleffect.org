@@ -208,7 +208,12 @@ class Statistic(LinkFields):
         verbose_name="Units",
         help_text="The units of the statistic (e.g. the '%' in '85%')",
     )
-    description = RichTextField(blank=True, max_length=80, verbose_name="Description")
+    description = RichTextField(
+        blank=True,
+        max_length=80,
+        verbose_name="Description",
+        features=["bold", "italic", "link", "document-link"]
+    )
 
     panels = [
         FieldPanel('title'),
