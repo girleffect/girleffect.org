@@ -71,6 +71,9 @@ if 'SERVER_EMAIL' in env:
 if 'EMAIL_SUBJECT_PREFIX' in env:
     EMAIL_SUBJECT_PREFIX = env['EMAIL_SUBJECT_PREFIX']
 
+if 'EMAIL_HOST' in env:
+    EMAIL_HOST = env['EMAIL_HOST']
+
 if 'CACHE_PURGE_URL' in env:
     INSTALLED_APPS += ('wagtail.contrib.wagtailfrontendcache', )  # noqa
     WAGTAILFRONTENDCACHE = {
