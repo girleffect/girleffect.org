@@ -37,4 +37,14 @@
     &__cite {
         font-size: 12px;
     }
+
+    &__figure {
+        @include font-size(34px, 65px);
+        font-weight: $weight-bold;
+    }
+
+    &__unit {
+        @include font-size(24px, 45px);
+        font-weight: $weight-normal;
+    }
 }
