@@ -1,0 +1,38 @@
+{% load i18n %}
+<table class="listing">
+    <col />
+    <col  />
+    <col width="16%" />
+    <thead>
+        <tr class="table-headers">
+            <th>{% trans "Title" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for snippet in items %}
+            <tr>
+                <td class="title">
+                    {% if choosing %}
+                        <h2><a class="snippet-choice" href="{% url 'wagtailsnippets:chosen' model_opts.app_label model_opts.model_name snippet.id %}">{{ snippet }}</a></h2>
+                        {% if snippet.description %}
+                            {{ snippet.description|safe|truncatechars_html:50 }}
+                        {% elif snippet.summary %}
+                            {{ snippet.summary|safe|truncatechars_html:50 }}
+                        {% else %}
+                            {# The snippet doesn't have a description #}
+                        {% endif %}
+                    {% else %}
+                        <h2><a href="{% url 'wagtailsnippets:edit' model_opts.app_label model_opts.model_name snippet.id %}">{{ snippet }}</a></h2>
+                        {% if snippet.description %}
+                            {{ snippet.description|safe|truncatechars_html:50 }}
+                        {% elif snippet.summary %}
+                            {{ snippet.summary|safe|truncatechars_html:50 }}
+                        {% else %}
+                            {# The snippet doesn't have a description #}
+                        {% endif %}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
