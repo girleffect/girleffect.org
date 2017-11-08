@@ -2,8 +2,8 @@
     <div class="stat-block">
         <div class="stat-block__content">
             <p class="stat-block__label">{{ value.title }}</p>
-            <p>{{ value.description }}</p>
             <div class="stat-block__figure">{{ value.statistic_value }}<span class="stat-block__unit">{{ value.statistic_units }}</span></div>
+            {{ value.description|richtext }}
 
             {% if value.link_page %}
                 <a class="stat-block__cite" href="{{ value.link_page.href }}">{{ value.get_link_text }}</a>
