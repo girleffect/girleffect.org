@@ -127,7 +127,6 @@ class SolutionPage(Page, PageLinkFields, SocialFields, ListingFields):
     ] + PageLinkFields.content_panels + [
         StreamFieldPanel('body'),
         InlinePanel('related_partners', label="Related partners"),
-        SnippetChooserPanel('person_category'),
         SnippetChooserPanel('call_to_action'),
     ]
 
