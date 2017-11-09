@@ -19,7 +19,7 @@ from girleffect.utils.models import (
     ListingFields, SocialFields, RelatedPage,
     RelatedDocument
 )
-from girleffect.utils.blocks import StoryBlock
+from girleffect.utils.blocks import ArticleBlock
 
 
 @register_snippet
@@ -78,7 +78,7 @@ class ArticlePage(Page, SocialFields, ListingFields):
         max_length=255,
         help_text="Optional Author name. Will default to 'Girl Effect Team' if empty.")
     introduction = models.TextField(blank=True, max_length=350)
-    body = StreamField(StoryBlock())
+    body = StreamField(ArticleBlock())
 
     search_fields = Page.search_fields + [
         index.SearchField('introduction'),
