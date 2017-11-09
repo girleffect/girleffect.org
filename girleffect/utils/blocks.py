@@ -254,6 +254,11 @@ class StoryBlock(blocks.StreamBlock):
         template="blocks/list_column_block.html",
         icon="list-ul"
     )
+    link_row = blocks.ListBlock(
+        LinkBlock(),
+        template="blocks/inline_link_block.html",
+        icon="link"
+    )
     statistic = StatisticBlock(label="Statistic Block")
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="blocks/call_to_action.html")
 
