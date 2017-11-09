@@ -1,0 +1,7 @@
+{% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
+<div class="link-row">
+    {# Inline link row - maximum 3 per row #}
+    {% for link in value %}
+        {% include_block link %}
+    {% endfor %}
+</div>

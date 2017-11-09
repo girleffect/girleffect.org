@@ -208,6 +208,15 @@ class StatisticBlock(blocks.StructBlock):
         template = "blocks/statistic_block.html"
 
 
+class BlockQuote(blocks.StructBlock):
+    quote = blocks.TextBlock()
+    citation = blocks.CharBlock(required=False)
+
+    class Meta:
+        icon = "openquote"
+        template = "blocks/blockquote_block.html"
+
+
 class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
     body_text = blocks.RichTextBlock(
@@ -245,8 +254,20 @@ class StoryBlock(blocks.StreamBlock):
         template="blocks/list_column_block.html",
         icon="list-ul"
     )
+    link_row = blocks.ListBlock(
+        LinkBlock(),
+        template="blocks/inline_link_block.html",
+        icon="link"
+    )
     statistic = StatisticBlock(label="Statistic Block")
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="blocks/call_to_action.html")
+
+    class Meta:
+        template = "blocks/stream_block.html"
+
+
+class ArticleBlock(StoryBlock):
+    blockquote = BlockQuote()
 
     class Meta:
         template = "blocks/stream_block.html"
