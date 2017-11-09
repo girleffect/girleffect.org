@@ -13,7 +13,13 @@
 
         &:only-child {
             color: $green;
-            padding: 0 20px;
+            background: $brand-grey;
+            text-align: center;
+            padding: 60px 0;
+
+            @include media-query(tablet-landscape) {
+                padding: 125px 0;
+            }
         }
     }
 
@@ -39,6 +45,10 @@
 
     &__logo {
         margin-bottom: 1rem;
+    }
+
+    &__image {
+        width: 100%;
     }
 
     &__video {

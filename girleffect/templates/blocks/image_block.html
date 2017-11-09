@@ -1,4 +1,5 @@
 {% load wagtailimages_tags %}
-
-{% image value.image original %}
-<p>{{ value.caption }}</p>
+<div class="image-embed image-embed--full-width">
+    {% image value.image max-1400x930 class="image-embed__image" %}
+    <p class="image-embed__caption">{{ value.caption }}</p>
+</div>

@@ -1,0 +1,15 @@
+.image-embed {
+    position: relative;
+
+    &--full-width {
+        max-width: $wrapper--large;
+        margin: 0 auto;
+    }
+
+    &__caption {
+        position: absolute;
+        bottom: 0;
+        color: $white;
+        left: 20px;
+    }
+}
