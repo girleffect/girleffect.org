@@ -207,6 +207,8 @@ class Statistic(LinkFields):
     )
     statistic_units = models.CharField(
         max_length=4,
+        blank=True,
+        null=True,
         verbose_name="Units",
         help_text="The units of the statistic (e.g. the '%' in '85%')",
     )
