@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
@@ -11,6 +12,7 @@ from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtailmedia.models import AbstractMedia
 
 from girleffect.images.models import CustomImage
 
@@ -205,6 +207,8 @@ class Statistic(LinkFields):
     )
     statistic_units = models.CharField(
         max_length=4,
+        blank=True,
+        null=True,
         verbose_name="Units",
         help_text="The units of the statistic (e.g. the '%' in '85%')",
     )
@@ -224,3 +228,20 @@ class Statistic(LinkFields):
 
     def __str__(self):
         return self.title
+
+
+class CustomMedia(AbstractMedia):
+    duration = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        verbose_name=_('duration'),
+        help_text=_('Duration in seconds')
+    )
+
+    admin_form_fields = (
+        'title',
+        'file',
+        'collection',
+        'thumbnail',
+        'tags',
+    )
