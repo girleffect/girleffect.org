@@ -36,6 +36,10 @@
         </div>
     </section>
 
+    {% block breadcrumbs %}
+        {% include "navigation/breadcrumbs.html" %}
+    {% endblock %}
+
     {# Streamfield options #}
     <section class="section section--body">
         {{ page.body }}

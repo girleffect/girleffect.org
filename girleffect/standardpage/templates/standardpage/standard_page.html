@@ -19,6 +19,10 @@
         </h1>
     </section>
 
+    {% block breadcrumbs %}
+        {% include "navigation/breadcrumbs.html" %}
+    {% endblock %}
+
     {# Introduction #}
     <section class="wrapper wrapper--small wrapper--top-bottom-space">
         <h3 class="heading heading--squashed">{{ page.introduction }}</h3>

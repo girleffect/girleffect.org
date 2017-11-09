@@ -150,4 +150,14 @@
             }
         }
     }
+
+    &--underlined {
+        border-bottom: 2px solid transparent;
+        transition: border 0.3s ease;
+        padding-bottom: 3px;
+
+        &:hover {
+            border-color: $yellow;
+        }
+    }
 }
