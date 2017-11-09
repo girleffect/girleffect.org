@@ -12,6 +12,10 @@
         <h1 class="hero__heading">{{ page.hero_heading }}</h1>
     </section>
 
+    {% block breadcrumbs %}
+        {% include "navigation/breadcrumbs.html" %}
+    {% endblock %}
+
     {# Streamfield options #}
     <section class="section section--body">
         {{ page.body }}
