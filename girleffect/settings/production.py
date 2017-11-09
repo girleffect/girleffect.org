@@ -124,19 +124,15 @@ if 'CACHE_URL' in env:
 if 'BROKER_URL' in env:
     BROKER_URL = env['BROKER_URL']
 
+# Postgres as search
 
-# Elasticsearch
-
-if 'ELASTICSEARCH_URL' in env:
-    WAGTAILSEARCH_BACKENDS = {
-        'default': {
-            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch',
-            'URLS': [env['ELASTICSEARCH_URL']],
-            'INDEX': APP_NAME,
-            'ATOMIC_REBUILD': True,
-        },
-    }
-
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.contrib.postgres_search.backend',
+        'INDEX': 'girleffect',
+        'ATOMIC_REBUILD': True,
+    },
+}
 
 # Logging
 

@@ -29,12 +29,13 @@ CACHES = {
 }
 
 
-# Use Elasticsearch as the search backend for extra performance and better search results
+# Postgres as search
 
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch',
+        'BACKEND': 'wagtail.contrib.postgres_search.backend',
         'INDEX': 'girleffect',
+        'ATOMIC_REBUILD': True,
     },
 }
 
