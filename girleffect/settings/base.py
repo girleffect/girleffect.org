@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'girleffect.standardpage',
     'girleffect.utils',
 
+    'wagtail.contrib.postgres_search',
     'wagtail.contrib.wagtailsitemaps',
     'wagtail.contrib.wagtailsearchpromotions',
     'wagtail.contrib.settings',
