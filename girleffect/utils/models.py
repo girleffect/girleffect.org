@@ -204,7 +204,7 @@ class Statistic(LinkFields):
         blank=True,
         max_length=255,
         verbose_name="Description",
-        help_text="The statistic. For example, '66%% of girls complete primary school'",
+        help_text="The statistic. For example, '66% of girls complete primary school'",
         features=["bold", "italic", "link", "document-link"]
     )
 

@@ -24,6 +24,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='statistic',
             name='description',
-            field=wagtail.wagtailcore.fields.RichTextField(blank=True, help_text="The statistic. For example, '66%% of girls complete primary school'", max_length=255, verbose_name='Description'),
+            field=wagtail.wagtailcore.fields.RichTextField(blank=True, help_text="The statistic. For example, '66% of girls complete primary school'", max_length=255, verbose_name='Description'),
         ),
     ]
