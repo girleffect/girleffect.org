@@ -6,7 +6,7 @@ from django.conf import settings
 from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
     InlinePanel,
@@ -58,9 +58,10 @@ class PersonCategory(models.Model):
 
     @cached_property
     def people(self):
-        people = [
-            p.page for p in self.person_relationships.all()
-        ]
+        people = []
+        for p in self.person_relationships.all():
+            if p.page.live:
+                people.append(p.page)
         return people
 
     def __str__(self):
@@ -85,12 +86,61 @@ class PersonPagePersonCategory(models.Model):
     ]
 
 
+class PersonIndexPersonCategory(models.Model):
+    page = ParentalKey(
+        'PersonIndexPage',
+        related_name='category_relationships'
+    )
+    category = models.ForeignKey(
+        'PersonCategory',
+        related_name='+'
+    )
+
+    panels = [
+        SnippetChooserPanel('category')
+    ]
+
+
 class PersonIndexPage(Page):
+    hero_image = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        related_name='+',
+        help_text="Hero Image to be used as full width feature image for page.",
+        on_delete=models.SET_NULL
+    )
+    heading = models.CharField(blank=True, max_length=80)
+    introduction = RichTextField(
+        null=True,
+        blank=True,
+        features=['bold', 'italic', 'link']
+    )
+    call_to_action = models.ForeignKey(
+        'utils.CallToActionSnippet',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
     subpage_types = ['PersonPage']
+
+    content_panels = Page.content_panels + [
+        ImageChooserPanel('hero_image'),
+        FieldPanel('heading'),
+        FieldPanel('introduction'),
+        InlinePanel('category_relationships', label="Person Index Categories"),
+        SnippetChooserPanel('call_to_action')
+    ]
 
     @cached_property
     def people(self):
         return self.get_children().specific().live().public()
+
+    @cached_property
+    def categories(self):
+        return [related.category for related in self.category_relationships.all()]
 
     def get_context(self, request, *args, **kwargs):
         page_number = request.GET.get('page')
