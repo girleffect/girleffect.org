@@ -1,6 +1,17 @@
 .hero {
     position: relative;
 
+    &--article {
+        &::before {
+            content: '';
+            height: 400px;
+            width: 100%;
+            position: absolute;
+            background: $light-grey;
+            z-index: -1;
+        }
+    }
+
     &__heading {
         &:not(:only-child) {
             position: absolute;
