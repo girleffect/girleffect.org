@@ -8,11 +8,13 @@
 
         <div class="article-card__copy">
             <div>
+                {% if article.categories %}
                 <span class="article-card__category">
                     <a href="{{ article.get_parent.url }}?category={{ article.categories.first.category.id }}">
                         {{ article.categories.first.category }}
                     </a>
                 </span>
+                {% endif %}
                 <span class="article-card__date">{{ article.publication_date|date:"d.m.y" }}</span>
             </div>
             <a class="article-card__link" href="{{ article.url }}">{{ article.title }}</a>
