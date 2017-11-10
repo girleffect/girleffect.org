@@ -1,0 +1,18 @@
+blockquote {
+    @include font-size(20px, 25px);
+    padding-left: 30px;
+    border-left: 5px solid $yellow;
+
+    cite {
+        font-size: 14px;
+        font-style: normal;
+        display: block;
+        color: $mid-grey;
+        margin-top: 20px;
+    }
+
+    .wrapper--article & {
+        max-width: $wrapper--medium;
+        margin: 50px auto;
+    }
+}
