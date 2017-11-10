@@ -104,6 +104,15 @@ class CarouselItemBlock(blocks.StructBlock):
 
 class MediaTextOverlayBlock(blocks.StructBlock):
     image = ImageChooserBlock()
+    title = blocks.CharBlock(
+        required=False,
+        label="Title Text",
+        max_length=25
+    )
+    logo = ImageChooserBlock(
+        label="Title Logo",
+        required=False
+    )
     label = blocks.CharBlock(
         required=False,
         max_length=30,
@@ -115,6 +124,21 @@ class MediaTextOverlayBlock(blocks.StructBlock):
         features=["bold", "italic", "ol", "ul", "link", "document-link"]
     )
     link = LinkBlock(required=False)
+
+    def clean(self, value):
+        if value['title'] and value['logo']:
+            error_messages = ["Please choose only one logo or title."]
+            raise ValidationError(
+                "Validation error in MediaTextOverlayBlock",
+                params={'title': error_messages, 'logo': error_messages},
+            )
+        if not value['title'] and not value['logo']:
+            error_messages = ["Please choose a logo or title."]
+            raise ValidationError(
+                "Validation error in MediaTextOverlayBlock",
+                params={'title': error_messages, 'logo': error_messages},
+            )
+        return super(MediaTextOverlayBlock, self).clean(value)
 
     class Meta:
         icon = "image"

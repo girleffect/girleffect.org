@@ -1,5 +1,12 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 <div class="media-card">
+    {% if value.title %}
+        <h3>{{ value.title }}</h3>
+    {% elif value.logo %}
+        {% image value.logo fill-40x40 as logo %}
+         <img src="{{ logo.url }}" alt="{{ logo.alt }}">
+    {% endif %}
+
     {% image value.image fill-1600x500 as fw_image %}
     <img src="{{ fw_image.url }}" alt="{{ fw_image.alt }}" class="media-card__image">
 
