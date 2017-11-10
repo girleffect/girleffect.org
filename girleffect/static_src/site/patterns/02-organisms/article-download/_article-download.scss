@@ -1,0 +1,21 @@
+.article-download {
+    display: flex;
+    padding: 0 20px;
+
+    @include media-query(tablet-landscape) {
+        padding: 0;
+    }
+
+    &__icon {
+        display: none;
+        margin-right: 40px;
+        max-width: 100px;
+
+        @include media-query(tablet-portrait) {
+            display: block;
+            padding: 0;
+        }
+    }
+}
+
+
