@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 <div class="media-card">
-    {% image value.image original as fw_image %}
+    {% image value.image fill-1600x500 as fw_image %}
     <img src="{{ fw_image.url }}" alt="{{ fw_image.alt }}" class="media-card__image">
 
     <div class="media-card__content">

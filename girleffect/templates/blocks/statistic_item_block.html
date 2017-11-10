@@ -6,9 +6,8 @@
             {{ value.description|richtext }}
 
             {% if value.link_page %}
-                <a class="stat-block__cite" href="{{ value.link_page.href }}">{{ value.get_link_text }}</a>
+                <a href="{{ value.link_page.href }}">{{ value.get_link_text }}</a>
             {% elif value.link_url  %}
-                <a class="stat-block__cite" href="{{ value.link_url.href }}">{{ value.get_link_text }}</a>
+                <a href="{{ value.link_url.href }}">{{ value.get_link_text }}</a>
             {% endif %}
-        </div>
     </div>

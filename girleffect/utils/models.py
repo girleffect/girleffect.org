@@ -200,29 +200,16 @@ class PartnerWithUsSnippet(CallToActionSnippet):
 @register_snippet
 class Statistic(LinkFields):
     title = models.CharField(max_length=80)
-    statistic_value = models.CharField(
-        max_length=4,
-        verbose_name="Value",
-        help_text="The value of the statistic (e.g. the '85' in '85%')",
-    )
-    statistic_units = models.CharField(
-        max_length=4,
-        blank=True,
-        null=True,
-        verbose_name="Units",
-        help_text="The units of the statistic (e.g. the '%' in '85%')",
-    )
     description = RichTextField(
         blank=True,
-        max_length=80,
+        max_length=255,
         verbose_name="Description",
+        help_text="The statistic. For example, '66% of girls complete primary school'",
         features=["bold", "italic", "link", "document-link"]
     )
 
     panels = [
         FieldPanel('title'),
-        FieldPanel('statistic_value'),
-        FieldPanel('statistic_units'),
         FieldPanel('description'),
     ] + LinkFields.content_panels
 

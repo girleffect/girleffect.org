@@ -13,6 +13,10 @@
         <h1 class="hero__heading">{{ page.title }}</h1>
     </section>
 
+    {% block breadcrumbs %}
+        {% include "navigation/breadcrumbs.html" %}
+    {% endblock %}
+
     <section class="wrapper wrapper--small wrapper--top-bottom-space">
         <h2 class="heading heading--squashed">{{ page.heading }}</h2>
     </section>
