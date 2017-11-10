@@ -7,6 +7,7 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailcore.fields import StreamField
@@ -68,6 +69,13 @@ class ArticlePageRelatedPage(RelatedPage):
 
 
 class ArticlePage(Page, SocialFields, ListingFields):
+    hero_image = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        related_name='+',
+        on_delete=models.SET_NULL
+    )
     # It's datetime for easy comparison with first_published_at
     publication_date = models.DateTimeField(
         null=True, blank=True,
@@ -81,11 +89,13 @@ class ArticlePage(Page, SocialFields, ListingFields):
     body = StreamField(ArticleBlock())
 
     search_fields = Page.search_fields + [
+        index.SearchField('author'),
         index.SearchField('introduction'),
         index.SearchField('body')
     ]
 
     content_panels = Page.content_panels + [
+        ImageChooserPanel('hero_image'),
         FieldPanel('publication_date'),
         FieldPanel('author'),
         FieldPanel('introduction'),
