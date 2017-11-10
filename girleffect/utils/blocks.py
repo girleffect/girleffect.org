@@ -127,7 +127,7 @@ class MediaTextOverlayBlock(blocks.StructBlock):
 
     def clean(self, value):
         if value['title'] and value['logo']:
-            error_messages = ["Please choose only one logo or title."]
+            error_messages = ["Please choose only one of logo or title."]
             raise ValidationError(
                 "Validation error in MediaTextOverlayBlock",
                 params={'title': error_messages, 'logo': error_messages},

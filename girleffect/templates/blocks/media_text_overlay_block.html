@@ -3,7 +3,7 @@
     {% if value.title %}
         <h3>{{ value.title }}</h3>
     {% elif value.logo %}
-        {% image value.logo fill-40x40 as logo %}
+        {% image value.logo max-40x40 as logo %}
          <img src="{{ logo.url }}" alt="{{ logo.alt }}">
     {% endif %}
 
