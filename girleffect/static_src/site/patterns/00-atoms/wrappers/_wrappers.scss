@@ -28,4 +28,11 @@
     &--bottom-space {
         margin: 0 auto 2rem;
     }
+
+    &--article {
+        > * {
+            max-width: $wrapper--small;
+            margin: 0 auto;
+        }
+    }
 }
