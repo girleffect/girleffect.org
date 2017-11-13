@@ -643,6 +643,7 @@ h4 {
 .article-card .arrow {
   position: absolute;
   bottom: 40px;
+  left: 20px;
 }
 
 .article-card:hover .arrow {
@@ -1216,6 +1217,10 @@ article .share-icons--hide-mobile {
   max-width: 380px;
 }
 
+.article-card:hover {
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 768px) {
   .article-card {
     margin: 0 10px 20px;
@@ -1237,11 +1242,26 @@ article .share-icons--hide-mobile {
   }
 }
 
-.article-card__copy {
+.article-card__content {
+  font-size: 1.98413vw;
   background: #f4f4f3;
   padding: 30px;
   min-height: 280px;
   position: relative;
+  font-weight: 700;
+  display: block;
+}
+
+@media (max-width: 1008px) {
+  .article-card__content {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1260px) {
+  .article-card__content {
+    font-size: 25px;
+  }
 }
 
 .article-card__date {
@@ -1253,23 +1273,9 @@ article .share-icons--hide-mobile {
   margin-right: 10px;
 }
 
-.article-card__link {
-  font-size: 1.98413vw;
-  font-weight: 700;
-  margin: 10px 0;
-  display: block;
-}
-
-@media (max-width: 1008px) {
-  .article-card__link {
-    font-size: 20px;
-  }
-}
-
-@media (min-width: 1260px) {
-  .article-card__link {
-    font-size: 25px;
-  }
+.article-card__date, .article-card__category {
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .carousel-container {
