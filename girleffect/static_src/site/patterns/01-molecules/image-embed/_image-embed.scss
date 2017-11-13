@@ -12,4 +12,9 @@
         color: $white;
         left: 20px;
     }
+
+    .wrapper--article & {
+        max-width: $wrapper--small-medium;
+        margin: 40px auto;
+    }
 }

@@ -1,5 +1,9 @@
 .section {
-    padding: 4rem 0;
+    padding: 2rem 0;
+
+    @include media-query(tablet-landscape) {
+        padding: 4rem 0;
+    }
 
     &__title {
         text-align: center;
@@ -28,5 +32,9 @@
             margin: 3rem auto 2rem;
             line-height: 1.2;
         }
+    }
+
+    &--downloads {
+        background: $light-grey;
     }
 }

@@ -17,6 +17,10 @@
         max-width: $wrapper--small;
     }
 
+    &--small-medium {
+        max-width: $wrapper--small-medium;
+    }
+
     &--medium {
         max-width: $wrapper--medium;
     }
@@ -31,5 +35,12 @@
 
     &--bottom-space {
         margin: 0 auto 2rem;
+    }
+
+    &--article {
+        > * {
+            max-width: $wrapper--small;
+            margin: 0 auto;
+        }
     }
 }

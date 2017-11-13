@@ -1,0 +1,54 @@
+.share-icons {
+    $root: &;
+    display: inline-flex;
+
+    &--vertical {
+        flex-direction: column;
+    }
+
+    &__link {
+        border: 1px solid $brand-grey;
+        border-radius: 50%;
+        padding: 10px;
+        margin-bottom: 10px;
+        transition: border $transition;
+        background: $white;
+
+        &:hover {
+            border: 1px solid $green;
+        }
+
+        .share-icons--horizontal & {
+            margin: 10px 10px 0 0;
+        }
+    }
+
+    &__icon {
+        width: 20px;
+        height: 20px;
+        transition: fill $transition;
+        fill: $steel;
+
+        #{$root}__link:hover & {
+            fill: $green;
+        }
+    }
+
+    &--hide-mobile {
+        display: none;
+
+        article & {
+            position: absolute;
+        }
+
+        @include media-query(tablet-landscape) {
+            display: inline-flex;
+        }
+    }
+
+    &--show-mobile {
+        @include media-query(tablet-landscape) {
+            display: none;
+        }
+    }
+}
