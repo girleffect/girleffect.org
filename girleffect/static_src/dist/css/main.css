@@ -1599,6 +1599,28 @@ article .share-icons--hide-mobile {
   margin: 40px auto;
 }
 
+.link-block {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.link-block > a {
+  flex-basis: 100%;
+  margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 480px) {
+  .link-block > a {
+    flex-basis: 50%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .link-block > a {
+    flex-basis: 33%;
+  }
+}
+
 .list-item {
   padding: 0 20px;
   margin-bottom: 3rem;
