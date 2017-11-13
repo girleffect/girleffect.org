@@ -9,7 +9,7 @@
     &__icon {
         display: none;
         margin-right: 40px;
-        max-width: 100px;
+        max-width: 80px;
 
         @include media-query(tablet-portrait) {
             display: block;
