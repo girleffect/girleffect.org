@@ -1,54 +1,79 @@
 {% load wagtailcore_tags wagtailimages_tags %}
-
-{% if page.related_documents.exists or page.related_pages.exists %}
-    <section class="related">
-        {# Related Documents #}
-        <ul>
-
-            {% for related_document in page.related_documents.all %}
-                {% with related_document.document as document %}
+{% if page.related_documents.exists %}
+<section class="section section--downloads">
+    {# Related Documents #}
+    <div class="wrapper wrapper--small article-download">
+        <svg class="article-download__icon">
+            <use xlink:href="#download-file"></use>
+        </svg>
+        <div>
+            <h4>Related Downloads</h4>
+            <ul class="list list--download">
+                {% for related_document in page.related_documents.all %} {% with related_document.document as document %}
                     <li>
-                        <a href="{{ document.url }}">
-                            <h2>
-                                {% if related_document.title %}
-                                    {{ related_document.title }}
-                                    ({{ document.file_extension }})
-                                {% else %}
-                                    {{ document.filename }}
-                                {% endif %}
-                            </h2>
-                        </a>
+                        {% if related_document.title %}
+                            <a href="{{ document.url }}">
+                                {{ related_document.title }}
+                            </a>
+                            <span>{{ document.file_extension }}</span>
+                        {% else %}
+                            <a href="{{ document.url }}">
+                                {{ document.filename }}
+                            </a> {% endif %}
                     </li>
-                {% endwith %}
-            {% endfor %}
+                    {% endwith %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
 
+
+{% endif %}
+
+
+
+{% if page.related_pages.exists %}
+
+    <section class="section section--articles">
+        <h2 class="section__title">Related News &amp; Stories</h2>
+        <div class="article-container wrapper wrapper--medium">
             {# Related pages #}
             {% for related_page in page.related_pages.live %}
                 {# a related_page object links to the original page (related_page.source_page) and a related one (related_page.page) #}
                 {% with related_page.page as specific_related_page %}
-                    <li>
-                        <a href="{% pageurl specific_related_page %}">
-                            {% if specific_related_page.listing_image %}
-                                {% image specific_related_page.listing_image fill-450x300 %}
+
+                <div class="article-card">
+                    {% if specific_related_page.listing_image %}
+                        {% image specific_related_page.listing_image fill-380x225 %}
+                    {% endif %}
+                    <div class="article-card__copy">
+                        <a class="article-card__link" href="{% pageurl specific_related_page %}">
+                            {% if specific_related_page.listing_title %}
+                                {{ specific_related_page.listing_title }}
+                            {% else %}
+                                {{ specific_related_page.title }}
                             {% endif %}
-                            <div>
-                                <h2>
-                                    {% if specific_related_page.listing_title %}
-                                        {{ specific_related_page.listing_title }}
-                                    {% else %}
-                                        {{ specific_related_page.title }}
-                                    {% endif %}
-                                </h2>
-                                {% if specific_related_page.listing_summary %}
-                                    <p>{{ specific_related_page.listing_summary }}</p>
-                                {% endif %}
-                            </div>
-                        </a>
-                    </li>
+
+                            {% if specific_related_page.listing_summary %}
+                                <p>{{ specific_related_page.listing_summary }}</p>
+                            {% endif %}
+
+                         </a>
+                         <div class="arrow"></div>
+                     </div>
+                </div>
+
                 {% endwith %}
             {% endfor %}
+        </div>
 
-            </ul>
+        <div class="wrapper wrapper--center">
+            <a class="link link--boxed link--center" href="/stories">
+                See all news
+                <span></span>
+                <span></span>
+            </a>
         </div>
     </section>
 {% endif %}
