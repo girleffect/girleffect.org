@@ -21,6 +21,10 @@
     margin: 0 20px 20px;
     max-width: 380px;
 
+    &:hover {
+        cursor: pointer;
+    }
+
     @include media-query(tablet-portrait) {
         margin: 0 10px 20px;
     }
@@ -41,11 +45,14 @@
         }
     }
 
-    &__copy {
+    &__content {
+        @include font-size(20px, 25px);
         background: $light-grey;
         padding: 30px;
         min-height: 280px;
         position: relative;
+        font-weight: $weight-bold;
+        display: block;
     }
 
     &__date {
@@ -57,10 +64,9 @@
         margin-right: 10px;
     }
 
-    &__link {
-        @include font-size(20px, 25px);
-        font-weight: $weight-bold;
-        margin: 10px 0;
-        display: block;
+    &__date,
+    &__category {
+        font-size: 16px;
+        font-weight: $weight-normal;
     }
 }
