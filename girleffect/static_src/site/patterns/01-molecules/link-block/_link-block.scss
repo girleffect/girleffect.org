@@ -1,0 +1,17 @@
+.link-block {
+    display: flex;
+    flex-wrap: wrap;
+
+    > a {
+        flex-basis: 100%;
+        margin-bottom: 10px;
+
+        @include media-query(mob-landscape) {
+            flex-basis: 50%;
+        }
+
+        @include media-query(tablet-portrait) {
+            flex-basis: 33%;
+        }
+    }
+}
