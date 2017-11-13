@@ -4,10 +4,13 @@
     flex-wrap: wrap;
     flex-direction: column;
 
-    @include media-query(tablet-portrait) {
-        justify-content: space-between;
-        flex-wrap: nowrap;
+    @include media-query(mob-landscape) {
+        justify-content: center;
         flex-direction: row;
+    }
+
+    @include media-query(tablet-landscape) {
+        justify-content: flex-start;
     }
 }
 
@@ -15,24 +18,41 @@
     color: $green;
     display: flex;
     flex-direction: column;
+    margin: 0 20px 20px;
     max-width: 380px;
-    margin-bottom: 20px;
+
+    &:hover {
+        cursor: pointer;
+    }
 
     @include media-query(tablet-portrait) {
-        &:first-child {
-            margin-right: 20px;
+        margin: 0 10px 20px;
+    }
+
+    @include media-query(tablet-landscape) {
+        max-width: 32%;
+
+        &:nth-child(3n+1) {
+            margin: 0 10px 20px 0;
         }
 
-        &:last-child {
-            margin-left: 20px;
+        &:nth-child(3n+2) {
+            margin: 0 10px 20px;
+        }
+
+        &:nth-child(3n+3) {
+            margin: 0 0 20px 10px;
         }
     }
 
-    &__copy {
+    &__content {
+        @include font-size(20px, 25px);
         background: $light-grey;
         padding: 30px;
         min-height: 280px;
         position: relative;
+        font-weight: $weight-bold;
+        display: block;
     }
 
     &__date {
@@ -44,10 +64,9 @@
         margin-right: 10px;
     }
 
-    &__link {
-        @include font-size(20px, 25px);
-        font-weight: $weight-bold;
-        margin: 10px 0;
-        display: block;
+    &__date,
+    &__category {
+        font-size: 16px;
+        font-weight: $weight-normal;
     }
 }
