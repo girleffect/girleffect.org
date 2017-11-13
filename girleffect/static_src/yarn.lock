@@ -2242,7 +2242,7 @@ jodid25519@^1.0.0:
   dependencies:
     jsbn "~0.1.0"
 
-jquery@>=1.8.3:
+jquery@>=1.8.3, jquery@^3.1.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
 
@@ -3460,6 +3460,12 @@ sass-lint@^1.8.2:
     merge "^1.2.0"
     path-is-absolute "^1.0.0"
     util "^0.10.3"
+
+scrolltofixed@Grawl/ScrollToFixed:
+  version "1.0.7"
+  resolved "https://codeload.github.com/Grawl/ScrollToFixed/tar.gz/a65b3bb5e112f6f8cc2dc443d7252590c06e663d"
+  dependencies:
+    jquery "^3.1.0"
 
 "semver@2 || 3 || 4 || 5", "semver@2.x || 3.x || 4 || 5", semver@~5.3.0:
   version "5.3.0"
