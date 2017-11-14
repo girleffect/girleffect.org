@@ -43,4 +43,17 @@
             margin: 0 auto;
         }
     }
+
+    &--bottom-space-xl {
+        margin: 0 auto 4rem;
+    }
+
+    &--people {
+        border-top: 1px solid $brand-grey;
+        padding: 2rem 0;
+
+        @include media-query(tablet-portrait) {
+            padding: 4rem 0;
+        }
+    }
 }

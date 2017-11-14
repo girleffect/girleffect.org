@@ -13,20 +13,24 @@
     </section>
 
     {# Intro - RichText. To be styled as 'large text' #}
-    <section class="introduction">
+    <section class="section wrapper wrapper--small">
         {{ page.introduction|richtext }}
     </section>
 
     {# People listed by Category #}
-    <section class="person-categories">    
+    <section>
     {% for category in page.categories %}
         {% if category.people %}
-            <h4>{{ category.title }}</h4>
+            <div class="wrapper wrapper--center wrapper--people">
+                <h3>{{ category.title }}</h3>
+            </div>
             {# category.description is also available #}
-            {% for person in category.people %}
-                {# Person card here #}
-                {% include "includes/person_index_card.html" with person=person %}
-            {% endfor %}
+            <div class="article-container wrapper wrapper--medium wrapper--bottom-space-xl">
+                {% for person in category.people %}
+                    {# Person card here #}
+                    {% include "includes/person_index_card.html" with person=person %}
+                {% endfor %}
+            </div>
         {% endif %}
     {% endfor %}
     </section>
