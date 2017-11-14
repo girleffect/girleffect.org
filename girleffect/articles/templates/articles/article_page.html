@@ -5,12 +5,14 @@
 
 <article>
     {# Hero section #}
-    <div class="hero hero--article">
-        <div class="wrapper wrapper--small-medium">
-            {% image page.hero_image fill-1000x500 as hero_image %}
-            <img class="hero__image hero__image--top-space" src="{{ hero_image.url }}">
+    {% if page.hero_image %}
+        <div class="hero hero--article">
+            <div class="wrapper wrapper--small-medium">
+                {% image page.hero_image fill-1000x500 as hero_image %}
+                <img class="hero__image hero__image--top-space" src="{{ hero_image.url }}">
+            </div>
         </div>
-    </div>
+    {% endif %}
 
     {# Breadcrumbs #}
     {% block breadcrumbs %}
