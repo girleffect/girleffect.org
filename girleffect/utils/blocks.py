@@ -114,12 +114,6 @@ class MediaTextOverlayBlock(blocks.StructBlock):
         label="Title Logo",
         required=False
     )
-    label = blocks.CharBlock(
-        required=False,
-        max_length=30,
-        help_text="A short label or title, e.g. 'Our Reach'.\
-            Appears above the text on the module."
-    )
     text = blocks.RichTextBlock(
         max_length=75,
         required=False,
