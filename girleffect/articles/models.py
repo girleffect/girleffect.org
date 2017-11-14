@@ -159,4 +159,4 @@ class ArticleIndex(Page, SocialFields):
         return context
 
     subpage_types = ['ArticlePage']
-    parent_page_types = ['home.HomePage']
+    parent_page_types = ['home.HomePage', 'standardpage.StandardIndex']
