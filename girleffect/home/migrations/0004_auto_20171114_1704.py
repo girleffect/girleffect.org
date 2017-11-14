@@ -10,6 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('home', '0003_auto_20171107_1512'),
+        ('utils', '0009_auto_20171114_1412'),
     ]
 
     operations = [
