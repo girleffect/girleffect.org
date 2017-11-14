@@ -1189,9 +1189,24 @@ article .share-icons--hide-mobile {
   margin: 0 auto;
 }
 
+.wrapper--bottom-space-xl {
+  margin: 0 auto 4rem;
+}
+
+.wrapper--people {
+  border-top: 1px solid #dad9d6;
+  padding: 2rem 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapper--people {
+    padding: 4rem 0;
+  }
+}
+
 .article-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   flex-direction: column;
 }
@@ -1273,7 +1288,7 @@ article .share-icons--hide-mobile {
   margin-right: 10px;
 }
 
-.article-card__date, .article-card__category {
+.article-card__copy, .article-card__date, .article-card__category {
   font-size: 16px;
   font-weight: 400;
 }
