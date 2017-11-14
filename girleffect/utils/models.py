@@ -202,7 +202,7 @@ class Statistic(LinkFields):
     title = models.CharField(max_length=80)
     description = RichTextField(
         blank=True,
-        max_length=255,
+        max_length=180,
         verbose_name="Description",
         help_text="The statistic. For example, '66% of girls complete primary school'",
         features=["bold", "italic", "link", "document-link"]
