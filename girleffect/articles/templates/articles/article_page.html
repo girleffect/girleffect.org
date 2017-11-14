@@ -6,29 +6,67 @@
     {# Title and introduction section #}
 
     {# Hero section #}
-    <section class="hero">
-        {% if page.hero_image %}
-            {% image page.hero_image fill-1800x400 as hero_image %}
-            <img class="hero__image" src="{{ hero_image.url }}">
-        {% endif %}
-        <h1 class="hero__heading">
-            {{ page.title }}
-        </h1>
-    </section>
+    {% if page.hero_image %}
+        <div class="hero hero--article">
+            <div class="wrapper wrapper--small-medium">
+                {% image page.hero_image fill-1000x500 as hero_image %}
+                <img class="hero__image hero__image--top-space" src="{{ hero_image.url }}">
+            </div>
+        </div>
+    {% endif %}
 
-    <section class="wrapper wrapper--small wrapper--top-bottom-space">
-        <p>{{ page.display_date }} by {% if page.author %}{{ page.author }}{% else %} Girl Effect Team{% endif %}.</p>
-        <u>{{ page.categories.first.category }}</u>
-        <h3 class="heading">{{ page.introduction }}</h3>
-    </section>
+    {# Breadcrumbs #}
+    {% block breadcrumbs %}
+        {% include "navigation/breadcrumbs.html" %}
+    {% endblock %}
 
-    {# Streamfield options #}
-    <section class="body">
+    {# Share Icons #}
+    <div class="wrapper wrapper--small-medium">
+        <div class="share-icons share-icons--vertical js-share-icons share-icons--hide-mobile">
+            <a class="share-icons__link" href="https://www.facebook.com/sharer/sharer.php?u={{ page.full_url }}">
+                <svg class="share-icons__icon"><use xlink:href="#facebook"></use></svg>
+            </a>
+            <a class="share-icons__link" href="http://www.twitter.com/share?url={{ page.full_url }}">
+                <svg class="share-icons__icon"><use xlink:href="#twitter"></use></svg>
+            </a>
+            <a class="share-icons__link" href="https://www.linkedin.com/cws/share?url={{ page.full_url }}">
+                <svg class="share-icons__icon"><use xlink:href="#linkedin"></use></svg>
+            </a>
+            <a class="share-icons__link" href="mailto:?subject=Thought%20you%20might%20be%20interested&body={{ page.full_url }}">
+                <svg class="share-icons__icon"><use xlink:href="#email"></use></svg>
+            </a>
+        </div>
+    </div>
+
+    {# Title, introduction and Streamfields #}
+    <section class="section wrapper wrapper--article">
+        <h3 class="heading heading--squashed">{{ page.title }}</h3>
+
+        <div class="article-info">
+            <a class="article-info__category" href="#">{{ page.categories.first.category }}</a>
+            <p class="article-info__author">{% if page.author %}<span>By {{ page.author }}</span>{% endif %} {{ page.display_date }}</p>
+        </div>
+        <p class="large-text">{{ page.introduction }}</p>
         {{ page.body }}
+
+        <div class="wrapper wrapper--small-medium">
+            <div class="share-icons share-icons--horizontal share-icons--show-mobile">
+                <a class="share-icons__link" href="https://www.facebook.com/sharer/sharer.php?u={{ page.full_url }}">
+                    <svg class="share-icons__icon"><use xlink:href="#facebook"></use></svg>
+                </a>
+                <a class="share-icons__link" href="http://www.twitter.com/share?url={{ page.full_url }}">
+                    <svg class="share-icons__icon"><use xlink:href="#twitter"></use></svg>
+                </a>
+                <a class="share-icons__link" href="https://www.linkedin.com/cws/share?url={{ page.full_url }}">
+                    <svg class="share-icons__icon"><use xlink:href="#linkedin"></use></svg>
+                </a>
+                <a class="share-icons__link" href="mailto:?subject=Thought%20you%20might%20be%20interested&body={{ page.full_url }}">
+                    <svg class="share-icons__icon"><use xlink:href="#email"></use></svg>
+                </a>
+            </div>
+        </div>
     </section>
 
-    <section class="wrapper wrapper--small">
-        {% include "includes/relatedcontent.html" %}
-    </section>
+{% include "includes/relatedcontent.html" %}
 
 {% endblock %}
