@@ -1,6 +1,6 @@
 .article-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     flex-direction: column;
 
@@ -64,6 +64,7 @@
         margin-right: 10px;
     }
 
+    &__copy,
     &__date,
     &__category {
         font-size: 16px;
