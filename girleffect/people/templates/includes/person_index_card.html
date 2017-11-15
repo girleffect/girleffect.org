@@ -1,17 +1,20 @@
 {% load wagtailimages_tags %}
-    <div class="person-column">
-        <h4>{{ person.first_name }} {{ person.last_name }}</h4>
-        {% if person.introduction %}
-            <p>{{ person.introduction }}</p>
-        {% endif %}
+    <a class="article-card" href="{{person.url}}">
         {% if person.photo %}
-            {% image person.photo fill-500x400 as person_photo %}
+            {% image person.photo fill-380x255 as person_photo %}
             <img src='{{ person_photo.url }}'>
         {% endif %}
-        {% if person.job_title %}
-            <p>{{ person.job_title }}</p>
-        {% endif %}
-        {% if person.email %}
-            <p>{{ person.email }}</p>
-        {% endif %}
-    </div>
+        <div class="article-card__content">
+            {% if person.job_title %}
+                <p class="article-card__date">{{ person.job_title }}</p>
+            {% endif %}
+            <h4>{{ person.first_name }} {{ person.last_name }}</h4>
+            {% if person.introduction %}
+                <p class="article-card__copy">{{ person.introduction }}</p>
+            {% endif %}
+
+            {% if person.email %}
+                <p class="article-card__copy">{{ person.email }}</p>
+            {% endif %}
+        </div>
+    </a>
