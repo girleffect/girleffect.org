@@ -1,0 +1,10 @@
+.form {
+    &--search {
+        opacity: 0;
+        transition: opacity $transition;
+
+        &.visible {
+            opacity: 1;
+        }
+    }
+}
