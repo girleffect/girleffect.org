@@ -61,4 +61,16 @@ $(function() {
             video.src += '&autoplay=1';
         }
     });
+
+    $('.js-search').on('click', function() {
+        const headerHeight = $('.header').outerHeight();
+        const searchBar = $('.header__search-bar');
+        const form = $('.form--search');
+
+        $(searchBar).css('top', headerHeight);
+        $(form).removeClass('visible');
+        $(searchBar).slideToggle(250, function() {
+            $(form).addClass('visible');
+        });
+    });
 });
