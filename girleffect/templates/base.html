@@ -80,12 +80,7 @@
             <div class="header__row">
                 {% primarynav %}
 
-                <form action="{% url 'search' %}" method="get" role="search">
-                    <input type="text" placeholder="Search…" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
-                    <input type="submit" value="Search">
-                </form>
-
-                <a class="header__link header__link--search" aria-label="search">
+                <a class="js-search header__link header__link--search" aria-label="search">
                     <svg class="header__icon"><use xlink:href="#magnifying-glass"></use></svg>
                 </a>
 
@@ -103,7 +98,14 @@
                         <svg class="header__icon"><use xlink:href="#linkedin"></use></svg>
                     </a>
                 </div>
-            </section>
+            </div>
+
+            <div class="header__search-bar">
+                <form class="form form--search" action="{% url 'search' %}" method="get" role="search">
+                    <input type="text" placeholder="Search…" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+                    <input type="submit" value="Search">
+                </form>
+            </div>
         </header>
 
         <main>
