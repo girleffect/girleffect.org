@@ -3,9 +3,9 @@ from django.utils.functional import cached_property
 
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
-    PageLinkFields,
     ListingFields,
     SocialFields,
+    HeroVideoFieldsLogo,
 )
 from girleffect.articles.models import ArticlePage
 
@@ -18,10 +18,8 @@ from wagtail.wagtailadmin.edit_handlers import (
 
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtailmedia.edit_handlers import MediaChooserPanel
 
 
 class SolutionPageRelatedPartner(Orderable, models.Model):
@@ -39,37 +37,8 @@ class SolutionPageRelatedPartner(Orderable, models.Model):
     ]
 
 
-class SolutionPage(Page, PageLinkFields, SocialFields, ListingFields):
-    hero_video = models.ForeignKey(
-        'utils.CustomMedia',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        help_text="Hero Video to show on top of page. Recommended size 12Mb or under.",
-        related_name='+'
-    )
-    hero_fallback_image = models.ForeignKey(
-        'images.CustomImage',
-        null=True,
-        blank=True,
-        related_name='+',
-        help_text="Hero Image to be used as fallback for video.",
-        on_delete=models.SET_NULL
-    )
+class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
     summary = models.TextField(blank=True)
-    strapline = models.TextField(
-        blank=True,
-        max_length=80,
-        help_text="The strapline will show over the hero image if a logo is not selected."
-    )
-    logo = models.ForeignKey(
-        'images.CustomImage',
-        null=True,
-        blank=True,
-        related_name='+',
-        help_text="The logo will show over the hero image.",
-        on_delete=models.SET_NULL
-    )
     body = StreamField(StoryBlock())
     person_category = models.ForeignKey(
         'people.PersonCategory',
@@ -118,13 +87,9 @@ class SolutionPage(Page, PageLinkFields, SocialFields, ListingFields):
         index.SearchField('body'),
     ]
 
-    content_panels = Page.content_panels + [
-        MediaChooserPanel('hero_video'),
-        ImageChooserPanel('hero_fallback_image'),
+    content_panels = Page.content_panels + HeroVideoFieldsLogo.content_panels + [
         FieldPanel('summary'),
-        ImageChooserPanel('logo'),
-        FieldPanel('strapline')
-    ] + PageLinkFields.content_panels + [
+    ] + [
         StreamFieldPanel('body'),
         InlinePanel('related_partners', label="Related partners"),
         SnippetChooserPanel('call_to_action'),

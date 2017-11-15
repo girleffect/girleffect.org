@@ -243,7 +243,7 @@ class CustomMedia(AbstractMedia):
 
 class HeroVideoFields(models.Model):
     hero_video = models.ForeignKey(
-        'wagtailmedia.Media',
+        'utils.CustomMedia',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -333,6 +333,34 @@ class HeroVideoFields(models.Model):
             )
 
         return super(HeroVideoFields, self).clean()
+
+    class Meta:
+        abstract = True
+
+
+class HeroVideoFieldsLogo(HeroVideoFields):
+    hero_logo = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        related_name='+',
+        help_text="The logo will show over the hero image.",
+        on_delete=models.SET_NULL
+    )
+
+    content_panels = [
+        MultiFieldPanel([
+            MediaChooserPanel('hero_video'),
+            ImageChooserPanel('hero_fallback_image'),
+            ImageChooserPanel('hero_logo'),
+            FieldPanel('hero_strapline'),
+            MultiFieldPanel([
+                PageChooserPanel('link_page'),
+                FieldPanel('link_youtube'),
+                FieldPanel('link_text'),
+            ], 'Hero Clickthrough Link')
+        ], 'Hero Video'),
+    ]
 
     class Meta:
         abstract = True
