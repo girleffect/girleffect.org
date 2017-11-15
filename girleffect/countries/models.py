@@ -3,6 +3,7 @@ from django.utils.functional import cached_property
 
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
+    HeroImageFields,
     ListingFields,
     SocialFields
 )
@@ -16,7 +17,6 @@ from wagtail.wagtailadmin.edit_handlers import (
 
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
@@ -36,16 +36,7 @@ class CountryPageRelatedPartner(Orderable, models.Model):
     ]
 
 
-class CountryPage(Page, SocialFields, ListingFields):
-    hero_image = models.ForeignKey(
-        'images.CustomImage',
-        null=True,
-        blank=True,
-        related_name='+',
-        help_text="Hero Image to be used as full width feature image for page.",
-        on_delete=models.SET_NULL
-    )
-    heading = models.CharField(blank=True, max_length=80)
+class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
     body = StreamField(StoryBlock())
     partners_description = models.TextField(
         blank=True,
@@ -81,14 +72,11 @@ class CountryPage(Page, SocialFields, ListingFields):
         ]
         return partners
 
-    search_fields = Page.search_fields + [
-        index.SearchField('heading'),
+    search_fields = Page.search_fields + HeroImageFields.search_fields + [
         index.SearchField('body')
     ]
 
-    content_panels = Page.content_panels + [
-        ImageChooserPanel('hero_image'),
-        FieldPanel('heading'),
+    content_panels = Page.content_panels + HeroImageFields.content_panels + [
         StreamFieldPanel('body'),
         FieldPanel('partners_description'),
         InlinePanel('related_partners', label="Related partners"),
