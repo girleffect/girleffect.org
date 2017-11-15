@@ -3,25 +3,37 @@
     {% image value.image fill-1020x500 as fw_image %}
     <img src="{{ fw_image.url }}" alt="{{ fw_image.alt }}" class="media-card__image">
 
-    <a class="media-card__content"
-        {% if value.link.external_link %}
-            href="{{ value.link.external_link }}"
-        {% elif value.link.internal_link %}
-            href="{{ value.link.internal_link.url}}"
-        {% elif value.link.document_url %}
-            href="{{ value.link.document_link.url }}"
-        {% endif %}
-    >
+    {% if value.link.external_link %}
+        <a class="media-card__content" href="{{ value.link.external_link }}">
+    {% elif value.link.internal_link %}
+        <a class="media-card__content" href="{{ value.link.internal_link.url}}">
+    {% elif value.link.document_link %}
+        <a class="media-card__content" href="{{ value.link.document_link.url }}">
+    {% else %}
+        <div class="media-card__content">
+    {% endif %}
 
-        {% if value.title %}
-            <h3 class="media-card__title">{{ value.title }}</h3>
-        {% elif value.logo %}
-            {% image value.logo max-300x75 as logo %}
-             <img class="media-card__logo" src="{{ logo.url }}" alt="{{ logo.alt }}">
-        {% endif %}
 
-        {# text is RichText #}
-        {{ value.text }}
+    {% if value.title %}
+        <h3 class="media-card__title">{{ value.title }}</h3>
+    {% elif value.logo %}
+        {% image value.logo max-300x75 as logo %}
+         <img class="media-card__logo" src="{{ logo.url }}" alt="{{ logo.alt }}">
+    {% endif %}
+
+    {# text is RichText #}
+    {{ value.text }}
+
+    {% if value.link.external_link %}
         <div class="media-card__link link__arrow"></div>
-    </a>
+        </a>
+    {% elif value.link.internal_link %}
+        <div class="media-card__link link__arrow"></div>
+        </a>
+    {% elif value.link.document_link %}
+        <div class="media-card__link link__arrow"></div>
+        </a>
+    {% else %}
+        </div>
+    {% endif %}
 </div>
