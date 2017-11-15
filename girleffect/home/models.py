@@ -31,5 +31,10 @@ class HomePage(Page, HeroVideoFields, SocialFields):
 
         return ''
 
+    def get_context(self, request):
+        context = super(HomePage, self).get_context(request)
+        print("Context", context)
+        return context
+
     # Only allow creating HomePages at the root level
     parent_page_types = ['wagtailcore.Page']
