@@ -1385,34 +1385,43 @@ article .share-icons--hide-mobile {
 }
 
 .carousel__nav > div {
-  transition: color 0.25s ease-out;
-}
-
-.carousel__nav > div:hover {
-  cursor: pointer;
-  color: #cc9f00;
+  height: 30px;
 }
 
 .carousel__nav--full-width {
   position: absolute;
+  bottom: 0;
   z-index: 1;
   width: 100%;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 1rem;
-  color: #ffc700;
-  font-size: 2rem;
   display: none;
-  top: 50%;
-  transform: translate(0, -50%);
 }
 
 @media only screen and (min-width: 768px) {
   .carousel__nav--full-width {
     display: flex;
-    font-size: 4rem;
-    padding: 2rem;
+    font-size: 3rem;
+    padding: 30px 45px;
   }
+}
+
+.carousel__nav-left, .carousel__nav-right {
+  width: 30px;
+  fill: #ffc700;
+  transition: fill 0.25s ease-out;
+  cursor: pointer;
+  height: 30px;
+}
+
+.carousel__nav-left:hover, .carousel__nav-right:hover {
+  fill: #cc9f00;
+}
+
+.carousel__nav-right {
+  transform: rotate(180deg);
+  margin-left: 20px;
 }
 
 .owl-carousel {
@@ -1528,6 +1537,33 @@ article .share-icons--hide-mobile {
 /* No Js */
 .no-js .owl-carousel {
   display: block;
+}
+
+.owl-dots {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+}
+
+.owl-dot {
+  flex: 1;
+  margin-right: 2px;
+}
+
+.owl-dot:last-child {
+  margin-right: 0;
+}
+
+.owl-dot.active span {
+  background: #ffc700;
+}
+
+.owl-dot span {
+  height: 5px;
+  width: 100%;
+  display: block;
+  background: #dad9d6;
 }
 
 .hero {
