@@ -33,7 +33,7 @@ $(function() {
         nav: true,
         dots: true,
         navContainer: '.js-full-width-nav',
-        navText: ['&larr;','&rarr;'],
+        navText: ['<svg class="carousel__nav-left"><use xlink:href="#arrow"></use></svg>','<svg class="carousel__nav-right"><use xlink:href="#arrow"></use></svg>'],
         loop: $('.owl-carousel .carousel__item').length > 1 ? true : false
     });
 
