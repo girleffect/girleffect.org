@@ -3,24 +3,25 @@
     {% image value.image fill-1020x500 as fw_image %}
     <img src="{{ fw_image.url }}" alt="{{ fw_image.alt }}" class="media-card__image">
 
-        <a class="media-card__content"
+    <a class="media-card__content"
         {% if value.link.external_link %}
-        href="{{ value.link.external_link }}"
+            href="{{ value.link.external_link }}"
         {% elif value.link.internal_link %}
-        href="{{ value.link.internal_link.url}}"
+            href="{{ value.link.internal_link.url}}"
         {% elif value.link.document_url %}
-        href="{{ value.link.document_link.url }}"        
+            href="{{ value.link.document_link.url }}"
         {% endif %}
-        >
+    >
 
-    <div class="media-card__content">
-        <h4 class="media-card__label">{{ value.label }}</h4>
+        {% if value.title %}
+            <h3 class="media-card__title">{{ value.title }}</h3>
+        {% elif value.logo %}
+            {% image value.logo max-300x75 as logo %}
+             <img class="media-card__logo" src="{{ logo.url }}" alt="{{ logo.alt }}">
+        {% endif %}
 
         {# text is RichText #}
         {{ value.text }}
-
-        {# template for this is in link_block.html #}
-        {% include_block value.link %}
-    </div>
-
+        <div class="media-card__link link__arrow"></div>
+    </a>
 </div>
