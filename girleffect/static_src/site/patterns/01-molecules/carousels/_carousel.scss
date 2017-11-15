@@ -64,32 +64,46 @@
 
     &__nav {
         > div {
-            transition: color $transition;
-
-            &:hover {
-                cursor: pointer;
-                color: darken($yellow, 10%);
-            }
+            height: 30px;
         }
 
         &--full-width {
             position: absolute;
+            bottom: 0;
             z-index: 1;
             width: 100%;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-end;
             padding: 1rem;
-            color: $yellow;
-            font-size: 2rem;
             display: none;
-            top: 50%;
-            transform: translate(0, -50%);
 
             @include media-query(tablet-portrait) {
                 display: flex;
-                font-size: 4rem;
-                padding: 2rem;
+                font-size: 3rem;
+                padding: 30px 45px;
             }
         }
+    }
+
+    &__nav-left,
+    &__nav-right {
+        width: 30px;
+        fill: $yellow;
+        transition: fill $transition;
+        cursor: pointer;
+        height: 30px;
+
+        &:hover {
+            fill: darken($yellow, 10%);
+        }
+    }
+
+    &__nav-left {
+
+    }
+
+    &__nav-right {
+        transform: rotate(180deg);
+        margin-left: 20px;
     }
 }
