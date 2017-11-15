@@ -41,7 +41,7 @@ class SolutionPageRelatedPartner(Orderable, models.Model):
 
 class SolutionPage(Page, PageLinkFields, SocialFields, ListingFields):
     hero_video = models.ForeignKey(
-        'wagtailmedia.Media',
+        'utils.CustomMedia',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,

@@ -84,7 +84,7 @@ class ArticlePage(Page, SocialFields, ListingFields):
     author = models.CharField(
         blank=True,
         max_length=255,
-        help_text="Optional Author name. Will default to 'Girl Effect Team' if empty.")
+        help_text="Optional Author name.")
     introduction = models.TextField(blank=True, max_length=350)
     body = StreamField(ArticleBlock())
 
@@ -159,4 +159,4 @@ class ArticleIndex(Page, SocialFields):
         return context
 
     subpage_types = ['ArticlePage']
-    parent_page_types = ['home.HomePage']
+    parent_page_types = ['home.HomePage', 'standardpage.StandardIndex']

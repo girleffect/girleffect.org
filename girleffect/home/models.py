@@ -19,7 +19,7 @@ from girleffect.utils.models import (
 
 class HomePage(Page, SocialFields):
     hero_video = models.ForeignKey(
-        'wagtailmedia.Media',
+        'utils.CustomMedia',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,

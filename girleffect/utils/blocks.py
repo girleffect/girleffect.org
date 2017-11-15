@@ -103,20 +103,16 @@ class CarouselItemBlock(blocks.StructBlock):
 
 
 class MediaTextOverlayBlock(blocks.StructBlock):
-    image = ImageChooserBlock()
     title = blocks.CharBlock(
         required=False,
         label="Title Text",
-        max_length=25
+        max_length=25,
+        help_text="Appears above the module."
     )
+    image = ImageChooserBlock()
     logo = ImageChooserBlock(
         label="Title Logo",
         required=False
-    )
-    label = blocks.CharBlock(
-        required=False,
-        max_length=30,
-        help_text="A short label or title, e.g. 'Our Reach'"
     )
     text = blocks.RichTextBlock(
         max_length=75,
@@ -187,7 +183,7 @@ class QuoteBlock(blocks.StructBlock):
         required=False,
         max_length=80,
     )
-    link = blocks.URLBlock(required=False, label="Citation Link")
+    link_block = LinkBlock(required=False)
 
     class Meta:
         icon = "openquote"
