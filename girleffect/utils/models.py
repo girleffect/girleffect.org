@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -9,10 +10,16 @@ from wagtail.wagtailadmin.edit_handlers import (
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
+from wagtail.wagtailembeds import oembed_providers
+from wagtail.wagtailembeds.embeds import get_embed
+from wagtail.wagtailembeds.exceptions import EmbedException
+from wagtail.wagtailembeds.finders.oembed import OEmbedFinder as OEmbedFinder
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtailmedia.models import AbstractMedia
+from wagtailmedia.edit_handlers import MediaChooserPanel
 
 from girleffect.images.models import CustomImage
 
@@ -232,3 +239,128 @@ class CustomMedia(AbstractMedia):
         'thumbnail',
         'tags',
     )
+
+
+class HeroVideoFields(models.Model):
+    hero_video = models.ForeignKey(
+        'utils.CustomMedia',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        help_text="Short Hero Video to show on top of page. Recommended size 12Mb or under.",
+        related_name='+'
+    )
+    hero_fallback_image = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        related_name='+',
+        help_text="Hero Image to be used as fallback for video.",
+        on_delete=models.SET_NULL
+    )
+    hero_strapline = models.TextField(
+        blank=False,
+        max_length=80,
+        help_text="The strapline will show over the hero image."
+    )
+    link_page = models.ForeignKey(
+        Page,
+        blank=True,
+        null=True,
+        related_name='+',
+        on_delete=models.SET_NULL,
+        help_text="Optional page link as clickthrough for hero video."
+    )
+    link_youtube = models.URLField(
+        blank=True,
+        help_text="Optional URL for a full length YouTube video goes here,\
+                    which will open in a modal window."
+    )
+    link_text = models.CharField(
+        blank=True,
+        max_length=255
+    )
+
+    search_fields = Page.search_fields + [
+        index.SearchField('hero_strapline'),
+    ]
+
+    content_panels = [
+        MultiFieldPanel([
+            MediaChooserPanel('hero_video'),
+            ImageChooserPanel('hero_fallback_image'),
+            FieldPanel('hero_strapline'),
+            MultiFieldPanel([
+                PageChooserPanel('link_page'),
+                FieldPanel('link_youtube'),
+                FieldPanel('link_text'),
+            ], 'Hero Clickthrough Link')
+        ], 'Hero Video'),
+    ]
+
+    def clean(self):
+        # Validating if URL is a valid YouTube URL
+        youtube_embed = self.link_youtube
+        if youtube_embed:
+            youtube_finder = OEmbedFinder(providers=[oembed_providers.youtube])
+            if not youtube_finder.accept(youtube_embed):
+                raise ValidationError({'link_youtube': _('Please supply a valid YouTube URL.')})
+            else:
+                try:
+                    embed = get_embed(youtube_embed)
+                    self.link_youtube_html = embed.html
+                except EmbedException:
+                    raise ValidationError({'link_youtube': _('Embed cannot be found.')})
+
+        # Validating links
+        populated_fields = []
+
+        for link_field in [self.link_page, self.link_youtube]:
+            if link_field:
+                populated_fields.append(link_field)
+
+        # Only only one or less fields can be selected
+        if len(populated_fields) > 1:
+            error_message = 'Please choose only one of Link Page or Link YouTube as destination.'
+            raise ValidationError(
+                {'link_page': error_message, 'link_youtube': error_message}
+            )
+
+        # Link fields should have link text
+        if len(populated_fields) >= 1 and not self.link_text:
+            raise ValidationError(
+                {'link_text': 'Link text is required if link destination has been selected'}
+            )
+
+        return super(HeroVideoFields, self).clean()
+
+    class Meta:
+        abstract = True
+
+
+class HeroVideoFieldsLogo(HeroVideoFields):
+    hero_logo = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        related_name='+',
+        help_text="The logo will show over the hero image.",
+        on_delete=models.SET_NULL
+    )
+
+    content_panels = [
+        MultiFieldPanel([
+            MediaChooserPanel('hero_video'),
+            ImageChooserPanel('hero_fallback_image'),
+            ImageChooserPanel('hero_logo'),
+            FieldPanel('hero_strapline'),
+            MultiFieldPanel([
+                PageChooserPanel('link_page'),
+                FieldPanel('link_youtube'),
+                FieldPanel('link_text'),
+            ], 'Hero Clickthrough Link')
+        ], 'Hero Video'),
+    ]
+
+    class Meta:
+        abstract = True
