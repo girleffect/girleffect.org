@@ -5,6 +5,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from modelcluster.fields import ParentalKey
 
+from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
@@ -17,7 +18,7 @@ from wagtail.wagtailadmin.edit_handlers import (
 from wagtail.wagtailsearch import index
 
 from girleffect.utils.models import (
-    ListingFields, SocialFields, RelatedPage,
+    HeroImageFields, ListingFields, SocialFields, RelatedPage,
     RelatedDocument
 )
 from girleffect.utils.blocks import ArticleBlock
@@ -68,14 +69,7 @@ class ArticlePageRelatedPage(RelatedPage):
     )
 
 
-class ArticlePage(Page, SocialFields, ListingFields):
-    hero_image = models.ForeignKey(
-        'images.CustomImage',
-        null=True,
-        blank=True,
-        related_name='+',
-        on_delete=models.SET_NULL
-    )
+class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
     # It's datetime for easy comparison with first_published_at
     publication_date = models.DateTimeField(
         null=True, blank=True,
@@ -88,14 +82,16 @@ class ArticlePage(Page, SocialFields, ListingFields):
     introduction = models.TextField(blank=True, max_length=350)
     body = StreamField(ArticleBlock())
 
-    search_fields = Page.search_fields + [
+    search_fields = Page.search_fields + HeroImageFields.search_fields + [
         index.SearchField('author'),
         index.SearchField('introduction'),
         index.SearchField('body')
     ]
 
     content_panels = Page.content_panels + [
-        ImageChooserPanel('hero_image'),
+        MultiFieldPanel([
+            ImageChooserPanel('hero_image'),
+        ], 'Hero Image'),
         FieldPanel('publication_date'),
         FieldPanel('author'),
         FieldPanel('introduction'),
