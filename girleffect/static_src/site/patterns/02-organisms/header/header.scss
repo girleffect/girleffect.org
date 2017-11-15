@@ -3,6 +3,7 @@
     justify-content: space-between;
     padding: 20px;
     position: relative;
+    background: $white;
 
     &__logo {
         margin-right: 20px;
@@ -37,10 +38,6 @@
             background: transparent;
             padding: 0;
             flex-direction: row;
-        }
-
-        form {
-            display: none; // until functionality is decided
         }
     }
 
@@ -94,5 +91,16 @@
             fill: $green;
             cursor: pointer;
         }
+    }
+
+    &__search-bar {
+        display: none;
+        position: absolute;
+        width: 100%;
+        background: $light-grey;
+        left: 0;
+        text-align: center;
+        padding: 25px;
+        z-index: 10;
     }
 }
