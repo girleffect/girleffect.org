@@ -62,9 +62,9 @@ $(function() {
         }
     });
 
-    $('.js-search').on('click', function() {
+    $('.js-search-desktop').on('click', function() {
         const headerHeight = $('.header').outerHeight();
-        const searchBar = $('.header__search-bar');
+        const searchBar = $('.header__search-bar--desktop');
         const form = $('.form--search');
 
         $(searchBar).css('top', headerHeight);
