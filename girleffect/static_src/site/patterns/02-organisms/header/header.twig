@@ -1,10 +1,21 @@
 <header class="header">
+    <div class="header__search-bar header__search-bar--mobile">
+        <div class="js-close-search-mobile header__icon header__icon--close">&#215;</div>
+        {% include 'molecules-form--search' %}
+    </div>
 
     <a href="/" class="header__logo">
         <img src="https://placehold.it/220x140" alt="">
     </a>
 
-    {% include 'atoms-hamburger' %}
+    <div class="header__mobile-icons">
+        <a class="js-search-mobile" aria-label="search">
+            <svg class="header__icon header__icon--search-mobile"><use xlink:href="#magnifying-glass"></use></svg>
+        </a>
+
+        {% include 'atoms-hamburger' %}
+    </div>
+
     <div class="header__row">
         <nav role="navigation" aria-label="Primary">
             <ul class="header__nav primary" role="menubar">
@@ -26,7 +37,7 @@
             </ul>
         </nav>
 
-        <a class="header__link header__link--search js-search" aria-label="search">
+        <a class="js-search-desktop header__link header__link--search" aria-label="search">
             <svg class="header__icon"><use xlink:href="#magnifying-glass"></use></svg>
         </a>
 
@@ -45,7 +56,7 @@
             </a>
         </div>
     </div>
-    <div class="header__search-bar">
+    <div class="header__search-bar header__search-bar--desktop">
         {% include 'molecules-form--search' %}
     </div>
 </header>
