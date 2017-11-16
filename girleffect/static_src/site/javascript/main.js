@@ -72,6 +72,7 @@ $(function() {
         $(form).removeClass('visible');
         $(searchBar).slideToggle(250, function() {
             $(form).addClass('visible');
+            $('.input--search').focus();
         });
     });
 });
