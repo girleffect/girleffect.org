@@ -19,7 +19,7 @@
                         <span></span>
                     </a>
                 {% elif page.link_youtube  %}
-                    <a class="link link--boxed" href="{{ page.link_url }}" target="_blank">
+                    <a class="link link--boxed js-modal" href="#js-modal">
                         {{ page.get_link_text }}
                         <span></span>
                         <span></span>
@@ -30,9 +30,7 @@
     </section>
 
     {% if page.link_youtube %}
-    <div class="youtube-modal">
-        <div class="video__wrapper">
+        <div class="modal modal--hidden" id="js-modal" aria-modal="true">
             {% embed page.link_youtube %}
         </div>
-    </div>
     {% endif %}
