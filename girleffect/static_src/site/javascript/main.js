@@ -63,6 +63,29 @@ $(function() {
         }
     });
 
+    $('.js-search-desktop').on('click', function() {
+        $(this).toggleClass('is-active');
+        const headerHeight = $('.header').outerHeight();
+        const searchBar = $('.header__search-bar--desktop');
+        const form = $('.form--search');
+
+        $(searchBar).css('top', headerHeight);
+        $(form).removeClass('visible');
+        $(searchBar).slideToggle(250, function() {
+            $(form).addClass('visible');
+            $('.input--search').focus();
+        });
+    });
+
+    $('.js-search-mobile').on('click', function() {
+        $('.header__search-bar--mobile').addClass('is-visible');
+        $('.input--search').focus();
+    });
+
+    $('.js-close-search-mobile').on('click', function() {
+        $('.header__search-bar--mobile').removeClass('is-visible');
+    });
+
     $('.js-share-icons').scrollToFixed({
         marginTop: 30,
         limit: $($('.section--downloads')).offset().top - $('.js-share-icons').outerHeight(true) - 30
