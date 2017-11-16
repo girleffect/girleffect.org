@@ -42,6 +42,17 @@ $(function() {
         $('.carousel__nav').hide();
     }
 
+    $('.js-article-filter').on('change', function() {
+        var url = $(this).val();
+
+        if (url) {
+            window.location = `?category=${url}`;
+            return false;
+        }
+        window.location = '/stories/';
+        return false;
+    });
+
     $('.js-share-icons').scrollToFixed({
         marginTop: 30,
         limit: $($('.section--downloads')).offset().top - $('.js-share-icons').outerHeight(true) - 30
