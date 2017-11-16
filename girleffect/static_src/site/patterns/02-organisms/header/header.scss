@@ -87,20 +87,69 @@
         height: 20px;
         transition: fill $transition;
 
+        &:hover {
+            cursor: pointer;
+        }
+
+        .is-active & {
+            fill: $green;
+        }
+
         .header__link:hover & {
             fill: $green;
             cursor: pointer;
         }
+
+        &--search-mobile {
+            fill: $green;
+            width: 30px;
+            height: 30px;
+            margin-right: 20px;
+        }
+
+        &--close {
+            font-size: 40px;
+            position: absolute;
+            top: 0;
+            right: 20px;
+        }
     }
 
     &__search-bar {
-        display: none;
         position: absolute;
         width: 100%;
         background: $light-grey;
         left: 0;
-        text-align: center;
         padding: 25px;
-        z-index: 10;
+        display: flex;
+
+        &--desktop {
+            text-align: center;
+            display: none;
+            z-index: 10;
+        }
+
+        &--mobile {
+            height: 100vh;
+            top: 0;
+            z-index: -1;
+            opacity: 0;
+            align-items: center;
+            justify-content: center;
+            transition: z-index, opacity $transition;
+
+            &.is-visible {
+                z-index: 15;
+                opacity: 1;
+            }
+        }
+    }
+
+    &__mobile-icons {
+        display: flex;
+
+        @include media-query(tablet-landscape) {
+            display: none;
+        }
     }
 }
