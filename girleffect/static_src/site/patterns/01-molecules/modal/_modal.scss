@@ -1,0 +1,51 @@
+.modal {
+    &--hidden {
+        display: none;
+    }
+}
+
+.modal-container {
+    // Featherlight overrides - '.modal-container' is added in main.js
+    .featherlight-content {
+        padding: 0;
+        border-bottom: 0;
+        background: transparent;
+        overflow: visible;
+    }
+
+    .featherlight-close-icon {
+        top: -40px;
+        right: -40px;
+        color: $black;
+        background: $white;
+    }
+
+    iframe {
+        width: 256px;
+        height: 144px;
+
+        @include media-query(mob-landscape) {
+            width: 384px;
+            height: 216px;
+        }
+
+        @include media-query(tablet-portrait) {
+            width: 640px;
+            height: 360px;
+        }
+
+        @include media-query(tablet-landscape) {
+            width: 768px;
+            height: 432px;
+        }
+
+        @include media-query(desktop) {
+            width: 1152px;
+            height: 648px;
+        }
+    }
+}
+
+.featherlight:last-of-type {
+    background: $black-90;
+}
