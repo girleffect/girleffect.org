@@ -1,0 +1,21 @@
+.button {
+    border: 0;
+    background-image: none;
+    background-color: transparent;
+    box-shadow: none;
+
+    &--search-icon {
+        width: 30px;
+        height: 30px;
+        fill: $yellow;
+        transition: fill $transition;
+
+        &:hover {
+            fill: darken($yellow, 5%);
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
