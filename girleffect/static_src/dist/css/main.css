@@ -631,6 +631,10 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 b,
 strong {
   font-weight: 700;
@@ -852,6 +856,28 @@ blockquote cite {
   bottom: 0;
 }
 
+.button {
+  border: 0;
+  background-image: none;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.button--search-icon {
+  width: 30px;
+  height: 30px;
+  fill: #ffc700;
+  transition: fill 0.25s ease-out;
+}
+
+.button--search-icon:hover {
+  fill: #e6b300;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
 .hamburger {
   background: transparent;
   border: 0;
@@ -922,6 +948,33 @@ blockquote cite {
 
 .heading--squashed {
   line-height: 1.1;
+}
+
+.input--search {
+  background: transparent;
+  border: 0;
+  padding: 10px;
+  width: 100%;
+  font-size: 20px;
+  color: #2f6165;
+}
+
+@media only screen and (min-width: 480px) {
+  .input--search {
+    max-width: 330px;
+  }
+}
+
+.input--search:focus {
+  outline: none;
+}
+
+.input--search::placeholder {
+  padding-left: 10px;
+}
+
+.header__search-bar--mobile .input--search {
+  border-bottom: 1px solid #dad9d6;
 }
 
 .large-text {
@@ -1640,6 +1693,23 @@ article .share-icons--hide-mobile {
   background: #dad9d6;
 }
 
+.form--search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+}
+
+.form--search.visible {
+  opacity: 1;
+}
+
+.header__search-bar--mobile .form--search {
+  opacity: 1;
+  width: 100%;
+}
+
 .hero {
   position: relative;
 }
@@ -2091,6 +2161,7 @@ article .share-icons--hide-mobile {
   justify-content: space-between;
   padding: 20px;
   position: relative;
+  background: #fff;
 }
 
 .header__logo {
@@ -2131,10 +2202,6 @@ article .share-icons--hide-mobile {
     padding: 0;
     flex-direction: row;
   }
-}
-
-.header__row form {
-  display: none;
 }
 
 .header__nav {
@@ -2194,9 +2261,71 @@ article .share-icons--hide-mobile {
   transition: fill 0.25s ease-out;
 }
 
+.header__icon:hover {
+  cursor: pointer;
+}
+
+.is-active .header__icon {
+  fill: #2f6165;
+}
+
 .header__link:hover .header__icon {
   fill: #2f6165;
   cursor: pointer;
+}
+
+.header__icon--search-mobile {
+  fill: #2f6165;
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+}
+
+.header__icon--close {
+  font-size: 40px;
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
+.header__search-bar {
+  position: absolute;
+  width: 100%;
+  background: #f4f4f3;
+  left: 0;
+  padding: 25px;
+  display: flex;
+}
+
+.header__search-bar--desktop {
+  text-align: center;
+  display: none;
+  z-index: 10;
+}
+
+.header__search-bar--mobile {
+  height: 100vh;
+  top: 0;
+  z-index: -1;
+  opacity: 0;
+  align-items: center;
+  justify-content: center;
+  transition: z-index, opacity 0.25s ease-out;
+}
+
+.header__search-bar--mobile.is-visible {
+  z-index: 15;
+  opacity: 1;
+}
+
+.header__mobile-icons {
+  display: flex;
+}
+
+@media only screen and (min-width: 1024px) {
+  .header__mobile-icons {
+    display: none;
+  }
 }
 
 .media-block-container {

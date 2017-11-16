@@ -6363,6 +6363,29 @@ jquery(function () {
         }
     });
 
+    jquery('.js-search-desktop').on('click', function () {
+        jquery(this).toggleClass('is-active');
+        var headerHeight = jquery('.header').outerHeight();
+        var searchBar = jquery('.header__search-bar--desktop');
+        var form = jquery('.form--search');
+
+        jquery(searchBar).css('top', headerHeight);
+        jquery(form).removeClass('visible');
+        jquery(searchBar).slideToggle(250, function () {
+            jquery(form).addClass('visible');
+            jquery('.input--search').focus();
+        });
+    });
+
+    jquery('.js-search-mobile').on('click', function () {
+        jquery('.header__search-bar--mobile').addClass('is-visible');
+        jquery('.input--search').focus();
+    });
+
+    jquery('.js-close-search-mobile').on('click', function () {
+        jquery('.header__search-bar--mobile').removeClass('is-visible');
+    });
+
     jquery('.js-share-icons').scrollToFixed({
         marginTop: 30,
         limit: jquery(jquery('.section--downloads')).offset().top - jquery('.js-share-icons').outerHeight(true) - 30
