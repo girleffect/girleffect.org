@@ -63,6 +63,7 @@ $(function() {
     });
 
     $('.js-search-desktop').on('click', function() {
+        $(this).toggleClass('is-active');
         const headerHeight = $('.header').outerHeight();
         const searchBar = $('.header__search-bar--desktop');
         const form = $('.form--search');
