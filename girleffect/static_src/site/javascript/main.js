@@ -75,4 +75,13 @@ $(function() {
             $('.input--search').focus();
         });
     });
+
+    $('.js-search-mobile').on('click', function() {
+        $('.header__search-bar--mobile').addClass('is-visible');
+        $('.input--search').focus();
+    });
+
+    $('.js-close-search-mobile').on('click', function() {
+        $('.header__search-bar--mobile').removeClass('is-visible');
+    });
 });
