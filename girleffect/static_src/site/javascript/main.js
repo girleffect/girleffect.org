@@ -31,9 +31,9 @@ $(function() {
     $('.js-carousel--full-width').owlCarousel({
         items: 1,
         nav: true,
-        dots: false,
+        dots: true,
         navContainer: '.js-full-width-nav',
-        navText: ['&larr;','&rarr;'],
+        navText: ['<svg class="carousel__nav-left"><use xlink:href="#arrow"></use></svg>','<svg class="carousel__nav-right"><use xlink:href="#arrow"></use></svg>'],
         loop: $('.owl-carousel .carousel__item').length > 1 ? true : false
     });
 

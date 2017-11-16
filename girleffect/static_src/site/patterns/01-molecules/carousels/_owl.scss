@@ -111,3 +111,33 @@
 .no-js .owl-carousel {
     display: block;
 }
+
+// Custom owl dot styling
+.owl-dots {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+}
+
+.owl-dot {
+    flex: 1;
+    margin-right: 2px;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &.active {
+        span {
+            background: $yellow;
+        }
+    }
+
+    span {
+        height: 5px;
+        width: 100%;
+        display: block;
+        background: $brand-grey;
+    }
+}
