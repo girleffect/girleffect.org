@@ -1,6 +1,7 @@
 import $ from './globals';
 import 'owl.carousel';
 import 'scrolltofixed';
+import 'featherlight';
 
 import Hamburger from './../patterns/00-atoms/buttons/hamburger/hamburger.js';
 
@@ -51,6 +52,15 @@ $(function() {
         }
         window.location = '/stories/';
         return false;
+    });
+
+    $('.js-modal').featherlight({
+        targetAttr: 'href',
+        variant: 'modal-container', // add class for custom styling
+        afterOpen: () => {
+            const video = $('.featherlight iframe')[0];
+            video.src += '&autoplay=1';
+        }
     });
 
     $('.js-share-icons').scrollToFixed({
