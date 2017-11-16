@@ -6164,6 +6164,17 @@ jquery(function () {
         jquery('.carousel__nav').hide();
     }
 
+    jquery('.js-article-filter').on('change', function () {
+        var url = jquery(this).val();
+
+        if (url) {
+            window.location = '?category=' + url;
+            return false;
+        }
+        window.location = '/stories/';
+        return false;
+    });
+
     jquery('.js-share-icons').scrollToFixed({
         marginTop: 30,
         limit: jquery(jquery('.section--downloads')).offset().top - jquery('.js-share-icons').outerHeight(true) - 30
