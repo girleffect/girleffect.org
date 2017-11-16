@@ -12,7 +12,7 @@
             {{ page.introduction|richtext }}
 
             <form method="GET">
-                <select name="category">
+                <select name="category" class="js-article-filter">
                     <option value="">All</option>
                     {% for category in categories %}
                         <option value="{{ category.0 }}" {% if request.GET.category == category.0|slugify %}selected="selected"{% endif %}>{{ category.1 }}</option>
