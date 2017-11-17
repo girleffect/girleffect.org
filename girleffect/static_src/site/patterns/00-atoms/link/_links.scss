@@ -104,7 +104,9 @@
         display: inline-flex;
         align-items: center;
         margin-left: 10px;
-        transition: margin $transition;
+        right: 0;
+        transition: right $transition;
+        position: relative;
 
         &::before {
             content: '';
@@ -125,7 +127,7 @@
         }
 
         .link--with-arrow:hover & {
-            margin-left: 20px;
+            right: -10px;
         }
 
         .link--with-arrow-large:hover & {
