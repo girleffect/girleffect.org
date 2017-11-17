@@ -60,6 +60,10 @@
 
     &__image {
         width: 100%;
+
+        &--top-space {
+            margin-top: 70px;
+        }
     }
 
     &__video {
