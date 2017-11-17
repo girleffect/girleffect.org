@@ -42,7 +42,7 @@
         }
     }
 
-    &__nav {
+    &__nav-primary {
         display: flex;
         margin: 0;
         flex-direction: column;
@@ -52,16 +52,62 @@
         }
     }
 
-    &__nav-item {
-        margin-right: 15px;
+    &__nav-secondary {
+        opacity: 100;
+        position: absolute;
+        z-index: 1000;
+        text-align: left;
+        top: 132px;
+        padding-top: 20px;
+        transition: z-index, opacity, $transition;
+
+        &.is-visible {
+            z-index: 10;
+            opacity: 1;
+        }
+    }
+
+    &__nav-tertiary {
+        padding-bottom: 20px;
+    }
+
+    &__nav-item-primary {
+        padding-right: 15px;
 
         @include media-query(tablet-landscape) {
-            margin-right: 20px;
+            padding-right: 20px;
         }
 
         @include media-query(desktop) {
-            margin-right: 30px;
+            padding-right: 30px;
         }
+
+        > a {
+            padding-bottom: 21px;
+
+            &.active {
+                border-bottom: 3px solid $yellow;
+                padding-bottom: 18px;
+            }
+        }
+    }
+
+
+    &__nav-item-secondary {
+        font-weight: $weight-bold;
+        border-bottom: 1px solid $brand-grey;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+    }
+
+    &__nav-item-arrow {
+        width: 20px;
+        height: 20px;
+        fill: $yellow;
+        transform: rotate(180deg);
+        margin-right: 10px;
     }
 
     &__link {
@@ -79,6 +125,25 @@
             @include media-query(desktop) {
                 padding: 0 20px;
             }
+        }
+    }
+
+    &__link-secondary {
+        padding: 15px 0;
+        transition: padding $transition;
+
+        &:hover {
+            padding-left: 10px;
+        }
+    }
+
+    &__link-tertiary {
+        font-weight: $weight-normal;
+        padding-left: 35px;
+        transition: padding $transition;
+
+        &:hover {
+            padding-left: 45px;
         }
     }
 
@@ -153,4 +218,25 @@
             display: none;
         }
     }
+
+    &__nav-overlay {
+        position: absolute;
+        background: $white-90;
+        top: 152px;
+        width: 100%;
+        height: 60vh;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        display: block;
+        opacity: 0;
+        transition: z-index, opacity, height, 0.25s ease-in-out;
+
+        &.is-visible {
+            z-index: 5;
+            opacity: 1;
+            height: 65vh;
+        }
+    }
 }
+
