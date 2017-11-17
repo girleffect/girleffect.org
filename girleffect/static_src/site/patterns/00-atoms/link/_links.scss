@@ -90,6 +90,14 @@
         font-weight: $weight-bold;
         display: flex;
         align-items: center;
+
+        &:only-child {
+            .wrapper--center & {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
     }
 
     &__arrow {
