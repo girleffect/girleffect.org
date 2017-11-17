@@ -4,13 +4,7 @@
 {% block content %}
 
     {# Hero section #}
-    <section class="hero">
-        {% if page.hero_image %}
-            {% image page.hero_image fill-1800x400 as hero_image %}
-            <img class="hero__image" src="{{ hero_image.url }}">
-        {% endif %}
-        <h1 class="hero__heading">{{ page.hero_heading }}</h1>
-    </section>
+    {% include "includes/hero_image_section.html" %}
 
     {% block breadcrumbs %}
         {% include "navigation/breadcrumbs.html" %}

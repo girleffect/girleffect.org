@@ -18,6 +18,7 @@ from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from girleffect.utils.blocks import StoryBlock
+from girleffect.utils.models import HeroImageFields
 
 
 class SocialMediaProfile(models.Model):
@@ -101,16 +102,7 @@ class PersonIndexPersonCategory(models.Model):
     ]
 
 
-class PersonIndexPage(Page):
-    hero_image = models.ForeignKey(
-        'images.CustomImage',
-        null=True,
-        blank=True,
-        related_name='+',
-        help_text="Hero Image to be used as full width feature image for page.",
-        on_delete=models.SET_NULL
-    )
-    heading = models.CharField(blank=True, max_length=80)
+class PersonIndexPage(Page, HeroImageFields):
     introduction = RichTextField(
         null=True,
         blank=True,
@@ -126,9 +118,7 @@ class PersonIndexPage(Page):
 
     subpage_types = ['PersonPage']
 
-    content_panels = Page.content_panels + [
-        ImageChooserPanel('hero_image'),
-        FieldPanel('heading'),
+    content_panels = Page.content_panels + HeroImageFields.content_panels + [
         FieldPanel('introduction'),
         InlinePanel('category_relationships', label="Person Index Categories"),
         SnippetChooserPanel('call_to_action')

@@ -261,7 +261,7 @@ class HeroVideoFields(models.Model):
     hero_strapline = models.TextField(
         blank=False,
         max_length=80,
-        help_text="The strapline will show over the hero image."
+        help_text="Shows text over the hero."
     )
     link_page = models.ForeignKey(
         Page,
@@ -269,12 +269,14 @@ class HeroVideoFields(models.Model):
         null=True,
         related_name='+',
         on_delete=models.SET_NULL,
-        help_text="Optional page link as clickthrough for hero video."
+        help_text="Optional page link as clickthrough for hero video.",
+        verbose_name="Page Link"
     )
     link_youtube = models.URLField(
         blank=True,
         help_text="Optional URL for a full length YouTube video goes here,\
-                    which will open in a modal window."
+                    which will open in a modal window.",
+        verbose_name="YouTube Link"
     )
     link_text = models.CharField(
         blank=True,
@@ -344,8 +346,9 @@ class HeroVideoFieldsLogo(HeroVideoFields):
         null=True,
         blank=True,
         related_name='+',
-        help_text="The logo will show over the hero image.",
-        on_delete=models.SET_NULL
+        help_text="Shows the brand logo on the hero instead of a text heading.",
+        on_delete=models.SET_NULL,
+        verbose_name="Brand Logo"
     )
 
     content_panels = [
@@ -360,6 +363,32 @@ class HeroVideoFieldsLogo(HeroVideoFields):
                 FieldPanel('link_text'),
             ], 'Hero Clickthrough Link')
         ], 'Hero Video'),
+    ]
+
+    class Meta:
+        abstract = True
+
+
+class HeroImageFields(models.Model):
+    hero_image = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        related_name='+',
+        help_text="Hero Image to be used as full width feature image for page.",
+        on_delete=models.SET_NULL
+    )
+    hero_strapline = models.CharField(blank=True, max_length=80)
+
+    search_fields = Page.search_fields + [
+        index.SearchField('hero_strapline'),
+    ]
+
+    content_panels = [
+        MultiFieldPanel([
+            ImageChooserPanel('hero_image'),
+            FieldPanel('hero_strapline'),
+        ], 'Hero Image'),
     ]
 
     class Meta:

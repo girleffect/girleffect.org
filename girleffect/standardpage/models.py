@@ -1,36 +1,24 @@
 from django.db import models
 
 from wagtail.wagtailadmin.edit_handlers import (
-    FieldPanel, MultiFieldPanel,
+    FieldPanel,
     StreamFieldPanel
 )
 
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
+    HeroImageFields,
     ListingFields,
     SocialFields
 )
 
 
-class StandardPage(Page, SocialFields, ListingFields):
-    hero_image = models.ForeignKey(
-        'images.CustomImage',
-        null=True,
-        blank=True,
-        related_name='+',
-        on_delete=models.SET_NULL
-    )
-    hero_heading = models.CharField(
-        max_length=80,
-        blank=True,
-        help_text="Heading that will appear over the hero image."
-    )
+class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
     introduction = models.TextField(blank=True)
     body = StreamField(StoryBlock())
     call_to_action = models.ForeignKey(
@@ -41,20 +29,12 @@ class StandardPage(Page, SocialFields, ListingFields):
         related_name='+'
     )
 
-    search_fields = Page.search_fields + [
-        index.SearchField('hero_heading'),
+    search_fields = Page.search_fields + HeroImageFields.search_fields + [
         index.SearchField('introduction'),
         index.SearchField('body'),
     ]
 
-    content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                ImageChooserPanel('hero_image'),
-                FieldPanel('hero_heading'),
-            ],
-            heading="Hero"
-        ),
+    content_panels = Page.content_panels + HeroImageFields.content_panels + [
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
         SnippetChooserPanel('call_to_action'),
@@ -64,35 +44,16 @@ class StandardPage(Page, SocialFields, ListingFields):
     promote_panels = Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels
 
 
-class StandardIndex(Page, SocialFields):
-    hero_image = models.ForeignKey(
-        'images.CustomImage',
-        null=True,
-        blank=True,
-        related_name='+',
-        on_delete=models.SET_NULL
-    )
-    hero_heading = models.CharField(
-        max_length=80,
-        blank=True,
-        help_text="Heading that will appear over the hero image."
-    )
+class StandardIndex(Page, HeroImageFields, SocialFields):
     body = StreamField(StoryBlock(), blank=True)
 
-    content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                ImageChooserPanel('hero_image'),
-                FieldPanel('hero_heading'),
-            ],
-            heading="Hero"
-        ),
+    content_panels = Page.content_panels + HeroImageFields.content_panels + [
         StreamFieldPanel('body'),
 
     ]
 
-    search_fields = Page.search_fields + [
-        index.SearchField('hero_heading'),
+    search_fields = Page.search_fields + HeroImageFields.search_fields + [
+        index.SearchField('body'),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels
