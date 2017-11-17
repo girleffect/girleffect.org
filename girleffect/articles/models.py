@@ -6,7 +6,6 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel
-from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
@@ -117,7 +116,7 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
 
 class ArticleIndex(Page, SocialFields):
     heading = models.CharField(max_length=80, blank=True)
-    introduction = RichTextField(max_length=350, blank=True)
+    introduction = models.TextField(max_length=350, blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('heading'),
