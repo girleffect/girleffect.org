@@ -5,6 +5,8 @@
         {# RichText #}
         {{ value.description }}
 
+        {{ statistic.citation_text }}
+
         {% if value.link_page %}
             <a href="{{ value.link_page.href }}">{{ value.get_link_text }}</a>
         {% elif value.link_url  %}
