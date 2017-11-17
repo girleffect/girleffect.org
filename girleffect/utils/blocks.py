@@ -221,7 +221,6 @@ class StatisticBlock(blocks.StructBlock):
     statistics = blocks.ListBlock(
         SnippetChooserBlock(Statistic),
     )
-    citation_text = blocks.CharBlock(max_length=80, required=False)
     link = LinkBlock(required=False)
 
     class Meta:

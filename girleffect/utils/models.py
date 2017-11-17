@@ -214,10 +214,12 @@ class Statistic(LinkFields):
         help_text="The statistic. For example, '66% of girls complete primary school'",
         features=["bold", "italic", "link", "document-link", "h4"]
     )
+    citation_text = models.CharField(max_length=80, blank=True)
 
     panels = [
         FieldPanel('title'),
         FieldPanel('description'),
+        FieldPanel('citation_text'),
     ] + LinkFields.content_panels
 
     def __str__(self):
