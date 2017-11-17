@@ -92,4 +92,14 @@ $(function() {
     $('.js-close-search-mobile').on('click', function() {
         $('.header__search-bar--mobile').removeClass('is-visible');
     });
+
+    $('.header__nav-item-primary-parent, .header__nav-overlay, .header__nav-secondary').mouseover(function() {
+        $(this).children('.header__nav-secondary').addClass('is-visible');
+        $('.header__nav-overlay').addClass('is-visible');
+    });
+
+    $('.header__nav-item-primary-parent, .header__nav-overlay, .header__nav-secondary').mouseout(function() {
+        $('.header__nav-overlay, .header__nav-secondary').removeClass('is-visible');
+    });
+
 });
