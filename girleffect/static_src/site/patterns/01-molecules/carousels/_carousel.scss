@@ -3,6 +3,11 @@
 }
 
 .carousel {
+    &--home {
+        position: relative;
+        overflow: hidden;
+    }
+
     &__item {
         position: relative;
 
@@ -20,6 +25,22 @@
     &__image {
         max-height: 700px;
         object-fit: cover;
+
+        &--hidden {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            transition: opacity $transition;
+        }
+
+        &--main {
+            opacity: 1;
+            transition: opacity $transition;
+        }
+
+        &.is-visible {
+            opacity: 1;
+        }
     }
 
     &__content {
@@ -103,5 +124,53 @@
 
     &__inner {
         max-width: 750px;
+    }
+
+    &__panels {
+        display: flex;
+        position: absolute;
+        bottom: 30px;
+        width: 90%;
+        align-items: flex-end;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+
+    &__panel {
+        padding: 20px;
+        flex: 1;
+        background: transparent;
+        transition: height, background, $transition;
+        height: 70px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        &:hover {
+            background: $white-90;
+            height: 200px;
+        }
+    }
+
+    &__panel-title {
+        color: $yellow;
+        transition: color $transition;
+
+        .carousel__panel:hover & {
+            color: $green;
+        }
+    }
+
+    &__panel-content {
+        opacity: 0;
+        display: none;
+        color: $green;
+        transition: opacity $transition;
+
+        .is-expanded & {
+            display: block;
+            opacity: 1;
+        }
     }
 }
