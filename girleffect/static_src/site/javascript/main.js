@@ -7,12 +7,12 @@ import Hamburger from './../patterns/00-atoms/buttons/hamburger/hamburger.js';
 
 // Open the header callback
 function openHeader() {
-    $('.header').find('.header__row').slideDown(200);
+    $('.header').addClass('nav-open').find('.header__row').fadeIn(250);
 }
 
 // Close the header callback.
 function closeHeader() {
-    $('.header').find('.header__row').slideUp(200, () => {
+    $('.header').removeClass('nav-open').find('.header__row').fadeOut(250, () => {
         this.node.next().removeAttr('style');
     });
 }
