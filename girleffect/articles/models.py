@@ -132,7 +132,9 @@ class ArticleIndex(Page, SocialFields):
         ).order_by('-date')
 
         if request.GET.get('category'):
-            articles = articles.filter(categories=request.GET.get('category'))
+            articles = articles.filter(categories__category=request.GET.get('category'))
+
+        print(articles)
 
         # Pagination
         page = request.GET.get('page', 1)
