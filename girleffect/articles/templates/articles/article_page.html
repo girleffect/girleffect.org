@@ -3,8 +3,7 @@
 
 {% block content %}
 
-    {# Title and introduction section #}
-
+<article>
     {# Hero section #}
     {% if page.hero_image %}
         <div class="hero hero--article">
@@ -66,7 +65,7 @@
             </div>
         </div>
     </section>
-
+</article>
 {% include "includes/relatedcontent.html" %}
 
 {% endblock %}
