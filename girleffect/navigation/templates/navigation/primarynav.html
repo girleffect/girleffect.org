@@ -1,51 +1,40 @@
 {% load wagtailcore_tags %}
 <nav role="navigation" aria-label="Primary">
     {% if primary_nav_blocks %}
-    <ul class="header__nav primary" role="menubar">
+    <ul class="header__nav-primary" role="menubar">            
         {% for block in primary_nav_blocks %}
             {% if block.block_type == 'item' and block.value.page.live and not block.value.page.is_private %}
-            <li class="header__nav-item{% if block.value.sub_items %} parent{% endif %}"  role="presentation">
+            <li class="header__nav-item-primary{% if block.value.sub_items %} header__nav-item-primary-parent{% endif %}" role="presentation">
                 {% pageurl page=block.value.page as menu_item_url %}
-                <a href="{{ menu_item_url }}"
+                <a class="header__link-primary" href="{{ menu_item_url }}"
                     role="menuitem"
                     {% if block.value.sub_items %} aria-haspopup="true" {% endif %}
                 >
                     {{ block.value.title|default:block.value.page.title }}
-
-                    {% if block.value.sub_items %}
-                        <span class="expander">+</span>
-                    {% endif %}
                 </a>
-
+                <svg class="js-mobile-dropdown header__icon header__icon--mobile-nav"><use xlink:href="#chevron"></use></svg>
                 {% if block.value.sub_items %}
-                    <ul role="menu">
+                    <ul class="header__nav-secondary" role="menu">
                         {% for subpage in block.value.sub_items %}
-                            <li role="presentation">
-                                {% pageurl page=subpage.page as subpage_item_url %}
-                                <a href="{{ subpage_item_url }}"
-                                        role="menuitem"
-                                    >
+                            <li class="header__nav-item-secondary" role="presentation">                                
+                                {% pageurl page=subpage.page as subpage_item_url %}                                        
+                                <a class="header__link-secondary" href="{{ subpage_item_url }}" role="menuitem">
+                                    <svg class="header__nav-item-arrow"><use xlink:href="#arrow"></use></svg>                                        
                                     {{ subpage.title|default:subpage.page.title }}
-
-                                    {% if subpage.sub_items %}
-                                    <span class="expander">+</span>
-                                        
-                                        <ul role="menu">
-                                        {% for secondary_subpage in subpage.sub_items %}
-                                            <li role="presentation">
-                                                {% pageurl page=secondary_subpage.page as sec_subpage_item_url %}
-                                                <a href="{{ sec_subpage_item_url }}"
-                                                    role="menuitem"
-                                                >
-                                                {{ secondary_subpage.title|default:secondary_subpage.page.title }}
-
-                                                </a>
-                                            </li>
-                                        {% endfor %}
-                                        </ul>
-                                    
-                                    {% endif %}
                                 </a>
+                                <svg class="js-mobile-dropdown header__icon header__icon--mobile-nav"><use xlink:href="#chevron"></use></svg>
+                                {% if subpage.sub_items %}                                        
+                                    <ul class="header__nav-tertiary" role="menu">
+                                    {% for secondary_subpage in subpage.sub_items %}
+                                        <li class="header__nav-item-tertiary" role="presentation">
+                                            {% pageurl page=secondary_subpage.page as sec_subpage_item_url %}
+                                            <a class="header__link-tertiary" href="{{ sec_subpage_item_url }}" role="menuitem">
+                                                {{ secondary_subpage.title|default:secondary_subpage.page.title }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                         {% endfor %}
                     </ul>
