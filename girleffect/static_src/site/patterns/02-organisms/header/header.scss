@@ -195,6 +195,7 @@
     }
 
     &__link-tertiary {
+        font-size: 14px;
         font-weight: $weight-normal;
         padding: 10px 0 10px 25px;
         transition: padding $transition;
@@ -208,7 +209,7 @@
             width: auto;
 
             &:hover {
-                padding-left: 45px;
+                padding-left: 40px;
             }
         }
     }
