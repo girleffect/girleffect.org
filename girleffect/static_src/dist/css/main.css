@@ -1754,15 +1754,21 @@ article .share-icons--hide-mobile {
 }
 
 .hero__heading:only-child {
+  font-size: 5.15873vw;
+  max-width: 790px;
   color: #2f6165;
-  background: #dad9d6;
-  text-align: center;
-  padding: 60px 0;
+  margin: 20px auto;
 }
 
-@media only screen and (min-width: 1024px) {
+@media (max-width: 659.07692px) {
   .hero__heading:only-child {
-    padding: 125px 0;
+    font-size: 34px;
+  }
+}
+
+@media (min-width: 1260px) {
+  .hero__heading:only-child {
+    font-size: 65px;
   }
 }
 
@@ -2071,6 +2077,12 @@ article .share-icons--hide-mobile {
   padding: 0.5rem 1rem;
 }
 
+.template-404 .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
 @media only screen and (min-width: 1024px) {
   .footer {
     padding: 1rem 2rem;
@@ -2183,6 +2195,7 @@ article .share-icons--hide-mobile {
   padding: 20px;
   position: relative;
   background: #fff;
+  border-bottom: 1px solid #f4f4f3;
 }
 
 .header__logo {
