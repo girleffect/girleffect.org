@@ -1,14 +1,13 @@
 {% load wagtailcore_tags %}
 <nav role="navigation" aria-label="Tertiary">
     <ul class="footer__nav footer-links">
-        {% for snippet in footernav %}
-            {% if snippet %}
+        {% for block in footer_nav_blocks %}
+            {% if block.block_type == 'item' and block.value.page.live and not block.value.page.is_private %}
                 <li class="footer__nav-item">
-                    {% if snippet.menu_label %}
-                        <a href="{% pageurl snippet.menu_item %}">{{ snippet.menu_label }}</a>
-                    {% else %}
-                        <a href="{% pageurl snippet.menu_item %}">{{ snippet.menu_item.title }}</a>
-                    {% endif %}
+                    {% pageurl page=block.value.page as menu_item_url %}
+                    <a href="{{ menu_item_url }}">
+                        {{ block.value.title|default:block.value.page.title }}
+                    </a>
                 </li>
             {% endif %}
         {% endfor %}
