@@ -6387,10 +6387,12 @@ jquery(function () {
         jquery('.header__search-bar--mobile').removeClass('is-visible');
     });
 
-    jquery('.js-share-icons').scrollToFixed({
-        marginTop: 30,
-        limit: jquery(jquery('.section--downloads')).offset().top - jquery('.js-share-icons').outerHeight(true) - 30
-    });
+    if (jquery('.js-share-icons').length) {
+        jquery('.js-share-icons').scrollToFixed({
+            marginTop: 30,
+            limit: jquery(jquery('.footer')).offset().top - jquery('.js-share-icons').outerHeight(true) - 30
+        });
+    }
 });
 
 })));
