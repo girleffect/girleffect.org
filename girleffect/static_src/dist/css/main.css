@@ -1540,11 +1540,11 @@ article .share-icons--hide-mobile {
   position: absolute;
   bottom: 0;
   z-index: 1;
-  width: 100%;
   align-items: center;
   justify-content: flex-end;
   padding: 1rem;
   display: none;
+  right: 0;
 }
 
 @media only screen and (min-width: 768px) {
