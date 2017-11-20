@@ -1,19 +1,17 @@
 {% load wagtailcore_tags %}
 <nav role="navigation" aria-label="Secondary">
     <ul class="footer__nav secondary" role="menubar">
-        {% for label in secondarynav %}
-            <li class="footer__nav-item" role="presentation">
-                {% pageurl page=label.menu_item as menu_item_url %}
-                <a href="{{ menu_item_url }}"
-                    role="menuitem"
-                >
-                    {% if label.menu_label %}
-                        {{ label.menu_label }}
-                    {% else %}
-                        {{ label.menu_item.title }}
-                    {% endif %}
-                </a>
-            </li>
+        {% for block in secondary_nav_blocks %}
+            {% if block.block_type == 'item' and block.value.page.live and not block.value.page.is_private %}
+                <li class="footer__nav-item" role="presentation">
+                    {% pageurl page=block.value.page as menu_item_url %}
+                    <a href="{{ menu_item_url }}"
+                        role="menuitem"
+                    >
+                        {{ block.value.title|default:block.value.page.title }}
+                    </a>
+                </li>
+            {% endif %}
         {% endfor %}
     </ul>
 </nav>

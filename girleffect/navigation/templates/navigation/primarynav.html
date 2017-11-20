@@ -1,37 +1,49 @@
 {% load wagtailcore_tags %}
 <nav role="navigation" aria-label="Primary">
+    {% if primary_nav_blocks %}
     <ul class="header__nav primary" role="menubar">
-        {% for snippet in primarynav %}
-            <li class="header__nav-item{% if snippet.submenus.exists %} parent{% endif %}"  role="presentation">
-                {% pageurl page=snippet.menu_item as menu_item_url %}
+        {% for block in primary_nav_blocks %}
+            {% if block.block_type == 'item' and block.value.page.live and not block.value.page.is_private %}
+            <li class="header__nav-item{% if block.value.sub_items %} parent{% endif %}"  role="presentation">
+                {% pageurl page=block.value.page as menu_item_url %}
                 <a href="{{ menu_item_url }}"
                     role="menuitem"
-                    {% if snippet.submenus.exists %} aria-haspopup="true" {% endif %}
+                    {% if block.value.sub_items %} aria-haspopup="true" {% endif %}
                 >
-                    {% if snippet.menu_label %}
-                        {{ snippet.menu_label }}
-                    {% else %}
-                        {{ snippet.menu_item.title }}
-                    {% endif %}
+                    {{ block.value.title|default:block.value.page.title }}
 
-                    {% if snippet.submenus.exists %}
+                    {% if block.value.sub_items %}
                         <span class="expander">+</span>
                     {% endif %}
                 </a>
 
-                {% if snippet.submenus.exists %}
+                {% if block.value.sub_items %}
                     <ul role="menu">
-                        {% for submenu in snippet.submenus.all %}
+                        {% for subpage in block.value.sub_items %}
                             <li role="presentation">
-                                {% pageurl page=submenu.menu_item as submenu_item_url %}
-                                <a href="{{ submenu_item_url }}"
+                                {% pageurl page=subpage.page as subpage_item_url %}
+                                <a href="{{ subpage_item_url }}"
                                         role="menuitem"
                                     >
-                                    {% if submenu.menu_label %}
-                                        {{ submenu.menu_label }}
-                                    {% else %}
-                                        {{ submenu.menu_item.title }}
+                                    {{ subpage.title|default:subpage.page.title }}
 
+                                    {% if subpage.sub_items %}
+                                    <span class="expander">+</span>
+                                        
+                                        <ul role="menu">
+                                        {% for secondary_subpage in subpage.sub_items %}
+                                            <li role="presentation">
+                                                {% pageurl page=secondary_subpage.page as sec_subpage_item_url %}
+                                                <a href="{{ sec_subpage_item_url }}"
+                                                    role="menuitem"
+                                                >
+                                                {{ secondary_subpage.title|default:secondary_subpage.page.title }}
+
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                        </ul>
+                                    
                                     {% endif %}
                                 </a>
                             </li>
@@ -39,6 +51,8 @@
                     </ul>
                 {% endif %}
             </li>
+            {% endif %}
         {% endfor %}
     </ul>
+    {% endif %}
 </nav>
