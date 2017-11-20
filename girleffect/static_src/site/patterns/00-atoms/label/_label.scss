@@ -1,0 +1,19 @@
+.label {
+
+    &--small {
+        font-size: 15px;
+    }
+
+    &--large {
+        font-weight: $weight-bold;
+        font-size: 20px;
+    }
+
+    &--grey {
+        color: $steel;
+    }
+
+    &--green {
+        color: $green;
+    }
+}
