@@ -2,6 +2,12 @@
     background: $concrete;
     padding: 0.5rem 1rem;
 
+    .template-404 & {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
     @include media-query(tablet-landscape) {
         padding: 1rem 2rem;
     }
