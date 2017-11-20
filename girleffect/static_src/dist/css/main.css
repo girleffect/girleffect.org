@@ -950,6 +950,10 @@ blockquote cite {
   line-height: 1.1;
 }
 
+.heading--bottom-space {
+  margin-bottom: 20px;
+}
+
 .input--search {
   background: transparent;
   border: 0;
@@ -975,6 +979,23 @@ blockquote cite {
 
 .header__search-bar--mobile .input--search {
   border-bottom: 1px solid #dad9d6;
+}
+
+.label--small {
+  font-size: 15px;
+}
+
+.label--large {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.label--grey {
+  color: #afafaf;
+}
+
+.label--green {
+  color: #2f6165;
 }
 
 .large-text {
