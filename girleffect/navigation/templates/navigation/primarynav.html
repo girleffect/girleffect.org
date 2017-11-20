@@ -12,18 +12,18 @@
                 >
                     {{ block.value.title|default:block.value.page.title }}
                 </a>
-                <svg class="js-mobile-dropdown header__icon header__icon--mobile-nav"><use xlink:href="#chevron"></use></svg>
                 {% if block.value.sub_items %}
+                <svg class="js-mobile-dropdown header__icon header__icon--mobile-nav"><use xlink:href="#chevron"></use></svg>
                     <ul class="header__nav-secondary" role="menu">
                         {% for subpage in block.value.sub_items %}
-                            <li class="header__nav-item-secondary" role="presentation">                                
+                            <li class="header__nav-item-secondary {% if subpage.sub_items %}header__nav-item-secondary-parent{% endif %}" role="presentation">                                
                                 {% pageurl page=subpage.page as subpage_item_url %}                                        
                                 <a class="header__link-secondary" href="{{ subpage_item_url }}" role="menuitem">
                                     <svg class="header__nav-item-arrow"><use xlink:href="#arrow"></use></svg>                                        
                                     {{ subpage.title|default:subpage.page.title }}
                                 </a>
-                                <svg class="js-mobile-dropdown header__icon header__icon--mobile-nav"><use xlink:href="#chevron"></use></svg>
                                 {% if subpage.sub_items %}                                        
+                                <svg class="js-mobile-dropdown header__icon header__icon--mobile-nav"><use xlink:href="#chevron"></use></svg>
                                     <ul class="header__nav-tertiary" role="menu">
                                     {% for secondary_subpage in subpage.sub_items %}
                                         <li class="header__nav-item-tertiary" role="presentation">
