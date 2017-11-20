@@ -43,10 +43,12 @@ $(function() {
         $('.carousel__nav').hide();
     }
 
-    $('.js-share-icons').scrollToFixed({
-        marginTop: 30,
-        limit: $($('.section--downloads')).offset().top - $('.js-share-icons').outerHeight(true) - 30
-    });
+    if($('.js-share-icons').length){
+        $('.js-share-icons').scrollToFixed({
+            marginTop: 30,
+            limit: $($('.footer')).offset().top - $('.js-share-icons').outerHeight(true) - 30
+        });
+    }
 
     $('.js-article-filter').on('change', function() {
         var url = $(this).val();
