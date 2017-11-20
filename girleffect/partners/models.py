@@ -13,6 +13,7 @@ from wagtail.wagtailadmin.edit_handlers import (
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
+from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from girleffect.utils.models import (
     SocialFields
@@ -36,13 +37,15 @@ class Partner(Orderable, models.Model):
                                       blank=True)
 
     external_link = models.URLField(blank=True)
+    show_on_index = models.BooleanField(verbose_name="Show on Partner Index")
 
     panels = [
         ImageChooserPanel('logo'),
         FieldPanel('title'),
         FieldPanel('description'),
         PageChooserPanel('internal_link'),
-        FieldPanel('external_link')
+        FieldPanel('external_link'),
+        FieldPanel('show_on_index')
     ]
 
     def __str__(self):
@@ -51,10 +54,18 @@ class Partner(Orderable, models.Model):
 
 class PartnerIndexPage(Page, SocialFields):
     introduction = models.TextField(blank=True)
+    call_to_action = models.ForeignKey(
+        'utils.CallToActionSnippet',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel('introduction'),
-        InlinePanel('partners', label="Partners")
+        InlinePanel('partners', label="Partners"),
+        SnippetChooserPanel('call_to_action')
     ]
 
     search_fields = Page.search_fields + [
