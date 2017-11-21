@@ -1,15 +1,15 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 {% if value.link_page %}
-    <a class="stat-block" href="{{ value.link_page.href }}">
+    <a class="stat-block" href="{{ value.link_page.url }}">
 {% elif value.link_url  %}
-    <a class="stat-block" href="{{ value.link_url.href }}">
+    <a class="stat-block" href="{{ value.link_url }}">
 {% else %}
     <div class="stat-block">
 {% endif %}
         <div class="stat-block__content">
             <p class="stat-block__label">{{ value.title }}</p>
             {{ value.description|richtext }}
-            <p>{{ statistic.citation_text }}</p>
+            <p>{{ value.citation_text }}</p>
 
             {% if value.link_page %}
                 <div class="arrow"></div>
