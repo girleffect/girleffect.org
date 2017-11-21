@@ -11,14 +11,8 @@ from wagtail.wagtailadmin.edit_handlers import (
 
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailadmin.edit_handlers import (
-    StreamFieldPanel
-)
 
 from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-
 from girleffect.articles.models import ArticlePage
 from girleffect.utils.models import (
     CallToActionSnippet,
@@ -76,7 +70,6 @@ class HomePage(Page, HeroVideoFields, SocialFields):
     @cached_property
     def articles(self):
         return ArticlePage.objects.all().live().public().order_by('-publication_date')[:3]
-
 
     promote_panels = (
         Page.promote_panels +  # slug, seo_title, show_in_menus, search_description
