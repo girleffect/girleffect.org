@@ -1,0 +1,13 @@
+.list {
+    &--download {
+        a {
+            border-bottom: 2px solid $yellow;
+        }
+
+        span {
+            color: $mid-grey;
+            padding-left: 20px;
+            text-transform: uppercase;
+        }
+    }
+}
