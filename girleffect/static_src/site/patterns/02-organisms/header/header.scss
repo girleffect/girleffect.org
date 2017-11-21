@@ -1,17 +1,31 @@
 .header {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    padding: 5px;
     position: relative;
     background: $white;
     border-bottom: 1px solid $light-grey;
 
+    @include media-query(mob-landscape) {
+        padding: 10px;
+    }
+
+    @include media-query(tablet-landscape) {
+        padding: 20px;
+    }
+
     &__logo {
         margin-right: 20px;
+        max-width: 80px;
+
+        @include media-query(mob-landscape) {
+            max-width: 120px;
+        }
 
         @include media-query(tablet-landscape) {
             flex-basis: 20%;
             margin-right: 0;
+            max-width: 100%;
         }
     }
 
@@ -148,6 +162,7 @@
 
     &__mobile-icons {
         display: flex;
+        margin: 5px;
 
         @include media-query(tablet-landscape) {
             display: none;
