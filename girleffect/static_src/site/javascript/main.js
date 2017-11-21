@@ -1,5 +1,6 @@
 import $ from './globals';
 import 'owl.carousel';
+import 'scrolltofixed';
 import 'featherlight';
 import 'scrolltofixed';
 
@@ -34,6 +35,7 @@ $(function() {
         items: 1,
         nav: true,
         dots: true,
+        autoHeight: true,
         navContainer: '.js-full-width-nav',
         navText: ['<svg class="carousel__nav-left"><use xlink:href="#arrow"></use></svg>','<svg class="carousel__nav-right"><use xlink:href="#arrow"></use></svg>'],
         loop: $('.owl-carousel .carousel__item').length > 1 ? true : false
@@ -92,4 +94,11 @@ $(function() {
     $('.js-close-search-mobile').on('click', function() {
         $('.header__search-bar--mobile').removeClass('is-visible');
     });
+
+    if($('.js-share-icons').length){
+        $('.js-share-icons').scrollToFixed({
+            marginTop: 30,
+            limit: $($('.footer')).offset().top - $('.js-share-icons').outerHeight(true) - 30
+        });
+    }
 });

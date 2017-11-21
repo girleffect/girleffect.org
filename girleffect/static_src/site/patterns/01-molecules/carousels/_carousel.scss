@@ -71,11 +71,11 @@
             position: absolute;
             bottom: 0;
             z-index: 1;
-            width: 100%;
             align-items: center;
             justify-content: flex-end;
             padding: 1rem;
             display: none;
+            right: 0;
 
             @include media-query(tablet-portrait) {
                 display: flex;

@@ -3,6 +3,10 @@
 
     &--center {
         text-align: center;
+
+        .link--with-arrow {
+            display: inline-flex;
+        }
     }
 
     &--site {

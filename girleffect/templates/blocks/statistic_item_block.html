@@ -1,15 +1,15 @@
 {% load wagtailcore_tags wagtailimages_tags %}
-    <div class="statistic-column">
-        {{ value.title }}
+    <div class="stat-block">
+        <div class="stat-block__content">
+            <p class="stat-block__label">{{ value.title }}</p>
+            <div class="stat-block__figure">{{ value.statistic_value }}<span class="stat-block__unit">{{ value.statistic_units }}</span></div>
+            {{ value.description|richtext }}
 
-        {# RichText #}
-        {{ value.description }}
+            {{ statistic.citation_text }}
 
-        {{ statistic.citation_text }}
-
-        {% if value.link_page %}
-            <a href="{{ value.link_page.href }}">{{ value.get_link_text }}</a>
-        {% elif value.link_url  %}
-            <a href="{{ value.link_url.href }}">{{ value.get_link_text }}</a>
-        {% endif %}
+            {% if value.link_page %}
+                <a href="{{ value.link_page.href }}">{{ value.get_link_text }}</a>
+            {% elif value.link_url  %}
+                <a href="{{ value.link_url.href }}">{{ value.get_link_text }}</a>
+            {% endif %}
     </div>
