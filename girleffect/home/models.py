@@ -1,19 +1,65 @@
 from django.db import models
 
-from wagtail.wagtailcore.models import Page
+from modelcluster.fields import ParentalKey
+
+from wagtail.wagtailadmin.edit_handlers import (
+    FieldPanel,
+    InlinePanel,
+    MultiFieldPanel
+)
+
+from wagtail.wagtailcore.models import Orderable, Page
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from girleffect.utils.models import (
     CallToActionSnippet,
+    LinkFields,
     HeroVideoFields,
     SocialFields
 )
 
 
+class HomePageCarouselItem(Orderable, LinkFields, models.Model):
+    page = ParentalKey('HomePage', related_name='carousel_items')
+    title = models.CharField(blank=False, max_length=80)
+    description = models.TextField(blank=True)
+    image = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        related_name='+',
+        on_delete=models.SET_NULL
+    )
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('description'),
+        ImageChooserPanel('image'),
+
+    ]
+
+    def __str__(self):
+        return self.title
+
+
 class HomePage(Page, HeroVideoFields, SocialFields):
     call_to_action = models.ForeignKey(CallToActionSnippet, blank=True, null=True, on_delete=models.SET_NULL, related_name='+')
+    overview_image = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        related_name='+',
+        on_delete=models.SET_NULL
+    )
+    overview_title = models.CharField(blank=True, max_length=80)
 
     content_panels = Page.content_panels + HeroVideoFields.content_panels + [
+        MultiFieldPanel([
+            ImageChooserPanel('overview_image'),
+            FieldPanel('overview_title'),
+        ], 'Homepage Carousel Overview'),
+        InlinePanel('carousel_items', label="Homepage Carousel Items", min_num=3, max_num=3),
         SnippetChooserPanel('call_to_action'),
     ]
 
