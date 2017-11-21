@@ -195,7 +195,7 @@ class ListColumnBlock(blocks.StructBlock):
     title = blocks.CharBlock(max_length=80)
     description = blocks.RichTextBlock(
         max_length=250,
-        features=["bold", "italic"],
+        features=["bold", "italic", "link", "document-link"],
         required=False,
         icon="pilcrow"
     )
