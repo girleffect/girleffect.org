@@ -115,6 +115,22 @@
         }
     }
 
+    &__nav-item-secondary-parent {
+        a::after {
+            content: '';
+            width: 1px;
+            display: block;
+            position: absolute;
+            top: 0;
+            background-color: #dadad6;
+            right: 40px;
+            height: 42px;
+            @include media-query(tablet-landscape) {
+                display: none;
+            }
+        }
+    }
+
     &__nav-item-arrow {
         display: none;
 
