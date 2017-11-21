@@ -261,7 +261,7 @@ class HeroVideoFields(models.Model):
         on_delete=models.SET_NULL
     )
     hero_strapline = models.TextField(
-        blank=False,
+        blank=True,
         max_length=80,
         help_text="Shows text over the hero."
     )
