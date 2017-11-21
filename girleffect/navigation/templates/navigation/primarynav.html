@@ -6,12 +6,9 @@
             {% if block.block_type == 'item' and block.value.page.live and not block.value.page.is_private %}
             <li class="header__nav-item-primary{% if block.value.sub_items %} header__nav-item-primary-parent{% endif %}" role="presentation">
                 {% pageurl page=block.value.page as menu_item_url %}
-                <a class="header__link-primary" href="{{ menu_item_url }}"
-                    role="menuitem"
-                    {% if block.value.sub_items %} aria-haspopup="true" {% endif %}
-                >
+                <span class="header__link-primary" role="menuitem" {% if block.value.sub_items %} aria-haspopup="true" {% endif %}>
                     {{ block.value.title|default:block.value.page.title }}
-                </a>
+                </span>
                 {% if block.value.sub_items %}
                 <svg class="js-mobile-dropdown header__icon header__icon--mobile-nav"><use xlink:href="#chevron"></use></svg>
                     <ul class="header__nav-secondary" role="menu">
