@@ -57,6 +57,7 @@ class HomePage(Page, HeroVideoFields, SocialFields):
         on_delete=models.SET_NULL
     )
     overview_title = models.CharField(blank=True, max_length=80)
+    body = StreamField(StoryBlock(), null=True)
 
     content_panels = Page.content_panels + HeroVideoFields.content_panels + [
         MultiFieldPanel([
@@ -65,7 +66,6 @@ class HomePage(Page, HeroVideoFields, SocialFields):
         ], 'Homepage Carousel Overview'),
         InlinePanel('carousel_items', label="Homepage Carousel Items", min_num=3, max_num=3),
     ]
-    body = StreamField(StoryBlock(), null=True)
 
     @cached_property
     def articles(self):
