@@ -6305,14 +6305,14 @@ var Hamburger = function () {
 
 // Open the header callback
 function openHeader() {
-    jquery('.header').find('.header__row').slideDown(200);
+    jquery('.header').addClass('nav-open').find('.header__row').fadeIn(250);
 }
 
 // Close the header callback.
 function closeHeader() {
     var _this = this;
 
-    jquery('.header').find('.header__row').slideUp(200, function () {
+    jquery('.header').removeClass('nav-open').find('.header__row').fadeOut(250, function () {
         _this.node.next().removeAttr('style');
     });
 }
@@ -6342,6 +6342,13 @@ jquery(function () {
 
     if (jquery('.owl-carousel .carousel__item').length === 1) {
         jquery('.carousel__nav').hide();
+    }
+
+    if (jquery('.js-share-icons').length) {
+        jquery('.js-share-icons').scrollToFixed({
+            marginTop: 30,
+            limit: jquery(jquery('.footer')).offset().top - jquery('.js-share-icons').outerHeight(true) - 30
+        });
     }
 
     jquery('.js-article-filter').on('change', function () {
@@ -6391,6 +6398,31 @@ jquery(function () {
         jquery('.js-share-icons').scrollToFixed({
             marginTop: 30,
             limit: jquery(jquery('.footer')).offset().top - jquery('.js-share-icons').outerHeight(true) - 30
+        });
+    }
+
+    if (window.matchMedia('(min-width: 1024px)').matches) {
+        jquery('.header__nav-item-primary-parent, .header__nav-secondary').mouseover(function () {
+            jquery(this).children('.header__link-primary').addClass('is-active');
+            jquery(this).children('.header__nav-secondary').addClass('is-visible');
+            jquery('.header__nav-overlay').addClass('is-visible');
+        });
+
+        jquery('.header__nav-item-primary-parent, .header__nav-overlay, .header__nav-secondary').mouseout(function () {
+            jquery(this).children('.header__link-primary').removeClass('is-active');
+            jquery('.header__nav-overlay, .header__nav-secondary').removeClass('is-visible');
+        });
+    }
+
+    if (window.matchMedia('(max-width: 1024px)').matches) {
+        jquery('.header__link-primary').on('click', function () {
+            jquery(this).parent().toggleClass('is-open');
+            jquery(this).siblings('ul').slideToggle(250);
+        });
+
+        jquery('.js-mobile-dropdown').on('click', function () {
+            jquery(this).parent().toggleClass('is-open');
+            jquery(this).next('ul').slideToggle(250);
         });
     }
 });
