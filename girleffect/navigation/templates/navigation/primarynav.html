@@ -10,7 +10,7 @@
                     {{ block.value.title|default:block.value.page.title }}
                 </span>
                 {% if block.value.sub_items %}
-                <svg class="js-mobile-dropdown header__icon header__icon--mobile-nav"><use xlink:href="#chevron"></use></svg>
+                <svg class="header__icon header__icon--mobile-nav"><use xlink:href="#chevron"></use></svg>
                     <ul class="header__nav-secondary" role="menu">
                         {% for subpage in block.value.sub_items %}
                             <li class="header__nav-item-secondary {% if subpage.sub_items %}header__nav-item-secondary-parent{% endif %}" role="presentation">                                
