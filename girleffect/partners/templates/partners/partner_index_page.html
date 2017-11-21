@@ -10,17 +10,20 @@
         {% if page.partners.exists %}
             {# Partners exist #}
             {% for partner in page.partners.all %}
-                {% image partner.logo original as partner_logo %}
-                {% if partner.internal_link %}
-                    {# There are two link field options, PageChooser and URL Field. This checks for one of either #}
-                    {% include "partners/includes/partner_logo_item.html" with href=partner.internal_link.url src=partner_logo.url alt=partner.title %}
-                {% elif partner.external_link %}
-                    {% include "partners/includes/partner_logo_item.html" with href=partner.external_link src=partner_logo.url alt=partner.title %}
-                {% endif %}
+                {% if partner.show_on_index %}
+                    {% include "includes/partner_card.html" with partner=partner %}
+                {% endif%}
             {% endfor %}
         {% else %}
             {# No Partners Yet #}
         {% endif %}
     </section>
+
+    {# Call to Action, link is likely external #}
+    {% if page.call_to_action %}
+        <section class="cta">
+            {% include "includes/call_to_action.html" %}
+        </section>
+    {% endif %}
     
 {% endblock %}
