@@ -173,6 +173,12 @@
         padding: 12px 0;
         border-bottom: 1px solid $brand-grey;
         font-weight: $weight-bold;
+        position: relative;
+        z-index: 1;
+
+        &:hover {
+            cursor: default;
+        }
 
         @include media-query(tablet-landscape) {
             font-weight: $weight-normal;
@@ -270,7 +276,7 @@
             stroke-width: 2px;
             position: absolute;
             right: 0;
-            top: 8px;
+            top: 5px;
             transition: transform 0.25s ease-out;
             height: 35px;
             padding: 0 10px;
