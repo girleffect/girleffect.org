@@ -6,7 +6,8 @@ from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
     InlinePanel,
-    MultiFieldPanel
+    MultiFieldPanel,
+    StreamFieldPanel
 )
 
 from wagtail.wagtailcore.models import Orderable, Page
@@ -20,6 +21,8 @@ from girleffect.utils.models import (
     HeroVideoFields,
     SocialFields
 )
+
+from girleffect.utils.blocks import StoryBlock
 
 
 class HomePageCarouselItem(Orderable, LinkFields, models.Model):
@@ -63,6 +66,7 @@ class HomePage(Page, HeroVideoFields, SocialFields):
             FieldPanel('overview_title'),
         ], 'Homepage Carousel Overview'),
         InlinePanel('carousel_items', label="Homepage Carousel Items", min_num=3, max_num=3),
+        StreamFieldPanel('body')
     ]
 
     @cached_property
