@@ -242,7 +242,7 @@ class StoryBlock(blocks.StreamBlock):
     body_text = blocks.RichTextBlock(
         label="Body Text",
         features=[
-            "h4", "h5", "h6",
+            "h4",
             "bold", "italic", "link",
             "ol", "ul", "hr"
         ],
