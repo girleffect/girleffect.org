@@ -1,5 +1,11 @@
 .large-text {
     @include font-size(18px, 20px);
     max-width: $wrapper--small;
-    margin: 0 auto 2rem;
+    margin: 0 auto 1rem;
+    padding: 0 20px;
+
+    @include media-query(tablet-landscape) {
+        margin: 0 auto 2rem;
+        padding: 0;
+    }
 }

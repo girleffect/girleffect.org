@@ -1,6 +1,9 @@
 .list-item {
-    padding: 0 20px;
     margin-bottom: 3rem;
+
+    @include media-query(tablet-landscape) {
+        padding: 0 20px;
+    }
 
     &__image {
         margin-bottom: 1rem;
