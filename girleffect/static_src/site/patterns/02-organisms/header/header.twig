@@ -5,7 +5,7 @@
     </div>
 
     <a href="/" class="header__logo">
-        <img src="https://placehold.it/220x140" alt="">
+        <img src="https://placehold.it/170x112" alt="">
     </a>
 
     <div class="header__mobile-icons">
@@ -17,31 +17,13 @@
     </div>
 
     <div class="header__row">
-        <nav role="navigation" aria-label="Primary">
-            <ul class="header__nav primary" role="menubar">
-                <li class="header__nav-item parent" role="presentation">
-                    <a href="#"role="menuitem">Where we work</a>
-                </li>
-                <li class="header__nav-item parent" role="presentation">
-                    <a href="#"role="menuitem">What we do</a>
-                </li>
-                <li class="header__nav-item parent" role="presentation">
-                    <a href="#"role="menuitem">Lorem ipsum</a>
-                </li>
-                <li class="header__nav-item parent" role="presentation">
-                    <a href="#"role="menuitem">Who we are</a>
-                </li>
-                <li class="header__nav-item parent" role="presentation">
-                    <a href="#"role="menuitem">Stories</a>
-                </li>
-            </ul>
-        </nav>
+        {% include 'organisms-nav-primary' %}
 
         <a class="js-search-desktop header__link header__link--search" aria-label="search">
             <svg class="header__icon"><use xlink:href="#magnifying-glass"></use></svg>
         </a>
 
-        <div>
+        <div class="header__social-icons">
             <a class="header__link" href="#">
                 <svg class="header__icon"><use xlink:href="#facebook"></use></svg>
             </a>
@@ -59,5 +41,6 @@
     <div class="header__search-bar header__search-bar--desktop">
         {% include 'molecules-form--search' %}
     </div>
+    <div class="header__nav-overlay"></div>
 </header>
 
