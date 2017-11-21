@@ -103,7 +103,7 @@ $(function() {
     }
 
     if (window.matchMedia('(min-width: 1024px)').matches) {
-        $('.header__nav-item-primary-parent, .header__nav-overlay, .header__nav-secondary').mouseover(function() {
+        $('.header__nav-item-primary-parent, .header__nav-secondary').mouseover(function() {
             $(this).children('.header__link-primary').addClass('is-active');
             $(this).children('.header__nav-secondary').addClass('is-visible');
             $('.header__nav-overlay').addClass('is-visible');
