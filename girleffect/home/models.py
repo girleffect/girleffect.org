@@ -12,6 +12,7 @@ from wagtail.wagtailadmin.edit_handlers import (
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
+from wagtail.wagtailcore.fields import StreamField
 from girleffect.articles.models import ArticlePage
 from girleffect.utils.models import (
     CallToActionSnippet,
@@ -54,6 +55,7 @@ class HomePage(Page, HeroVideoFields, SocialFields):
         on_delete=models.SET_NULL
     )
     overview_title = models.CharField(blank=True, max_length=80)
+    body = StreamField(StoryBlock(), null=True)
 
     content_panels = Page.content_panels + HeroVideoFields.content_panels + [
         MultiFieldPanel([

@@ -2,6 +2,7 @@ import $ from './globals';
 import 'owl.carousel';
 import 'scrolltofixed';
 import 'featherlight';
+import 'scrolltofixed';
 
 import Hamburger from './../patterns/00-atoms/buttons/hamburger/hamburger.js';
 
@@ -42,6 +43,13 @@ $(function() {
 
     if ($('.owl-carousel .carousel__item').length === 1) {
         $('.carousel__nav').hide();
+    }
+
+    if($('.js-share-icons').length){
+        $('.js-share-icons').scrollToFixed({
+            marginTop: 30,
+            limit: $($('.footer')).offset().top - $('.js-share-icons').outerHeight(true) - 30
+        });
     }
 
     $('.js-article-filter').on('change', function() {
