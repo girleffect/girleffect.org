@@ -115,8 +115,15 @@ $(function() {
         });
     }
 
-    $('.js-mobile-dropdown').on('click', function() {
-        $(this).parent().toggleClass('is-open');
-        $(this).next('ul').slideToggle(250);
-    });
+    if (window.matchMedia('(max-width: 1024px)').matches) {
+        $('.header__link-primary').on('click', function() {
+            $(this).parent().toggleClass('is-open');
+            $(this).siblings('ul').slideToggle(250);
+        });
+
+        $('.js-mobile-dropdown').on('click', function() {
+            $(this).parent().toggleClass('is-open');
+            $(this).next('ul').slideToggle(250);
+        });
+    }
 });
