@@ -5,8 +5,13 @@
         {% include "includes/hero_video.html" with video=page.hero_video feature=page.hero_fallback_image %}
 
         <div class="hero__content hero__content--centered">
-            {% if page.hero_strapline %}
+            {% if page.hero_logo %}
+                {% image page.hero_logo fill-700x120 as hero_logo %}
+                <img class="hero__logo" src="{{ hero_logo.url }}" alt="">
+            {% elif page.hero_strapline %}
                 <h2 class="hero__strapline">{{ page.hero_strapline }}</h2>
+            {% else %}
+                <h2 class="hero__strapline">{{ page.title }}</h2>
             {% endif %}
 
             {# Link field to video or page #}
