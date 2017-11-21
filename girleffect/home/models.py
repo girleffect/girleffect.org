@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
 
@@ -10,8 +11,8 @@ from wagtail.wagtailadmin.edit_handlers import (
 
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
+from girleffect.articles.models import ArticlePage
 from girleffect.utils.models import (
     CallToActionSnippet,
     LinkFields,
@@ -60,8 +61,11 @@ class HomePage(Page, HeroVideoFields, SocialFields):
             FieldPanel('overview_title'),
         ], 'Homepage Carousel Overview'),
         InlinePanel('carousel_items', label="Homepage Carousel Items", min_num=3, max_num=3),
-        SnippetChooserPanel('call_to_action'),
     ]
+
+    @cached_property
+    def articles(self):
+        return ArticlePage.objects.all().live().public().order_by('-publication_date')[:3]
 
     promote_panels = (
         Page.promote_panels +  # slug, seo_title, show_in_menus, search_description
