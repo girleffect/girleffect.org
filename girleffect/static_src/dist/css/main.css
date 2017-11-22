@@ -840,9 +840,16 @@ blockquote cite {
   padding: 20px 20px 0;
 }
 
+.search-result .breadcrumb-container {
+  padding: 20px 0 0;
+}
+
 @media only screen and (min-width: 1024px) {
   .breadcrumb-container {
     padding: 50px 0 0;
+  }
+  .search-result .breadcrumb-container {
+    padding: 0;
   }
 }
 
@@ -995,6 +1002,14 @@ blockquote cite {
 
 .header__search-bar--mobile .input--search {
   border-bottom: 1px solid #dad9d6;
+}
+
+.hero--search .input--search {
+  max-width: 100%;
+}
+
+.input--search-results {
+  border: 1px solid #2f6165;
 }
 
 .label--small {
@@ -1782,6 +1797,27 @@ article .share-icons--hide-mobile {
   width: 100%;
 }
 
+.form--search-results {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+}
+
+.hero--search .form--search-results {
+  width: 270px;
+  padding: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .hero--search .form--search-results {
+    width: 600px;
+  }
+}
+
 .hero {
   position: relative;
 }
@@ -1793,6 +1829,18 @@ article .share-icons--hide-mobile {
   position: absolute;
   background: #f4f4f3;
   z-index: -1;
+}
+
+.hero--search {
+  background: url("../images/search-hero.png") no-repeat;
+  background-size: cover;
+  height: 200px;
+}
+
+@media only screen and (min-width: 768px) {
+  .hero--search {
+    height: 400px;
+  }
 }
 
 .hero__heading {
@@ -2019,6 +2067,40 @@ article .share-icons--hide-mobile {
 
 .featherlight:last-of-type {
   background: rgba(0, 0, 0, 0.9);
+}
+
+.search-result {
+  border-bottom: 1px solid #f4f4f3;
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 768px) {
+  .search-result {
+    flex-direction: row;
+  }
+}
+
+.search-result:first-child {
+  border-top: 1px solid #f4f4f3;
+}
+
+.search-result__heading {
+  margin-top: 15px;
+}
+
+.search-result img {
+  margin-right: 30px;
+}
+
+.search-result__default-image {
+  width: 270px;
+  height: 175px;
+  background: url("../images/defualt-search-result-icon.png") no-repeat #f4f4f3;
+  background-size: 80px;
+  background-position: center;
+  margin-right: 30px;
 }
 
 .stat-block {
