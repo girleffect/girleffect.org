@@ -43,8 +43,9 @@
 
         <div class="article-info">
             <a class="article-info__category" href="#">{{ page.categories.first.category }}</a>
-            <p class="article-info__author">{% if page.author %}<span>By {{ page.author }}</span>{% endif %} {{ page.display_date }}</p>
+            <p class="article-info__author">{% if page.author %}<span>By {{ page.author }}</span>{% endif %} {{ page.display_date|date }}</p>
         </div>
+
         <p class="large-text">{{ page.introduction }}</p>
         {{ page.body }}
 
