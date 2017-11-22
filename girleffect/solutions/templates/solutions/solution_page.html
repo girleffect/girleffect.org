@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
+{% block body_class %}template-solution-page template-{{page.slug}}{% endblock %}
+
 {% block content %}
 
     {# Hero section - section includes links #}
