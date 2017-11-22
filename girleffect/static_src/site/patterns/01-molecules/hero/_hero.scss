@@ -12,6 +12,16 @@
         }
     }
 
+    &--search {
+        background: url('../images/search-hero.png') no-repeat;
+        background-size: cover;
+        height: 200px;
+
+        @include media-query(tablet-portrait) {
+            height: 400px;
+        }
+    }
+
     &__heading {
         padding: 0 20px;
 
