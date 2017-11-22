@@ -8,12 +8,12 @@ import Hamburger from './../patterns/00-atoms/buttons/hamburger/hamburger.js';
 
 // Open the header callback
 function openHeader() {
-    $('.header').find('.header__row').slideDown(200);
+    $('.header').addClass('nav-open').find('.header__row').fadeIn(250);
 }
 
 // Close the header callback.
 function closeHeader() {
-    $('.header').find('.header__row').slideUp(200, () => {
+    $('.header').removeClass('nav-open').find('.header__row').fadeOut(250, () => {
         this.node.next().removeAttr('style');
     });
 }
@@ -94,11 +94,36 @@ $(function() {
     $('.js-close-search-mobile').on('click', function() {
         $('.header__search-bar--mobile').removeClass('is-visible');
     });
-
+  
     if($('.js-share-icons').length){
         $('.js-share-icons').scrollToFixed({
             marginTop: 30,
             limit: $($('.footer')).offset().top - $('.js-share-icons').outerHeight(true) - 30
+        });
+    }
+
+    if (window.matchMedia('(min-width: 1024px)').matches) {
+        $('.header__nav-item-primary-parent, .header__nav-secondary').mouseover(function() {
+            $(this).children('.header__link-primary').addClass('is-active');
+            $(this).children('.header__nav-secondary').addClass('is-visible');
+            $('.header__nav-overlay').addClass('is-visible');
+        });
+    
+        $('.header__nav-item-primary-parent, .header__nav-overlay, .header__nav-secondary').mouseout(function() {
+            $(this).children('.header__link-primary').removeClass('is-active');
+            $('.header__nav-overlay, .header__nav-secondary').removeClass('is-visible');
+        });
+    }
+
+    if (window.matchMedia('(max-width: 1024px)').matches) {
+        $('.header__link-primary').on('click', function() {
+            $(this).parent().toggleClass('is-open');
+            $(this).siblings('ul').slideToggle(250);
+        });
+
+        $('.js-mobile-dropdown').on('click', function() {
+            $(this).parent().toggleClass('is-open');
+            $(this).next('ul').slideToggle(250);
         });
     }
 });

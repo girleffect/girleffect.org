@@ -90,13 +90,23 @@
         font-weight: $weight-bold;
         display: flex;
         align-items: center;
+
+        &:only-child {
+            .wrapper--center & {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
     }
 
     &__arrow {
         display: inline-flex;
         align-items: center;
         margin-left: 10px;
-        transition: margin $transition;
+        right: 0;
+        transition: right $transition;
+        position: relative;
 
         &::before {
             content: '';
@@ -117,7 +127,7 @@
         }
 
         .link--with-arrow:hover & {
-            margin-left: 20px;
+            right: -10px;
         }
 
         .link--with-arrow-large:hover & {

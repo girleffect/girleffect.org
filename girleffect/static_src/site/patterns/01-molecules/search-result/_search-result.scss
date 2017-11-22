@@ -1,0 +1,31 @@
+.search-result  {
+  border-bottom: 1px solid $light-grey;
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+
+  @include media-query(tablet-portrait) {
+    flex-direction: row;
+  }
+
+  &:first-child {
+    border-top: 1px solid $light-grey;
+  }
+
+  &__heading {
+    margin-top: 15px;
+  }
+
+  img {
+    margin-right: 30px;
+  }
+
+  &__default-image {
+      width: 270px;
+      height: 175px;
+      background: url('../images/defualt-search-result-icon.png') no-repeat $light-grey;
+      background-size: 80px;
+      background-position: center;
+      margin-right: 30px;
+  }
+}
