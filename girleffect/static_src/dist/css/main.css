@@ -844,10 +844,6 @@ blockquote cite {
   background-image: url("../images/ni-nyampinga-pattern.png");
 }
 
-.template-tega .brand-pattern {
-  background-image: url("../images/tega-pattern.png");
-}
-
 .template-girls-connect .brand-pattern {
   background-image: url("../images/girls-connect-pattern.png");
 }
@@ -1321,6 +1317,26 @@ blockquote cite {
 
 .section--downloads {
   background: #f4f4f3;
+}
+
+.template-ni-nyampinga .section--articles {
+  background: url("../images/ni-nyampinga-pattern.png") no-repeat;
+}
+
+.template-girls-connect .section--articles {
+  background: url("../images/girls-connect-pattern.png") no-repeat;
+}
+
+.template-zathu .section--articles {
+  background: url("../images/zathu-pattern.png") no-repeat;
+}
+
+.template-yegna .section--articles {
+  background: url("../images/yegna-pattern.png") no-repeat;
+}
+
+.template-springster .section--articles {
+  background: url("../images/springster-pattern.png") no-repeat;
 }
 
 .share-icons {
