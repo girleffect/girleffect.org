@@ -832,6 +832,38 @@ blockquote cite {
   }
 }
 
+.brand-pattern {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-repeat: no-repeat;
+}
+
+.template-ni-nyampinga .brand-pattern {
+  background-image: url("../images/ni-nyampinga-pattern.png");
+}
+
+.template-tega .brand-pattern {
+  background-image: url("../images/tega-pattern.png");
+}
+
+.template-girls-connect .brand-pattern {
+  background-image: url("../images/girls-connect-pattern.png");
+}
+
+.template-zathu .brand-pattern {
+  background-image: url("../images/zathu-pattern.png");
+}
+
+.template-yegna .brand-pattern {
+  background-image: url("../images/yegna-pattern.png");
+}
+
+.template-springster .brand-pattern {
+  background-image: url("../images/springster-pattern.png");
+}
+
 .breadcrumb-container {
   display: flex;
   align-items: center;
@@ -2813,7 +2845,13 @@ article .share-icons--hide-mobile {
   display: flex;
   margin-bottom: 3rem;
   flex-direction: column;
-  width: 45%;
+  width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .media-block {
+    width: 45%;
+  }
 }
 
 .media-block:only-child {
