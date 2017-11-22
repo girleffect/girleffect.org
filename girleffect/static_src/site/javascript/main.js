@@ -137,4 +137,35 @@ $(function() {
     $('.carousel__panel').mouseout(function(){
         $('.carousel__panel').removeClass('is-expanded');
     });
+
+    $('[data-image="1"], [data-panel="1"]').addClass('is-visible');
+
+    $('.js-home-nav-next').on('click', function() {
+        $('.carousel__image.is-visible').removeClass(function () {
+            $(this).next().next().addClass('is-visible');
+            return 'is-visible';
+        });
+
+        $('.carousel__panel-mobile.is-visible').removeClass(function () {
+            $(this).next().next().addClass('is-visible');
+            return 'is-visible';
+        });
+    });
+
+    $('.js-home-nav-prev').on('click', function () {
+        const foo = $('.carousel__image.is-visible').getAttribute('data-image');
+        console.log(foo);
+        // if ( === '3') {
+        //     console.log('3rd');
+        // }
+        $('.carousel__image.is-visible').removeClass(function () {
+            $(this).prev().prev().addClass('is-visible');
+            return 'is-visible';
+        });
+
+        $('.carousel__panel-mobile.is-visible').removeClass(function () {
+            $(this).prev().prev().addClass('is-visible');
+            return 'is-visible';
+        });
+    });
 });

@@ -6,6 +6,7 @@
     &--home {
         position: relative;
         overflow: hidden;
+        min-height: 340px;
     }
 
     &__item {
@@ -27,19 +28,36 @@
         object-fit: cover;
 
         &--hidden {
-            opacity: 0;
             position: absolute;
             top: 0;
-            transition: opacity $transition;
+            left: 100%;
+            transition: left $transition;
+
+            &.is-visible {
+                left: 0;
+            }
+
+            @include media-query(tablet-portrait) {
+                opacity: 0;
+                transition: opacity $transition;
+                left: auto;
+            }
+
+
         }
 
         &--main {
             opacity: 1;
             transition: opacity $transition;
+            visibility: hidden;
         }
 
         &.is-visible {
-            opacity: 1;
+            left: 0;
+
+            @include media-query(tablet-portrait) {
+                opacity: 1;
+            }
         }
     }
 
@@ -127,13 +145,17 @@
     }
 
     &__panels {
-        display: flex;
+        display: none;
         position: absolute;
         bottom: 30px;
         width: 90%;
         align-items: flex-end;
         left: 50%;
         transform: translate(-50%, 0);
+
+        @include media-query(tablet-portrait) {
+            display: flex;
+        }
     }
 
     &__panel {
@@ -153,6 +175,26 @@
         }
     }
 
+    &__panel-mobile {
+        position: absolute;
+        bottom: 30px;
+        z-index: 5;
+        background: $white-90;
+        width: 90%;
+        padding: 20px;
+        left: 150%;
+        transform: translateX(-50%);
+        transition: left $transition;
+
+        &.is-visible {
+            left: 50%;
+        }
+
+        @include media-query(tablet-portrait) {
+            display: none;
+        }
+    }
+
     &__panel-title {
         color: $yellow;
         transition: color $transition;
@@ -163,14 +205,26 @@
     }
 
     &__panel-content {
-        opacity: 0;
-        display: none;
         color: $green;
         transition: opacity $transition;
+
+        @include media-query(tablet-portrait) {
+            opacity: 0;
+            display: none;
+        }
 
         .is-expanded & {
             display: block;
             opacity: 1;
+        }
+    }
+
+    &__nav-home {
+        display: flex;
+        justify-content: space-around;
+        
+        @include media-query(tablet-portrait) {
+            display: none;
         }
     }
 }
