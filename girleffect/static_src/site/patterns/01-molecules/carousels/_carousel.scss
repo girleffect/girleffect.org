@@ -34,6 +34,10 @@
         min-height: 340px;
         width: 100%;
         object-fit: cover;
+
+        @include media-query(tablet-portrait) {
+            min-height: 700px;
+        }
         
 
         &--hidden {
@@ -235,8 +239,6 @@
     &__nav-home {
         display: flex;
         padding: 20px;
-
-        // justify-content: space-around;
         
         @include media-query(tablet-portrait) {
             display: none;
@@ -253,6 +255,7 @@
         transform: rotate(180deg);
         margin-left: 20px;
     }
+
     &__home-title {
         color: $yellow;
         position: absolute;
