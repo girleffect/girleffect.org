@@ -141,6 +141,12 @@ $(function() {
     $('[data-image="1"], [data-panel="1"]').addClass('is-visible');
 
     $('.js-home-nav-next').on('click', function() {
+        const imageNumber = $('.carousel__image.is-visible').data('image');
+        
+        if (imageNumber === 3) {
+            return;
+        }
+        
         $('.carousel__image.is-visible').removeClass(function () {
             $(this).next().next().addClass('is-visible');
             return 'is-visible';
@@ -153,11 +159,12 @@ $(function() {
     });
 
     $('.js-home-nav-prev').on('click', function () {
-        const foo = $('.carousel__image.is-visible').getAttribute('data-image');
-        console.log(foo);
-        // if ( === '3') {
-        //     console.log('3rd');
-        // }
+        const imageNumber = $('.carousel__image.is-visible').data('image');
+
+        if (imageNumber === 1) {
+            return;
+        }
+    
         $('.carousel__image.is-visible').removeClass(function () {
             $(this).prev().prev().addClass('is-visible');
             return 'is-visible';
