@@ -7,6 +7,13 @@
         position: relative;
         overflow: hidden;
         min-height: 340px;
+        margin: 0 auto;
+        max-width: $wrapper--large;
+        
+        @include media-query(tablet-portrait) {
+            margin: 0 auto 4rem;
+            min-height: 700px;
+        }
     }
 
     &__item {
@@ -24,8 +31,10 @@
     }
 
     &__image {
-        max-height: 700px;
+        min-height: 340px;
+        width: 100%;
         object-fit: cover;
+        
 
         &--hidden {
             position: absolute;
@@ -42,14 +51,16 @@
                 transition: opacity $transition;
                 left: auto;
             }
-
-
         }
 
         &--main {
             opacity: 1;
             transition: opacity $transition;
             visibility: hidden;
+
+            @include media-query(tablet-portrait) {
+                visibility: visible;
+            }
         }
 
         &.is-visible {
@@ -221,10 +232,23 @@
 
     &__nav-home {
         display: flex;
-        justify-content: space-around;
+        padding: 20px;
+
+        // justify-content: space-around;
         
         @include media-query(tablet-portrait) {
             display: none;
         }
+
+        svg {
+            fill: $yellow;
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    &__nav-home-next {
+        transform: rotate(180deg);
+        margin-left: 20px;
     }
 }

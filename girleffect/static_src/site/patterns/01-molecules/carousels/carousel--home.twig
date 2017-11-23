@@ -1,5 +1,6 @@
 <div class="carousel carousel--home">  
   <img class="carousel__image carousel__image--main" src="https://picsum.photos/1600/800?image=0" alt="">
+  
   <img data-image="1" class="carousel__image carousel__image--hidden" src="https://picsum.photos/1600/800?image=0" alt="">
   <div data-panel="1" class="carousel__panel-mobile">
     <h4 class="carousel__panel-title">Our Approach</h4>
@@ -26,7 +27,6 @@
       {% include 'atoms-arrow' %}
     </div>
   </div>
-
 
   <div class="carousel__panels">
     <div data-panel="1" class="carousel__panel">
@@ -57,6 +57,14 @@
 </div>
 
 <div class="carousel__nav-home">
-  <div class="js-home-nav-prev">Left</div>
-  <div class="js-home-nav-next">Right</div>
+  <div class="js-home-nav-prev">
+    <svg>
+      <use xlink:href="#arrow"></use>
+    </svg>
+  </div>
+  <div class="js-home-nav-next carousel__nav-home-next">
+    <svg>
+      <use xlink:href="#arrow"></use>
+    </svg>
+  </div>
 </div>
