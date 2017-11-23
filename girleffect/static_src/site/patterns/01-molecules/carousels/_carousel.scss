@@ -3,16 +3,35 @@
 }
 
 .carousel {
-    &--home {
+    &--home-desktop {
         position: relative;
         overflow: hidden;
         min-height: 340px;
-        margin: 0 auto;
+        margin: 4rem auto;
         max-width: $wrapper--large;
+        display: none;
         
         @include media-query(tablet-portrait) {
-            margin: 4rem auto;
-            min-height: 700px;
+            display: block;
+        }
+
+        &::after {
+            background: linear-gradient(to bottom, transparent 80%, $black 100%);
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+
+    &--home-mobile {
+        margin: 2rem auto;
+        display: block;
+
+        @include media-query(tablet-portrait) {
+            display: none;
         }
     }
 
@@ -167,6 +186,7 @@
         align-items: flex-end;
         left: 50%;
         transform: translate(-50%, 0);
+        z-index: 5;
 
         @include media-query(tablet-portrait) {
             display: flex;
@@ -192,22 +212,11 @@
     }
 
     &__panel-mobile {
-        position: absolute;
-        bottom: 30px;
-        z-index: 5;
-        background: $white-90;
-        width: 90%;
-        padding: 20px;
-        left: 150%;
-        transform: translateX(-50%);
-        transition: left $transition;
+        position: relative;
 
-        &.is-visible {
-            left: 50%;
-        }
-
-        @include media-query(tablet-portrait) {
-            display: none;
+        > img {
+            min-height: 400px;
+            object-fit: cover;
         }
     }
 
@@ -217,6 +226,10 @@
         font-weight: $weight-medium;
 
         .carousel__panel:hover & {
+            color: $green;
+        }
+
+        .carousel__panel-mobile & {
             color: $green;
         }
     }
@@ -236,24 +249,14 @@
         }
     }
 
-    &__nav-home {
-        display: flex;
+    &__panel-content-mobile {
+        background: $white-90;
         padding: 20px;
-        
-        @include media-query(tablet-portrait) {
-            display: none;
-        }
-
-        svg {
-            fill: $yellow;
-            width: 40px;
-            height: 40px;
-        }
-    }
-
-    &__nav-home-next {
-        transform: rotate(180deg);
-        margin-left: 20px;
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        width: 90%;
+        max-width: 50%;
     }
 
     &__home-title {
