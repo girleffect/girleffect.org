@@ -9,18 +9,19 @@
     <div>
         <div>
             {# breadcrumbs #}
+            <ul class="breadcrumb-container">
             {% if result.get_ancestors|length > 2 %}
                 {% for ancestor in result.get_ancestors %}
                     {% if not ancestor.is_root %}
                         {% if ancestor.depth > 2 %}
-                            {{ ancestor.title }}
-                            {% if ancestor.depth|add:1 < result.depth %}
-                                &nbsp;/&nbsp;
-                            {% endif %}
-                        {% else %}/{% endif %} {# the first one #}
+                            <li class="breadcrumb">
+                                {{ ancestor.title }}
+                            </li>
+                        {% endif %} {# the first one #}
                     {% endif %}
                 {% endfor %}
             {% endif %}
+            </ul>
         </div>
 
         <h4 class="search-result__heading heading--medium">
