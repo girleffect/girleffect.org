@@ -43,7 +43,7 @@ class HomePageCarouselItem(Orderable, LinkFields, models.Model):
         FieldPanel('description'),
         ImageChooserPanel('image'),
 
-    ]
+    ] + LinkFields.content_panels
 
     def __str__(self):
         return self.title
