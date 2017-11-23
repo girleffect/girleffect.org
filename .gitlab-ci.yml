@@ -19,7 +19,8 @@ stages:
 
 image: docker:latest
 variables:
-  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_BUILD_REF
+  GE_REGISTRY: girleffect/corporate-site
+  IMAGE_TAG: $GE_REGISTRY:$CI_BUILD_REF
   CFG_EMAIL_SUBJECT_PREFIX: "[girleffect]"
   CFG_ALLOWED_HOSTS: "*"
   DEPLOY_FLAGS: >
@@ -93,9 +94,18 @@ build:
     - docker
   only:
     - staging
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
+    - docker build -t $IMAGE_TAG .
+
+# Build the Docker image for production, push to the GE docker repo.
+docker_push:
+  stage: build
+  tags: 
+    - docker
+  only:
+    - master
+  script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD $CI_REGISTRY
     - docker build -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
 
