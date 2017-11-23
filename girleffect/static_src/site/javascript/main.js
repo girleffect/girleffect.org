@@ -138,7 +138,9 @@ $(function() {
         $('.carousel__panel').removeClass('is-expanded');
     });
 
-    $('[data-image="1"], [data-panel="1"]').addClass('is-visible');
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        $('[data-image="1"], [data-panel="1"]').addClass('is-visible');
+    }
 
     $('.js-home-nav-next').on('click', function() {
         const imageNumber = $('.carousel__image.is-visible').data('image');
