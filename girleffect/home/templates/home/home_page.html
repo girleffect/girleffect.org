@@ -32,6 +32,9 @@
         <div class="carousel__panels">
              {% for item in page.carousel_items.all %}
                 <div data-panel="{{ forloop.counter }}" class="carousel__panel">
+                    <svg class="carousel__icon">
+                        <use xlink:href="#chevron"></use>
+                    </svg>
                     <h4 class="carousel__panel-title">{{ item.title }}</h4>
                     <div class="carousel__panel-content">
                         <p>{{ item.description }}</p>

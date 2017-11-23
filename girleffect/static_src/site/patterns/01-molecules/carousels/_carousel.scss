@@ -261,4 +261,22 @@
         left: 50px;
         font-size: 35px;
     }
+
+    &__icon {
+        fill: none;
+        stroke: $yellow;
+        stroke-width: 3px;
+        position: absolute;
+        right: 0;
+        height: 35px;
+        width: 15px;
+        left: 50%;
+        transform: translateX(-50%) rotate(180deg);
+        bottom: 50px;
+        transition: bottom $transition;
+
+        .is-expanded & {
+            bottom: 210px;
+        }
+    }
 }
