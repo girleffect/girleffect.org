@@ -8,7 +8,7 @@
             {% if person.job_title %}
                 <p class="article-card__date">{{ person.job_title }}</p>
             {% endif %}
-            <h4>{{ person.first_name }} {{ person.last_name }}</h4>
+            <h4 class="heading heading--medium">{{ person.first_name }} {{ person.last_name }}</h4>
             {% if person.introduction %}
                 <p class="article-card__copy">{{ person.introduction|truncatechars_html:145 }}</p>
             {% endif %}
