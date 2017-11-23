@@ -11,7 +11,7 @@
         max-width: $wrapper--large;
         
         @include media-query(tablet-portrait) {
-            margin: 0 auto 4rem;
+            margin: 4rem auto;
             min-height: 700px;
         }
     }
