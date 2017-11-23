@@ -35,7 +35,7 @@ $(function() {
         items: 1,
         nav: true,
         dots: true,
-        autoHeight: true,
+        autoHeight: false,
         navContainer: '.js-full-width-nav',
         navText: ['<svg class="carousel__nav-left"><use xlink:href="#arrow"></use></svg>','<svg class="carousel__nav-right"><use xlink:href="#arrow"></use></svg>'],
         loop: $('.owl-carousel .carousel__item').length > 1 ? true : false
