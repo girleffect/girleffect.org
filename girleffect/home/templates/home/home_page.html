@@ -10,18 +10,20 @@
     
     {# Homepage Carousel #}
     {% if page.carousel_items.exists %}
-    <div class="homepage-carousel">
-        <h4>{{ page.overview_title }}</h4>
+    <div class="carousel carousel--home">
+        {% image page.overview_image fill-1600x800 as overview_image %}
+        <img class="carousel__image carousel__image--main" src="{{ overview_image.url }}">
 
-        {% image page.overview_image fill-100x100 as overview_image %}
-        <img class="homepage-carousel overview__image" src="{{ overview_image.url }}">
-
+        
         {% for item in page.carousel_items.all %}
-            <div class="homepage-carousel-item">
-                <h4>{{ item.title }}</h4>
-                {{ item.description }}
-                {% image item.image fill-100x100 as carousel_item_image %}
-                <img class="homepage-carousel-item__image" src="{{ carousel_item_image.url }}">
+            {% image item.image fill-1600x800 as carousel_item_image %}
+            <img data-image="{{ forloop.counter }}" class="carousel__image carousel__image--hidden" src="{{ carousel_item_image.url }}">
+            <div data-panel="{{ forloop.counter }}" class="carousel__panel-mobile">
+                <h4 class="carousel__panel-title">{{ item.title }}</h4>
+                <div class="carousel__panel-content">
+                    <p>{{ item.description }}</p>
+                    <div class="arrow"></div>
+                </div>
             </div>
             {% if item.link_page %}
                 <a href="{{ item.link_page.url }}">{{ item.link_text|default:item.title }}</a>
@@ -29,6 +31,31 @@
                 <a href="{{ item.url }}">{{ item.link_text|default:item.title }}</a>
             {% endif %}
         {% endfor %}
+
+        <div class="carousel__panels">
+             {% for item in page.carousel_items.all %}
+                <div data-panel="{{ forloop.counter }}" class="carousel__panel">
+                    <h4 class="carousel__panel-title">{{ item.title }}</h4>
+                    <div class="carousel__panel-content">
+                        <p>{{ item.description }}</p>
+                        <div class="arrow"></div>
+                    </div>
+                </div>
+             {% endfor %}
+        </div>
+    </div>
+    <div class="carousel__nav-home">
+        <div class="js-home-nav-prev">
+            <svg>
+                <use xlink:href="#arrow"></use>
+            </svg>
+        </div>
+        <div class="js-home-nav-next carousel__nav-home-next">
+            <svg>
+                <use xlink:href="#arrow"></use>
+            </svg>
+        </div>
+    </div>
     {% endif %}
         
     {# Streamfield options #}
