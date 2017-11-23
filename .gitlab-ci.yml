@@ -102,8 +102,6 @@ docker_push:
   stage: build
   tags: 
     - docker
-  only:
-    - master
   script:
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD $CI_REGISTRY
     - docker build -t $IMAGE_TAG .
