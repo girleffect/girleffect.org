@@ -9,14 +9,13 @@
         <div class="stat-block__content">
             <p class="stat-block__label">{{ value.title }}</p>
             {{ value.description|richtext }}
-            <p>{{ value.citation_text }}</p>
-
-            {% if value.link_page %}
-                <div class="arrow"></div>
-            {% elif value.link_url  %}
-                <div class="arrow"></div>
-            {% endif %}
+            <p class="stat-block__cite">{{ value.citation_text }}</p>
         </div>
+        {% if value.link_page %}
+            <div class="arrow"></div>
+        {% elif value.link_url %}
+            <div class="arrow"></div>
+        {% endif %}
 {% if value.link_page %}
     </a>
 {% elif value.link_url  %}
