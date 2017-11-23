@@ -179,6 +179,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        position: relative;
 
         &:hover {
             background: $white-90;
@@ -207,8 +208,9 @@
     }
 
     &__panel-title {
-        color: $yellow;
+        color: $white;
         transition: color $transition;
+        font-weight: $weight-medium;
 
         .carousel__panel:hover & {
             color: $green;
@@ -250,5 +252,13 @@
     &__nav-home-next {
         transform: rotate(180deg);
         margin-left: 20px;
+    }
+    &__home-title {
+        color: $yellow;
+        position: absolute;
+        z-index: 5;
+        top: 50px;
+        left: 50px;
+        font-size: 35px;
     }
 }
