@@ -7,6 +7,15 @@
     text-rendering: optimizeLegibility;
 }
 
+// Medium
+@font-face {
+    font-family: 'lineto-circular';
+    src: url('./../fonts/lineto-circular/lineto-circular-medium.eot'), url('./../fonts/lineto-circular/lineto-circular-medium.eot?#iefix') format('embedded-opentype'), url('./../fonts/lineto-circular/lineto-circular-medium.woff') format('woff');
+    font-style: normal;
+    font-weight: 500;
+    text-rendering: optimizeLegibility;
+}
+
 // Bold
 @font-face {
     font-family: 'lineto-circular';
