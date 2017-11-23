@@ -16,7 +16,7 @@
             </span>
             {% endif %}
             <span class="article-card__date">{{ article.publication_date|date:"d.m.y" }}</span>
-            <div><a href="{{ article.url }}">{{ article.title }}</a></div>
+            <div class="article-card__title"><a href="{{ article.url }}">{{ article.title }}</a></div>
         </div>
         <div class="arrow"></div>
     </div>
