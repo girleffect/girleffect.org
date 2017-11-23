@@ -31,4 +31,9 @@
     .article-card:hover & {
         margin-left: 20px;
     }
+
+    .stat-block & {
+        position: absolute;
+        bottom: 50px;
+    }
 }
