@@ -18,18 +18,45 @@
         {% endfor %}
 
         <div class="carousel__panels">
-             {% for item in page.carousel_items.all %}
-                <div data-panel="{{ forloop.counter }}" class="carousel__panel">
-                    <svg class="carousel__icon">
-                        <use xlink:href="#chevron"></use>
-                    </svg>
-                    <h4 class="carousel__panel-title">{{ item.title }}</h4>
-                    <div class="carousel__panel-content">
-                        <p>{{ item.description }}</p>
-                        <div class="arrow"></div>
+            {% for item in page.carousel_items.all %}
+
+                {% if item.link_page %}
+                    <a data-panel="{{ forloop.counter }}" class="carousel__panel" href="{{ item.link_page.url }}">
+                {% elif item.link_url %}
+                    <a data-panel="{{ forloop.counter }}" class="carousel__panel" href="{{ item.link_url }}">
+                {% else %}
+                    <div data-panel="{{ forloop.counter }}" class="carousel__panel">
+                {% endif %}
+
+                        <svg class="carousel__icon">
+                            <use xlink:href="#chevron"></use>
+                        </svg>
+
+                        <h4 class="carousel__panel-title">{{ item.title }}</h4>
+                        <div class="carousel__panel-content">
+                            <p>{{ item.description }}</p>
+                            
+                            {% if item.link_page %}
+                                <span class="link link--with-arrow">
+                                    {{ item.link_text|default:item.title }}
+                                    <div class="arrow"></div>
+                                </span>
+                            {% elif item.link_url %}
+                                <span class="link link--with-arrow">
+                                    {{ item.link_text|default:item.title }}
+                                    <div class="arrow"></div>
+                                </span>
+                            {% endif %}
+                        </div>
+
+                {% if item.link_page %}
+                    </a>
+                {% elif item.link_url %}
+                    </a>
+                {% else %}
                     </div>
-                </div>
-             {% endfor %}
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 
@@ -46,7 +73,17 @@
                         <h4 class="carousel__panel-title">{{ item.title }}</h4>
                         <div class="carousel__panel-content">
                             <p>{{ item.description }}</p>
-                            <div class="arrow"></div>
+                            {% if item.link_page %}
+                                <a class="link link--with-arrow" href="{{ item.link_page.url }}">
+                                    {{ item.link_text|default:item.title }}
+                                    <div class="arrow"></div>
+                                </a>
+                                {% elif item.link_url %}
+                                <a class="link link--with-arrow" href="{{ item.link_url }}">
+                                    {{ item.link_text|default:item.title }}
+                                    <div class="arrow"></div>
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
