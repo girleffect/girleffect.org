@@ -1,8 +1,16 @@
 .list-item {
     margin-bottom: 3rem;
 
-    @include media-query(tablet-landscape) {
-        padding: 0 20px;
+    &:nth-child(3n+1) {
+        padding: 0 10px 20px 0;
+    }
+
+    &:nth-child(3n+2) {
+        padding: 0 10px 20px;
+    }
+
+    &:nth-child(3n+3) {
+        padding: 0 0 20px 10px;
     }
 
     &__image {
