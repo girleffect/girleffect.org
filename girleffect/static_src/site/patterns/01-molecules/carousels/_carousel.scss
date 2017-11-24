@@ -8,7 +8,7 @@
 
         &::before {
             content: '';
-            background: linear-gradient(to top, $black-40, $black-05 35%);
+            background: linear-gradient(to bottom, transparent 80%, $black 100%);
             position: absolute;
             top: 0;
             bottom: 0;
