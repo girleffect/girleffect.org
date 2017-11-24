@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags search_tags %}
 
 {% if result.listing_image %}
     {% image result.listing_image fill-270x175 %}
@@ -34,14 +34,6 @@
             </a>
         </h4>
 
-        {% if pick.description %}
-            {{ pick.description }}
-        {% elif result.search_description %}
-            {{ result.search_description }}
-        {% endif %}
-
-        {% if result.listing_summary %}
-            <p>{{ result.listing_summary }}</p>
-        {% endif %}
+        {% preview result %}
 
     </div>
