@@ -30,15 +30,19 @@
             flex-direction: row-reverse;
             width: auto;
             max-width: 100%;
-        }
-
-        .media-block-container & {
-            justify-content: initial;
+            margin: 2rem auto;
         }
     }
 
     &__image + .media-block__content {
         padding: 60px 70px 40px 40px;
+        width: 90%;
+        margin: 0 auto;
+
+        @include media-query(tablet-landscape) {
+            width: 100%;
+            margin: auto;
+        }
     }
 
     &__content {
