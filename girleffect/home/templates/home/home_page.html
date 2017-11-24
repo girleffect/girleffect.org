@@ -20,6 +20,11 @@
                 {% image item.image fill-100x100 as carousel_item_image %}
                 <img class="homepage-carousel-item__image" src="{{ carousel_item_image.url }}">
             </div>
+            {% if item.link_page %}
+                <a href="{{ item.link_page.url }}">{{ item.link_text|default:item.title }}</a>
+            {% elif page.link_url %}
+                <a href="{{ item.url }}">{{ item.link_text|default:item.title }}</a>
+            {% endif %}
         {% endfor %}
     {% endif %}
         
