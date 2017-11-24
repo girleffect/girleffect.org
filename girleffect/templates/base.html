@@ -26,7 +26,7 @@
         <!--  and https://dev.twitter.com/cards/getting-started -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@{{ settings.utils.SocialMediaSettings.twitter_handle }}" />
-        <meta name="twitter:title" content="{{ page.seo_title|default:page.social_title|default:page.title }}" />
+        <meta name="twitter:title" content="{{ page.social_title|default:page.seo_title|default:page.title }}" />
         {% with page.introduction as page_intro %}
         <meta name="twitter:description" content="{{ page.social_text|default:page_intro|default:settings.utils.SocialMediaSettings.default_sharing_text }}">
         {% endwith %}
@@ -45,7 +45,7 @@
         <meta property="fb:app_id" content="{{ settings.utils.SocialMediaSettings.facebook_app_id }}" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="{{ request.site.hostname }}{{ page.url }}" />
-        <meta property="og:title" content="{{ page.seo_title|default:page.social_title|default:page.title }}" />
+        <meta property="og:title" content="{{ page.social_title|default:page.seo_title|default:page.title }}" />
         {% if page.social_image %}
             <meta property="og:image" content="{{ request.site.hostname }}{{ social_img.url }}" />
         {% elif page.hero_image %}
