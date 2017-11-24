@@ -94,7 +94,7 @@ build:
   tags:
     - docker
   only:
-    - staging
+    - master
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
@@ -107,7 +107,7 @@ docker_push:
   tags: 
     - docker
   only:
-    - master
+    - staging
   script:
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - docker build -t $IMAGE_TAG .
