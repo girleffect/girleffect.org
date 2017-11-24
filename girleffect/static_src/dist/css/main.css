@@ -1207,6 +1207,11 @@ blockquote cite {
   transform: translateX(-50%);
 }
 
+.quote__content--has-link .link--with-arrow {
+  color: #fff;
+  margin-top: 30px;
+}
+
 .link__arrow {
   display: inline-flex;
   align-items: center;
@@ -3058,6 +3063,7 @@ article .share-icons--hide-mobile {
   position: relative;
   max-width: 657px;
   margin-bottom: 2rem;
+  overflow: hidden;
 }
 
 .quote::before {
@@ -3100,6 +3106,16 @@ article .share-icons--hide-mobile {
   .quote__content {
     padding: 2rem;
   }
+}
+
+.quote__content--has-link {
+  padding: 2rem 2rem 40px;
+  margin-bottom: -60px;
+  transition: margin-bottom 0.25s ease-in-out;
+}
+
+.quote:hover .quote__content--has-link {
+  margin-bottom: 0;
 }
 
 .quote__copy {
