@@ -15,6 +15,7 @@
     position: relative;
     max-width: 657px;
     margin-bottom: 2rem;
+    overflow: hidden;
 
     &::before {
         content: '';
@@ -53,6 +54,16 @@
 
         @include media-query(tablet-landscape) {
             padding: 2rem;
+        }
+
+        &--has-link {
+            padding: 2rem 2rem 40px;
+            margin-bottom: -60px;
+            transition: margin-bottom 0.25s ease-in-out;
+
+            .quote:hover & {
+                margin-bottom: 0;
+            }
         }
     }
 

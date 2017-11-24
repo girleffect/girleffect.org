@@ -5,12 +5,22 @@
             <img class="quote__image" src="{{ quote_image.url }}" alt="{{ quote_image.alt }}">
         {% endif %}
 
-        <div class="quote__content">
+        <div class="quote__content 
+            {% if value.link_block.external_link %} 
+                quote__content--has-link
+            {% elif value.link_block.internal_link %}
+                quote__content--has-link
+            {% elif value.link_block.document_link %}
+                quote__content--has-link
+            {% else %}
+
+            {% endif %}
+        ">
             {% if value.title %}
                 <h4 class="quote__title">{{ value.title }}</h4>
             {% endif %}
 
-            <blockquote class="quote__copy"{% if value.link %} cite="{{ value.link }}"{% endif %}>
+            <blockquote class="quote__copy">
                 {{ value.text }}
             </blockquote>
 
@@ -18,7 +28,14 @@
                 <span class="quote__cite">{{ value.citation }}</span>
             {% endif %}
             
-            {# template for this is in link_block.html #}
-            {% include_block value.link %}
+            {% if value.link_block.external_link %}
+                {# template for this is in link_block.html #} 
+                {% include_block value.link_block %}
+            {% elif value.link_block.internal_link %}
+                {% include_block value.link_block %}
+            {% elif value.link_block.document_link %}
+                {% include_block value.link_block %}
+            {% else %}
+            {% endif %}
         </div>
     </div>

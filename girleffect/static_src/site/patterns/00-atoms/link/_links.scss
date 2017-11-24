@@ -98,6 +98,11 @@
                 transform: translateX(-50%);
             }
         }
+
+        .quote__content--has-link & {
+            color: $white;
+            margin-top: 30px;
+        }
     }
 
     &__arrow {
