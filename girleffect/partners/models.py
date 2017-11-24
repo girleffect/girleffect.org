@@ -7,6 +7,7 @@ from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
     InlinePanel,
+    MultiFieldPanel,
     PageChooserPanel
 )
 
@@ -16,6 +17,7 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from girleffect.utils.models import (
+    HeroImageFields,
     SocialFields
 )
 
@@ -52,7 +54,7 @@ class Partner(Orderable, models.Model):
         return self.title
 
 
-class PartnerIndexPage(Page, SocialFields):
+class PartnerIndexPage(Page, HeroImageFields, SocialFields):
     introduction = models.TextField(blank=True)
     call_to_action = models.ForeignKey(
         'utils.CallToActionSnippet',
@@ -63,6 +65,9 @@ class PartnerIndexPage(Page, SocialFields):
     )
 
     content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            ImageChooserPanel('hero_image'),
+        ], 'Hero Image'),
         FieldPanel('introduction'),
         InlinePanel('partners', label="Partners"),
         SnippetChooserPanel('call_to_action')
