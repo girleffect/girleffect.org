@@ -26,7 +26,13 @@
         <!--  and https://dev.twitter.com/cards/getting-started -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@{{ settings.utils.SocialMediaSettings.twitter_handle }}" />
-        <meta name="twitter:title" content="{{ page.social_title|default:page.seo_title|default:page.title }}" />
+        {% if page %}
+            <meta name="twitter:title" content="{{ page.social_title|default:page.seo_title|default:page.title }}" />
+        {% else %}
+            <meta name="twitter:title" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
+        {% endif %}
+
+
         {% with page.introduction as page_intro %}
         <meta name="twitter:description" content="{{ page.social_text|default:page_intro|default:settings.utils.SocialMediaSettings.default_sharing_text }}">
         {% endwith %}
@@ -45,7 +51,11 @@
         <meta property="fb:app_id" content="{{ settings.utils.SocialMediaSettings.facebook_app_id }}" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="{{ request.site.hostname }}{{ page.url }}" />
-        <meta property="og:title" content="{{ page.social_title|default:page.seo_title|default:page.title }}" />
+        {% if page %}
+            <meta property="og:title" content="{{ page.social_title|default:page.seo_title|default:page.title }}" />
+        {% else %}
+            <meta property="og:title" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
+        {% endif %}
         {% if page.social_image %}
             <meta property="og:image" content="{{ request.site.hostname }}{{ social_img.url }}" />
         {% elif page.hero_image %}
@@ -107,11 +117,10 @@
                 {% primarynav %}
 
                 <a class="js-search-desktop header__link header__link--search" aria-label="search">
-                    
                     <svg class="header__icon"><use xlink:href="#magnifying-glass"></use></svg>
                 </a>
 
-                <div>
+                <div class="header__social-icons">
                     <a class="header__link" href="https://www.facebook.com/girleffect/">
                         <svg class="header__icon"><use xlink:href="#facebook"></use></svg>
                     </a>
@@ -135,6 +144,7 @@
                     </button>
                 </form>
             </div>
+            <div class="header__nav-overlay"></div>
         </header>
 
         <main>
