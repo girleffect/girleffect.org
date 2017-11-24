@@ -1216,6 +1216,12 @@ blockquote cite {
   margin-top: 30px;
 }
 
+@media only screen and (min-width: 768px) {
+  .carousel__panel-content .link--with-arrow {
+    justify-content: center;
+  }
+}
+
 .link__arrow {
   display: inline-flex;
   align-items: center;
@@ -1616,6 +1622,42 @@ article .share-icons--hide-mobile {
   position: relative;
 }
 
+.carousel--home-desktop {
+  position: relative;
+  overflow: hidden;
+  min-height: 340px;
+  margin: 4rem auto;
+  max-width: 1400px;
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .carousel--home-desktop {
+    display: block;
+  }
+}
+
+.carousel--home-desktop::after {
+  background: linear-gradient(to bottom, transparent 80%, #000 100%);
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.carousel--home-mobile {
+  margin: 2rem auto;
+  display: block;
+}
+
+@media only screen and (min-width: 768px) {
+  .carousel--home-mobile {
+    display: none;
+  }
+}
+
 .carousel__item {
   position: relative;
 }
@@ -1631,8 +1673,56 @@ article .share-icons--hide-mobile {
 }
 
 .carousel__image {
-  max-height: 700px;
+  min-height: 340px;
+  width: 100%;
   object-fit: cover;
+}
+
+@media only screen and (min-width: 768px) {
+  .carousel__image {
+    min-height: 700px;
+  }
+}
+
+.carousel__image--hidden {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  transition: left 0.25s ease-out;
+}
+
+.carousel__image--hidden.is-visible {
+  left: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .carousel__image--hidden {
+    opacity: 0;
+    transition: opacity 0.25s ease-out;
+    left: auto;
+  }
+}
+
+.carousel__image--main {
+  opacity: 1;
+  transition: opacity 0.25s ease-out;
+  visibility: hidden;
+}
+
+@media only screen and (min-width: 768px) {
+  .carousel__image--main {
+    visibility: visible;
+  }
+}
+
+.carousel__image.is-visible {
+  left: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .carousel__image.is-visible {
+    opacity: 1;
+  }
 }
 
 .carousel__content {
@@ -1741,6 +1831,118 @@ article .share-icons--hide-mobile {
 
 .carousel__inner {
   max-width: 750px;
+}
+
+.carousel__panels {
+  display: none;
+  position: absolute;
+  bottom: 30px;
+  width: 90%;
+  align-items: flex-end;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 5;
+}
+
+@media only screen and (min-width: 768px) {
+  .carousel__panels {
+    display: flex;
+  }
+}
+
+.carousel__panel {
+  padding: 20px;
+  flex: 1;
+  background: transparent;
+  transition: height, background, 0.25s ease-out;
+  height: 70px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: relative;
+}
+
+.carousel__panel:hover {
+  background: rgba(255, 255, 255, 0.9);
+  height: 200px;
+}
+
+.carousel__panel-mobile {
+  position: relative;
+}
+
+.carousel__panel-mobile > img {
+  min-height: 400px;
+  object-fit: cover;
+}
+
+.carousel__panel-title {
+  color: #fff;
+  transition: color 0.25s ease-out;
+  font-weight: 500;
+}
+
+.carousel__panel:hover .carousel__panel-title {
+  color: #2f6165;
+}
+
+.carousel__panel-mobile .carousel__panel-title {
+  color: #2f6165;
+}
+
+.carousel__panel-content {
+  color: #2f6165;
+  transition: opacity 0.25s ease-out;
+}
+
+@media only screen and (min-width: 768px) {
+  .carousel__panel-content {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.is-expanded .carousel__panel-content {
+  display: block;
+  opacity: 1;
+}
+
+.carousel__panel-content-mobile {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  width: 90%;
+  max-width: 50%;
+}
+
+.carousel__home-title {
+  color: #ffc700;
+  position: absolute;
+  z-index: 5;
+  top: 50px;
+  left: 50px;
+  font-size: 35px;
+}
+
+.carousel__icon {
+  fill: none;
+  stroke: #ffc700;
+  stroke-width: 3px;
+  position: absolute;
+  right: 0;
+  height: 35px;
+  width: 15px;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  bottom: 50px;
+  transition: bottom 0.25s ease-out;
+}
+
+.is-expanded .carousel__icon {
+  bottom: 210px;
 }
 
 .owl-carousel {
