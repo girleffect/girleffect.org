@@ -873,6 +873,10 @@ blockquote cite {
   background-image: url("../images/springster-pattern.png");
 }
 
+.template-tega .brand-pattern {
+  background-image: url("../images/tega-pattern.png");
+}
+
 .breadcrumb-container {
   display: flex;
   align-items: center;
@@ -1302,6 +1306,17 @@ blockquote cite {
 .rich-text a {
   border-bottom: 2px solid #ffc700;
   padding-bottom: 1px;
+  font-weight: 700;
+}
+
+.rich-text ul,
+.rich-text ol {
+  padding-left: 20px;
+  list-style-position: inside;
+}
+
+.rich-text ul {
+  list-style-type: disc;
 }
 
 .section {
@@ -1372,6 +1387,10 @@ blockquote cite {
 
 .template-springster .section--articles {
   background: url("../images/springster-pattern.png") no-repeat;
+}
+
+.template-tega .section--articles {
+  background: url("../images/tega-pattern.png") no-repeat;
 }
 
 .share-icons {
@@ -1603,7 +1622,7 @@ article .share-icons--hide-mobile {
 
 .carousel__item::before {
   content: '';
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.05) 35%);
+  background: linear-gradient(to bottom, transparent 80%, #000 100%);
   position: absolute;
   top: 0;
   bottom: 0;
@@ -1612,13 +1631,8 @@ article .share-icons--hide-mobile {
 }
 
 .carousel__image {
-  max-height: 800px;
-}
-
-@supports (object-fit: cover) {
-  .carousel__image {
-    object-fit: cover;
-  }
+  max-height: 700px;
+  object-fit: cover;
 }
 
 .carousel__content {
@@ -1723,6 +1737,10 @@ article .share-icons--hide-mobile {
 .carousel__nav-right {
   transform: rotate(180deg);
   margin-left: 20px;
+}
+
+.carousel__inner {
+  max-width: 750px;
 }
 
 .owl-carousel {
@@ -2051,8 +2069,12 @@ article .share-icons--hide-mobile {
 }
 
 .image-embed--full-width {
-  max-width: 1400px;
-  margin: 0 auto 2rem;
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+}
+
+.image-embed__image {
+  width: 100%;
 }
 
 .image-embed__caption {
@@ -2093,10 +2115,16 @@ article .share-icons--hide-mobile {
   margin-bottom: 3rem;
 }
 
-@media only screen and (min-width: 1024px) {
-  .list-item {
-    padding: 0 20px;
-  }
+.list-item:nth-child(3n+1) {
+  padding: 0 10px 20px 0;
+}
+
+.list-item:nth-child(3n+2) {
+  padding: 0 10px 20px;
+}
+
+.list-item:nth-child(3n+3) {
+  padding: 0 0 20px 10px;
 }
 
 .list-item__image {
@@ -2938,15 +2966,21 @@ article .share-icons--hide-mobile {
     flex-direction: row-reverse;
     width: auto;
     max-width: 100%;
+    margin: 2rem auto;
   }
-}
-
-.media-block-container .media-block:only-child {
-  justify-content: initial;
 }
 
 .media-block__image + .media-block__content {
   padding: 60px 70px 40px 40px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 1024px) {
+  .media-block__image + .media-block__content {
+    width: 100%;
+    margin: auto;
+  }
 }
 
 .media-block__content {
@@ -2964,6 +2998,7 @@ article .share-icons--hide-mobile {
     margin-right: -30px;
     flex-direction: row-reverse;
     max-width: 100%;
+    min-height: 260px;
   }
 }
 
@@ -3067,9 +3102,13 @@ article .share-icons--hide-mobile {
 }
 
 .quote::before {
+  background: linear-gradient(to bottom, transparent 80%, #000 100%);
   content: '';
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.05));
-  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 @media only screen and (min-width: 1024px) {
