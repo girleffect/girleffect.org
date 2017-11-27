@@ -8,10 +8,6 @@
         justify-content: center;
         flex-direction: row;
     }
-
-    @include media-query(tablet-landscape) {
-        justify-content: flex-start;
-    }
 }
 
 .article-card {
@@ -64,10 +60,20 @@
         margin-right: 10px;
     }
 
+    &__copy {
+        margin-top: 15px;
+    }
+
     &__copy,
     &__date,
     &__category {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: $weight-normal;
+    }
+
+    &__title {
+        font-weight: $weight-medium;
+        margin-top: 15px;
+        line-height: 1.3;
     }
 }

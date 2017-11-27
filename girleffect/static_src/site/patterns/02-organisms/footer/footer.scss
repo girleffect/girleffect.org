@@ -24,8 +24,14 @@
     }
 
     &__nav-item {
+        margin-bottom: 10px;
+
         @include media-query(mob-landscape) {
             margin-right: 20px;
+        }
+
+        @include media-query(tablet-landscape) {
+            margin-bottom: 0;
         }
 
         &:last-child {
@@ -60,6 +66,10 @@
         .footer__link:hover & {
             fill: $green;
         }
+    }
+
+    &__social-icons {
+        margin: 10px 0 20px;
     }
 }
 

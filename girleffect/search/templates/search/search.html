@@ -19,7 +19,14 @@
 </section>
 
 <div class="wrapper wrapper--small-medium wrapper--top-bottom-space">
-    <h2 class="heading heading--bottom-space">{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search{% endif %}</h2>
+    <h4 class="heading heading--bottom-space heading--medium">
+    {% if search_query %}
+        {% with count=search_results.paginator.count %}  
+            {{ count }} search result{{ count|pluralize }} 
+        {% endwith %} 
+        for &ldquo;{{ search_query }}&rdquo;{% else %}Search
+    {% endif %}
+    </h4>
 
     {% get_search_promotions search_query as search_picks %}
     {% if search_picks %}
@@ -33,10 +40,6 @@
     {% endif %}
 
     {% if search_results %}
-
-        {% with count=search_results.paginator.count %}
-            {{ count }} result{{ count|pluralize }} found.
-        {% endwith %}
 
         <ul>
             {% for result in search_results %}

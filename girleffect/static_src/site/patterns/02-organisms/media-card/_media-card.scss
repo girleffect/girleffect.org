@@ -44,11 +44,6 @@
     }
 
     &__link {
-        @include media-query(tablet-portrait) {
-            position: absolute;
-            bottom: 40px;
-        }
-
         #{$root}__content:hover & {
             margin-left: 20px;
         }

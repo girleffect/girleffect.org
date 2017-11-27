@@ -8,4 +8,9 @@
     &--bottom-space {
         margin-bottom: 20px;
     }
+
+    &--medium {
+        font-weight: $weight-medium;
+        line-height: 1.3;
+    }
 }

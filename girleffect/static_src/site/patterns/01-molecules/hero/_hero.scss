@@ -85,12 +85,16 @@
 
     &__image {
         width: 100%;
-        min-height: 150px;
+        min-height: 225px;
         object-fit: cover;
 
         @include media-query(mob-landscape) {
             min-height: auto;
-            object-fit: initial;
+            min-height: 150px;
+        }
+
+        @include media-query(tablet-portrait) {
+            min-height: 400px;
         }
 
         &--top-space {

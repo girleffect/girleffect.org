@@ -6,14 +6,15 @@
     &__image {
         display: block;
         width: 100%;
+        object-fit: cover;
+        min-height: 275px;
 
-        @supports (object-fit: cover) {
-            object-fit: cover;
+        @include media-query(tablet-portrait) {
             min-height: 400px;
         }
 
-        @include media-query(tablet-landscape) {
-            min-height: auto;
+        @include media-query(tablet-landcsape) {
+            min-height: 500px;
         }
     }
 
@@ -38,6 +39,7 @@
 
     &__title {
         color: $white;
+        line-height: 1;
     }
 
     &__summary {
