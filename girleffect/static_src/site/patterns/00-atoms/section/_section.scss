@@ -43,4 +43,30 @@
     &--downloads {
         background: $light-grey;
     }
+
+    &--articles {
+        .template-ni-nyampinga & {
+            background: url('../images/ni-nyampinga-pattern.png') no-repeat;
+        }
+
+        .template-tega & {
+            background: url('../images/tega-pattern.png') no-repeat;
+        }
+
+        .template-girls-connect & {
+            background: url('../images/girls-connect-pattern.png') no-repeat;
+        }
+
+        .template-zathu & {
+            background: url('../images/zathu-pattern.png') no-repeat;
+        }
+
+        .template-yegna & {
+            background: url('../images/yegna-pattern.png') no-repeat;
+        }
+
+        .template-springster & {
+            background: url('../images/springster-pattern.png') no-repeat;
+        }
+    }
 }
