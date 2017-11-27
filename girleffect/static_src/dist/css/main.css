@@ -3143,6 +3143,16 @@ article .share-icons--hide-mobile {
   }
 }
 
+.media-block-container--partners {
+  padding-bottom: 2rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .media-block-container--partners {
+    padding-bottom: 4rem;
+  }
+}
+
 .media-block {
   display: flex;
   margin-bottom: 3rem;
