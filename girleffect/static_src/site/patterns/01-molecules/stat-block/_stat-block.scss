@@ -3,9 +3,13 @@
     z-index: 10;
     padding: 30px 50px 30px 30px;
     max-width: 260px;
-    margin: 0 40px;
+    margin: 0 40px 60px;
     background: $white;
     min-height: 350px;
+
+    @include media-query(tablet-landscape) {
+        margin: 0 40px 0;
+    }
 
 
     &::after {
