@@ -33,7 +33,7 @@ djrun
 This will make the site available on the host machine at: http://127.0.0.1:8000/
 
 
-# Available Fabric commands
+# Available Fabric commands (set up Kubernetes first - see below)
 
 To populate your local database with the content of staging:
 
@@ -53,3 +53,14 @@ fab pull_staging_media
 # Deployment
 
 We are using Kubernetes for our staging environment. We use GitLab CI (see `.gitlab-ci.yaml`) for deployment tasks. When a branch is merged with `staging`, a deployment pipeline runs.
+
+# Setting up Kubernetes on your host machine
+
+If you have not used Kubernertes before on a previous project you will need to set up your host machine.
+Instructions can be found at
+
+https://account.torchbox.com/kubernetes/
+
+Here you can generate a token to access Kubernertes and configure your host machine. You only need follow the instructions to 'Install and setup kubectl' - there is no need to configure your namespace or add clusters in order to get the fab commands working.
+
+If you want more information about Kubernertes see https://projects.torchbox.com/projects/sysadmin/notebook/Kubernetes
