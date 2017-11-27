@@ -6,7 +6,7 @@
 
         <div class="hero__content hero__content--centered">
             {% if page.hero_logo %}
-                {% image page.hero_logo fill-700x120 as hero_logo %}
+                {% image page.hero_logo max-700x120 as hero_logo %}
                 <img class="hero__logo" src="{{ hero_logo.url }}" alt="">
             {% elif page.hero_strapline %}
                 <h2 class="hero__strapline">{{ page.hero_strapline }}</h2>
