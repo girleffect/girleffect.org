@@ -8,6 +8,14 @@
     @include media-query(desktop) {
         justify-content: space-between;
     }
+
+    &--partners {
+        padding-bottom: 2rem;
+
+        @include media-query(tablet-landscape) {
+            padding-bottom: 4rem;
+        }
+    }
 }
 
 .media-block {

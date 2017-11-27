@@ -6,12 +6,19 @@
     {# Hero section #}
     {% include "includes/hero_image_section.html" %}
 
-    <section class="section section--partners">
-        <div class="wrapper wrapper--medium wrapper--bottom-space-xl">
+    <section class="section--partners">
+
+        <div class="wrapper wrapper--bottom-space">
+            {% block breadcrumbs %} 
+                {% include "navigation/breadcrumbs.html" %} 
+            {% endblock %}
+        </div>
+
+        <div class="wrapper wrapper--small wrapper--bottom-space-xl large-text">
             <p>{{ page.introduction }}</p>
         </div>
-        {% if page.partners.exists %}
-            <div class="media-block-container">
+        {% if page.partners.exists %}   
+            <div class="media-block-container media-block-container--partners">
                 {# Partners exist #}
                 {% for partner in page.partners.all %}
                     {% if partner.show_on_index %}

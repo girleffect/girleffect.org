@@ -3,16 +3,22 @@
 {% include 'molecules-hero' %}
 
 <section class="section section--partners">
-  <div class="wrapper wrapper--medium wrapper--bottom-space-xl">
-    <p>Exercitation labore exercitation voluptate pariatur.</p>
+  <div class="wrapper wrapper--bottom-space">
+    {% include 'atoms-breadcrumbs' %}
   </div>
-    <div class="media-block-container">
-      {% include 'organisms-media-block' %}
-      {% include 'organisms-media-block' %}
-      {% include 'organisms-media-block' %}
-      {% include 'organisms-media-block' %}
-    </div>
+
+  <div class="wrapper wrapper--medium wrapper--bottom-space-xl">
+    {% include 'atoms-large-text' %}
+  </div>
+  <div class="media-block-container media-block-container--partners">
+    {% include 'organisms-media-block' %}
+    {% include 'organisms-media-block' %}
+    {% include 'organisms-media-block' %}
+    {% include 'organisms-media-block' %}
+  </div>
 </section>
+
+{% include 'organisms-call-to-action' %}
 
 {% include 'organisms-footer' %}
 
