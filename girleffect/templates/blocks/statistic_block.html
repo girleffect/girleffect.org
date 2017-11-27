@@ -8,8 +8,20 @@
             {# found in statistic_item_block.html #}
         {% endfor %}
     </div>
-    <div class="wrapper wrapper--center wrapper--top-bottom-space">
-        {# template for this is in link_block.html #}
-        {% include_block value.link %}
-    </div>
+
+    {% if value.link.external_link %}
+        {# template for this is in link_block.html #} 
+        <div class="wrapper wrapper--center">
+            {% include_block value.link %}
+        </div>
+    {% elif value.link.internal_link %}
+        <div class="wrapper wrapper--center">
+            {% include_block value.link %}
+        </div>
+    {% elif value.link.document_link %}
+        <div class="wrapper wrapper--center">
+            {% include_block value.link %}
+        </div>
+    {% else %}
+    {% endif %}
 </section>

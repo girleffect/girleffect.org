@@ -12,8 +12,15 @@
                 {# text is RichText #}
                 <p>{{ value.text }}</p>
 
-                {# template for this is in link_block.html #}
-                {% include_block value.link %}
+                {% if value.link.external_link %}
+                    {# template for this is in link_block.html #} 
+                    {% include_block value.link %}
+                {% elif value.link.internal_link %}
+                    {% include_block value.link %}
+                {% elif value.link.document_link %}
+                    {% include_block value.link %}
+                {% else %}
+                {% endif %}
             </div>
         </div>
     </div>
