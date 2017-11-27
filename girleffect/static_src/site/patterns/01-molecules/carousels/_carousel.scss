@@ -8,7 +8,7 @@
 
         &::before {
             content: '';
-            background: linear-gradient(to top, $black-40, $black-05 35%);
+            background: linear-gradient(to bottom, transparent 80%, $black 100%);
             position: absolute;
             top: 0;
             bottom: 0;
@@ -18,11 +18,8 @@
     }
 
     &__image {
-        max-height: 800px;
-
-        @supports (object-fit: cover) {
-            object-fit: cover;
-        }
+        max-height: 700px;
+        object-fit: cover;
     }
 
     &__content {
@@ -99,12 +96,12 @@
         }
     }
 
-    &__nav-left {
-
-    }
-
     &__nav-right {
         transform: rotate(180deg);
         margin-left: 20px;
+    }
+
+    &__inner {
+        max-width: 750px;
     }
 }

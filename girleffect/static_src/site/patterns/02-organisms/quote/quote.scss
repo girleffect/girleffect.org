@@ -18,9 +18,13 @@
     overflow: hidden;
 
     &::before {
+        background: linear-gradient(to bottom, transparent 80%, $black 100%);
         content: '';
-        background: linear-gradient(to top, $black-50, $black-05);
-        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
 
     &:nth-child(odd) {

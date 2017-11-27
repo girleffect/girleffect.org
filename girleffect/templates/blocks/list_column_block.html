@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
 
 {# Rows are to have a maximum of 3 list items per row #}
-<div class="grid grid--three">
+<div class="grid grid--three wrapper wrapper--medium">
 {% for list_item in value %}
     {# found in list_column_item_block.html #}
     {% include_block list_item %}

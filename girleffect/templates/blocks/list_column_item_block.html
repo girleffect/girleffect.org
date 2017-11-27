@@ -6,7 +6,7 @@
         <h4 class="list-item__title">{{ value.title }}</h4>
 
         {# description is RichText #}
-        <p>{{ value.description }}</p>
+        {{ value.description }}
 
         {# template for this is in link_block.html #}
         {% include_block value.link %}

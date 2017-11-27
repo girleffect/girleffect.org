@@ -8,5 +8,16 @@
     a {
         border-bottom: 2px solid $yellow;
         padding-bottom: 1px;
+        font-weight: $weight-bold;
+    }
+
+    ul,
+    ol {
+        padding-left: 20px;
+        list-style-position: inside;
+    }
+
+    ul {
+        list-style-type: disc;
     }
 }
