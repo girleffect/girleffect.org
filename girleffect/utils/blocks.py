@@ -192,7 +192,7 @@ class QuoteBlock(blocks.StructBlock):
 
 class ListColumnBlock(blocks.StructBlock):
     image = ImageChooserBlock(required=False)
-    title = blocks.CharBlock(max_length=80)
+    title = blocks.CharBlock(max_length=80, required=False)
     description = blocks.RichTextBlock(
         max_length=250,
         features=["bold", "italic", "link", "document-link"],
