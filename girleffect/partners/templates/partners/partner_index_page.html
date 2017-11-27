@@ -6,17 +6,19 @@
     {# Hero section #}
     {% include "includes/hero_image_section.html" %}
 
-    <h1>{{ page.title }}</h1>
-    <p>{{ page.introduction }}</p>
-
-    <section class="partners">
+    <section class="section section--partners">
+        <div class="wrapper wrapper--medium wrapper--bottom-space-xl">
+            <p>{{ page.introduction }}</p>
+        </div>
         {% if page.partners.exists %}
-            {# Partners exist #}
-            {% for partner in page.partners.all %}
-                {% if partner.show_on_index %}
-                    {% include "includes/partner_card.html" with partner=partner %}
-                {% endif%}
-            {% endfor %}
+            <div class="media-block-container">
+                {# Partners exist #}
+                {% for partner in page.partners.all %}
+                    {% if partner.show_on_index %}
+                        {% include "includes/partner_card.html" with partner=partner %}
+                    {% endif %}
+                {% endfor %}
+            </div>
         {% else %}
             {# No Partners Yet #}
         {% endif %}
