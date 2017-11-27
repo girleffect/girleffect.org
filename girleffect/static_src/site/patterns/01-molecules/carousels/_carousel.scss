@@ -3,6 +3,38 @@
 }
 
 .carousel {
+    &--home-desktop {
+        position: relative;
+        overflow: hidden;
+        min-height: 340px;
+        margin: 4rem auto;
+        max-width: $wrapper--large;
+        display: none;
+        
+        @include media-query(tablet-portrait) {
+            display: block;
+        }
+
+        &::after {
+            background: linear-gradient(to bottom, transparent 80%, $black 100%);
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+
+    &--home-mobile {
+        margin: 2rem auto;
+        display: block;
+
+        @include media-query(tablet-portrait) {
+            display: none;
+        }
+    }
+
     &__item {
         position: relative;
 
@@ -18,8 +50,49 @@
     }
 
     &__image {
-        max-height: 700px;
+        min-height: 340px;
+        width: 100%;
         object-fit: cover;
+
+        @include media-query(tablet-portrait) {
+            min-height: 700px;
+        }
+        
+
+        &--hidden {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            transition: left $transition;
+
+            &.is-visible {
+                left: 0;
+            }
+
+            @include media-query(tablet-portrait) {
+                opacity: 0;
+                transition: opacity $transition;
+                left: auto;
+            }
+        }
+
+        &--main {
+            opacity: 1;
+            transition: opacity $transition;
+            visibility: hidden;
+
+            @include media-query(tablet-portrait) {
+                visibility: visible;
+            }
+        }
+
+        &.is-visible {
+            left: 0;
+
+            @include media-query(tablet-portrait) {
+                opacity: 1;
+            }
+        }
     }
 
     &__content {
@@ -103,5 +176,113 @@
 
     &__inner {
         max-width: 750px;
+    }
+
+    &__panels {
+        display: none;
+        position: absolute;
+        bottom: 30px;
+        width: 90%;
+        align-items: flex-end;
+        left: 50%;
+        transform: translate(-50%, 0);
+        z-index: 5;
+
+        @include media-query(tablet-portrait) {
+            display: flex;
+        }
+    }
+
+    &__panel {
+        padding: 20px;
+        flex: 1;
+        background: transparent;
+        transition: height, background, $transition;
+        height: 70px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        position: relative;
+
+        &:hover {
+            background: $white-90;
+            height: 200px;
+        }
+    }
+
+    &__panel-mobile {
+        position: relative;
+
+        > img {
+            min-height: 400px;
+            object-fit: cover;
+        }
+    }
+
+    &__panel-title {
+        color: $white;
+        transition: color $transition;
+        font-weight: $weight-medium;
+
+        .carousel__panel:hover & {
+            color: $green;
+        }
+
+        .carousel__panel-mobile & {
+            color: $green;
+        }
+    }
+
+    &__panel-content {
+        color: $green;
+        transition: opacity $transition;
+
+        @include media-query(tablet-portrait) {
+            opacity: 0;
+            display: none;
+        }
+
+        .is-expanded & {
+            display: block;
+            opacity: 1;
+        }
+    }
+
+    &__panel-content-mobile {
+        background: $white-90;
+        padding: 20px;
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        width: 90%;
+        max-width: 50%;
+    }
+
+    &__home-title {
+        color: $yellow;
+        position: absolute;
+        z-index: 5;
+        top: 50px;
+        left: 50px;
+        font-size: 35px;
+    }
+
+    &__icon {
+        fill: none;
+        stroke: $yellow;
+        stroke-width: 3px;
+        position: absolute;
+        right: 0;
+        height: 35px;
+        width: 15px;
+        left: 50%;
+        transform: translateX(-50%) rotate(180deg);
+        bottom: 50px;
+        transition: bottom $transition;
+
+        .is-expanded & {
+            bottom: 210px;
+        }
     }
 }
