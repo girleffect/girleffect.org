@@ -1,8 +1,11 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
-<section class="section section--statistics">
-{# Rows are to have a maximum of 3 list items per row #}
-    <h3>{{ value.title }}</h3>
-    <div class="grid grid--three grid--center">
+<section class="section section--statistics section--top-bottom-space">
+    {# Rows are to have a maximum of 3 list items per row #}
+    {% if value.title %}
+        <h3>{{ value.title }}</h3>
+    {% endif %}
+    
+    <div class="grid grid--three grid--center grid--statistics">
         {% for item in value.statistics %}
             {% include "blocks/statistic_item_block.html" with value=item %}
             {# found in statistic_item_block.html #}
