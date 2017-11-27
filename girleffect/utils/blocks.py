@@ -260,7 +260,7 @@ class StoryBlock(blocks.StreamBlock):
         template="blocks/quote_block.html",
         icon="openquote"
     )
-    video = YouTubeEmbed(label="Girl Effect YouTube Video")
+    video = YouTubeEmbed(label="YouTube Video")
     carousel = blocks.ListBlock(
         CarouselItemBlock(),
         template="blocks/carousel_block.html",
