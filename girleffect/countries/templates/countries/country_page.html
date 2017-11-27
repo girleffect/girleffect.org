@@ -19,6 +19,9 @@
         {{ page.body }}
     </section>
 
+    {# Latest articles, limited to three most recent, link to all articles index #}
+    {% include "includes/articles_section.html" with title="Latest in "|add:page.title %}
+
     {# Related partners #}
     {% if page.partners %}
     <section class="section section--partners">
