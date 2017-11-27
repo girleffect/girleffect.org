@@ -50,6 +50,7 @@ class HomePageCarouselItem(Orderable, LinkFields, models.Model):
 
 
 class HomePage(Page, HeroVideoFields, SocialFields):
+    introduction = models.TextField(blank=True, null=True)
     call_to_action = models.ForeignKey(CallToActionSnippet, blank=True, null=True, on_delete=models.SET_NULL, related_name='+')
     overview_image = models.ForeignKey(
         'images.CustomImage',
@@ -62,6 +63,7 @@ class HomePage(Page, HeroVideoFields, SocialFields):
     body = StreamField(StoryBlock(), null=True)
 
     content_panels = Page.content_panels + HeroVideoFields.content_panels + [
+        FieldPanel('introduction'),
         MultiFieldPanel([
             ImageChooserPanel('overview_image'),
             FieldPanel('overview_title'),
