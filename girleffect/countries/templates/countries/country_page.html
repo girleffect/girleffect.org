@@ -36,18 +36,6 @@
     </section>
     {% endif %}
 
-    {# Related people #}
-    {% if page.people %}
-    <section class="people">
-        <h2>People</h2>
-        <h3>{{ page.person_category }}</h3>
-        {% for person in page.people %}
-            {# Person card here #}
-            {% include "includes/person_index_card.html" with person=person %}
-        {% endfor %}
-    </section>
-    {% endif %}
-
     {# Call to Action, link is likely external #}
     {% if page.call_to_action %}
         <section class="cta">
