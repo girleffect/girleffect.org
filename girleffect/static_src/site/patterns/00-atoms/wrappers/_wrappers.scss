@@ -44,6 +44,8 @@
     }
 
     &--article {
+        margin: 2rem auto 4rem;
+
         > * {
             max-width: $wrapper--small;
             margin: 0 auto;
