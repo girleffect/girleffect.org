@@ -280,12 +280,24 @@
     }
 
     &__home-title {
-        color: $yellow;
+        @include font-size(20px, 115px);
         position: absolute;
-        z-index: 5;
-        top: 50px;
-        left: 50px;
-        font-size: 35px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 100%;
+        color: $white;
+        font-weight: $weight-bold;
+
+        &--mobile {
+            z-index: 5;
+            top: 50px;
+            left: 50px;
+            font-size: 35px;
+            transform: translate(0);
+            text-align: left;
+        }
     }
 
     &__icon {
