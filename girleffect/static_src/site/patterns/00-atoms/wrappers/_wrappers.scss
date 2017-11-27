@@ -1,8 +1,14 @@
 .wrapper {
     margin: 0 auto;
+    padding: 0 20px;
+
+    @include media-query(tablet-landscape) {
+        padding: 0;
+    }
 
     &--center {
         text-align: center;
+        position: relative;
     }
 
     &--site {
@@ -26,7 +32,11 @@
     }
 
     &--top-bottom-space {
-        margin: 2rem auto;
+        margin: 1rem auto;
+
+        @include media-query(tablet-landscape) {
+            margin: 2rem auto;
+        }
     }
 
     &--bottom-space {

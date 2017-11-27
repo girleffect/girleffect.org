@@ -1,15 +1,29 @@
 {% load wagtailcore_tags wagtailimages_tags %}
-    <div class="statistic-column">
-        {{ value.title }}
+{% if value.link_page %}
+    <a class="stat-block" href="{{ value.link_page.url }}">
+{% elif value.link_url  %}
+    <a class="stat-block" href="{{ value.link_url }}">
+{% else %}
+    <div class="stat-block">
+{% endif %}
+        <div class="stat-block__content">
+            <p class="stat-block__label">{{ value.title }}</p>
+            {{ value.description|richtext }}
+            <p>{{ value.citation_text }}</p>
 
-        {# RichText #}
-        {{ value.description }}
-
-        {{ statistic.citation_text }}
-
-        {% if value.link_page %}
-            <a href="{{ value.link_page.href }}">{{ value.get_link_text }}</a>
-        {% elif value.link_url  %}
-            <a href="{{ value.link_url.href }}">{{ value.get_link_text }}</a>
-        {% endif %}
+            {% if value.link_page %}
+                <div class="arrow"></div>
+            {% elif value.link_url  %}
+                <div class="arrow"></div>
+            {% endif %}
+        </div>
+{% if value.link_page %}
+    </a>
+{% elif value.link_url  %}
+    </a>
+{% else %}
     </div>
+{% endif %}
+
+
+

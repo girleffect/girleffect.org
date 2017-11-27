@@ -1,23 +1,23 @@
 {% load wagtailimages_tags %}
-    <div class="article-card">
-        {# Single article #}
-        {% if article.listing_image %}
-            {% image article.listing_image original as article_image %}
-            <img src="{{ article_image.url }}" alt="{{ article.listing_title }}">
-        {% endif %}
+<div class="article-card" >
+    {# Single article #}
+    {% if article.listing_image %}
+        {% image article.listing_image fill-385x255 as article_image %}
+        <img src="{{ article_image.url }}" alt="{{ article.listing_title }}">
+    {% endif %}
 
-        <div class="article-card__copy">
-            <div>
-                {% if article.categories %}
-                <span class="article-card__category">
-                    <a href="{{ article.get_parent.url }}?category={{ article.categories.first.category.id }}">
-                        {{ article.categories.first.category }}
-                    </a>
-                </span>
-                {% endif %}
-                <span class="article-card__date">{{ article.publication_date|date:"d.m.y" }}</span>
-            </div>
-            <a class="article-card__link" href="{{ article.url }}">{{ article.title }}</a>
-            <div class="arrow"></div>
+    <div class="article-card__content">
+        <div>
+            {% if article.categories %}
+            <span class="article-card__category">
+                <a href="{{ article.get_parent.url }}?category={{ article.categories.first.category.id }}">
+                    {{ article.categories.first.category }}
+                </a>
+            </span>
+            {% endif %}
+            <span class="article-card__date">{{ article.publication_date|date:"d.m.y" }}</span>
+            <div><a href="{{ article.url }}">{{ article.title }}</a></div>
         </div>
+        <div class="arrow"></div>
     </div>
+</div>

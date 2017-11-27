@@ -10,6 +10,8 @@
         <h4 class="video__title">{{ value.heading }}</h4>
         <p class="video__copy">{{ value.text }}</p>
         {# template for this is in link_block.html #}
-        {% include_block value.link %}
+        {% if value.link.link_text %}
+            {% include_block value.link %}
+        {% endif %}
     </div>
 </div>

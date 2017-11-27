@@ -109,6 +109,7 @@ class RelatedDocument(Orderable, models.Model):
 
 # Generic social fields abstract class to add social image/text to any new content type easily.
 class SocialFields(models.Model):
+    social_title = models.CharField(max_length=255, blank=True)
     social_image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     social_text = models.CharField(max_length=255, blank=True)
 
@@ -117,6 +118,7 @@ class SocialFields(models.Model):
 
     promote_panels = [
         MultiFieldPanel([
+            FieldPanel('social_title'),
             ImageChooserPanel('social_image'),
             FieldPanel('social_text'),
         ], 'Social networks'),
@@ -188,6 +190,21 @@ class SocialMediaSettings(BaseSetting):
         default='Girl Effect',
         help_text='Site name, used by Open Graph.',
     )
+    default_sharing_image = models.ForeignKey(
+        CustomImage,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('twitter_handle'),
+        FieldPanel('facebook_app_id'),
+        FieldPanel('default_sharing_text'),
+        FieldPanel('site_name'),
+        ImageChooserPanel('default_sharing_image')
+    ]
 
 
 @register_snippet
@@ -261,7 +278,7 @@ class HeroVideoFields(models.Model):
         on_delete=models.SET_NULL
     )
     hero_strapline = models.TextField(
-        blank=False,
+        blank=True,
         max_length=80,
         help_text="Shows text over the hero."
     )

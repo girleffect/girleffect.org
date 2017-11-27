@@ -7,18 +7,25 @@
 
 {% block content %}
 
-    <h1>{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search{% endif %}</h1>
-
-    <form action="{% url 'search' %}" method="get" role="search">
-        <input type="text" placeholder="Search…" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-        <input type="submit" value="Search">
+<section class="hero hero--search">
+    <form class="form form--search-results" action="#" method="get" role="search">
+        <input class="input input--search" type="text" placeholder="Search" name="query" value="">
+        <button class="button" type="submit">
+            <svg class="button--search-icon">
+                <use xlink:href="#magnifying-glass"></use>
+            </svg>
+        </button>
     </form>
+</section>
+
+<div class="wrapper wrapper--small-medium wrapper--top-bottom-space">
+    <h2 class="heading heading--bottom-space">{% if search_query %}Search results for &ldquo;{{ search_query }}&rdquo;{% else %}Search{% endif %}</h2>
 
     {% get_search_promotions search_query as search_picks %}
     {% if search_picks %}
          <ul>
             {% for pick in search_picks %}
-                <li>
+                <li class="search-result">
                     {% include "search/includes/search_result.html" with result=pick.page.specific %}
                 </li>
              {% endfor %}
@@ -33,7 +40,7 @@
 
         <ul>
             {% for result in search_results %}
-                <li>
+                <li class="search-result">
                     {% include "search/includes/search_result.html" with result=result.specific %}
                 </li>
             {% endfor %}
@@ -44,5 +51,5 @@
     {% elif search_query and not search_picks %}
         No results found.
     {% endif %}
-
+</div>
 {% endblock %}

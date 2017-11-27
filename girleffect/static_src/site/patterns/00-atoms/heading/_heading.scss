@@ -1,6 +1,8 @@
 .heading {
     &--squashed {
-        line-height: 1.1;
+        @include media-query(tablet-landscape) {
+            line-height: 1.1;
+        }
     }
 
     &--bottom-space {

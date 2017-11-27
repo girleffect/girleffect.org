@@ -24,28 +24,50 @@
 
         <!-- Twitter summary card - see https://dev.twitter.com/cards/types/summary -->
         <!--  and https://dev.twitter.com/cards/getting-started -->
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@{{ settings.utils.SocialMediaSettings.twitter_handle }}" />
-        <meta name="twitter:title" content="{{ page.title }}" />
-        <meta name="twitter:description" content="{{ page|social_text:request.site }}">
+        {% if page %}
+            <meta name="twitter:title" content="{{ page.social_title|default:page.seo_title|default:page.title }}" />
+        {% else %}
+            <meta name="twitter:title" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
+        {% endif %}
+
+
+        {% with page.introduction as page_intro %}
+        <meta name="twitter:description" content="{{ page.social_text|default:page_intro|default:settings.utils.SocialMediaSettings.default_sharing_text }}">
+        {% endwith %}
         {% if page.social_image  %}
             {% image page.social_image width-320 as social_img %}
             <meta name="twitter:image" content="{{ request.site.root_url }}{{ social_img.url }}">
+        {% elif page.hero_image %}
+            <meta name="twitter:image" content="{{ request.site.root_url }}{{ page.hero_image.file.url }}">
+        {% elif page.hero_fallback_image %}
+            <meta name="twitter:image" content="{{ request.site.root_url }}{{ page.hero_fallback_image.file.url }}">
         {% else %}
-            <!-- Add a default image to use for social sharing here in case one is not provided on the page. -->
+            <meta name="twitter:image" content="{{ request.site.hostname }}{{ settings.utils.SocialMediaSettings.default_sharing_image.file.url }}">
         {% endif %}
 
         <!--facebook opengraph tags-->
         <meta property="fb:app_id" content="{{ settings.utils.SocialMediaSettings.facebook_app_id }}" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="{{ page.url }}" />
-        <meta property="og:title" content="{{ page.title }}" />
-        {% if page.social_image %}
-            <meta property="og:image" content="http://{{ request.site.hostname }}{{ social_img.url }}" />
+        <meta property="og:url" content="{{ request.site.hostname }}{{ page.url }}" />
+        {% if page %}
+            <meta property="og:title" content="{{ page.social_title|default:page.seo_title|default:page.title }}" />
         {% else %}
-            <!-- Add a default image to use for social sharing here in case one is not provided on the page. -->
+            <meta property="og:title" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
         {% endif %}
-        <meta property="og:description" content="{{ page|social_text:request.site }}" />
+        {% if page.social_image %}
+            <meta property="og:image" content="{{ request.site.hostname }}{{ social_img.url }}" />
+        {% elif page.hero_image %}
+            <meta property="og:image" content="{{ request.site.root_url }}{{ page.hero_image.file.url }}">
+        {% elif page.hero_fallback_image %}
+            <meta property="og:image" content="{{ request.site.root_url }}{{ page.hero_fallback_image.file.url }}">
+        {% else %}
+            <meta property="og:image" content="{{ request.site.hostname }}{{ settings.utils.SocialMediaSettings.default_sharing_image.file.url }}" />
+        {% endif %}
+        {% with page.introduction as page_intro %}
+        <meta property="og:description" content="{{ page.social_text|default:page_intro|default:settings.utils.SocialMediaSettings.default_sharing_text }}" />
+        {% endwith %}
         <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
 
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
@@ -95,7 +117,6 @@
                 {% primarynav %}
 
                 <a class="js-search-desktop header__link header__link--search" aria-label="search">
-                    
                     <svg class="header__icon"><use xlink:href="#magnifying-glass"></use></svg>
                 </a>
 

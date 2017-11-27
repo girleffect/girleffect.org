@@ -22,5 +22,13 @@
         .header__search-bar--mobile & {
             border-bottom: 1px solid $brand-grey;
         }
+
+        .hero--search & {
+            max-width: 100%;
+        }
+    }
+
+    &--search-results {
+        border: 1px solid $green;
     }
 }

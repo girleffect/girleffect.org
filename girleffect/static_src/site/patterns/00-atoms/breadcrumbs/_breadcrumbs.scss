@@ -3,7 +3,25 @@
     align-items: center;
     max-width: $wrapper--small;
     margin: 0 auto;
-    padding: 50px 0 0;
+    padding: 20px 20px 0;
+
+    .search-result & {
+        padding: 20px 0 0;   
+    }
+
+    @include media-query(tablet-portrait) {
+        .search-result & {
+
+        }
+    }
+
+    @include media-query(tablet-landscape) {
+        padding: 50px 0 0;
+
+        .search-result & {
+            padding: 0;
+        }
+    }
 }
 
 .breadcrumb {

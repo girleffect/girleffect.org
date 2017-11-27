@@ -10,8 +10,18 @@
         margin-bottom: 3rem;
     }
 
+    &--statistics,
     &--partners {
         background: $light-grey;
+    }
+
+    &--statistics {
+        padding: 40px;
+
+        > h3 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
     }
 
     &--body {
@@ -19,8 +29,14 @@
 
         h2 {
             max-width: $wrapper--small;
-            margin: 3rem auto 2rem;
+            margin: 1rem auto;
             line-height: 1.2;
+            padding: 0 20px;
+
+            @include media-query(tablet-landscape) {
+                margin: 3rem auto 2rem;
+                padding: 0;
+            }
         }
     }
 
