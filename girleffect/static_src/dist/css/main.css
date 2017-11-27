@@ -1279,6 +1279,8 @@ blockquote cite {
 
 .rich-text {
   font-size: 1.42857vw;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @media (max-width: 1120px) {
@@ -1638,7 +1640,7 @@ article .share-icons--hide-mobile {
 }
 
 .carousel--home-desktop::after {
-  background: linear-gradient(to bottom, transparent 80%, #000 100%);
+  background: linear-gradient(to bottom, transparent 80%, #000 90%);
   position: absolute;
   content: '';
   top: 0;
@@ -1650,6 +1652,7 @@ article .share-icons--hide-mobile {
 .carousel--home-mobile {
   margin: 2rem auto;
   display: block;
+  position: relative;
 }
 
 @media only screen and (min-width: 768px) {
@@ -1658,18 +1661,18 @@ article .share-icons--hide-mobile {
   }
 }
 
-.carousel__item {
-  position: relative;
-}
-
-.carousel__item::before {
+.carousel--home-mobile::before {
   content: '';
-  background: linear-gradient(to bottom, transparent 80%, #000 100%);
+  background: linear-gradient(to bottom, transparent 80%, rgba(0, 0, 0, 0.9) 90%);
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.carousel__item {
+  position: relative;
 }
 
 .carousel__image {
@@ -2410,7 +2413,7 @@ article .share-icons--hide-mobile {
 }
 
 .search-result__heading {
-  margin-top: 15px;
+  margin: 15px 0;
 }
 
 .search-result img {
@@ -3314,7 +3317,7 @@ article .share-icons--hide-mobile {
 }
 
 .quote::before {
-  background: linear-gradient(to bottom, transparent 80%, #000 100%);
+  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.6) 90%);
   content: '';
   position: absolute;
   top: 0;
