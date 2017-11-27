@@ -134,6 +134,10 @@ $(function() {
         $(image).addClass('is-visible');
     });
 
+    $('.carousel--home-desktop').mouseout(function() {
+        $('.carousel__image.is-visible').removeClass('is-visible');
+    });
+
     $('.carousel__panel').mouseout(function(){
         $('.carousel__panel').removeClass('is-expanded');
     });
