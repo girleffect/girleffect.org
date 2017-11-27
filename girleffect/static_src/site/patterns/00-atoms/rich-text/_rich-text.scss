@@ -1,6 +1,8 @@
 .rich-text  {
     @include font-size(16px, 18px);
-
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
     .large-text & {
         @include font-size(18px, 20px);
     }
