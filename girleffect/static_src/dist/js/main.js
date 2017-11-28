@@ -6434,6 +6434,10 @@ jquery(function () {
         jquery(image).addClass('is-visible');
     });
 
+    jquery('.carousel--home-desktop').mouseout(function () {
+        jquery('.carousel__image.is-visible').removeClass('is-visible');
+    });
+
     jquery('.carousel__panel').mouseout(function () {
         jquery('.carousel__panel').removeClass('is-expanded');
     });
