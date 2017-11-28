@@ -5,6 +5,7 @@
     max-width: $wrapper--large;
     margin: 0 auto;
     align-items: center;
+    flex-wrap: wrap;
 
     @include media-query(tablet-landscape) {
         flex-direction: row;
