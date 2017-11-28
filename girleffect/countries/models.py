@@ -86,7 +86,6 @@ class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
         StreamFieldPanel('body'),
         FieldPanel('partners_description'),
         InlinePanel('related_partners', label="Related partners"),
-        SnippetChooserPanel('person_category'),
         SnippetChooserPanel('call_to_action'),
     ]
 
