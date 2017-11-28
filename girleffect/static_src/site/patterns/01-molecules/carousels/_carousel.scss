@@ -8,7 +8,28 @@
         overflow: hidden;
         min-height: 340px;
         margin: 4rem auto;
-        max-width: $wrapper--large;
+        display: none;
+        
+        @include media-query(tablet-portrait) {
+            display: block;
+        }
+
+        &::after {
+            background: linear-gradient(to bottom, transparent 80%, $black 90%);
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+
+    &__item {
+        position: relative;
+        overflow: hidden;
+        min-height: 340px;
+        margin: 4rem auto 0;
         display: none;
         
         @include media-query(tablet-portrait) {
@@ -44,10 +65,6 @@
             left: 0;
             right: 0;
         }
-    }
-
-    &__item {
-        position: relative;
     }
 
     &__image {
