@@ -6,9 +6,11 @@
     {# Hero section #}
     {% include "includes/hero_image_section.html" %}
 
-    {% block breadcrumbs %}
-        {% include "navigation/breadcrumbs.html" %}
-    {% endblock %}
+    <div class="wrapper wrapper--bottom-space">
+        {% block breadcrumbs %}
+            {% include "navigation/breadcrumbs.html" %}
+        {% endblock %}
+    </div>
 
     {# Streamfield options #}
     <section class="section section--body">
