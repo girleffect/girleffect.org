@@ -95,7 +95,19 @@ if 'MEDIA_URL' in env:
 if 'MEDIA_DIR' in env:
     MEDIA_ROOT = env['MEDIA_DIR']
 
+# S3 File Storage
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = env['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = env['AWS_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = env['AWS_STORAGE_BUCKET_NAME']
+# AWS_HEADERS = {
+#     'Expires': 'Thu, 15 Apr 2010 20:00:00 GMT',
+#     'Cache-Control': 'max-age=86400',
+# }
 
+
+S3_USE_SIGV4 = True
 # Database
 
 if 'DATABASE_URL' in os.environ:
