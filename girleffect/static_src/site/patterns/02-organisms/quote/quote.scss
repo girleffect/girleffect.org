@@ -18,7 +18,6 @@
     overflow: hidden;
 
     &::before {
-
         background: linear-gradient(to bottom, transparent 60%, $black-60 90%);
         content: '';
         position: absolute;
