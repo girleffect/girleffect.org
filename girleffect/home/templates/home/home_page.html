@@ -4,7 +4,11 @@
 {% block content %}
     {# Hero section - section includes links #}
     {% include "includes/hero_video_section.html" %}
-    
+
+    <div class="wrapper wrapper--small wrapper--top-bottom-space large-text">
+        <p>{{ page.introduction }}</p>
+    </div>
+
     {# Homepage Carousel #}
     {% if page.carousel_items.exists %}
     <div class="carousel carousel--home-desktop">
