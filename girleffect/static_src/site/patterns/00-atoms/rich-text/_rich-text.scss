@@ -4,7 +4,8 @@
     -moz-osx-font-smoothing: grayscale;
     
     .large-text & {
-        @include font-size(18px, 20px);
+        @include font-size(18px, 25px);
+        font-weight: $weight-bold;
     }
 
     a {
