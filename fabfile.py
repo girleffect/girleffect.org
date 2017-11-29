@@ -94,6 +94,7 @@ def _post_deploy():
     # update search index
     run('django-admin update_index')
 
+
 # Staging tasks from k8s
 def pull_staging_data():
     _pull_data_from_k8s(
@@ -173,3 +174,55 @@ def _get_pod_name(kube_app_label):
         ),
         capture=True
     ).strip()
+
+
+def _pull_db_dump_from_k8s(kube_app_label, local_db_name, dump_path):
+    timestamp = datetime.now().strftime('%Y%m%d-%I%M%S')
+    filename = '.'.join([local_db_name, timestamp, 'sql'])
+    dump_path = os.path.abspath(os.path.join(os.sep, dump_path, filename))
+
+    kube_pod_name = _get_pod_name(kube_app_label)
+    local(
+        'kubectl exec {kube_pod_name} -- bash -c \'pg_dump $DATABASE_URL -xO\' > {dump_path}'.format(
+            dump_path=dump_path,
+            kube_pod_name=kube_pod_name
+        )
+    )
+
+
+def _pull_media_archive_from_k8s(kube_app_label, remote_folder, local_folder):
+    timestamp = datetime.now().strftime('%Y%m%d-%I%M%S')
+    kube_pod_name = _get_pod_name(kube_app_label)
+
+    local(
+        'kubectl cp {kube_pod_name}:{remote_folder} {local_folder}'.format(
+            kube_pod_name=kube_pod_name,
+            remote_folder=remote_folder,
+            local_folder=local_folder
+        )
+    )
+
+    local(
+        'tar -zcvf /vagrant/kubernetes/media-{timestamp}.tar.gz {local_folder}'.format(
+            timestamp=timestamp,
+            local_folder=local_folder
+        )
+    )
+
+    local(
+        'rm -rf {local_folder}'.format(local_folder=local_folder)
+    )
+
+
+def pull_staging_dumps():
+    _pull_db_dump_from_k8s(
+        kube_app_label="staging",
+        local_db_name="girleffect",
+        dump_path="/vagrant/kubernetes/"
+    )
+
+    _pull_media_archive_from_k8s(
+        kube_app_label="staging",
+        remote_folder="/data/media/",
+        local_folder="/tmp/media/"
+    )
