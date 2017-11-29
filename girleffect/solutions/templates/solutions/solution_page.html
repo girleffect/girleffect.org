@@ -52,22 +52,6 @@
     {% endif %}
 
     {# Latest articles, limited to three most recent, link to all articles index #}
-    {% if page.articles %}
-    <section class="section section--articles">
-        <h2 class="section__title">Latest in {{ page.title }}</h2>
-        <div class="article-container wrapper wrapper--medium">
-            {% for article in page.articles %}
-                {% include "includes/article_card.html" %}
-            {% endfor %}
-        </div>
-        <div class="wrapper wrapper--center">
-            <a class="link link--boxed link--center" href="/articles">
-                See all news
-                <span></span>
-                <span></span>
-            </a>
-        </div>
-    </section>
-    {% endif %}
+    {% include "includes/articles_section.html" with title="Latest from "|add:page.title %}
 
 {% endblock %}

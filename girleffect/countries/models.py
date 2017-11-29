@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.functional import cached_property
 
+from girleffect.articles.models import ArticlePage
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
     HeroImageFields,
@@ -57,6 +58,11 @@ class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+
+    @cached_property
+    def articles(self):
+        # returns articles that have solution selected as a related page
+        return ArticlePage.objects.filter(related_pages__page=self).live().public().order_by('-publication_date')[:3]
 
     @cached_property
     def people(self):

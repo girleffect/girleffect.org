@@ -102,29 +102,8 @@
         {{ page.body }}
     </section>
 
-    {% if page.articles.exists %}
-    <div class="article-container wrapper wrapper--medium">
-        {% for article in page.articles %}
-            <a class="article-card" href="{% pageurl article %}">
-                {% if article.listing_image %}
-                    {% image article.listing_image fill-380x225 %}
-                {% endif %}
-                <div class="article-card__content">
-                    <span class="article-card__date">{{ article.display_date }}</span>
-                    {% if article.listing_title %}
-                        <div>{{ article.listing_title }}</div>
-                    {% else %}
-                        <div>{{ article.title }}</div>
-                    {% endif %}
-                    {% if article.listing_summary %}
-                        <p>{{ article.listing_summary }}</p>
-                    {% endif %}
-                    <div class="arrow"></div>
-                </div>
-            </a>
-        {% endfor %}
-    </div>
-    {% endif %}
+    {# Latest articles, limited to three most recent, link to all articles index #}
+    {% include "includes/articles_section.html" with title="Latest News &amp; Stories" %}
 
     {# Call to Action, link is likely external #}
     {% if page.call_to_action %}
