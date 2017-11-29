@@ -3,6 +3,10 @@
     margin: 0 auto 1rem;
     padding: 0 20px;
 
+    .template-article-page & {
+        padding: 0;
+    }
+
     @include media-query(tablet-landscape) {
         margin: 0 auto 2rem;
         padding: 0;

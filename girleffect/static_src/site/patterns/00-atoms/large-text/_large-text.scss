@@ -1,5 +1,6 @@
 .large-text {
-    @include font-size(18px, 20px);
+    @include font-size(18px, 25px);
+    font-weight: $weight-bold;
     max-width: $wrapper--small;
     margin: 0 auto 1rem;
     padding: 0 20px;
@@ -10,7 +11,6 @@
     }
 
     .template-home-page & {
-        @include font-size(18px, 25px);
         font-weight: $weight-bold;
         margin: 2rem auto;
 
@@ -20,8 +20,11 @@
     }
 
     .template-article-page & {
-        @include font-size(18px, 25px);
         font-weight: $weight-bold;
-        margin-bottom: 30px;
+        padding: 0;
+
+        @include media-query(tablet-landscape) {
+            margin-bottom: 30px;         
+        }
     }
 }

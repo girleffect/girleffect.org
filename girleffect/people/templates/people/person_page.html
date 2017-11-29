@@ -5,19 +5,20 @@
 {% block content %}
 
 <article>
+    {# Breadcrumbs #}
+    {% block breadcrumbs %}
     {# Hero section #}
     {% if page.photo %}
         <div class="hero hero--article">
-            <div class="wrapper wrapper--small-medium">
-                {% image page.photo fill-1000x500 as hero_image %}
+             {% include "navigation/breadcrumbs.html" %}
+            <div class="wrapper wrapper--small">
+                {% image page.photo fill-790x400 as hero_image %}
                 <img class="hero__image hero__image--top-space" src="{{ hero_image.url }}">
             </div>
         </div>
-    {% endif %}
-
-    {# Breadcrumbs #}
-    {% block breadcrumbs %}
+    {% else %}
         {% include "navigation/breadcrumbs.html" %}
+    {% endif %}
     {% endblock %}
 
     <div class="wrapper wrapper--small wrapper--top-bottom-space">
