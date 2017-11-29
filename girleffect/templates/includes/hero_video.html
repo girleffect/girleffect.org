@@ -3,7 +3,6 @@
 {% if video %}
 <video class="hero__video" autoplay loop muted preload poster="{{ feature_image.url }}">
     <source src="{{ video.file.url }}" type="video/mp4">
-    <img src="{{ feature_image.url }}">
 </video>
 {% elif feature_image %}
 <img class="hero__image" src="{{ feature_image.url }}">
