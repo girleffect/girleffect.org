@@ -26,9 +26,7 @@
             <div class="article-container wrapper wrapper--medium">
                 {% for article in articles %}
                     <a class="article-card" href="{% pageurl article %}">
-                        {% if article.listing_image %}
-                            {% image article.listing_image fill-380x225 %}
-                        {% endif %}
+                            {% image article.listing_image|default:article.hero_image|default:settings.utils.SocialMediaSettings.default_sharing_image fill-380x225 %}
                         <div class="article-card__content">
                             <span class="article-card__date">{{ article.display_date }}</span>
                             {% if article.listing_title %}

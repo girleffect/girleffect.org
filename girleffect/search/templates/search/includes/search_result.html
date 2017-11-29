@@ -1,7 +1,7 @@
 {% load static wagtailcore_tags wagtailsearchpromotions_tags wagtailimages_tags search_tags %}
 
-{% if result.listing_image %}
-    {% image result.listing_image fill-270x175 %}
+{% if result.listing_image or result.hero_image %}
+    {% image result.listing_image|default:result.hero_image fill-270x175 %}
 {% else %}
     <div class="search-result__default-image"></div>
 {% endif %}
