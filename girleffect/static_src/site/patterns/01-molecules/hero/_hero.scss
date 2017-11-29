@@ -4,7 +4,7 @@
     &--article {
         &::before {
             content: '';
-            height: 400px;
+            height: 240px;
             width: 100%;
             position: absolute;
             background: $light-grey;
@@ -98,7 +98,7 @@
         }
 
         &--top-space {
-            margin-top: 70px;
+            margin-top: 30px;
         }
     }
 

@@ -1,24 +1,38 @@
 {% include 'organisms-header' %}
 
-<main class="wrapper wrapper--site">
-
     {# Hero #}
     {% include 'molecules-hero' %}
 
     {# Introduction #}
-    <section class="wrapper wrapper--small wrapper--bottom-space">
-        <h2 class="heading heading--squashed">Cupiditate odio soluta repudiandae officia aut similique foop</h2>
+    <section class="wrapper wrapper--small wrapper--top-bottom-space">
+        <h3 class="heading heading--squashed">Cupiditate odio soluta repudiandae officia aut similique foop</h3>
     </section>
-
+        
     <section class="section section--body">
-        {% include 'atoms-large-text' %}
-        <div class="body-text">
-            <div class="rich-text">
-                <p>Quas perspiciatis voluptates, odit. Natus quos rem ipsam molestias quaerat quam veritatis perspiciatis expedita explicabo sed deserunt delectus consectetur beatae, atque deleniti.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas perspiciatis voluptates, odit. </p>
-            </div>
+        <div class="wrapper wrapper--small">
+            {% include 'atoms-rich-text' %}
+        </div>
+    
+        {% include 'organisms-video' %}
+
+        <div class="media-block-container">
+            {% include 'organisms-media-block' %}
+            {% include 'organisms-media-block' %}
+        </div>
+
+        <div class="quote-container">
+            {% include 'organisms-quote' %}
+            {% include 'organisms-quote' %}
+        </div>
+
+        <div class="wrapper wrapper--bottom-space">
+            {% include 'molecules-carousel--full-width' %}
+        </div>
+
+        <div class="wrapper wrapper--bottom-space">
+            {% include 'molecules-image-embed' %}
         </div>
     </section>
-</main>
 
+{% include 'organisms-call-to-action' %}
 {% include 'organisms-footer' %}

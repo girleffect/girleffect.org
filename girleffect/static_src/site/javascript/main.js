@@ -22,6 +22,7 @@ $(function() {
         new Hamburger($(el), openHeader, closeHeader);
     });
 
+    // Autoplays YouTube embed in a video streamfield
     $('.video__button').on('click', function(ev) {
         const video = $(this).parent().siblings().find('iframe');
         const overlay = $(this).parent('.video__overlay');
@@ -30,6 +31,7 @@ $(function() {
         ev.preventDefault();
     });
 
+    // Full width carousel streamfield
     $('.js-carousel--full-width').owlCarousel({
         items: 1,
         nav: true,
@@ -40,10 +42,12 @@ $(function() {
         loop: $('.owl-carousel .carousel__item').length > 1 ? true : false
     });
 
+    // Hide the carousel nav if there's only one slide - relies on the result of the loop ternary above
     if ($('.owl-carousel .carousel__item').length === 1) {
         $('.carousel__nav').hide();
     }
 
+    // Filters articles via the category id
     $('.js-article-filter').on('change', function() {
         var url = $(this).val();
 
@@ -55,6 +59,7 @@ $(function() {
         return false;
     });
 
+    // Modal that autoplays a YouTube embed
     $('.js-modal').featherlight({
         targetAttr: 'href',
         variant: 'modal-container', // add class for custom styling
@@ -64,13 +69,14 @@ $(function() {
         }
     });
 
+    // Desktop search
     $('.js-search-desktop').on('click', function() {
         $(this).toggleClass('is-active');
         const headerHeight = $('.header').outerHeight();
         const searchBar = $('.header__search-bar--desktop');
         const form = $('.form--search');
 
-        $(searchBar).css('top', headerHeight);
+        $(searchBar).css('top', headerHeight); // get the header height so the search bar displays in the correct place
         $(form).removeClass('visible');
         $(searchBar).slideToggle(250, function() {
             $(form).addClass('visible');
@@ -78,15 +84,18 @@ $(function() {
         });
     });
 
+    // Mobile search open
     $('.js-search-mobile').on('click', function() {
         $('.header__search-bar--mobile').addClass('is-visible');
         $('.input--search').focus();
     });
 
+    // Mobile search close
     $('.js-close-search-mobile').on('click', function() {
         $('.header__search-bar--mobile').removeClass('is-visible');
     });
   
+    // Sticky share icons on the article page
     if($('.js-share-icons').length){
         $('.js-share-icons').scrollToFixed({
             marginTop: 30,
@@ -94,6 +103,7 @@ $(function() {
         });
     }
 
+    // Desktop navigation
     if (window.matchMedia('(min-width: 1024px)').matches) {
         $('.header__nav-item-primary-parent, .header__nav-secondary').mouseover(function() {
             $(this).children('.header__link-primary').addClass('is-active');
@@ -107,6 +117,7 @@ $(function() {
         });
     }
 
+    // Mobile navigation
     if (window.matchMedia('(max-width: 1024px)').matches) {
         $('.header__link-primary').on('click', function() {
             $(this).parent().toggleClass('is-open');
@@ -119,6 +130,7 @@ $(function() {
         });
     }
     
+    // Home page carousel - changes to Owl Carousel on mobile
     $('.carousel__panel').mouseover(function(){
         const panelNumber = $(this).data('panel');
         const image = document.querySelector(`img[data-image="${panelNumber}"]`);
@@ -134,14 +146,17 @@ $(function() {
         $(image).addClass('is-visible');
     });
 
+    // Always show the main slide when not hovering on the home page carousel
     $('.carousel--home-desktop').mouseout(function() {
         $('.carousel__image.is-visible').removeClass('is-visible');
     });
 
+    // Hide the carousel panels when not being hovered over
     $('.carousel__panel').mouseout(function(){
         $('.carousel__panel').removeClass('is-expanded');
     });
 
+    // Home page carsouel on mobile
     $('.js-carousel--home-mobile').owlCarousel({
         items: 1,
         nav: false,
