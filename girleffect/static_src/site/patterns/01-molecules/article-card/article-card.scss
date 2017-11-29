@@ -27,6 +27,7 @@
 
     @include media-query(tablet-landscape) {
         max-width: 32%;
+        width: 100%; // required for IE11
 
         &:nth-child(3n+1) {
             margin: 0 10px 20px 0;
@@ -45,7 +46,7 @@
         @include font-size(20px, 25px);
         background: $light-grey;
         padding: 30px;
-        min-height: 280px;
+        min-height: 320px;
         position: relative;
         font-weight: $weight-bold;
         display: block;
