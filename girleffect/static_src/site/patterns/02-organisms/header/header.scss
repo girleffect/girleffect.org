@@ -198,14 +198,13 @@
         @include media-query(tablet-landscape) {
             font-weight: $weight-normal;
             display: inline;
-            padding: 0 0 21px;
-            border-bottom: 0;
-            transition: padding $transition;
+            padding: 0 0 18px;
+            border-bottom: 3px solid transparent;
+            transition: border-bottom $transition;
         }
         
         @include media-query(desktop) {
             &.is-active {
-                padding: 0 0 18px;
                 border-bottom: 3px solid $yellow;
             }
         }
@@ -350,7 +349,7 @@
     &__nav-overlay {
         position: absolute;
         background: rgba(255, 255, 255, 0.95);
-        top: 152px;
+        top: 153px; // header height
         width: 100%;
         height: 60vh;
         left: 0;
