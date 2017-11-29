@@ -12,6 +12,7 @@ uwsgidecorators==1.1.0
 wagtailfontawesome==1.0.7
 wagtailmedia==0.1.4
 django-storages==1.6.5
+boto3==1.4.8
 
 # Production dependencies
 dj-database-url==0.4.1
