@@ -114,11 +114,14 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
             return self.first_published_at
 
 
-class ArticleIndex(Page, SocialFields):
+class ArticleIndex(Page, HeroImageFields, SocialFields):
     heading = models.CharField(max_length=80, blank=True)
     introduction = models.TextField(max_length=350, blank=True)
 
     content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            ImageChooserPanel('hero_image'),
+        ], 'Hero Image'),
         FieldPanel('heading'),
         FieldPanel('introduction', classname="full"),
     ]
