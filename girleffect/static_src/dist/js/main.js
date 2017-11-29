@@ -6322,6 +6322,7 @@ jquery(function () {
         new Hamburger(jquery(el), openHeader, closeHeader);
     });
 
+    // Autoplays YouTube embed in a video streamfield
     jquery('.video__button').on('click', function (ev) {
         var video = jquery(this).parent().siblings().find('iframe');
         var overlay = jquery(this).parent('.video__overlay');
@@ -6330,6 +6331,7 @@ jquery(function () {
         ev.preventDefault();
     });
 
+    // Full width carousel streamfield
     jquery('.js-carousel--full-width').owlCarousel({
         items: 1,
         nav: true,
@@ -6340,10 +6342,12 @@ jquery(function () {
         loop: jquery('.owl-carousel .carousel__item').length > 1 ? true : false
     });
 
+    // Hide the carousel nav if there's only one slide - relies on the result of the loop ternary above
     if (jquery('.owl-carousel .carousel__item').length === 1) {
         jquery('.carousel__nav').hide();
     }
 
+    // Filters articles via the category id
     jquery('.js-article-filter').on('change', function () {
         var url = jquery(this).val();
 
@@ -6355,6 +6359,7 @@ jquery(function () {
         return false;
     });
 
+    // Modal that autoplays a YouTube embed
     jquery('.js-modal').featherlight({
         targetAttr: 'href',
         variant: 'modal-container', // add class for custom styling
@@ -6364,13 +6369,14 @@ jquery(function () {
         }
     });
 
+    // Desktop search
     jquery('.js-search-desktop').on('click', function () {
         jquery(this).toggleClass('is-active');
         var headerHeight = jquery('.header').outerHeight();
         var searchBar = jquery('.header__search-bar--desktop');
         var form = jquery('.form--search');
 
-        jquery(searchBar).css('top', headerHeight);
+        jquery(searchBar).css('top', headerHeight); // get the header height so the search bar displays in the correct place
         jquery(form).removeClass('visible');
         jquery(searchBar).slideToggle(250, function () {
             jquery(form).addClass('visible');
@@ -6378,15 +6384,18 @@ jquery(function () {
         });
     });
 
+    // Mobile search open
     jquery('.js-search-mobile').on('click', function () {
         jquery('.header__search-bar--mobile').addClass('is-visible');
         jquery('.input--search').focus();
     });
 
+    // Mobile search close
     jquery('.js-close-search-mobile').on('click', function () {
         jquery('.header__search-bar--mobile').removeClass('is-visible');
     });
 
+    // Sticky share icons on the article page
     if (jquery('.js-share-icons').length) {
         jquery('.js-share-icons').scrollToFixed({
             marginTop: 30,
@@ -6394,6 +6403,7 @@ jquery(function () {
         });
     }
 
+    // Desktop navigation
     if (window.matchMedia('(min-width: 1024px)').matches) {
         jquery('.header__nav-item-primary-parent, .header__nav-secondary').mouseover(function () {
             jquery(this).children('.header__link-primary').addClass('is-active');
@@ -6407,6 +6417,7 @@ jquery(function () {
         });
     }
 
+    // Mobile navigation
     if (window.matchMedia('(max-width: 1024px)').matches) {
         jquery('.header__link-primary').on('click', function () {
             jquery(this).parent().toggleClass('is-open');
@@ -6419,6 +6430,7 @@ jquery(function () {
         });
     }
 
+    // Home page carousel - changes to Owl Carousel on mobile
     jquery('.carousel__panel').mouseover(function () {
         var panelNumber = jquery(this).data('panel');
         var image = document.querySelector('img[data-image="' + panelNumber + '"]');
@@ -6434,14 +6446,17 @@ jquery(function () {
         jquery(image).addClass('is-visible');
     });
 
+    // Always show the main slide when not hovering on the home page carousel
     jquery('.carousel--home-desktop').mouseout(function () {
         jquery('.carousel__image.is-visible').removeClass('is-visible');
     });
 
+    // Hide the carousel panels when not being hovered over
     jquery('.carousel__panel').mouseout(function () {
         jquery('.carousel__panel').removeClass('is-expanded');
     });
 
+    // Home page carsouel on mobile
     jquery('.js-carousel--home-mobile').owlCarousel({
         items: 1,
         nav: false,

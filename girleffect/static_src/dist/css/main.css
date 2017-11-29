@@ -828,7 +828,6 @@ blockquote cite {
 }
 
 .wrapper--article blockquote {
-  max-width: 950px;
   margin: 35px auto;
 }
 
@@ -1138,6 +1137,24 @@ blockquote cite {
 @media only screen and (min-width: 1024px) {
   .template-home-page .large-text {
     margin: 7rem auto;
+  }
+}
+
+.template-article-page .large-text {
+  font-size: 1.98413vw;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 907.2px) {
+  .template-article-page .large-text {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1260px) {
+  .template-article-page .large-text {
+    font-size: 25px;
   }
 }
 
@@ -1548,6 +1565,10 @@ article .share-icons--hide-mobile {
   margin: 0 auto;
 }
 
+.wrapper--article-breadcrumbs {
+  background: #f4f4f3;
+}
+
 .wrapper--bottom-space-xl {
   margin: 0 auto 4rem;
 }
@@ -1658,6 +1679,7 @@ article .share-icons--hide-mobile {
 
 .carousel-container {
   position: relative;
+  margin-bottom: 3rem;
 }
 
 .carousel--home-desktop {
@@ -2214,7 +2236,7 @@ article .share-icons--hide-mobile {
 
 .hero--article::before {
   content: '';
-  height: 400px;
+  height: 240px;
   width: 100%;
   position: absolute;
   background: #f4f4f3;
@@ -2342,7 +2364,7 @@ article .share-icons--hide-mobile {
 }
 
 .hero__image--top-space {
-  margin-top: 70px;
+  margin-top: 30px;
 }
 
 .hero__video {
@@ -2789,7 +2811,7 @@ article .share-icons--hide-mobile {
 }
 
 .grid {
-  margin: 0 auto;
+  margin: 3rem auto;
   display: flex;
   flex-wrap: wrap;
 }
