@@ -13,20 +13,28 @@
                 <svg class="header__icon header__icon--mobile-nav"><use xlink:href="#chevron"></use></svg>
                     <ul class="header__nav-secondary" role="menu">
                         {% for subpage in block.value.sub_items %}
-                            <li class="header__nav-item-secondary {% if subpage.sub_items %}header__nav-item-secondary-parent{% endif %}" role="presentation">                                
-                                {% pageurl page=subpage.page as subpage_item_url %}                                        
-                                <a class="header__link-secondary" href="{{ subpage_item_url }}" role="menuitem">
-                                    <svg class="header__nav-item-arrow"><use xlink:href="#arrow"></use></svg>                                        
-                                    {{ subpage.title|default:subpage.page.title }}
+                            <li class="header__nav-item-secondary {% if subpage.sub_items %}header__nav-item-secondary-parent{% endif %}" role="presentation">                                       
+                                <a class="header__link-secondary" href="{{ subpage.page.url|default:'#' }}" role="menuitem">
+                                    <svg class="header__nav-item-arrow"><use xlink:href="#arrow"></use></svg>
+
+                                    {% if subpage.title %}                                      
+                                        {{ subpage.title }}
+                                    {% else %}
+                                        {{ subpage.page.title|default:" " }}
+                                    {% endif %}
+
                                 </a>
                                 {% if subpage.sub_items %}                                        
                                 <svg class="js-mobile-dropdown header__icon header__icon--mobile-nav"><use xlink:href="#chevron"></use></svg>
                                     <ul class="header__nav-tertiary" role="menu">
                                     {% for secondary_subpage in subpage.sub_items %}
                                         <li class="header__nav-item-tertiary" role="presentation">
-                                            {% pageurl page=secondary_subpage.page as sec_subpage_item_url %}
-                                            <a class="header__link-tertiary" href="{{ sec_subpage_item_url }}" role="menuitem">
-                                                {{ secondary_subpage.title|default:secondary_subpage.page.title }}
+                                            <a class="header__link-tertiary" href="{{ secondary_subpage.page.url|default:'#' }}" role="menuitem">
+                                                {% if secondary_subpage.title %}                                      
+                                                    {{ secondary_subpage.title }}
+                                                {% else %}
+                                                    {{ secondary_subpage.page.title|default:" " }}
+                                                {% endif %}
                                             </a>
                                         </li>
                                     {% endfor %}
