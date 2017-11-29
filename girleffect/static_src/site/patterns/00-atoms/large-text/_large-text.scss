@@ -18,4 +18,10 @@
             margin: 7rem auto;
         }
     }
+
+    .template-article-page & {
+        @include font-size(18px, 25px);
+        font-weight: $weight-bold;
+        margin-bottom: 30px;
+    }
 }
