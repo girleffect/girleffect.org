@@ -4,19 +4,21 @@
 {% block content %}
 
 <article>
-    {# Hero section #}
-    {% if page.hero_image %}
-        <div class="hero hero--article">
-            <div class="wrapper wrapper--small-medium">
-                {% image page.hero_image fill-1000x500 as hero_image %}
-                <img class="hero__image hero__image--top-space" src="{{ hero_image.url }}">
-            </div>
-        </div>
-    {% endif %}
 
     {# Breadcrumbs #}
     {% block breadcrumbs %}
+    {# Hero section #}
+    {% if page.hero_image %}
+        <div class="hero hero--article">
+            {% include "navigation/breadcrumbs.html" %}
+            <div class="wrapper wrapper--small">
+                {% image page.hero_image fill-790x400 as hero_image %}
+                <img class="hero__image hero__image--top-space" src="{{ hero_image.url }}">
+            </div>
+        </div>
+    {% else %}
         {% include "navigation/breadcrumbs.html" %}
+    {% endif %}
     {% endblock %}
 
     {# Share Icons #}
@@ -42,7 +44,6 @@
         <h3 class="heading heading--squashed">{{ page.title }}</h3>
 
         <div class="article-info">
-            <a class="article-info__category" href="#">{{ page.categories.first.category }}</a>
             <p class="article-info__author">{% if page.author %}<span>By {{ page.author }}</span>{% endif %} {{ page.display_date|date }}</p>
         </div>
 

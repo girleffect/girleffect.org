@@ -1,11 +1,13 @@
 {% include 'organisms-header' %}
 
 <article>
-    {% include 'molecules-hero--article' %}
-
-    <div class="wrapper wrapper--small">
-        {% include 'atoms-breadcrumbs' %}
+    <div class="wrapper wrapper--article-breadcrumbs">
+        <div class="wrapper-small">
+            {% include 'atoms-breadcrumbs' %}
+        </div>
     </div>
+
+    {% include 'molecules-hero--article' %}
 
     <div class="wrapper wrapper--small-medium">
         {% include 'atoms-share-icons--vertical' %}
