@@ -89,7 +89,6 @@
         object-fit: cover;
 
         @include media-query(mob-landscape) {
-            min-height: auto;
             min-height: 150px;
         }
 
