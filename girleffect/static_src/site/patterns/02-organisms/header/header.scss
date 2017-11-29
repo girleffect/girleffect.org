@@ -340,7 +340,7 @@
 
     &__mobile-icons {
         display: flex;
-        margin: 5px;
+        margin: 15px 5px 0;
 
         @include media-query(tablet-landscape) {
             display: none;

@@ -8,8 +8,30 @@
         overflow: hidden;
         min-height: 340px;
         margin: 4rem auto;
-        max-width: $wrapper--large;
         display: none;
+        
+        @include media-query(tablet-portrait) {
+            display: block;
+        }
+
+        &::after {
+            background: linear-gradient(to bottom, transparent 80%, $black 90%);
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+
+    &__item {
+        position: relative;
+        overflow: hidden;
+        min-height: 340px;
+        margin: 4rem auto 0;
+        display: none;
+        max-height: 800px;
         
         @include media-query(tablet-portrait) {
             display: block;
@@ -44,10 +66,6 @@
             left: 0;
             right: 0;
         }
-    }
-
-    &__item {
-        position: relative;
     }
 
     &__image {
@@ -261,12 +279,24 @@
     }
 
     &__home-title {
-        color: $yellow;
+        @include font-size(20px, 115px);
         position: absolute;
-        z-index: 5;
-        top: 50px;
-        left: 50px;
-        font-size: 35px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 100%;
+        color: $white;
+        font-weight: $weight-bold;
+
+        &--mobile {
+            z-index: 5;
+            top: 50px;
+            left: 50px;
+            font-size: 35px;
+            transform: translate(0);
+            text-align: left;
+        }
     }
 
     &__icon {

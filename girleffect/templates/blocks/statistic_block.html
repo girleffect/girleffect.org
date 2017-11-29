@@ -1,15 +1,30 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
-<section class="section section--statistics">
-{# Rows are to have a maximum of 3 list items per row #}
-    <h3>{{ value.title }}</h3>
-    <div class="grid grid--three grid--center">
+<section class="section section--statistics section--top-bottom-space">
+    {# Rows are to have a maximum of 3 list items per row #}
+    {% if value.title %}
+        <h3>{{ value.title }}</h3>
+    {% endif %}
+    
+    <div class="grid grid--three grid--center grid--statistics">
         {% for item in value.statistics %}
             {% include "blocks/statistic_item_block.html" with value=item %}
             {# found in statistic_item_block.html #}
         {% endfor %}
     </div>
-    <div class="wrapper wrapper--center wrapper--top-bottom-space">
-        {# template for this is in link_block.html #}
-        {% include_block value.link %}
-    </div>
+
+    {% if value.link.external_link %}
+        {# template for this is in link_block.html #} 
+        <div class="wrapper wrapper--center">
+            {% include_block value.link %}
+        </div>
+    {% elif value.link.internal_link %}
+        <div class="wrapper wrapper--center">
+            {% include_block value.link %}
+        </div>
+    {% elif value.link.document_link %}
+        <div class="wrapper wrapper--center">
+            {% include_block value.link %}
+        </div>
+    {% else %}
+    {% endif %}
 </section>

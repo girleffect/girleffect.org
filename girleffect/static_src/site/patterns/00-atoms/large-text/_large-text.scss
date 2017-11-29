@@ -8,4 +8,14 @@
         margin: 0 auto 2rem;
         padding: 0;
     }
+
+    .template-home-page & {
+        @include font-size(18px, 25px);
+        font-weight: $weight-bold;
+        margin: 2rem auto;
+
+        @include media-query(tablet-landscape) {
+            margin: 7rem auto;
+        }
+    }
 }
