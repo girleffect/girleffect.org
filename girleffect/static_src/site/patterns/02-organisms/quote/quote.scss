@@ -19,7 +19,7 @@
     overflow: hidden;
 
     &::before {
-        background: linear-gradient(to bottom, transparent 60%, $black-60 90%);
+        background: linear-gradient(to bottom, transparent 40%, $black-70 60%);
         content: '';
         position: absolute;
         top: 0;
