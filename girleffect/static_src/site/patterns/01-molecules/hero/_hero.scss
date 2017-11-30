@@ -43,6 +43,7 @@
             @include font-size(34px, 65px);
             max-width: $wrapper--small;
             color: $green;
+            text-shadow: none;
             margin: 10px auto 0;
 
             @include media-query(tablet-landscape) {
