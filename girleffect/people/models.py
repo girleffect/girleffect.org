@@ -59,11 +59,7 @@ class PersonCategory(models.Model):
 
     @cached_property
     def people(self):
-        people = []
-        for p in self.person_relationships.all():
-            if p.page.live:
-                people.append(p.page)
-        return people
+        return PersonPage.objects.filter(category_relationships__category=self).live().public()
 
     def __str__(self):
         return self.title
@@ -126,7 +122,8 @@ class PersonIndexPage(Page, HeroImageFields):
 
     @cached_property
     def people(self):
-        return self.get_children().specific().live().public()
+        # print(PersonPage.objects.filter(category_relationships__category=self).live().public().order_by())
+        return self.get_children().order_by().filter(personpage__category_relationships__category=2).specific().live().public()
 
     @cached_property
     def categories(self):
