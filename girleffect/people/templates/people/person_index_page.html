@@ -14,7 +14,7 @@
     {# People listed by Category #}
     <section>
     {% for category in page.categories %}
-        {% if category.people %}
+        {% if category.people.exists %}
             <div class="wrapper wrapper--center wrapper--people">
                 <h3>{{ category.title }}</h3>
             </div>

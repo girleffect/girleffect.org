@@ -59,11 +59,7 @@ class PersonCategory(models.Model):
 
     @cached_property
     def people(self):
-        people = []
-        for p in self.person_relationships.all():
-            if p.page.live:
-                people.append(p.page)
-        return people
+        return PersonPage.objects.filter(category_relationships__category=self).live().public()
 
     def __str__(self):
         return self.title
