@@ -20,14 +20,6 @@ INSTALLED_APPS += (
     'raven.contrib.django.raven_compat',
 )
 
-RAVEN_CONFIG = {
-    'dsn': 'https://cc32e609c8ac42a88761fdc1cbae7b43:ff20cd1373ba4b818bb379720ad501fc@sentry.torchbox.com/182?verify_ssl=0',
-    # If you are using git, you can also automatically configure the
-    # release based on the git info.
-    'release': raven.fetch_git_sha(BASE_DIR),
-}
-
-
 # Cache everything for 10 minutes
 # This only applies to pages that do not have a more specific cache-control
 # setting. See urls.py
@@ -43,7 +35,6 @@ env = os.environ.copy()
 for key, value in os.environ.items():
     if key.startswith('CFG_'):
         env[key[4:]] = value
-
 
 # Basic configuration
 
@@ -106,8 +97,16 @@ if all(v in env for v in ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'AWS_STO
     }
     S3_USE_SIGV4 = True
 
-# Database
+# Sentry Config
+if 'SENTRY_DSN' in env:
+    RAVEN_CONFIG = {
+        'dsn': env['SENTRY_DSN'],
+        # If you are using git, you can also automatically configure the
+        # release based on the git info.
+        'release': raven.fetch_git_sha(BASE_DIR),
+    }
 
+# Database
 if 'DATABASE_URL' in os.environ:
     DATABASES = {'default': dj_database_url.config()}
 
