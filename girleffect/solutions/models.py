@@ -38,7 +38,6 @@ class SolutionPageRelatedPartner(Orderable, models.Model):
 
 
 class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
-    summary = models.TextField(blank=True)
     body = StreamField(StoryBlock())
     person_category = models.ForeignKey(
         'people.PersonCategory',
@@ -83,13 +82,10 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
             return None
 
     search_fields = Page.search_fields + [
-        index.SearchField('summary'),
         index.SearchField('body'),
     ]
 
     content_panels = Page.content_panels + HeroVideoFieldsLogo.content_panels + [
-        FieldPanel('summary'),
-    ] + [
         StreamFieldPanel('body'),
         InlinePanel('related_partners', label="Related partners"),
         SnippetChooserPanel('call_to_action'),
