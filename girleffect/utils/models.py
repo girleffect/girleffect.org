@@ -229,7 +229,7 @@ class Statistic(LinkFields):
         max_length=180,
         verbose_name="Description",
         help_text="The statistic. For example, '66% of girls complete primary school'",
-        features=["bold", "italic", "link", "document-link", "h4"]
+        features=["bold", "italic", "link", "document-link"]
     )
     citation_text = models.CharField(max_length=80, blank=True)
 
