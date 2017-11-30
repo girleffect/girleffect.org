@@ -39,7 +39,7 @@
         }
 
         &::after {
-            background: linear-gradient(to bottom, transparent 80%, $black 90%);
+            background: linear-gradient(to bottom, transparent 50%, $black 90%);
             position: absolute;
             content: '';
             top: 0;
