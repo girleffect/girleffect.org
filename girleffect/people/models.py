@@ -121,11 +121,6 @@ class PersonIndexPage(Page, HeroImageFields):
     ]
 
     @cached_property
-    def people(self):
-        # print(PersonPage.objects.filter(category_relationships__category=self).live().public().order_by())
-        return self.get_children().order_by().filter(personpage__category_relationships__category=2).specific().live().public()
-
-    @cached_property
     def categories(self):
         return [related.category for related in self.category_relationships.all()]
 
