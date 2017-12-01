@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'template_debug',
     'captcha',
+    'storages',
     'wagtailcaptcha',
     'wagtailfontawesome',
     'wagtailmedia',
