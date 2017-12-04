@@ -31,12 +31,8 @@
         overflow: hidden;
         min-height: 340px;
         margin: 4rem auto 0;
-        display: none;
+        display: block;
         max-height: 800px;
-        
-        @include media-query(tablet-portrait) {
-            display: block;
-        }
 
         &::after {
             background: linear-gradient(to bottom, transparent 80%, $black 90%);
