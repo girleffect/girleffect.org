@@ -10,7 +10,7 @@
         min-height: 340px;
         margin: 4rem auto;
         display: none;
-        
+
         @include media-query(tablet-portrait) {
             display: block;
         }
@@ -73,7 +73,7 @@
         @include media-query(tablet-portrait) {
             min-height: 700px;
         }
-        
+
 
         &--hidden {
             position: absolute;
