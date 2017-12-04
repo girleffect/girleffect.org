@@ -10,10 +10,12 @@
         {% include "navigation/breadcrumbs.html" %}
     {% endblock %}
 
-    <section class="wrapper wrapper--small wrapper--top-bottom-space">
-        <h2 class="heading heading--squashed">{{ page.heading }}</h2>
-    </section>
-
+    {% if page.heading %}
+        <section class="wrapper wrapper--small wrapper--top-bottom-space">
+            <h2 class="heading heading--squashed">{{ page.heading }}</h2>
+        </section>    
+    {% endif %}
+    
     {# Streamfield options #}
     <section class="section section--body">
         {{ page.body }}
