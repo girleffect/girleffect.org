@@ -3,18 +3,6 @@
 
 set -e
 
-# Set up $CFG_MEDIA_DIR
-mkdir -p /data/media
-CFG_MEDIA_DIR=/data/media
-export CFG_MEDIA_DIR
-
-# To avoid accidental data loss, refuse to start unless a volume is mounted
-# on our media directory.
-if [ "$(stat -c%D /)" = "$(stat -c%D "${CFG_MEDIA_DIR}")" ]; then
-    printf >&2 'error: no filesystem mounted on "%s"; refusing to start.\n' "$CFG_MEDIA_DIR"
-    exit 1
-fi
-
 # Any host is fine (Kubernetes will prevent invalid hosts from reaching the
 # application).
 CFG_ALLOWED_HOSTS='*'
