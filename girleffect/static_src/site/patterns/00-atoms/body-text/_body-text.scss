@@ -3,6 +3,16 @@
     margin: 0 auto 1rem;
     padding: 0 20px;
 
+    &:first-child {
+        .section--body & {
+            margin: 1rem auto 2rem;
+
+            @include media-query(tablet-landscape) {
+                margin: 2rem auto 4rem;
+            }
+        }
+    }
+
     .template-article-page & {
         padding: 0;
     }
