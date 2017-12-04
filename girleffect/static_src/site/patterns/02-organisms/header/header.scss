@@ -37,7 +37,7 @@
         display: none;
         position: absolute;
         top: 0;
-        background: $light-grey;
+        background: $white-95;
         width: 100%;
         align-items: center;
         justify-content: center;
@@ -45,7 +45,7 @@
         left: 0;
         flex-direction: column;
         z-index: 5;
-        height: auto;
+        height: 100%;
 
         @include media-query(tablet-landscape) {
             justify-content: flex-end;
@@ -60,6 +60,7 @@
             flex-direction: row;
             z-index: auto;
             text-align: center;
+            height: auto;
         }
     }
 
