@@ -8,8 +8,10 @@
     <section class="section">
         <div class="wrapper wrapper--medium wrapper--bottom-space">
             {# Intro is RichText #}
-            {{ page.introduction }}
+            {{ page.introduction|richtext }}
+        </div>
 
+        <div class="wrapper wrapper--medium wrapper--bottom-space">
             <form method="GET">
                 <select name="category" class="js-article-filter">
                     <option value="">All</option>
@@ -24,21 +26,32 @@
 
             <div class="article-container wrapper wrapper--medium">
                 {% for article in articles %}
-                    <a class="article-card" href="{% pageurl article %}">
+                    <div class="article-card">
+                        <a href="{% pageurl article %}">
                             {% image article.listing_image|default:article.hero_image|default:settings.utils.SocialMediaSettings.default_sharing_image fill-380x225 %}
+                        </a>
                         <div class="article-card__content">
-                            <span class="article-card__date">{{ article.display_date }}</span>
-                            {% if article.listing_title %}
-                                <div>{{ article.listing_title }}</div>
-                            {% else %}
-                                <div>{{ article.title }}</div>
-                            {% endif %}
-                            {% if article.listing_summary %}
-                                <p>{{ article.listing_summary }}</p>
-                            {% endif %}
+                            <div>
+                                {% if article.categories %}
+                                    <span class="article-card__category">
+                                        <a href="{{ article.get_parent.url }}?category={{ article.categories.first.category.id }}">
+                                            {{ article.categories.first.category }}
+                                        </a>
+                                    </span>
+                                {% endif %}
+                                <span class="article-card__date">{{ article.publication_date|date:"d.m.y" }}</span>
+                                {% if article.listing_title %}
+                                    <div class="article-card__title"><a href="{% pageurl article %}">{{ article.listing_title }}</a></div>
+                                {% else %}
+                                    <div class="article-card__title"><a href="{% pageurl article %}">{{ article.title }}</a></div>
+                                {% endif %}
+                                {% if article.listing_summary %}
+                                    <p>{{ article.listing_summary }}</p>
+                                {% endif %}
+                            </div>
                             <div class="arrow"></div>
                         </div>
-                    </a>
+                    </div>
                 {% endfor %}
             </div>
 
