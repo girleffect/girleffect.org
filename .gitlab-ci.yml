@@ -20,7 +20,7 @@ stages:
 image: docker:latest
 variables:
   GE_REGISTRY: girleffect/corporate-site
-  IMAGE_TAG: $GE_REGISTRY:$CI_BUILD_REF
+  IMAGE_TAG: $GE_REGISTRY:master_$CI_BUILD_REF
   CI_IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_BUILD_REF
   CFG_EMAIL_SUBJECT_PREFIX: "[girleffect]"
   CFG_ALLOWED_HOSTS: "*"
@@ -108,8 +108,8 @@ docker_push:
     - docker
   script:
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - docker build -t master_$IMAGE_TAG .
-    - docker push master_$IMAGE_TAG
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
 
 # Deploy the staging site.
 deploy:
