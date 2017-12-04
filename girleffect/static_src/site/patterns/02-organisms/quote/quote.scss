@@ -75,12 +75,13 @@
     &__copy {
         @include font-size(16px, 25px);
         color: $white;
-        margin: 0 0 10px;
+        margin: 0 0 5px;
         padding: 0;
         border: 0;
 
         * {
             font-size: inherit;
+            margin-bottom: 0;
         }
     }
 
