@@ -1,8 +1,8 @@
 .rich-text  {
     @include font-size(16px, 18px);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    
+    -webkit-font-smoothing: antialiased; // sass-lint:disable-line no-vendor-prefixes
+    -moz-osx-font-smoothing: grayscale; // sass-lint:disable-line no-vendor-prefixes
+
     .large-text & {
         @include font-size(18px, 25px);
         font-weight: $weight-bold;
