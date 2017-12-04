@@ -48,8 +48,10 @@
         padding: 30px;
         min-height: 320px;
         position: relative;
-        font-weight: $weight-bold;
+        font-weight: $weight-medium;
         display: block;
+        -webkit-font-smoothing: antialiased; // sass-lint:disable-line no-vendor-prefixes
+        -moz-osx-font-smoothing: grayscale; // sass-lint:disable-line no-vendor-prefixes
     }
 
     &__date {
