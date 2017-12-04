@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models.functions import Coalesce
-from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from modelcluster.fields import ParentalKey
@@ -21,6 +20,8 @@ from girleffect.utils.models import (
     RelatedDocument
 )
 from girleffect.utils.blocks import ArticleBlock
+
+DEFAULT_ARTICLES_PER_PAGE = 15
 
 
 @register_snippet
@@ -134,11 +135,9 @@ class ArticleIndex(Page, HeroImageFields, SocialFields):
         if request.GET.get('category'):
             articles = articles.filter(categories__category=request.GET.get('category'))
 
-        print(articles)
-
         # Pagination
         page = request.GET.get('page', 1)
-        paginator = Paginator(articles, settings.DEFAULT_PER_PAGE)
+        paginator = Paginator(articles, DEFAULT_ARTICLES_PER_PAGE)
         try:
             articles = paginator.page(page)
         except PageNotAnInteger:
