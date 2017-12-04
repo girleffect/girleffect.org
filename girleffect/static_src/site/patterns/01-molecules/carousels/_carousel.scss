@@ -306,9 +306,11 @@
         left: 50%;
         transform: translateX(-50%) rotate(180deg);
         bottom: 50px;
-        transition: bottom $transition;
+        opacity: 1;
+        transition: opacity, bottom $transition;
 
         .is-expanded & {
+            opacity: 0;
             bottom: 210px;
         }
     }
