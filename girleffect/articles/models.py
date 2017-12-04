@@ -22,6 +22,8 @@ from girleffect.utils.models import (
 )
 from girleffect.utils.blocks import ArticleBlock
 
+DEFAULT_ARTICLES_PER_PAGE = 15
+
 
 @register_snippet
 class ArticleCategory(models.Model):
@@ -134,11 +136,9 @@ class ArticleIndex(Page, HeroImageFields, SocialFields):
         if request.GET.get('category'):
             articles = articles.filter(categories__category=request.GET.get('category'))
 
-        print(articles)
-
         # Pagination
         page = request.GET.get('page', 1)
-        paginator = Paginator(articles, settings.DEFAULT_PER_PAGE)
+        paginator = Paginator(articles, DEFAULT_ARTICLES_PER_PAGE)
         try:
             articles = paginator.page(page)
         except PageNotAnInteger:

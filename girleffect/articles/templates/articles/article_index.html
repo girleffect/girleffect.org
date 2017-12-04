@@ -43,7 +43,7 @@
             </div>
 
             <div class="wrapper wrapper--medium">
-                {% include "includes/pagination.html" %}
+                {% include "includes/pagination.html" with subpages=articles %}
             </div>
         {% else %}
             {# no items #}
