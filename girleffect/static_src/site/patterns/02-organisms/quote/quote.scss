@@ -40,6 +40,11 @@
         }
     }
 
+    &:only-child {
+        max-width: $wrapper--small;
+        margin: 0;
+    }
+
     &__image {
         + .quote__content {
             position: absolute;
