@@ -24,7 +24,7 @@
 
     &__heading {
         padding: 0 20px;
-        text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);
+        text-shadow: 0 0 70px $black-80;
 
         @include media-query(tablet-landscape) {
             padding: 0;
@@ -70,7 +70,7 @@
     &__strapline {
         color: $white;
         margin-bottom: 1rem;
-        text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);
+        text-shadow: 0 0 70px $black-80;
 
         .template-home-page & {
             @include font-size(20px, 65px);
