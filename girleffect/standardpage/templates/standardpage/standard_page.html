@@ -10,10 +10,12 @@
         {% include "navigation/breadcrumbs.html" %}
     {% endblock %}
 
-    {# Introduction #}
-    <section class="wrapper wrapper--small wrapper--top-bottom-space large-text">
-        <p>{{ page.introduction }}</p>
-    </section>
+    {% if page.introduction %}
+        {# Introduction #}
+        <section class="wrapper wrapper--small wrapper--top-bottom-space large-text">
+            <p>{{ page.introduction }}</p>
+        </section>    
+    {% endif %}
 
     {# Streamfield options - rich text #}
     <section class="section section--body">
