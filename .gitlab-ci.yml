@@ -139,4 +139,5 @@ deploy:
     GIT_STRATEGY: none
   image: torchbox/kdtool:latest
   script:
-    - kdtool deploy -A -Dpostgresql -vdata:/data $DEPLOY_FLAGS -sSECRET_KEY="${SECRET_KEY}" --hostname=$CI_ENVIRONMENT_URL $IMAGE_TAG $CI_ENVIRONMENT_SLUG
+    - kdtool deploy -A -Dpostgresql -vdata:/data $DEPLOY_FLAGS -sSECRET_KEY="${SECRET_KEY}" --hostname=$CI_ENVIRONMENT_URL $STAGING_IMAGE_TAG $CI_ENVIRONMENT_SLUG
+    
