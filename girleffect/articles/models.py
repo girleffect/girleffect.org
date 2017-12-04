@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models.functions import Coalesce
-from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from modelcluster.fields import ParentalKey
