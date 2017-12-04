@@ -108,7 +108,7 @@ docker_push:
     - docker
   script:
     - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - docker build -t $IMAGE_TAG:master .
+    - docker build -t master_$IMAGE_TAG .
     - docker push $IMAGE_TAG
 
 # Deploy the staging site.
