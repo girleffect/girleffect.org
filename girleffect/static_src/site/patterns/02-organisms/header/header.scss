@@ -5,7 +5,7 @@
     position: relative;
     background: $white;
     border-bottom: 1px solid $light-grey;
-    
+
     &.nav-open {
         height: 100%;
     }
@@ -87,7 +87,7 @@
             top: 132px;
             padding-top: 20px;
             transition: z-index, opacity, $transition;
-    
+
             &.is-visible {
                 z-index: 10;
                 opacity: 1;
@@ -203,7 +203,7 @@
             border-bottom: 3px solid transparent;
             transition: border-bottom $transition;
         }
-        
+
         @include media-query(desktop) {
             &.is-active {
                 border-bottom: 3px solid $yellow;
@@ -221,7 +221,7 @@
         left: 0;
 
         @include media-query(tablet-landscape) {
-            padding: 10px 0 10px 0;
+            padding: 10px 0;
             border-bottom: 0;
             display: inline;
             width: auto;
@@ -296,7 +296,7 @@
             height: 35px;
             padding: 0 10px;
             width: 40px;
-        
+
 
             .is-open > & {
                 transform: rotate(180deg);
@@ -365,7 +365,7 @@
                 z-index: 5;
                 opacity: 1;
                 height: 65vh;
-            }   
+            }
         }
     }
 
