@@ -218,12 +218,12 @@
         text-align: center;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: center;
         position: relative;
 
         &:hover {
             background: $white-90;
-            height: 200px;
+            height: 220px;
         }
     }
 
