@@ -1,12 +1,12 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
     <div class="quote">
         {% if value.image %}
-            {% image value.image fill-657x400 as quote_image %}
+            {% image value.image fill-790x400 as quote_image %}
             <img class="quote__image" src="{{ quote_image.url }}" alt="{{ quote_image.alt }}">
         {% endif %}
 
-        <div class="quote__content 
-            {% if value.link_block.external_link %} 
+        <div class="quote__content
+            {% if value.link_block.external_link %}
                 quote__content--has-link
             {% elif value.link_block.internal_link %}
                 quote__content--has-link
@@ -27,9 +27,9 @@
             {% if value.citation %}
                 <span class="quote__cite">{{ value.citation }}</span>
             {% endif %}
-            
+
             {% if value.link_block.external_link %}
-                {# template for this is in link_block.html #} 
+                {# template for this is in link_block.html #}
                 {% include_block value.link_block %}
             {% elif value.link_block.internal_link %}
                 {% include_block value.link_block %}
