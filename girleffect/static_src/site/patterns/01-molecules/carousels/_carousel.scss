@@ -10,7 +10,7 @@
         min-height: 340px;
         margin: 4rem auto;
         display: none;
-        
+
         @include media-query(tablet-portrait) {
             display: block;
         }
@@ -31,12 +31,8 @@
         overflow: hidden;
         min-height: 340px;
         margin: 4rem auto 0;
-        display: none;
+        display: block;
         max-height: 800px;
-        
-        @include media-query(tablet-portrait) {
-            display: block;
-        }
 
         &::after {
             background: linear-gradient(to bottom, transparent 80%, $black 90%);
@@ -77,7 +73,7 @@
         @include media-query(tablet-portrait) {
             min-height: 700px;
         }
-        
+
 
         &--hidden {
             position: absolute;
@@ -222,12 +218,12 @@
         text-align: center;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: center;
         position: relative;
 
         &:hover {
             background: $white-90;
-            height: 200px;
+            height: 220px;
         }
     }
 
@@ -276,7 +272,6 @@
         bottom: 30px;
         left: 30px;
         width: 90%;
-        max-width: 50%;
     }
 
     &__home-title {
@@ -311,9 +306,11 @@
         left: 50%;
         transform: translateX(-50%) rotate(180deg);
         bottom: 50px;
-        transition: bottom $transition;
+        opacity: 1;
+        transition: opacity, bottom $transition;
 
         .is-expanded & {
+            opacity: 0;
             bottom: 210px;
         }
     }

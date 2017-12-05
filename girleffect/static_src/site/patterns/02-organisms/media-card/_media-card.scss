@@ -1,19 +1,16 @@
 .media-card {
     $root: &;
     position: relative;
-    margin: 50px auto;
+    margin: 50px 20px;
     max-width: $wrapper--medium;
 
     @include media-query(tablet-landscape) {
-        margin: 100px auto;
+        margin: 50px auto;
     }
 
     &__image {
         min-height: 300px;
-
-        @supports (object-fit: cover) {
-            object-fit: cover;
-        }
+        object-fit: cover;
 
         @include media-query(tablet-portrait) {
             height: 500px;
@@ -65,6 +62,12 @@
                 position: relative;
                 left: 15%;
             }
+        }
+    }
+
+    &:last-child {
+        @include media-query(tablet-landscape) {
+            margin: 50px auto 100px;
         }
     }
 }

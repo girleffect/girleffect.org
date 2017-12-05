@@ -3,7 +3,9 @@
     {# Single article #}
     {% if article.listing_image or article.hero_image|default:settings.utils.SocialMediaSettings.default_sharing_image %}
         {% image article.listing_image|default:article.hero_image fill-385x255 as article_image %}
-        <img src="{{ article_image.url }}" alt="{{ article.listing_title }}">
+        <a href="{{ article.url }}">
+            <img src="{{ article_image.url }}" alt="{{ article.listing_title }}">
+        </a>
     {% endif %}
 
     <div class="article-card__content">
