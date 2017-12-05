@@ -21,6 +21,7 @@ HEADING_ALIGN_OPTIONS = [
     ('center', 'center')
 ]
 
+
 class ImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     caption = blocks.CharBlock(required=False)
