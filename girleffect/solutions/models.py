@@ -56,18 +56,18 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
         related_name='+'
     )
     upper_background_image = models.ForeignKey(
-        'images.CustomImage', 
-        null=True, 
-        blank=True, 
-        on_delete=models.SET_NULL, 
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
         related_name='+',
         help_text='Add an image to appear as background for page introduction'
     )
     lower_background_image = models.ForeignKey(
-        'images.CustomImage', 
-        null=True, 
-        blank=True, 
-        on_delete=models.SET_NULL, 
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
         related_name='+',
         help_text='Add an image to appear as background for page related articles'
     )

@@ -24,9 +24,21 @@ class ImageBlock(blocks.StructBlock):
 class CustomisationBlock(blocks.StructBlock):
     """ For hex colours, background images """
     background_image = ImageChooserBlock(required=False)
+    background_hex = blocks.CharBlock(max_length=7, required=False)
 
     class Meta:
         template = "blocks/customisation_block.html"
+
+    def clean(self, value):
+        import re
+        if value['background_hex']:
+            background_hex = value['background_hex']
+            if not re.match('^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$', background_hex):
+                raise ValidationError(
+                    "Validation error in CustomisationBlock",
+                    params={'background_hex': 'Please enter valid hex code'},
+                )
+        return super(CustomisationBlock, self).clean(value)
 
 
 class LinkBlock(blocks.StructBlock):
