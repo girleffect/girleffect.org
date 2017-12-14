@@ -1,5 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
-<div class="media-card">
+{% image value.customisation.background_image max-100x100 as bg_img %}
+<div class="media-card"
+     style="{% if bg_img %}background:url({{ bg_img.url }}){% endif %}">
     {% image value.image fill-1020x500 as fw_image %}
     <img src="{{ fw_image.url }}" alt="{{ fw_image.alt }}" class="media-card__image">
 

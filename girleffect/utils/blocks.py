@@ -21,6 +21,14 @@ class ImageBlock(blocks.StructBlock):
         template = "blocks/image_block.html"
 
 
+class CustomisationBlock(blocks.StructBlock):
+    """ For hex colours, background images """
+    background_image = ImageChooserBlock(required=False)
+
+    class Meta:
+        template = "blocks/customisation_block.html"
+
+
 class LinkBlock(blocks.StructBlock):
     external_link = blocks.URLBlock(required=False, label="External Link")
     internal_link = blocks.PageChooserBlock(required=False, label="Internal Link")
@@ -120,6 +128,7 @@ class MediaTextOverlayBlock(blocks.StructBlock):
         features=["bold", "italic", "ol", "ul", "link", "document-link"]
     )
     link = LinkBlock(required=False)
+    customisation = CustomisationBlock(required=False)
 
     def clean(self, value):
         if value['title'] and value['logo']:
@@ -154,6 +163,7 @@ class YouTubeEmbed(blocks.StructBlock):
             The custom 'play' button will be created for valid YouTube URLs."
     )
     link = LinkBlock(required=False)
+    customisation = CustomisationBlock(required=False)
 
     def clean(self, value):
         cleaned_data = super(YouTubeEmbed, self).clean(value)
@@ -186,11 +196,25 @@ class QuoteBlock(blocks.StructBlock):
     link_block = LinkBlock(required=False)
 
     class Meta:
-        icon = "openquote"
         template = "blocks/quote_item_block.html"
 
 
-class ListColumnBlock(blocks.StructBlock):
+class QuoteListBlock(blocks.StructBlock):
+    quotes = blocks.ListBlock(
+        QuoteBlock(),
+        template="blocks/quote_block.html",
+        icon="openquote"
+    )
+    customisation = CustomisationBlock(
+        required=False
+    )
+
+    class Meta:
+        icon = "openquote"
+        template = "blocks/quote_block.html"
+
+
+class ListItemBlock(blocks.StructBlock):
     image = ImageChooserBlock(required=False)
     title = blocks.CharBlock(max_length=80, required=False)
     description = blocks.RichTextBlock(
@@ -222,6 +246,9 @@ class StatisticBlock(blocks.StructBlock):
         SnippetChooserBlock(Statistic),
     )
     link = LinkBlock(required=False)
+    customisation = CustomisationBlock(
+        required=False
+    )
 
     class Meta:
         icon = "snippet"
@@ -237,6 +264,53 @@ class BlockQuote(blocks.StructBlock):
         template = "blocks/blockquote_block.html"
 
 
+class LargeTextBlock(blocks.StructBlock):
+    body = blocks.RichTextBlock(
+        label="Large Text",
+        max_length=350,
+        features=["bold", "italic", "link", "document-link"],
+        required=False,
+    )
+    customisation = CustomisationBlock(
+        required=False
+    )
+
+    class Meta:
+        icon = "pilcrow"
+        template = "blocks/large_text_block.html"
+
+
+class BodyTextBlock(blocks.StructBlock):
+    body = blocks.RichTextBlock(
+        label="Body Text",
+        features=[
+            "h4",
+            "bold", "italic", "link",
+            "ol", "ul", "hr"
+        ],
+    )
+    customisation = CustomisationBlock(
+        required=False
+    )
+
+    class Meta:
+        icon = "pilcrow"
+        template = "blocks/body_text_block.html"
+
+
+class ListColumnBlock(blocks.StructBlock):
+    list_block = blocks.ListBlock(
+        ListItemBlock()
+    )
+    customisation = CustomisationBlock(
+        required=False
+    )
+
+    class Meta:
+        template = "blocks/list_column_block.html"
+        icon = "list-ul"
+
+
 class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
     body_text = blocks.RichTextBlock(
@@ -247,6 +321,7 @@ class StoryBlock(blocks.StreamBlock):
             "ol", "ul", "hr"
         ],
     )
+    body_text_new = BodyTextBlock()
     large_text = blocks.RichTextBlock(
         label="Large Text",
         max_length=350,
@@ -254,12 +329,14 @@ class StoryBlock(blocks.StreamBlock):
         required=False,
         icon="pilcrow"
     )
+    large_text_new = LargeTextBlock()
     image = ImageBlock()
     quote = blocks.ListBlock(
         QuoteBlock(),
         template="blocks/quote_block.html",
         icon="openquote"
     )
+    quote_new = QuoteListBlock()
     video = YouTubeEmbed(label="Girl Effect YouTube Video")
     carousel = blocks.ListBlock(
         CarouselItemBlock(),
@@ -274,6 +351,7 @@ class StoryBlock(blocks.StreamBlock):
         template="blocks/list_column_block.html",
         icon="list-ul"
     )
+    list_block_new = ListColumnBlock()
     link_row = blocks.ListBlock(
         LinkBlock(),
         template="blocks/inline_link_block.html",

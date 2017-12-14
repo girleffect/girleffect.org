@@ -1,5 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
-<section class="section section--statistics section--top-bottom-space">
+{% image value.customisation.background_image max-100x100 as bg_img %}
+<section class="section section--statistics section--top-bottom-space"
+         style="{% if bg_img %}background:url({{ bg_img.url }}){% endif %}">
     {# Rows are to have a maximum of 3 list items per row #}
     {% if value.title %}
         <h3>{{ value.title }}</h3>
