@@ -127,6 +127,10 @@ class CustomisableFeature(Orderable, models.Model):
         if background_hex:
             if not re.match('^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$', background_hex):
                 raise ValidationError({'background_hex': _('Not a valid hex code.')})
+
+        if self.image and self.background_hex:
+            raise ValidationError({'background_hex': _('Please choose one of image or hex code.')})
+
         return super(CustomisableFeature, self).clean()
 
 

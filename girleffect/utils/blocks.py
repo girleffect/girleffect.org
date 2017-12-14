@@ -38,6 +38,14 @@ class CustomisationBlock(blocks.StructBlock):
                     "Validation error in CustomisationBlock",
                     params={'background_hex': 'Please enter valid hex code'},
                 )
+
+        if value['background_image'] and value['background_hex']:
+            error_message = ["Please select one of background image or hex"]
+            raise ValidationError(
+                "Validation error in CustomisationBlock",
+                params={'background_image': error_message,
+                        'background_hex': error_message},
+            )
         return super(CustomisationBlock, self).clean(value)
 
 
