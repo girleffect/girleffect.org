@@ -107,6 +107,29 @@ class RelatedDocument(Orderable, models.Model):
     ]
 
 
+# Related pages
+class CustomisableFeature(Orderable, models.Model):
+    image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    background_hex = models.CharField(max_length=7, null=True, blank=True,)
+
+    class Meta:
+        abstract = True
+        ordering = ['sort_order']
+
+    panels = [
+        ImageChooserPanel('image'),
+        FieldPanel('background_hex')
+    ]
+
+    def clean(self):
+        import re
+        background_hex = self.background_hex
+        if background_hex:
+            if not re.match('^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$', background_hex):
+                raise ValidationError({'background_hex': _('Not a valid hex code.')})
+        return super(CustomisableFeature, self).clean()
+
+
 # Generic social fields abstract class to add social image/text to any new content type easily.
 class SocialFields(models.Model):
     social_title = models.CharField(max_length=255, blank=True)

@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
 
@@ -17,6 +18,7 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from girleffect.utils.models import (
+    CustomisableFeature,
     HeroImageFields,
     SocialFields
 )
@@ -54,6 +56,20 @@ class Partner(Orderable, models.Model):
         return self.title
 
 
+class PartnerCustomisablePartners(CustomisableFeature):
+    page = ParentalKey(
+        'PartnerIndexPage',
+        related_name='partner_customisation'
+    )
+
+
+class PartnerCustomisableIntroduction(CustomisableFeature):
+    page = ParentalKey(
+        'PartnerIndexPage',
+        related_name='introduction_customisation'
+    )
+
+
 class PartnerIndexPage(Page, HeroImageFields, SocialFields):
     introduction = models.TextField(blank=True)
     call_to_action = models.ForeignKey(
@@ -68,8 +84,14 @@ class PartnerIndexPage(Page, HeroImageFields, SocialFields):
         MultiFieldPanel([
             ImageChooserPanel('hero_image'),
         ], 'Hero Image'),
-        FieldPanel('introduction'),
-        InlinePanel('partners', label="Partners"),
+        MultiFieldPanel([
+            FieldPanel('introduction'),
+            InlinePanel('introduction_customisation', label="Introduction Customisation", max_num=1),
+        ], 'Introduction'),
+        MultiFieldPanel([
+            InlinePanel('partners', label="Partners"),
+            InlinePanel('partner_customisation', label="Partners Customisation", max_num=1),
+        ], 'Partners'),
         SnippetChooserPanel('call_to_action')
     ]
 
@@ -81,6 +103,16 @@ class PartnerIndexPage(Page, HeroImageFields, SocialFields):
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels
+
+    @cached_property
+    def introduction_customisations(self):
+        customisations = self.introduction_customisation.first()
+        return customisations
+
+    @cached_property
+    def partner_customisations(self):
+        customisations = self.partner_customisation.first()
+        return customisations
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)

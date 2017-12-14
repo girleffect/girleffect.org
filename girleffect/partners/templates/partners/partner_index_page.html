@@ -13,12 +13,15 @@
                 {% include "navigation/breadcrumbs.html" %} 
             {% endblock %}
         </div>
-
-        <div class="wrapper wrapper--small wrapper--bottom-space-xl large-text">
+        {% image page.introduction_customisations.image max-100x100 as intro_image %}
+        <div class="wrapper wrapper--small wrapper--bottom-space-xl large-text"
+             style="{% if intro_image %}background:url({{ intro_image.url }}){% endif %}">
             <p>{{ page.introduction }}</p>
         </div>
-        {% if page.partners.exists %}   
-            <div class="media-block-container media-block-container--partners">
+        {% if page.partners.exists %}
+            {% image page.partner_customisations.image max-100x100 as partner_background %}  
+            <div class="media-block-container media-block-container--partners"
+                 style="{% if partner_background %}background:url({{ partner_background.url }}){% endif %}">
                 {# Partners exist #}
                 {% for partner in page.partners.all %}
                     {% if partner.show_on_index %}

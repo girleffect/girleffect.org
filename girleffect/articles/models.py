@@ -17,7 +17,7 @@ from wagtail.wagtailsearch import index
 
 from girleffect.utils.models import (
     HeroImageFields, ListingFields, SocialFields, RelatedPage,
-    RelatedDocument
+    RelatedDocument, CustomisableFeature
 )
 from girleffect.utils.blocks import ArticleBlock
 
@@ -94,7 +94,7 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
         ], 'Hero Image'),
         FieldPanel('publication_date'),
         FieldPanel('author'),
-        FieldPanel('introduction'),
+        FieldPanel('introduction'),      
         StreamFieldPanel('body'),
         InlinePanel('categories', label="Category", max_num=1),
         InlinePanel('related_documents', label="Related documents"),
@@ -115,6 +115,20 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
             return self.first_published_at
 
 
+class ArticleIndexCustomisableIntroduction(CustomisableFeature):
+    page = ParentalKey(
+        'ArticleIndex',
+        related_name='introduction_customisation'
+    )
+
+
+class ArticleIndexCustomisableArticles(CustomisableFeature):
+    page = ParentalKey(
+        'ArticleIndex',
+        related_name='article_customisation'
+    )
+
+
 class ArticleIndex(Page, HeroImageFields, SocialFields):
     introduction = models.TextField(max_length=350, blank=True)
 
@@ -122,10 +136,22 @@ class ArticleIndex(Page, HeroImageFields, SocialFields):
         MultiFieldPanel([
             ImageChooserPanel('hero_image'),
         ], 'Hero Image'),
-        FieldPanel('introduction', classname="full"),
+        MultiFieldPanel([
+            FieldPanel('introduction'),
+            InlinePanel('introduction_customisation', label="Introduction Customisation", max_num=1),
+        ], 'Introduction'),
+        InlinePanel('article_customisation', label="Article Listing Customisation", max_num=1),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels
+
+    def introduction_customisations(self):
+        customisations = self.introduction_customisation.first()
+        return customisations
+
+    def article_customisations(self):
+        customisations = self.article_customisation.first()
+        return customisations
 
     def get_context(self, request, *args, **kwargs):
         articles = ArticlePage.objects.live().public().descendant_of(self).annotate(
