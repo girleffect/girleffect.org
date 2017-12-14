@@ -13,6 +13,9 @@
     {% block breadcrumbs %}
         {% include "navigation/breadcrumbs.html" %}
     {% endblock %}
+    {# Upper Background Image #}
+    {% image page.upper_background_image max-100x100 as upper_background_image %}
+    <img src="{{ upper_background_image.url }}">
 
     {# Streamfield options #}
     <section class="section section--body">
@@ -50,6 +53,10 @@
             {% include "includes/call_to_action.html" %}
         </section>
     {% endif %}
+
+    {# Lower Background Image #}
+    {% image page.lower_background_image max-100x100 as lower_background_image %}
+    <img src="{{ lower_background_image.url }}">
 
     {# Latest articles, limited to three most recent, link to all articles index #}
     {% include "includes/articles_section.html" with title="Latest from "|add:page.title %}

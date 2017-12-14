@@ -13,11 +13,12 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel, InlinePanel,
-    StreamFieldPanel
+    MultiFieldPanel, StreamFieldPanel
 )
 
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
@@ -54,6 +55,22 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    upper_background_image = models.ForeignKey(
+        'images.CustomImage', 
+        null=True, 
+        blank=True, 
+        on_delete=models.SET_NULL, 
+        related_name='+',
+        help_text='Add an image to appear as background for page introduction'
+    )
+    lower_background_image = models.ForeignKey(
+        'images.CustomImage', 
+        null=True, 
+        blank=True, 
+        on_delete=models.SET_NULL, 
+        related_name='+',
+        help_text='Add an image to appear as background for page related articles'
+    )
 
     @cached_property
     def articles(self):
@@ -89,6 +106,10 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
         StreamFieldPanel('body'),
         InlinePanel('related_partners', label="Related partners"),
         SnippetChooserPanel('call_to_action'),
+        MultiFieldPanel([
+            ImageChooserPanel('upper_background_image'),
+            ImageChooserPanel('lower_background_image')
+        ], 'Background Images')
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels \
