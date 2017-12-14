@@ -94,7 +94,7 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
         ], 'Hero Image'),
         FieldPanel('publication_date'),
         FieldPanel('author'),
-        FieldPanel('introduction'),      
+        FieldPanel('introduction'),
         StreamFieldPanel('body'),
         InlinePanel('categories', label="Category", max_num=1),
         InlinePanel('related_documents', label="Related documents"),

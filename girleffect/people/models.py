@@ -104,6 +104,7 @@ class PersonCustomisablePeople(CustomisableFeature):
         related_name='people_customisation'
     )
 
+
 class PersonCustomisableIntroduction(CustomisableFeature):
     page = ParentalKey(
         'PersonIndexPage',
