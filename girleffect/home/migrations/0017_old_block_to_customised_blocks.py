@@ -86,9 +86,11 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('home', '0016_auto_20171214_1350'),
+        ('articles', '0038_auto_20171214_1350'),
         ('standardpage', '0028_auto_20171214_1350'),
-        ('people', '0028_auto_20171214_1350'),
+        ('countries', '0042_auto_20171214_1350'),
         ('solutions', '0039_auto_20171214_1350'),
+        ('people', '0028_auto_20171214_1350')
     ]
 
     operations = [

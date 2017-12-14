@@ -313,30 +313,10 @@ class ListColumnBlock(blocks.StructBlock):
 
 class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
-    body_text = blocks.RichTextBlock(
-        label="Body Text",
-        features=[
-            "h4",
-            "bold", "italic", "link",
-            "ol", "ul", "hr"
-        ],
-    )
-    body_text_new = BodyTextBlock()
-    large_text = blocks.RichTextBlock(
-        label="Large Text",
-        max_length=350,
-        features=["bold", "italic", "link", "document-link"],
-        required=False,
-        icon="pilcrow"
-    )
-    large_text_new = LargeTextBlock()
+    body_text = BodyTextBlock()
+    large_text = LargeTextBlock()
     image = ImageBlock()
-    quote = blocks.ListBlock(
-        QuoteBlock(),
-        template="blocks/quote_block.html",
-        icon="openquote"
-    )
-    quote_new = QuoteListBlock()
+    quote = QuoteListBlock()
     video = YouTubeEmbed(label="Girl Effect YouTube Video")
     carousel = blocks.ListBlock(
         CarouselItemBlock(),
@@ -346,12 +326,7 @@ class StoryBlock(blocks.StreamBlock):
     media_text_overlay = MediaTextOverlayBlock(
         label="Full Width Media with Text Overlay"
     )
-    list_block = blocks.ListBlock(
-        ListColumnBlock(),
-        template="blocks/list_column_block.html",
-        icon="list-ul"
-    )
-    list_block_new = ListColumnBlock()
+    list_block = ListColumnBlock()
     link_row = blocks.ListBlock(
         LinkBlock(),
         template="blocks/inline_link_block.html",
