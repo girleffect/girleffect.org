@@ -82,6 +82,30 @@ class HeadingCustomisationBlock(CustomisationBlock):
         return value
 
 
+class BodyHeadingCustomisationBlock(CustomisationBlock):
+    """ For hex colours, background images """
+    body_heading_hex = blocks.CharBlock(max_length=7, required=False)
+
+    def clean(self, value):
+        errors = {}
+
+        try:
+            value = super(BodyHeadingCustomisationBlock, self).clean(value)
+        except ValidationError as e:
+            errors = e.params
+
+        hex_fields = ['body_heading_hex']
+        heading_errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}
+
+        if heading_errors:
+            errors.update(heading_errors)
+            raise ValidationError(
+                "Validation error in CustomisationBlock",
+                params=errors,
+            )
+        return value
+
+
 class LinkBlock(blocks.StructBlock):
     external_link = blocks.URLBlock(required=False, label="External Link")
     internal_link = blocks.PageChooserBlock(required=False, label="Internal Link")
@@ -324,7 +348,7 @@ class LargeTextBlock(blocks.StructBlock):
         features=["bold", "italic", "link", "document-link"],
         required=False,
     )
-    customisation = CustomisationBlock(
+    customisation = BodyHeadingCustomisationBlock(
         required=False
     )
 
@@ -342,7 +366,7 @@ class BodyTextBlock(blocks.StructBlock):
             "ol", "ul", "hr"
         ],
     )
-    customisation = CustomisationBlock(
+    customisation = BodyHeadingCustomisationBlock(
         required=False
     )
 
