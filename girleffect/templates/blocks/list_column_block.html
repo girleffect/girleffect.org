@@ -6,6 +6,6 @@
             {% if value.customisation.background_hex %}background:{{ value.customisation.background_hex }};{% endif %}">
 {% for list_item in value.list_block %}
     {# found in list_column_item_block.html #}
-    {% include_block list_item %}
+    {% include_block list_item with heading_hex=value.customisation.heading_hex %}
 {% endfor %}
 </div>

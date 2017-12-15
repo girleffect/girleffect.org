@@ -3,7 +3,7 @@
         {% image value.image fill-375x300 as column_image %}
         <img class="list-item__image" src="{{ column_image.url }}" alt="{{ column_image.alt }}">
 
-        <h4 class="list-item__title">{{ value.title }}</h4>
+        <h4 class="list-item__title" style="color: {% if heading_hex %}{{ heading_hex }}{% endif %}">{{ value.title }}</h4>
 
         {# description is RichText #}
         {{ value.description }}

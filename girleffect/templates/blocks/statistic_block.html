@@ -5,7 +5,7 @@
             {% if value.customisation.background_hex %}background:{{ value.customisation.background_hex }};{% endif %}">
     {# Rows are to have a maximum of 3 list items per row #}
     {% if value.title %}
-        <h3>{{ value.title }}</h3>
+        <h3 style="color: {% if value.customisation.heading_hex %}{{ value.customisation.heading_hex }}{% endif %}">{{ value.title }}</h3>
     {% endif %}
     
     <div class="grid grid--three grid--center grid--statistics">

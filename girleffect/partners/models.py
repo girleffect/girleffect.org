@@ -62,12 +62,22 @@ class PartnerCustomisablePartners(CustomisableFeature):
         related_name='partner_customisation'
     )
 
+    panels = [
+        ImageChooserPanel('image'),
+        FieldPanel('background_hex'),
+    ]
+
 
 class PartnerCustomisableIntroduction(CustomisableFeature):
     page = ParentalKey(
         'PartnerIndexPage',
         related_name='introduction_customisation'
     )
+
+    panels = [
+        ImageChooserPanel('image'),
+        FieldPanel('background_hex'),
+    ]
 
 
 class PartnerIndexPage(Page, HeroImageFields, SocialFields):

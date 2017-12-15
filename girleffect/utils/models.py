@@ -111,6 +111,7 @@ class RelatedDocument(Orderable, models.Model):
 class CustomisableFeature(Orderable, models.Model):
     image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     background_hex = models.CharField(max_length=7, null=True, blank=True,)
+    heading_hex = models.CharField(max_length=7, null=True, blank=True,)
 
     class Meta:
         abstract = True
@@ -118,18 +119,29 @@ class CustomisableFeature(Orderable, models.Model):
 
     panels = [
         ImageChooserPanel('image'),
-        FieldPanel('background_hex')
+        FieldPanel('background_hex'),
+        FieldPanel('heading_hex')
     ]
 
     def clean(self):
-        import re
-        background_hex = self.background_hex
-        if background_hex:
-            if not re.match('^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$', background_hex):
-                raise ValidationError({'background_hex': _('Not a valid hex code.')})
+        from girleffect.utils.blocks import validate_hex
+
+        errors = {}
+
+        validated_hexes = {
+            'heading_hex': validate_hex(self.heading_hex),
+            'background_hex': validate_hex(self.background_hex)
+        }
+
+        hex_errors = {fieldname: _('Please enter a valid hex code') for fieldname, value in validated_hexes.items() if value is False}
+
+        errors.update(hex_errors)
 
         if self.image and self.background_hex:
-            raise ValidationError({'background_hex': _('Please choose one of image or hex code.')})
+            errors.update({'image': _('Please choose one of image or hex code.')})
+
+        if errors:
+            raise ValidationError(errors)
 
         return super(CustomisableFeature, self).clean()
 

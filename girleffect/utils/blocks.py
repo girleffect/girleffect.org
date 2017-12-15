@@ -1,3 +1,4 @@
+import re
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 
@@ -10,6 +11,14 @@ from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
 from .models import CallToActionSnippet, Statistic
+
+
+def validate_hex(value):
+    valid = True
+    if value:
+        if not re.match('^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$', value):
+            return False
+    return valid
 
 
 class ImageBlock(blocks.StructBlock):
@@ -30,23 +39,47 @@ class CustomisationBlock(blocks.StructBlock):
         template = "blocks/customisation_block.html"
 
     def clean(self, value):
-        import re
-        if value['background_hex']:
-            background_hex = value['background_hex']
-            if not re.match('^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$', background_hex):
-                raise ValidationError(
-                    "Validation error in CustomisationBlock",
-                    params={'background_hex': 'Please enter valid hex code'},
-                )
+        value = super(CustomisationBlock, self).clean(value)
+        errors = {}
+
+        hex_fields = ['background_hex']
+        errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}
 
         if value['background_image'] and value['background_hex']:
-            error_message = ["Please select one of background image or hex"]
+            error_message = ["Please select one of background image or background hex"]
+            errors['background_image'] = error_message
+            errors['background_hex'] = error_message
+
+        if errors:
             raise ValidationError(
                 "Validation error in CustomisationBlock",
-                params={'background_image': error_message,
-                        'background_hex': error_message},
+                params=errors,
             )
-        return super(CustomisationBlock, self).clean(value)
+        return value
+
+
+class HeadingCustomisationBlock(CustomisationBlock):
+    """ For hex colours, background images """
+    heading_hex = blocks.CharBlock(max_length=7, required=False)
+
+    def clean(self, value):
+        errors = {}
+
+        try:
+            value = super(HeadingCustomisationBlock, self).clean(value)
+        except ValidationError as e:
+            errors = e.params
+
+        hex_fields = ['heading_hex']
+        heading_errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}
+
+        if heading_errors:
+            errors.update(heading_errors)
+            raise ValidationError(
+                "Validation error in CustomisationBlock",
+                params=errors,
+            )
+        return value
 
 
 class LinkBlock(blocks.StructBlock):
@@ -225,7 +258,7 @@ class QuoteListBlock(blocks.StructBlock):
         template="blocks/quote_block.html",
         icon="openquote"
     )
-    customisation = CustomisationBlock(
+    customisation = HeadingCustomisationBlock(
         required=False
     )
 
@@ -266,7 +299,7 @@ class StatisticBlock(blocks.StructBlock):
         SnippetChooserBlock(Statistic),
     )
     link = LinkBlock(required=False)
-    customisation = CustomisationBlock(
+    customisation = HeadingCustomisationBlock(
         required=False
     )
 
@@ -322,7 +355,7 @@ class ListColumnBlock(blocks.StructBlock):
     list_block = blocks.ListBlock(
         ListItemBlock()
     )
-    customisation = CustomisationBlock(
+    customisation = HeadingCustomisationBlock(
         required=False
     )
 

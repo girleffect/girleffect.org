@@ -17,7 +17,7 @@
             {% endif %}
         ">
             {% if value.title %}
-                <h4 class="quote__title">{{ value.title }}</h4>
+                <h4 class="quote__title" style="color: {% if heading_hex %}{{ heading_hex }}{% endif %}">{{ value.title }}</h4>
             {% endif %}
 
             <blockquote class="quote__copy">

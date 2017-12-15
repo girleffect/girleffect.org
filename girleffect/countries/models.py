@@ -4,16 +4,17 @@ from django.utils.functional import cached_property
 from girleffect.articles.models import ArticlePage
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
+    CustomisableFeature,
     HeroImageFields,
     ListingFields,
-    SocialFields
+    SocialFields,
 )
 
 from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel, InlinePanel,
-    StreamFieldPanel
+    MultiFieldPanel, StreamFieldPanel
 )
 
 from wagtail.wagtailcore.fields import StreamField
@@ -35,6 +36,20 @@ class CountryPageRelatedPartner(Orderable, models.Model):
     panels = [
         FieldPanel('related_partner'),
     ]
+
+
+class CountryCustomisablePartners(CustomisableFeature):
+    page = ParentalKey(
+        'CountryPage',
+        related_name='partners_customisation'
+    )
+
+
+class CountryCustomisableArticles(CustomisableFeature):
+    page = ParentalKey(
+        'CountryPage',
+        related_name='articles_customisation'
+    )
 
 
 class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
@@ -78,6 +93,16 @@ class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
         ]
         return partners
 
+    @cached_property
+    def article_customisations(self):
+        customisations = self.articles_customisation.first()
+        return customisations
+
+    @cached_property
+    def partners_customisations(self):
+        customisations = self.partners_customisation.first()
+        return customisations
+
     search_fields = Page.search_fields + HeroImageFields.search_fields + [
         index.SearchField('body')
     ]
@@ -85,7 +110,13 @@ class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
     content_panels = Page.content_panels + HeroImageFields.content_panels + [
         StreamFieldPanel('body'),
         FieldPanel('partners_description'),
-        InlinePanel('related_partners', label="Related partners"),
+        MultiFieldPanel([
+            InlinePanel('articles_customisation', label="Articles Listing Customisation", max_num=1),
+        ], 'Articles Listing'),
+        MultiFieldPanel([
+            InlinePanel('related_partners', label="Related partners"),
+            InlinePanel('partners_customisation', label="Partners Customisation", max_num=1),
+        ], 'Articles Listing'),
         SnippetChooserPanel('call_to_action'),
     ]
 

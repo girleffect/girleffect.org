@@ -3,6 +3,7 @@ from django.utils.functional import cached_property
 
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
+    CustomisableFeature,
     ListingFields,
     SocialFields,
     HeroVideoFieldsLogo,
@@ -38,6 +39,20 @@ class SolutionPageRelatedPartner(Orderable, models.Model):
     ]
 
 
+class SolutionCustomisablePartners(CustomisableFeature):
+    page = ParentalKey(
+        'SolutionPage',
+        related_name='partners_customisation'
+    )
+
+
+class SolutionCustomisableArticles(CustomisableFeature):
+    page = ParentalKey(
+        'SolutionPage',
+        related_name='articles_customisation'
+    )
+
+
 class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
     body = StreamField(StoryBlock())
     person_category = models.ForeignKey(
@@ -55,21 +70,13 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    upper_background_image = models.ForeignKey(
+    heading_background_image = models.ForeignKey(
         'images.CustomImage',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
         help_text='Add an image to appear as background for page introduction'
-    )
-    lower_background_image = models.ForeignKey(
-        'images.CustomImage',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-        help_text='Add an image to appear as background for page related articles'
     )
 
     @cached_property
@@ -98,18 +105,33 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
         else:
             return None
 
+    @cached_property
+    def article_customisations(self):
+        customisations = self.articles_customisation.first()
+        return customisations
+
+    @cached_property
+    def partners_customisations(self):
+        customisations = self.partners_customisation.first()
+        return customisations
+
     search_fields = Page.search_fields + [
         index.SearchField('body'),
     ]
 
     content_panels = Page.content_panels + HeroVideoFieldsLogo.content_panels + [
+        MultiFieldPanel([
+            ImageChooserPanel('heading_background_image'),
+        ], 'Top Background Customisations'),
         StreamFieldPanel('body'),
-        InlinePanel('related_partners', label="Related partners"),
+        MultiFieldPanel([
+            InlinePanel('related_partners', label="Related partners"),
+            InlinePanel('partners_customisation', label="Partners Listing Customisation", max_num=1),
+        ], 'Partners'),
         SnippetChooserPanel('call_to_action'),
         MultiFieldPanel([
-            ImageChooserPanel('upper_background_image'),
-            ImageChooserPanel('lower_background_image')
-        ], 'Background Images')
+            InlinePanel('articles_customisation', label="Articles Listing Customisation", max_num=1),
+        ], 'Articles Listing'),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels \
