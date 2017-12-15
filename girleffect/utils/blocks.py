@@ -304,7 +304,7 @@ class BodyTextBlock(blocks.StructBlock):
     body = blocks.RichTextBlock(
         label="Body Text",
         features=[
-            "h4",
+            "h2", "h3", "h4",
             "bold", "italic", "link",
             "ol", "ul", "hr"
         ],
