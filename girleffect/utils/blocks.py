@@ -11,16 +11,6 @@ from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
 from .models import CallToActionSnippet, Statistic
 
-HEADING_SIZE_OPTIONS = [
-    ('h2', 'h2'),
-    ('h3', 'h3')
-]
-
-HEADING_ALIGN_OPTIONS = [
-    ('left', 'left'),
-    ('center', 'center')
-]
-
 
 class ImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
@@ -247,18 +237,8 @@ class BlockQuote(blocks.StructBlock):
         template = "blocks/blockquote_block.html"
 
 
-class HeadingBlock(blocks.StructBlock):
-    text = blocks.CharBlock(classname="full title")
-    size = blocks.ChoiceBlock(choices=HEADING_SIZE_OPTIONS)
-    alignment = blocks.ChoiceBlock(choices=HEADING_ALIGN_OPTIONS)
-
-    class Meta:
-        icon = "placeholder"
-        template = "blocks/heading_block.html"
-
-
 class StoryBlock(blocks.StreamBlock):
-    aligned_heading = HeadingBlock(label="Heading")
+    heading = blocks.CharBlock(classname="full title")
     body_text = blocks.RichTextBlock(
         label="Body Text",
         features=[
