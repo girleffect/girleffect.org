@@ -1,9 +1,14 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
+
+from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
+    InlinePanel,
     MultiFieldPanel,
     PageChooserPanel
 )
@@ -260,8 +265,19 @@ class PartnerWithUsSnippet(CallToActionSnippet):
         return self.title
 
 
+class StatisticCustomisableHeading(CustomisableFeature):
+    statistic = ParentalKey(
+        'Statistic',
+        related_name='statistic_customisation'
+    )
+
+    panels = [
+        FieldPanel('heading_hex'),
+    ]
+
+
 @register_snippet
-class Statistic(LinkFields):
+class Statistic(ClusterableModel, LinkFields):
     title = models.CharField(max_length=80)
     description = RichTextField(
         blank=True,
@@ -272,10 +288,18 @@ class Statistic(LinkFields):
     )
     citation_text = models.CharField(max_length=80, blank=True)
 
+    @cached_property
+    def statistic_customisations(self):
+        customisations = self.statistic_customisation.first()
+        return customisations
+
     panels = [
         FieldPanel('title'),
         FieldPanel('description'),
         FieldPanel('citation_text'),
+        MultiFieldPanel([
+            InlinePanel('statistic_customisation', label="Snippet Customisation", max_num=1),
+        ], 'Customisations'),
     ] + LinkFields.content_panels
 
     def __str__(self):
