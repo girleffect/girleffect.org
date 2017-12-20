@@ -271,9 +271,38 @@ class QuoteBlock(blocks.StructBlock):
         max_length=80,
     )
     link_block = LinkBlock(required=False)
+    drop_shadow_is_on = blocks.BooleanBlock(
+        label="Drop Shadow Toggle",
+        help_text="Show or hide drop shadow",
+        required=False
+    )
+    text_hex = blocks.CharBlock(
+        label="Quote Text Hex Code",
+        max_length=7,
+        required=False
+    )
+    quote_mark_hex = blocks.CharBlock(
+        label="Quote Mark Hex Code",
+        max_length=7,
+        required=False
+    )
 
     class Meta:
         template = "blocks/quote_item_block.html"
+
+    def clean(self, value):
+        value = super(QuoteBlock, self).clean(value)
+        errors = {}
+
+        hex_fields = ['text_hex', 'quote_mark_hex']
+        errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}
+
+        if errors:
+            raise ValidationError(
+                "Validation error in QuoteBlock",
+                params=errors,
+            )
+        return value
 
 
 class QuoteListBlock(blocks.StructBlock):
