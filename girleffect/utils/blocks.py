@@ -375,6 +375,43 @@ class BodyTextBlock(blocks.StructBlock):
         template = "blocks/body_text_block.html"
 
 
+class ExtendableBodyTextBlock(blocks.StructBlock):
+    body_upper = blocks.RichTextBlock(
+        label="Body Text",
+        features=[
+            "h2", "h3", "h4",
+            "bold", "italic", "link",
+            "ol", "ul", "hr"
+        ],
+    )
+    extend_button_text = blocks.CharBlock(
+        max_length=80,
+        required=False,
+        help_text="Customise text for the extend button"
+    )
+    collapse_button_text = blocks.CharBlock(
+        max_length=80,
+        required=False,
+        help_text="Customise text for the collapse button"
+    )
+    body_lower = blocks.RichTextBlock(
+        label="Body Text",
+        features=[
+            "h2", "h3", "h4",
+            "bold", "italic", "link",
+            "ol", "ul", "hr"
+        ],
+    )
+
+    customisation = BodyHeadingCustomisationBlock(
+        required=False
+    )
+
+    class Meta:
+        icon = "collapse-down"
+        template = "blocks/extendable_body_text_block.html"
+
+
 class ListColumnBlock(blocks.StructBlock):
     list_block = blocks.ListBlock(
         ListItemBlock()
@@ -392,6 +429,7 @@ class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
     body_text = BodyTextBlock()
     large_text = LargeTextBlock()
+    extendable_body = ExtendableBodyTextBlock()
     image = ImageBlock()
     quote = QuoteListBlock()
     video = YouTubeEmbed(label="Girl Effect YouTube Video")
