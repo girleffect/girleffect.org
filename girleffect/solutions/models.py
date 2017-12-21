@@ -81,6 +81,15 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
         else:
             return None
 
+    def get_link_text(self):
+        if self.link_text:
+            return self.link_text
+
+        if self.link_page:
+            return self.link_page.title
+
+        return ''
+
     search_fields = Page.search_fields + [
         index.SearchField('body'),
     ]
