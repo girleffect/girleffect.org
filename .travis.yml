@@ -43,8 +43,8 @@ jobs:
         - sudo apt-get install -qy -o Dpkg::Options::="--force-confold" docker-ce
 
       before_script:
-        - COMMIT_TAG=${TRAVIS_COMMIT::8}
-        - TAG="$TRAVIS_BRANCH_$COMMIT_TAG"
+        - COMMIT_TAG=${TRAVIS_COMMIT::7}
+        - TAG=$TRAVIS_BRANCH_$COMMIT_TAG
         - image="girleffect/corporate-site"
         # Fetch existing image to use as cache
         - docker pull "$image"
