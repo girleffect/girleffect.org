@@ -41,7 +41,7 @@ jobs:
         - docker
       before_script:
         - COMMIT_TAG=${TRAVIS_COMMIT::7}
-        - TAG=$TRAVIS_BRANCH_$COMMIT_TAG
+        - TAG=${TRAVIS_BRANCH}_$COMMIT_TAG
         - image="girleffect/corporate-site"
         # Fetch existing image to use as cache
         - docker pull "$image" || true
