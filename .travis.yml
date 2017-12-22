@@ -20,12 +20,8 @@ jobs:
   include:
     - stage: test
       install:
-        - "pip install -e ."
         - "pip install -r requirements-dev.txt --use-wheel"
       script:
-        - pip install wheel
-        - pip install -r requirements.txt
-
         # We need to run the collectstatic command, because we use ManifestStaticFilesStorage.
         # Otherwise the check command will fail
         - python manage.py collectstatic --verbosity 0 --noinput --clear
