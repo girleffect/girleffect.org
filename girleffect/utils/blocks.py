@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 
 from wagtail.wagtailcore import blocks
+from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.wagtailembeds import oembed_providers
 from wagtail.wagtailembeds.finders.oembed import OEmbedFinder as OEmbedFinder
@@ -473,6 +474,54 @@ class SliderBlock(blocks.StructBlock):
         icon = "image"
 
 
+class CarouselItemBlock(SliderItemBlock):
+    slide_title = blocks.CharBlock(
+        required=False,
+        help_text="Title to appear at bottom of carousel, for example \"Youth Brands\""
+    )
+    slide_logo = ImageChooserBlock(
+        required=False
+    )
+    slide_title_hex = blocks.CharBlock(
+        max_length=7,
+        help_text="Add valid hex for slide title and chevron colours."
+    )
+
+    class Meta:
+        template = "blocks/carousel_item_block.html"
+        icon = "plus"
+
+    def clean(self, value):
+        value = super(CarouselItemBlock, self).clean(value)
+        errors = {}
+
+        hex_fields = ['slide_title_hex']
+        errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}
+
+        validation_fields = [value['slide_title'], value['slide_logo']]
+
+        if all(validation_field for validation_field in validation_fields):
+            errors = {field: ['Please choose only one of slide title or slide logo'] for field in validation_fields}
+
+        if all(not validation_field for validation_field in validation_fields):
+            errors = {field: ['Please choose one of slide title or slide logo'] for field in validation_fields}
+
+        if errors:
+            raise ValidationError(
+                "Validation error in CarouselItemBlock",
+                params=errors,
+            )
+        return value
+
+
+class CarouselBlock(blocks.StreamBlock):
+    carousel_item = CarouselItemBlock()
+
+    class Meta:
+        template = "blocks/carousel_block.html"
+        icon = "image"
+
+
 class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
     body_text = BodyTextBlock()
@@ -482,6 +531,7 @@ class StoryBlock(blocks.StreamBlock):
     quote = QuoteListBlock()
     video = YouTubeEmbed(label="Girl Effect YouTube Video")
     slider = SliderBlock()
+    carousel_block = CarouselBlock(min_num=2, max_num=3, label="Carousel")
     media_text_overlay = MediaTextOverlayBlock(
         label="Full Width Media with Text Overlay"
     )
