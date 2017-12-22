@@ -1,56 +1,57 @@
-language: python
-python:
-  - 3.6
-cache:
-  pip: true
-  directories:
-    - node_modules
-
-
-# Use container-based infrastructure
-dist: trusty
 sudo: false
-
-# Services
-services:
-  - postgresql
-
 addons:
   postgresql: "9.6"
+services:
+  - postgresql
+language: python
+python: '3.6'
 
 env:
   global:
-    - DJANGO_SETTINGS_MODULE=girleffect.settings.production
-    - DATABASE_URL=postgres://postgres@localhost/test_db
-    - CFG_SECRET_KEY=iamnotsosecret
-    - CFG_ALLOWED_HOSTS=localhost
+    - REGISTRY_USER=geautomation
+    - secure: "QTsNwcEjQVR06SeIAElBFtqg+Qoy9p+scBkUt0gC2hkq0YztfdIWtfUvEfLAWK9B5qB7hiAdBsCqqGpOYUxMx5z1q+ePiMj97/F5giKGaEy3NReCI5JSb2fK6U7x3XRN3143r60ni3gPEUGIf6FKPOxiXUMIDkuabuecjF1lMUrjRhzpDqRds23VTu0B3R8mNItV1aoApADfYjxFVSpzSoSaZlRpHXJUTORx87avCw5boCfcmGuUbyj8TTdbsGHyrtGLzl+n8i7CZCa3VOO8QzpdnuC39XzHT9Ip8PB786sEetyLiSMfR0r99RcnbwupNPSaAxrSlnblyhzao97iksQl4y9YXwMp7XLIL66/VCC7k6epwn/Ggdh6IIXzVPDBICkCzWPvxgC3hbM8eA13qW87sb853fLj6RmZmcTjyr0NpL1vn7OvzB5o8id5WexZJm0Jv7dcyxUxv3Anrl+GifhDiRxtdJI69diw+4UX+UAFNBt1EpFf3gugTcUQnPPI2ZyGnu97K3PkaFVSyS8wvwYlp7zMGGEc+A8in28rsPalSydll7ebqBf6GEszY+6TzuO3bt8HzHm2NL7oRFTUGVacOpBQ/9OOlqhb/zUKyZkoyrPNelqube3ICJnAVba4vHXODFtSBsAtpgNK8fpACFC4KMY5kErmv3/Tiafz6tE="
+    - DJANGO_SETTINGS_MODULE="girleffect.settings.production"
+    - CFG_SECRET_KEY="fake_secret_key_to_run_tests"
+    - DATABASE_URL="postgres://postgres@localhost/postgres"
+    - REPO="girleffect/girleffect.org"
 
-before_script:
-  # Create a database
-  - psql -c 'create database test_db;' -U postgres
+jobs:
+  include:
+    - stage: test
+      install:
+        - "pip install -r requirements.txt --use-wheel"
+      script:
+        # We need to run the collectstatic command, because we use ManifestStaticFilesStorage.
+        # Otherwise the check command will fail
+        - python manage.py collectstatic --verbosity 0 --noinput --clear
 
-# Package installation
-install:
-  # Install project dependencies
-  - pip install -r requirements.txt
+        # Run system checks
+        - python manage.py check
 
-  # Install test dependencies
-  - pip install flake8
+        # Check for missing migrations
+        - python manage.py makemigrations --check --noinput
 
-  # Install node dependencies
-  - npm install --quiet
+        # Run tests
+        - python manage.py test
 
-# Run the tests
-script:
-  # Run python code style checks
-  - npm run jscs
-  - flake8 girleffect --ignore=E501,F405 --exclude=*/migrations/*
-
-  # Run system checks
-  - python manage.py check
-
-  # Check for missing migrations
-  - python manage.py makemigrations --check --noinput
-
-  # Run tests
-  - python manage.py test
+    - stage: build
+      if: branch IN (master, staging)
+      sudo: required
+      services:
+        - docker
+      before_script:
+        - COMMIT_TAG=${TRAVIS_COMMIT::7}
+        - TAG=$TRAVIS_BRANCH_$COMMIT_TAG
+        - image="girleffect/corporate-site"
+        # Fetch existing image to use as cache
+        - docker pull "$image"
+      script:
+        - docker build --pull --cache-from "$image" --tag "$image" .
+      after_script:
+        - docker images
+      before_deploy:
+        - pip install docker-ci-deploy==0.3.0
+        - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+      deploy:
+        provider: script
+        script: dcd --tag $TAG -- "$image"
