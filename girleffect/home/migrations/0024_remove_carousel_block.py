@@ -15,7 +15,7 @@ import wagtail.wagtailsnippets.blocks
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('home', '0023_carousel_to_slider'),
+        ('home', '0022_add_slider_block'),
     ]
 
     operations = [
