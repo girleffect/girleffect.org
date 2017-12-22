@@ -1,9 +1,8 @@
-sudo: required
+sudo: false
 addons:
   postgresql: "9.6"
 services:
   - postgresql
-  - docker
 language: python
 python: '3.6'
 
@@ -37,11 +36,9 @@ jobs:
 
     - stage: build
       if: branch IN (master, staging)
-      # Update Docker Engine and Compose
-      before_install:
-        - sudo apt-get update
-        - sudo apt-get install -qy -o Dpkg::Options::="--force-confold" docker-ce
-
+      sudo: required
+      services:
+        - docker
       before_script:
         - COMMIT_TAG=${TRAVIS_COMMIT::7}
         - TAG=$TRAVIS_BRANCH_$COMMIT_TAG
