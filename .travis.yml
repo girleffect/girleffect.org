@@ -44,7 +44,7 @@ jobs:
         - TAG=$TRAVIS_BRANCH_$COMMIT_TAG
         - image="girleffect/corporate-site"
         # Fetch existing image to use as cache
-        - docker pull "$image"
+        - docker pull "$image" || true
       script:
         - docker build --pull --cache-from "$image" --tag "$image" .
       after_script:
@@ -54,4 +54,4 @@ jobs:
         - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
       deploy:
         provider: script
-        script: dcd --tag $TAG -- "$image"
+        script: dcd --tag $TAG --tag latest -- "$image"
