@@ -1,45 +1,41 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
     <div class="carousel__item">
-        {% image value.image fill-1600x800 as carousel_image %}
-        <img src="{{ carousel_image.url }}" alt="{{ carousel_image.alt }}" class="carousel__image">
+        {% image value.image fill-1600x800 class="carousel__image" %}
 
         <div class="carousel__content">
-            <h3 class="carousel__title" 
-            style="color: {% if value.overview_title_shadow.text_hex %}{{ value.overview_title_shadow.text_hex }};{% endif %}
-         {% if value.overview_title_shadow.drop_shadow_is_on %}text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);{% endif %}" 
-        >
+            <h3 class="carousel__title"
+                style="{% if value.overview_title_shadow.text_hex %}color: {{ value.overview_title_shadow.text_hex }};{% endif %}
+                       {% if value.overview_title_shadow.drop_shadow_is_on %}text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);{% endif %}"
+            >
             {{ value.overview_title }}
         </h3>
-
-            <p style="color: {% if value.overview_text_shadow.text_hex %}{{ value.overview_text_shadow.text_hex }};{% endif %}
-         {% if value.overview_text_shadow.drop_shadow_is_on %}text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);{% endif %}" 
-         >{{ value.overview_text }}</p>
+            <p style="{% if value.overview_text_shadow.text_hex %}color: {{ value.overview_text_shadow.text_hex }};{% endif %}
+                      {% if value.overview_text_shadow.drop_shadow_is_on %}text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);{% endif %}"
+            >{{ value.overview_text }}</p>
 
             {% if value.textbox_title or value.textbox_text or value.textbox_link %}
-            <div class="carousel__textbox">
-                <h2 class="carousel__title">{{ value.textbox_title }}</h2>
+                <div class="carousel__textbox">
+                    <h2 class="carousel__title">{{ value.textbox_title }}</h2>
 
-                <p>{{ value.textbox_text }}</p>
+                    <p>{{ value.textbox_text }}</p>
 
-                {% if value.textbox_link.external_textbox_link %}
-                    {# template for this is in textbox_link_block.html #} 
-                    {% include_block value.textbox_link %}
-                {% elif value.textbox_link.internal_textbox_link %}
-                    {% include_block value.textbox_link %}
-                {% elif value.textbox_link.document_textbox_link %}
-                    {% include_block value.textbox_link %}
-                {% else %}
-                {% endif %}
-            </div>
+                    {% if value.textbox_link.external_textbox_link %}
+                        {# template for this is in textbox_link_block.html #}
+                        {% include_block value.textbox_link %}
+                    {% elif value.textbox_link.internal_textbox_link %}
+                        {% include_block value.textbox_link %}
+                    {% elif value.textbox_link.document_textbox_link %}
+                        {% include_block value.textbox_link %}
+                    {% endif %}
+                </div>
             {% endif %}
         </div>
 
         {# Unstyled #}
         <div class="carousel-label"
-              style="color: {% if value.slide_title_hex %}{{ value.slide_title_hex }};{% endif %}">
+             {% if value.slide_title_hex %}style="color: {{ value.slide_title_hex }};"{% endif %}>
             {% if value.slide_logo %}
-                {% image value.slide_logo max-300x300 as logo %}
-                <img src="{{ logo.url }}">
+                {% image value.slide_logo max-300x300 %}
             {% elif value.slide_title %}
                 {{ value.slide_title }}
             {% else %}
