@@ -492,19 +492,22 @@ class CarouselItemBlock(SliderItemBlock):
         icon = "plus"
 
     def clean(self, value):
-        value = super(CarouselItemBlock, self).clean(value)
+        value = super().clean(value)
         errors = {}
 
         hex_fields = ['slide_title_hex']
         errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}
 
-        validation_fields = [value['slide_title'], value['slide_logo']]
+        validation_field_names = ['slide_title', 'slide_logo']
+        validation_field_values = [value[field] for field in validation_field_names]
 
-        if all(validation_field for validation_field in validation_fields):
-            errors = {field: ['Please choose only one of slide title or slide logo'] for field in validation_fields}
+        if all(value for value in validation_field_values):
+            errors = {field: ['Please choose only one of slide title or slide logo'] for field in validation_field_names}
 
-        if all(not validation_field for validation_field in validation_fields):
-            errors = {field: ['Please choose one of slide title or slide logo'] for field in validation_fields}
+        if all(not value for value in validation_field_values):
+            errors = {field: ['Please choose one of slide title or slide logo'] for field in validation_field_names}
+
+        print(errors)
 
         if errors:
             raise ValidationError(
