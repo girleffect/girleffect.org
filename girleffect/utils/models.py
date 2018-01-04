@@ -148,7 +148,7 @@ class CustomisableFeature(Orderable, models.Model):
         if errors:
             raise ValidationError(errors)
 
-        return super(CustomisableFeature, self).clean()
+        return super().clean()
 
 
 # Generic social fields abstract class to add social image/text to any new content type easily.

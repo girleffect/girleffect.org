@@ -287,7 +287,6 @@ class QuoteBlock(blocks.StructBlock):
 
     def clean(self, value):
         value = super().clean(value)
-        errors = {}
 
         hex_fields = ['text_hex', 'quote_mark_hex']
         errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}
