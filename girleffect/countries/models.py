@@ -95,13 +95,11 @@ class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
 
     @cached_property
     def article_customisations(self):
-        customisations = self.articles_customisation.first()
-        return customisations
+        return self.articles_customisation.first()
 
     @cached_property
     def partners_customisations(self):
-        customisations = self.partners_customisation.first()
-        return customisations
+        return self.partners_customisation.first()
 
     search_fields = Page.search_fields + HeroImageFields.search_fields + [
         index.SearchField('body')

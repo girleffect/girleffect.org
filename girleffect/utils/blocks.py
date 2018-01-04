@@ -14,11 +14,7 @@ from .models import CallToActionSnippet, Statistic
 
 
 def validate_hex(value):
-    valid = True
-    if value:
-        if not re.match('^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$', value):
-            return False
-    return valid
+    return not value or re.match('^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$', value)
 
 
 class ImageBlock(blocks.StructBlock):
@@ -39,8 +35,7 @@ class CustomisationBlock(blocks.StructBlock):
         template = "blocks/customisation_block.html"
 
     def clean(self, value):
-        value = super(CustomisationBlock, self).clean(value)
-        errors = {}
+        value = super().clean(value)
 
         hex_fields = ['background_hex']
         errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}
@@ -66,7 +61,7 @@ class HeadingCustomisationBlock(CustomisationBlock):
         errors = {}
 
         try:
-            value = super(HeadingCustomisationBlock, self).clean(value)
+            value = super().clean(value)
         except ValidationError as e:
             errors = e.params
 
@@ -90,7 +85,7 @@ class BodyHeadingCustomisationBlock(CustomisationBlock):
         errors = {}
 
         try:
-            value = super(BodyHeadingCustomisationBlock, self).clean(value)
+            value = super().clean(value)
         except ValidationError as e:
             errors = e.params
 
@@ -114,7 +109,7 @@ class LinkBlock(blocks.StructBlock):
     link_text = blocks.CharBlock(required=False, max_length=255, label="Link Text")
 
     def get_context(self, value, **kwargs):
-        context = super(LinkBlock, self).get_context(value, **kwargs)
+        context = super().get_context(value, **kwargs)
 
         external_link = value.get('external_link')
         internal_link = value.get('internal_link')
@@ -158,7 +153,7 @@ class LinkBlock(blocks.StructBlock):
                 params={block_name: error_messages for block_name in link_dest_block_names},
             )
 
-        return super(LinkBlock, self).clean(value)
+        return super().clean(value)
 
     class Meta:
         template = "blocks/link_block.html"
@@ -220,7 +215,7 @@ class MediaTextOverlayBlock(blocks.StructBlock):
                 "Validation error in MediaTextOverlayBlock",
                 params={'title': error_messages, 'logo': error_messages},
             )
-        return super(MediaTextOverlayBlock, self).clean(value)
+        return super().clean(value)
 
     class Meta:
         icon = "image"
@@ -243,7 +238,7 @@ class YouTubeEmbed(blocks.StructBlock):
     customisation = CustomisationBlock(required=False)
 
     def clean(self, value):
-        cleaned_data = super(YouTubeEmbed, self).clean(value)
+        cleaned_data = super().clean(value)
         # Validating if URL is a valid YouTube URL
         youtube_embed = cleaned_data.get('youtube_embed').url
         youtube_finder = OEmbedFinder(providers=[oembed_providers.youtube])
@@ -291,7 +286,7 @@ class QuoteBlock(blocks.StructBlock):
         template = "blocks/quote_item_block.html"
 
     def clean(self, value):
-        value = super(QuoteBlock, self).clean(value)
+        value = super().clean(value)
         errors = {}
 
         hex_fields = ['text_hex', 'quote_mark_hex']

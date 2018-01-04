@@ -146,12 +146,10 @@ class ArticleIndex(Page, HeroImageFields, SocialFields):
     promote_panels = Page.promote_panels + SocialFields.promote_panels
 
     def introduction_customisations(self):
-        customisations = self.introduction_customisation.first()
-        return customisations
+        return self.introduction_customisation.first()
 
     def article_customisations(self):
-        customisations = self.article_customisation.first()
-        return customisations
+        return self.article_customisation.first()
 
     def get_context(self, request, *args, **kwargs):
         articles = ArticlePage.objects.live().public().descendant_of(self).annotate(

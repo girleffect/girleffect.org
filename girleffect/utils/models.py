@@ -290,8 +290,7 @@ class Statistic(ClusterableModel, LinkFields):
 
     @cached_property
     def statistic_customisations(self):
-        customisations = self.statistic_customisation.first()
-        return customisations
+        return self.statistic_customisation.first()
 
     panels = [
         FieldPanel('title'),

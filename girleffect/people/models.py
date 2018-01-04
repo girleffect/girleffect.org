@@ -141,13 +141,11 @@ class PersonIndexPage(Page, HeroImageFields):
     ]
 
     def introduction_customisations(self):
-        customisations = self.introduction_customisation.first()
-        return customisations
+        return self.introduction_customisation.first()
 
     @cached_property
     def people_customisations(self):
-        customisations = self.people_customisation.first()
-        return customisations
+        return self.people_customisation.first()
 
     @cached_property
     def people(self):
