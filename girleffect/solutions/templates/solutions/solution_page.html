@@ -14,8 +14,7 @@
         {% include "navigation/breadcrumbs.html" %}
     {% endblock %}
     {# Upper Background Image #}
-    {% image page.heading_background_image max-100x100 as heading_background_image %}
-    <img src="{{ heading_background_image.url }}">
+    {% image page.heading_background_image max-100x100 %}
 
     {# Streamfield options #}
     <section class="section section--body">
@@ -27,9 +26,9 @@
         {% image page.partners_customisations.image max-100x100 as partners_image %}
         <section class="section section--partners"
                  style="{% if partners_image %}background:url({{ partners_image.url }});{% endif %}
-            {% if page.partners_customisations.background_hex %}background:{{ page.partners_customisations.background_hex }};{% endif %}">
+                        {% if page.partners_customisations.background_hex %}background:{{ page.partners_customisations.background_hex }};{% endif %}">
             <h2 class="section__title"
-                style="{% if page.partners_customisations.heading_hex %}color:{{ page.partners_customisations.heading_hex }};{% endif %}">Our partners</h2>
+                {% if page.partners_customisations.heading_hex %}style="color:{{ page.partners_customisations.heading_hex }};"{% endif %}>Our partners</h2>
             <div class="media-block-container">
                 {% for partner in page.partners %}
                     {# Partner card here #}

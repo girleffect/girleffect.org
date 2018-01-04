@@ -13,9 +13,9 @@
     {% if page.heading %}
         <section class="wrapper wrapper--small wrapper--top-bottom-space">
             <h2 class="heading heading--squashed">{{ page.heading }}</h2>
-        </section>    
+        </section>
     {% endif %}
-    
+
     {# Streamfield options #}
     <section class="section section--body">
         {{ page.body }}
@@ -29,9 +29,9 @@
     {% image page.partners_customisations.image max-100x100 as partners_image %}
     <section class="section section--partners"
              style="{% if partners_image %}background:url({{ partners_image.url }});{% endif %}
-            {% if page.partners_customisations.background_hex %}background:{{ page.partners_customisations.background_hex }};{% endif %}">
+                    {% if page.partners_customisations.background_hex %}background:{{ page.partners_customisations.background_hex }};{% endif %}">
         <h2 class="section__title"
-             style="{% if page.partners_customisations.heading_hex %}color:{{ page.partners_customisations.heading_hex }};{% endif %}">    
+            {% if page.partners_customisations.heading_hex %}style="color:{{ page.partners_customisations.heading_hex }};"{% endif %}>
             Partnerships in {{ page.title }}
         </h2>
         <div class="wrapper wrapper--medium wrapper--bottom-space">

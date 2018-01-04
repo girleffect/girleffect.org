@@ -1,15 +1,14 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
     <div class="list-item">
-        {% image value.image fill-375x300 as column_image %}
-        <img class="list-item__image" src="{{ column_image.url }}" alt="{{ column_image.alt }}">
+        {% image value.image fill-375x300 class="list-item__image" %}
 
-        <h4 class="list-item__title" style="color: {% if heading_hex %}{{ heading_hex }}{% endif %}">{{ value.title }}</h4>
+        <h4 class="list-item__title" {% if heading_hex %}style="color:{{ heading_hex }};"{% endif %}>{{ value.title }}</h4>
 
         {# description is RichText #}
         {{ value.description }}
-        
+
         {% if value.link.external_link %}
-            {# template for this is in link_block.html #} 
+            {# template for this is in link_block.html #}
             {% include_block value.link %}
         {% elif value.link.internal_link %}
             {% include_block value.link %}

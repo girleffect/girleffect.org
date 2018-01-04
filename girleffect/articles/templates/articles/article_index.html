@@ -9,7 +9,7 @@
     <section class="section">
         <div class="wrapper wrapper--medium wrapper--bottom-space"
              style="{% if intro_background %}background:url({{ intro_background.url }});{% endif %}
-            {% if page.introduction_customisations.background_hex %}background:{{ page.introduction_customisations.background_hex }};{% endif %}">
+                    {% if page.introduction_customisations.background_hex %}background:{{ page.introduction_customisations.background_hex }};{% endif %}">
             {# Intro is RichText #}
             {{ page.introduction|richtext }}
         </div>
@@ -29,7 +29,7 @@
             {% image page.article_customisations.image max-100x100 as article_background %}
             <div class="article-container wrapper wrapper--medium"
                  style="{% if article_background %}background:url({{ article_background.url }});{% endif %}
-            {% if page.article_customisations.background_hex %}background:{{ page.article_customisations.background_hex }};{% endif %}">
+                        {% if page.article_customisations.background_hex %}background:{{ page.article_customisations.background_hex }};{% endif %}">
                 {% for article in articles %}
                     <div class="article-card">
                         <a href="{% pageurl article %}">
