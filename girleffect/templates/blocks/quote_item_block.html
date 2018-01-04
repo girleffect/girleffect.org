@@ -1,8 +1,11 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
-    <div class="quote">
+    {# text colour within div should inherit from here if value.text_hex if set #}
+    {# drop shadow within div should inherit from here if value.drop_shadow_is_on if set #}
+    <div class="quote{% if value.drop_shadow_is_on %} quote--drop-shadow{% endif %}"
+         {% if value.text_hex %}style="color: {{ value.text_hex }};"{% endif %}
+    >
         {% if value.image %}
-            {% image value.image fill-790x400 as quote_image %}
-            <img class="quote__image" src="{{ quote_image.url }}" alt="{{ quote_image.alt }}">
+            {% image value.image fill-790x400 class="quote__image" %}
         {% endif %}
 
         <div class="quote__content
@@ -12,16 +15,18 @@
                 quote__content--has-link
             {% elif value.link_block.document_link %}
                 quote__content--has-link
-            {% else %}
-
             {% endif %}
         ">
             {% if value.title %}
-                <h4 class="quote__title">{{ value.title }}</h4>
+                <h4 class="quote__title" {% if heading_hex %}style="color: {{ heading_hex }};"{% endif %}>{{ value.title }}</h4>
             {% endif %}
 
             <blockquote class="quote__copy">
-                {{ value.text }}
+                <span class="quote-mark"
+                      {% if value.quote_mark_hex %}style="color: {{ value.quote_mark_hex }};"{% endif %}>&quot;</span>
+                    {{ value.text }}
+                <span class="quote-mark"
+                      {% if value.quote_mark_hex %}style="color: {{ value.quote_mark_hex }};"{% endif %}>&quot;</span>
             </blockquote>
 
             {% if value.citation %}

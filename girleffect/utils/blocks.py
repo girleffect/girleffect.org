@@ -1,3 +1,4 @@
+import re
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 
@@ -12,6 +13,10 @@ from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 from .models import CallToActionSnippet, Statistic
 
 
+def validate_hex(value):
+    return not value or re.match('^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$', value)
+
+
 class ImageBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     caption = blocks.CharBlock(required=False)
@@ -19,6 +24,81 @@ class ImageBlock(blocks.StructBlock):
     class Meta:
         icon = "image"
         template = "blocks/image_block.html"
+
+
+class CustomisationBlock(blocks.StructBlock):
+    """ For hex colours, background images """
+    background_image = ImageChooserBlock(required=False)
+    background_hex = blocks.CharBlock(max_length=7, required=False)
+
+    class Meta:
+        template = "blocks/customisation_block.html"
+
+    def clean(self, value):
+        value = super().clean(value)
+
+        hex_fields = ['background_hex']
+        errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}
+
+        if value['background_image'] and value['background_hex']:
+            error_message = ["Please select one of background image or background hex"]
+            errors['background_image'] = error_message
+            errors['background_hex'] = error_message
+
+        if errors:
+            raise ValidationError(
+                "Validation error in CustomisationBlock",
+                params=errors,
+            )
+        return value
+
+
+class HeadingCustomisationBlock(CustomisationBlock):
+    """ For hex colours, background images """
+    heading_hex = blocks.CharBlock(max_length=7, required=False)
+
+    def clean(self, value):
+        errors = {}
+
+        try:
+            value = super().clean(value)
+        except ValidationError as e:
+            errors = e.params
+
+        hex_fields = ['heading_hex']
+        heading_errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}
+
+        if heading_errors:
+            errors.update(heading_errors)
+            raise ValidationError(
+                "Validation error in CustomisationBlock",
+                params=errors,
+            )
+        return value
+
+
+class BodyHeadingCustomisationBlock(CustomisationBlock):
+    """ For hex colours, background images """
+    body_heading_hex = blocks.CharBlock(max_length=7, required=False)
+
+    def clean(self, value):
+        errors = {}
+
+        try:
+            value = super().clean(value)
+        except ValidationError as e:
+            errors = e.params
+
+        hex_fields = ['body_heading_hex']
+        heading_errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}
+
+        if heading_errors:
+            errors.update(heading_errors)
+            raise ValidationError(
+                "Validation error in CustomisationBlock",
+                params=errors,
+            )
+        return value
 
 
 class LinkBlock(blocks.StructBlock):
@@ -29,7 +109,7 @@ class LinkBlock(blocks.StructBlock):
     link_text = blocks.CharBlock(required=False, max_length=255, label="Link Text")
 
     def get_context(self, value, **kwargs):
-        context = super(LinkBlock, self).get_context(value, **kwargs)
+        context = super().get_context(value, **kwargs)
 
         external_link = value.get('external_link')
         internal_link = value.get('internal_link')
@@ -73,7 +153,7 @@ class LinkBlock(blocks.StructBlock):
                 params={block_name: error_messages for block_name in link_dest_block_names},
             )
 
-        return super(LinkBlock, self).clean(value)
+        return super().clean(value)
 
     class Meta:
         template = "blocks/link_block.html"
@@ -120,6 +200,7 @@ class MediaTextOverlayBlock(blocks.StructBlock):
         features=["bold", "italic", "ol", "ul", "link", "document-link"]
     )
     link = LinkBlock(required=False)
+    customisation = CustomisationBlock(required=False)
 
     def clean(self, value):
         if value['title'] and value['logo']:
@@ -134,7 +215,7 @@ class MediaTextOverlayBlock(blocks.StructBlock):
                 "Validation error in MediaTextOverlayBlock",
                 params={'title': error_messages, 'logo': error_messages},
             )
-        return super(MediaTextOverlayBlock, self).clean(value)
+        return super().clean(value)
 
     class Meta:
         icon = "image"
@@ -154,9 +235,10 @@ class YouTubeEmbed(blocks.StructBlock):
             The custom 'play' button will be created for valid YouTube URLs."
     )
     link = LinkBlock(required=False)
+    customisation = CustomisationBlock(required=False)
 
     def clean(self, value):
-        cleaned_data = super(YouTubeEmbed, self).clean(value)
+        cleaned_data = super().clean(value)
         # Validating if URL is a valid YouTube URL
         youtube_embed = cleaned_data.get('youtube_embed').url
         youtube_finder = OEmbedFinder(providers=[oembed_providers.youtube])
@@ -184,13 +266,55 @@ class QuoteBlock(blocks.StructBlock):
         max_length=80,
     )
     link_block = LinkBlock(required=False)
+    drop_shadow_is_on = blocks.BooleanBlock(
+        label="Drop Shadow Toggle",
+        help_text="Show or hide drop shadow",
+        required=False
+    )
+    text_hex = blocks.CharBlock(
+        label="Quote Text Hex Code",
+        max_length=7,
+        required=False
+    )
+    quote_mark_hex = blocks.CharBlock(
+        label="Quote Mark Hex Code",
+        max_length=7,
+        required=False
+    )
+
+    class Meta:
+        template = "blocks/quote_item_block.html"
+
+    def clean(self, value):
+        value = super().clean(value)
+
+        hex_fields = ['text_hex', 'quote_mark_hex']
+        errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}
+
+        if errors:
+            raise ValidationError(
+                "Validation error in QuoteBlock",
+                params=errors,
+            )
+        return value
+
+
+class QuoteListBlock(blocks.StructBlock):
+    quotes = blocks.ListBlock(
+        QuoteBlock(),
+        template="blocks/quote_block.html",
+        icon="openquote"
+    )
+    customisation = HeadingCustomisationBlock(
+        required=False
+    )
 
     class Meta:
         icon = "openquote"
-        template = "blocks/quote_item_block.html"
+        template = "blocks/quote_block.html"
 
 
-class ListColumnBlock(blocks.StructBlock):
+class ListItemBlock(blocks.StructBlock):
     image = ImageChooserBlock(required=False)
     title = blocks.CharBlock(max_length=80, required=False)
     description = blocks.RichTextBlock(
@@ -222,6 +346,9 @@ class StatisticBlock(blocks.StructBlock):
         SnippetChooserBlock(Statistic),
     )
     link = LinkBlock(required=False)
+    customisation = HeadingCustomisationBlock(
+        required=False
+    )
 
     class Meta:
         icon = "snippet"
@@ -237,29 +364,97 @@ class BlockQuote(blocks.StructBlock):
         template = "blocks/blockquote_block.html"
 
 
-class StoryBlock(blocks.StreamBlock):
-    heading = blocks.CharBlock(classname="full title")
-    body_text = blocks.RichTextBlock(
-        label="Body Text",
-        features=[
-            "h4",
-            "bold", "italic", "link",
-            "ol", "ul", "hr"
-        ],
-    )
-    large_text = blocks.RichTextBlock(
+class LargeTextBlock(blocks.StructBlock):
+    body = blocks.RichTextBlock(
         label="Large Text",
         max_length=350,
         features=["bold", "italic", "link", "document-link"],
         required=False,
-        icon="pilcrow"
     )
+    customisation = BodyHeadingCustomisationBlock(
+        required=False
+    )
+
+    class Meta:
+        icon = "pilcrow"
+        template = "blocks/large_text_block.html"
+
+
+class BodyTextBlock(blocks.StructBlock):
+    body = blocks.RichTextBlock(
+        label="Body Text",
+        features=[
+            "h2", "h3", "h4",
+            "bold", "italic", "link",
+            "ol", "ul", "hr"
+        ],
+    )
+    customisation = BodyHeadingCustomisationBlock(
+        required=False
+    )
+
+    class Meta:
+        icon = "pilcrow"
+        template = "blocks/body_text_block.html"
+
+
+class ExtendableBodyTextBlock(blocks.StructBlock):
+    body_upper = blocks.RichTextBlock(
+        label="Body Text",
+        features=[
+            "h2", "h3", "h4",
+            "bold", "italic", "link",
+            "ol", "ul", "hr"
+        ],
+    )
+    extend_button_text = blocks.CharBlock(
+        max_length=80,
+        required=False,
+        help_text="Customise text for the extend button"
+    )
+    collapse_button_text = blocks.CharBlock(
+        max_length=80,
+        required=False,
+        help_text="Customise text for the collapse button"
+    )
+    body_lower = blocks.RichTextBlock(
+        label="Body Text",
+        features=[
+            "h2", "h3", "h4",
+            "bold", "italic", "link",
+            "ol", "ul", "hr"
+        ],
+    )
+
+    customisation = BodyHeadingCustomisationBlock(
+        required=False
+    )
+
+    class Meta:
+        icon = "collapse-down"
+        template = "blocks/extendable_body_text_block.html"
+
+
+class ListColumnBlock(blocks.StructBlock):
+    list_block = blocks.ListBlock(
+        ListItemBlock()
+    )
+    customisation = HeadingCustomisationBlock(
+        required=False
+    )
+
+    class Meta:
+        template = "blocks/list_column_block.html"
+        icon = "list-ul"
+
+
+class StoryBlock(blocks.StreamBlock):
+    heading = blocks.CharBlock(classname="full title")
+    body_text = BodyTextBlock()
+    large_text = LargeTextBlock()
+    extendable_body = ExtendableBodyTextBlock()
     image = ImageBlock()
-    quote = blocks.ListBlock(
-        QuoteBlock(),
-        template="blocks/quote_block.html",
-        icon="openquote"
-    )
+    quote = QuoteListBlock()
     video = YouTubeEmbed(label="Girl Effect YouTube Video")
     carousel = blocks.ListBlock(
         CarouselItemBlock(),
@@ -269,11 +464,7 @@ class StoryBlock(blocks.StreamBlock):
     media_text_overlay = MediaTextOverlayBlock(
         label="Full Width Media with Text Overlay"
     )
-    list_block = blocks.ListBlock(
-        ListColumnBlock(),
-        template="blocks/list_column_block.html",
-        icon="list-ul"
-    )
+    list_block = ListColumnBlock()
     link_row = blocks.ListBlock(
         LinkBlock(),
         template="blocks/inline_link_block.html",

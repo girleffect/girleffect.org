@@ -1,9 +1,14 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
+
+from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
+    InlinePanel,
     MultiFieldPanel,
     PageChooserPanel
 )
@@ -105,6 +110,45 @@ class RelatedDocument(Orderable, models.Model):
         FieldPanel('title'),
         DocumentChooserPanel('document'),
     ]
+
+
+# Related pages
+class CustomisableFeature(Orderable, models.Model):
+    image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    background_hex = models.CharField(max_length=7, null=True, blank=True,)
+    heading_hex = models.CharField(max_length=7, null=True, blank=True,)
+
+    class Meta:
+        abstract = True
+        ordering = ['sort_order']
+
+    panels = [
+        ImageChooserPanel('image'),
+        FieldPanel('background_hex'),
+        FieldPanel('heading_hex')
+    ]
+
+    def clean(self):
+        from girleffect.utils.blocks import validate_hex
+
+        errors = {}
+
+        validated_hexes = {
+            'heading_hex': validate_hex(self.heading_hex),
+            'background_hex': validate_hex(self.background_hex)
+        }
+
+        hex_errors = {fieldname: _('Please enter a valid hex code') for fieldname, value in validated_hexes.items() if value is False}
+
+        errors.update(hex_errors)
+
+        if self.image and self.background_hex:
+            errors.update({'image': _('Please choose one of image or hex code.')})
+
+        if errors:
+            raise ValidationError(errors)
+
+        return super().clean()
 
 
 # Generic social fields abstract class to add social image/text to any new content type easily.
@@ -221,8 +265,19 @@ class PartnerWithUsSnippet(CallToActionSnippet):
         return self.title
 
 
+class StatisticCustomisableHeading(CustomisableFeature):
+    statistic = ParentalKey(
+        'Statistic',
+        related_name='statistic_customisation'
+    )
+
+    panels = [
+        FieldPanel('heading_hex'),
+    ]
+
+
 @register_snippet
-class Statistic(LinkFields):
+class Statistic(ClusterableModel, LinkFields):
     title = models.CharField(max_length=80)
     description = RichTextField(
         blank=True,
@@ -233,10 +288,17 @@ class Statistic(LinkFields):
     )
     citation_text = models.CharField(max_length=80, blank=True)
 
+    @cached_property
+    def statistic_customisations(self):
+        return self.statistic_customisation.first()
+
     panels = [
         FieldPanel('title'),
         FieldPanel('description'),
         FieldPanel('citation_text'),
+        MultiFieldPanel([
+            InlinePanel('statistic_customisation', label="Snippet Customisation", max_num=1),
+        ], 'Customisations'),
     ] + LinkFields.content_panels
 
     def __str__(self):

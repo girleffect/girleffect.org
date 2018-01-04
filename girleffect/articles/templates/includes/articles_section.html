@@ -1,6 +1,13 @@
+{% load wagtailimages_tags %}
 {% if page.articles %}
-<section class="section section--articles">
-    <h2 class="section__title">{{ title }}</h2>
+{% image customisations.image max-100x100 as articles_image %}
+<section class="section section--articles"
+         style="{% if articles_image %}background:url({{ articles_image.url }});{% endif %}
+                {% if customisations.background_hex %}background:{{ customisations.background_hex }};{% endif %}">
+    <h2 class="section__title"
+        {% if customisations.heading_hex %}style="color:{{ customisations.heading_hex }};"{% endif %}>
+        {{ title }}
+    </h2>
     <div class="article-container wrapper wrapper--medium">
         {% for article in page.articles %}
             {% include "includes/article_card.html" %}
