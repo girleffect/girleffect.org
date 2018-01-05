@@ -411,7 +411,8 @@ class ExtendableBodyTextBlock(blocks.StructBlock):
         help_text="Customise text for the collapse button"
     )
     body_lower = blocks.RichTextBlock(
-        label="Body Text",
+        label="Extended body text",
+        help_text="This body field is invisible until the user clicks the expand button",
         features=[
             "h2", "h3", "h4",
             "bold", "italic", "link",
