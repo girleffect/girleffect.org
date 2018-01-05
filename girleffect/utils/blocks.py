@@ -115,8 +115,7 @@ class DropShadowBlock(blocks.StructBlock):
     )
 
     def clean(self, value):
-        value = super(DropShadowBlock, self).clean(value)
-        errors = {}
+        value = super().clean(value)
 
         hex_fields = ['text_hex']
         errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}

@@ -1,5 +1,5 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
-<div class="slider-container" data-delay={{ value.slider_delay }}>
+<div class="slider-container" data-delay="{{ value.slider_delay }}">
     <div class="js-slider--full-width slider owl-slider">
     {% for slider_item in value.slider_items %}
         {% include_block slider_item %}
