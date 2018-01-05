@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 
 from wagtail.wagtailcore import blocks
+from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.wagtailembeds import oembed_providers
 from wagtail.wagtailembeds.finders.oembed import OEmbedFinder as OEmbedFinder
@@ -101,9 +102,36 @@ class BodyHeadingCustomisationBlock(CustomisationBlock):
         return value
 
 
+class DropShadowBlock(blocks.StructBlock):
+    drop_shadow_is_on = blocks.BooleanBlock(
+        label="Drop Shadow Toggle",
+        help_text="Show or hide drop shadow",
+        required=False
+    )
+    text_hex = blocks.CharBlock(
+        label="Text Hex Code",
+        max_length=7,
+        required=False
+    )
+
+    def clean(self, value):
+        value = super().clean(value)
+
+        hex_fields = ['text_hex']
+        errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}
+
+        if errors:
+            raise ValidationError(
+                "Validation error in DropShadowBlock",
+                params=errors,
+            )
+        return value
+
+
 class LinkBlock(blocks.StructBlock):
     external_link = blocks.URLBlock(required=False, label="External Link")
     internal_link = blocks.PageChooserBlock(required=False, label="Internal Link")
+    internal_link_anchor = blocks.CharBlock(required=False, label="Internal Link anchor")
     document_link = DocumentChooserBlock(required=False, label="Document Link")
 
     link_text = blocks.CharBlock(required=False, max_length=255, label="Link Text")
@@ -120,6 +148,9 @@ class LinkBlock(blocks.StructBlock):
             context['link_url'] = external_link
         elif internal_link:
             context['link_url'] = internal_link.url
+            anchor = value.get('internal_link_anchor')
+            if anchor:
+                context['link_url'] += '#' + anchor
         elif document_link:
             context['link_url'] = document_link.url
 
@@ -159,27 +190,11 @@ class LinkBlock(blocks.StructBlock):
         template = "blocks/link_block.html"
 
 
-class CarouselItemBlock(blocks.StructBlock):
-    image = ImageChooserBlock()
-    label = blocks.CharBlock(
-        max_length=30,
-        help_text="Carousel item small label, for example Our Reach"
-    )
-    title = blocks.CharBlock(
-        max_length=30,
-        help_text="Carousel item large title"
-    )
-    text = blocks.RichTextBlock(
-        max_length=75,
-        required=False,
-        help_text="Carousel item text",
-        features=["bold", "italic", "ol", "ul", "link", "document-link"]
-    )
-    link = LinkBlock(required=False)
+class AnchorBlock(blocks.StructBlock):
+    anchor = blocks.CharBlock()
 
     class Meta:
-        icon = "plus"
-        template = "blocks/carousel_item_block.html"
+        template = "blocks/anchor_block.html"
 
 
 class MediaTextOverlayBlock(blocks.StructBlock):
@@ -266,16 +281,7 @@ class QuoteBlock(blocks.StructBlock):
         max_length=80,
     )
     link_block = LinkBlock(required=False)
-    drop_shadow_is_on = blocks.BooleanBlock(
-        label="Drop Shadow Toggle",
-        help_text="Show or hide drop shadow",
-        required=False
-    )
-    text_hex = blocks.CharBlock(
-        label="Quote Text Hex Code",
-        max_length=7,
-        required=False
-    )
+    drop_shadow_options = DropShadowBlock()
     quote_mark_hex = blocks.CharBlock(
         label="Quote Mark Hex Code",
         max_length=7,
@@ -284,19 +290,6 @@ class QuoteBlock(blocks.StructBlock):
 
     class Meta:
         template = "blocks/quote_item_block.html"
-
-    def clean(self, value):
-        value = super().clean(value)
-
-        hex_fields = ['text_hex', 'quote_mark_hex']
-        errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}
-
-        if errors:
-            raise ValidationError(
-                "Validation error in QuoteBlock",
-                params=errors,
-            )
-        return value
 
 
 class QuoteListBlock(blocks.StructBlock):
@@ -449,6 +442,100 @@ class ListColumnBlock(blocks.StructBlock):
         icon = "list-ul"
 
 
+class SliderItemBlock(blocks.StructBlock):
+    image = ImageChooserBlock()
+    overview_title = blocks.CharBlock(
+        required=False,
+        max_length=80,
+        help_text="Slider item overview title"
+    )
+    overview_title_shadow = DropShadowBlock(required=False)
+    overview_text = blocks.TextBlock(
+        max_length=255,
+        required=False,
+        help_text="Slider item overview text",
+    )
+    overview_text_shadow = DropShadowBlock(required=False)
+    textbox_title = blocks.CharBlock(
+        required=False,
+        max_length=30,
+        help_text="Slider item textbox title"
+    )
+    textbox_text = blocks.TextBlock(
+        max_length=75,
+        required=False,
+        help_text="Slider item textbox text",
+    )
+    textbox_link = LinkBlock(required=False)
+
+    class Meta:
+        icon = "plus"
+        template = "blocks/slider_item_block.html"
+
+
+class SliderBlock(blocks.StructBlock):
+    slider_delay = blocks.IntegerBlock(
+        required=False,
+        help_text="Enter the milliseconds of the delay between each slide"
+    )
+    slider_items = blocks.ListBlock(SliderItemBlock())
+
+    class Meta:
+        template = "blocks/slider_block.html"
+        icon = "image"
+
+
+class CarouselItemBlock(SliderItemBlock):
+    slide_title = blocks.CharBlock(
+        required=False,
+        help_text="Title to appear at bottom of carousel, for example \"Youth Brands\""
+    )
+    slide_logo = ImageChooserBlock(
+        required=False
+    )
+    slide_title_hex = blocks.CharBlock(
+        max_length=7,
+        help_text="Add valid hex for slide title and chevron colours."
+    )
+
+    class Meta:
+        template = "blocks/carousel_item_block.html"
+        icon = "plus"
+
+    def clean(self, value):
+        value = super().clean(value)
+        errors = {}
+
+        hex_fields = ['slide_title_hex']
+        errors = {field: ['Please enter a valid hex code'] for field in hex_fields if not validate_hex(value[field])}
+
+        validation_field_names = ['slide_title', 'slide_logo']
+        validation_field_values = [value[field] for field in validation_field_names]
+
+        if all(value for value in validation_field_values):
+            errors = {field: ['Please choose only one of slide title or slide logo'] for field in validation_field_names}
+
+        if all(not value for value in validation_field_values):
+            errors = {field: ['Please choose one of slide title or slide logo'] for field in validation_field_names}
+
+        print(errors)
+
+        if errors:
+            raise ValidationError(
+                "Validation error in CarouselItemBlock",
+                params=errors,
+            )
+        return value
+
+
+class CarouselBlock(blocks.StreamBlock):
+    carousel_item = CarouselItemBlock()
+
+    class Meta:
+        template = "blocks/carousel_block.html"
+        icon = "image"
+
+
 class StoryBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
     body_text = BodyTextBlock()
@@ -457,11 +544,8 @@ class StoryBlock(blocks.StreamBlock):
     image = ImageBlock()
     quote = QuoteListBlock()
     video = YouTubeEmbed(label="Girl Effect YouTube Video")
-    carousel = blocks.ListBlock(
-        CarouselItemBlock(),
-        template="blocks/carousel_block.html",
-        icon="image"
-    )
+    slider = SliderBlock()
+    carousel_block = CarouselBlock(min_num=2, max_num=3, label="Carousel")
     media_text_overlay = MediaTextOverlayBlock(
         label="Full Width Media with Text Overlay"
     )
@@ -471,6 +555,7 @@ class StoryBlock(blocks.StreamBlock):
         template="blocks/inline_link_block.html",
         icon="link"
     )
+    anchor = AnchorBlock()
     statistic = StatisticBlock(label="Statistic Block")
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="blocks/call_to_action.html")
 
