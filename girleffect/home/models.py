@@ -1,5 +1,7 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.functional import cached_property
+from django.utils.translation import ugettext_lazy as _
 
 from modelcluster.fields import ParentalKey
 
@@ -29,6 +31,7 @@ from girleffect.utils.blocks import StoryBlock
 class HomePageCarouselItem(Orderable, LinkFields, models.Model):
     page = ParentalKey('HomePage', related_name='carousel_items')
     title = models.CharField(blank=False, max_length=80)
+    title_colour_hex = models.CharField(max_length=7, null=True, blank=True,)
     description = models.TextField(blank=True)
     image = models.ForeignKey(
         'images.CustomImage',
@@ -40,10 +43,20 @@ class HomePageCarouselItem(Orderable, LinkFields, models.Model):
 
     panels = [
         FieldPanel('title'),
+        FieldPanel('title_colour_hex'),
         FieldPanel('description'),
         ImageChooserPanel('image'),
 
     ] + LinkFields.content_panels
+
+
+    def clean(self):
+        from girleffect.utils.blocks import validate_hex
+
+        if not validate_hex(self.title_colour_hex):
+            raise ValidationError({'title_colour_hex': _('Please enter a valid hex code')})
+
+        return super().clean()
 
     def __str__(self):
         return self.title
