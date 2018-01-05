@@ -131,6 +131,7 @@ class DropShadowBlock(blocks.StructBlock):
 class LinkBlock(blocks.StructBlock):
     external_link = blocks.URLBlock(required=False, label="External Link")
     internal_link = blocks.PageChooserBlock(required=False, label="Internal Link")
+    internal_link_anchor = blocks.CharBlock(required=False, label="Internal Link anchor")
     document_link = DocumentChooserBlock(required=False, label="Document Link")
 
     link_text = blocks.CharBlock(required=False, max_length=255, label="Link Text")
@@ -147,6 +148,9 @@ class LinkBlock(blocks.StructBlock):
             context['link_url'] = external_link
         elif internal_link:
             context['link_url'] = internal_link.url
+            anchor = value.get('internal_link_anchor')
+            if anchor:
+                context['link_url'] += '#' + anchor
         elif document_link:
             context['link_url'] = document_link.url
 
@@ -184,6 +188,13 @@ class LinkBlock(blocks.StructBlock):
 
     class Meta:
         template = "blocks/link_block.html"
+
+
+class AnchorBlock(blocks.StructBlock):
+    anchor = blocks.CharBlock()
+
+    class Meta:
+        template = "blocks/anchor_block.html"
 
 
 class MediaTextOverlayBlock(blocks.StructBlock):
@@ -543,6 +554,7 @@ class StoryBlock(blocks.StreamBlock):
         template="blocks/inline_link_block.html",
         icon="link"
     )
+    anchor = AnchorBlock()
     statistic = StatisticBlock(label="Statistic Block")
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="blocks/call_to_action.html")
 
