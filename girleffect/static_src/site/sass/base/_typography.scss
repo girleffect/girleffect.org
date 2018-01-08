@@ -10,18 +10,18 @@ h6 {
 }
 
 h1 {
-    @include font-size(30px, 85px);
     color: $white;
+    font: map-get($font-styles, 'main-title');
 }
 
 h2 {
-    @include font-size(20px, 65px);
+    font: map-get($font-styles, 'sub-title');
 }
 
 h3 {
-    @include font-size(20px, 45px);
+    font: map-get($font-styles, 'section-title');
 }
 
 h4 {
-    @include font-size(18px, 25px);
+    font: map-get($font-styles, 'small-title');
 }
