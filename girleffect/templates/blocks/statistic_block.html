@@ -1,10 +1,13 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
-<section class="section section--statistics section--top-bottom-space">
+{% image value.customisation.background_image max-100x100 as bg_img %}
+<section class="section section--statistics section--top-bottom-space"
+         style="{% if bg_img %}background:url({{ bg_img.url }});{% endif %}
+                {% if value.customisation.background_hex %}background:{{ value.customisation.background_hex }};{% endif %}">
     {# Rows are to have a maximum of 3 list items per row #}
     {% if value.title %}
-        <h3>{{ value.title }}</h3>
+        <h3 {% if value.customisation.heading_hex %}style="color:{{ value.customisation.heading_hex }};"{% endif %}>{{ value.title }}</h3>
     {% endif %}
-    
+
     <div class="grid grid--three grid--center grid--statistics">
         {% for item in value.statistics %}
             {% include "blocks/statistic_item_block.html" with value=item %}
@@ -13,7 +16,7 @@
     </div>
 
     {% if value.link.external_link %}
-        {# template for this is in link_block.html #} 
+        {# template for this is in link_block.html #}
         <div class="wrapper wrapper--center">
             {% include_block value.link %}
         </div>

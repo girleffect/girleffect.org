@@ -18,7 +18,7 @@ from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from girleffect.utils.blocks import StoryBlock
-from girleffect.utils.models import HeroImageFields
+from girleffect.utils.models import HeroImageFields, CustomisableFeature
 
 
 class SocialMediaProfile(models.Model):
@@ -98,6 +98,20 @@ class PersonIndexPersonCategory(models.Model):
     ]
 
 
+class PersonCustomisablePeople(CustomisableFeature):
+    page = ParentalKey(
+        'PersonIndexPage',
+        related_name='people_customisation'
+    )
+
+
+class PersonCustomisableIntroduction(CustomisableFeature):
+    page = ParentalKey(
+        'PersonIndexPage',
+        related_name='introduction_customisation'
+    )
+
+
 class PersonIndexPage(Page, HeroImageFields):
     introduction = RichTextField(
         null=True,
@@ -115,10 +129,23 @@ class PersonIndexPage(Page, HeroImageFields):
     subpage_types = ['PersonPage']
 
     content_panels = Page.content_panels + HeroImageFields.content_panels + [
-        FieldPanel('introduction'),
-        InlinePanel('category_relationships', label="Person Index Categories"),
+        MultiFieldPanel([
+            FieldPanel('introduction'),
+            InlinePanel('introduction_customisation', label="Introduction Customisation", max_num=1),
+        ], 'Introduction'),
+        MultiFieldPanel([
+            InlinePanel('category_relationships', label="Person Index Categories"),
+            InlinePanel('people_customisation', label="People Section Customisation", max_num=1),
+        ], 'People'),
         SnippetChooserPanel('call_to_action')
     ]
+
+    def introduction_customisations(self):
+        return self.introduction_customisation.first()
+
+    @cached_property
+    def people_customisations(self):
+        return self.people_customisation.first()
 
     @cached_property
     def people(self):

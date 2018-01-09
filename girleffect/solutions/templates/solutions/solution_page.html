@@ -13,6 +13,8 @@
     {% block breadcrumbs %}
         {% include "navigation/breadcrumbs.html" %}
     {% endblock %}
+    {# Upper Background Image #}
+    {% image page.heading_background_image max-100x100 %}
 
     {# Streamfield options #}
     <section class="section section--body">
@@ -21,8 +23,12 @@
 
     {# Related partners #}
     {% if page.partners %}
-        <section class="section section--partners">
-            <h2 class="section__title">Our partners</h2>
+        {% image page.partners_customisations.image max-100x100 as partners_image %}
+        <section class="section section--partners"
+                 style="{% if partners_image %}background:url({{ partners_image.url }});{% endif %}
+                        {% if page.partners_customisations.background_hex %}background:{{ page.partners_customisations.background_hex }};{% endif %}">
+            <h2 class="section__title"
+                {% if page.partners_customisations.heading_hex %}style="color:{{ page.partners_customisations.heading_hex }};"{% endif %}>Our partners</h2>
             <div class="media-block-container">
                 {% for partner in page.partners %}
                     {# Partner card here #}
@@ -52,6 +58,6 @@
     {% endif %}
 
     {# Latest articles, limited to three most recent, link to all articles index #}
-    {% include "includes/articles_section.html" with title="Latest from "|add:page.title %}
+    {% include "includes/articles_section.html" with title="Latest from "|add:page.title customisations=page.article_customisations %}
 
 {% endblock %}
