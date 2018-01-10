@@ -7,7 +7,9 @@
     <div class="stat-block">
 {% endif %}
         <div class="stat-block__content">
-            <p class="stat-block__label">{{ value.title }}</p>
+            <p class="stat-block__label"
+            {% if value.statistic_customisations.heading_hex %}
+                style="color: {{ value.statistic_customisations.heading_hex }}"{% endif %}>{{ value.title }}</p>
             {{ value.description|richtext }}
             <p class="stat-block__cite">{{ value.citation_text }}</p>
         </div>

@@ -45,6 +45,10 @@
         margin: 0;
     }
 
+    &--drop-shadow {
+        text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);
+    }
+
     &__image {
         + .quote__content {
             position: absolute;

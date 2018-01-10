@@ -13,12 +13,10 @@
     {% if page.carousel_items.exists %}
     <div class="carousel carousel--home-desktop">
         <div class="carousel__home-title">{{ page.overview_title }}</div>
-        {% image page.overview_image fill-1600x800 as overview_image %}
-        <img class="carousel__image carousel__image--main" src="{{ overview_image.url }}">
+        {% image page.overview_image fill-1600x800 class="carousel__image carousel__image--main" %}
 
         {% for item in page.carousel_items.all %}
-            {% image item.image fill-1600x800 as carousel_item_image %}
-            <img data-image="{{ forloop.counter }}" class="carousel__image carousel__image--hidden" src="{{ carousel_item_image.url }}">
+            {% image item.image fill-1600x800 data-image="{{ forloop.counter }}" class="carousel__image carousel__image--hidden" %}
         {% endfor %}
 
         <div class="carousel__panels">
@@ -32,14 +30,18 @@
                     <div data-panel="{{ forloop.counter }}" class="carousel__panel">
                 {% endif %}
 
-                        <svg class="carousel__icon">
+                        <svg class="carousel__icon"
+                             {% if item.title_colour_hex %}style="stroke:{{ item.title_colour_hex }};"{% endif %}>
                             <use xlink:href="#chevron"></use>
                         </svg>
 
-                        <h4 class="carousel__panel-title">{{ item.title }}</h4>
+                        <h4 class="carousel__panel-title"
+                            {% if item.title_colour_hex %}style="color:{{ item.title_colour_hex }};"{% endif %}>
+                            {{ item.title }}
+                        </h4>
                         <div class="carousel__panel-content">
                             <p>{{ item.description }}</p>
-                            
+
                             {% if item.link_page %}
                                 <span class="link link--with-arrow">
                                     {{ item.link_text|default:item.title }}
@@ -82,7 +84,7 @@
                                     {{ item.link_text|default:item.title }}
                                     <div class="arrow"></div>
                                 </a>
-                                {% elif item.link_url %}
+                            {% elif item.link_url %}
                                 <a class="link link--with-arrow" href="{{ item.link_url }}">
                                     {{ item.link_text|default:item.title }}
                                     <div class="arrow"></div>
@@ -96,7 +98,7 @@
         </div>
     </div>
     {% endif %}
-        
+
     {# Streamfield options #}
     <section class="section section--body">
         {{ page.body }}

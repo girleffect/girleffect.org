@@ -3,6 +3,7 @@ from django.utils.functional import cached_property
 
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
+    CustomisableFeature,
     ListingFields,
     SocialFields,
     HeroVideoFieldsLogo,
@@ -13,11 +14,12 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel, InlinePanel,
-    StreamFieldPanel
+    MultiFieldPanel, StreamFieldPanel
 )
 
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
@@ -37,6 +39,20 @@ class SolutionPageRelatedPartner(Orderable, models.Model):
     ]
 
 
+class SolutionCustomisablePartners(CustomisableFeature):
+    page = ParentalKey(
+        'SolutionPage',
+        related_name='partners_customisation'
+    )
+
+
+class SolutionCustomisableArticles(CustomisableFeature):
+    page = ParentalKey(
+        'SolutionPage',
+        related_name='articles_customisation'
+    )
+
+
 class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
     body = StreamField(StoryBlock())
     person_category = models.ForeignKey(
@@ -53,6 +69,14 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
+    )
+    heading_background_image = models.ForeignKey(
+        'images.CustomImage',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text='Add an image to appear as background for page introduction'
     )
 
     @cached_property
@@ -90,14 +114,31 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
 
         return ''
 
+    @cached_property
+    def article_customisations(self):
+        return self.articles_customisation.first()
+
+    @cached_property
+    def partners_customisations(self):
+        return self.partners_customisation.first()
+
     search_fields = Page.search_fields + [
         index.SearchField('body'),
     ]
 
     content_panels = Page.content_panels + HeroVideoFieldsLogo.content_panels + [
+        MultiFieldPanel([
+            ImageChooserPanel('heading_background_image'),
+        ], 'Top Background Customisations'),
         StreamFieldPanel('body'),
-        InlinePanel('related_partners', label="Related partners"),
+        MultiFieldPanel([
+            InlinePanel('related_partners', label="Related partners"),
+            InlinePanel('partners_customisation', label="Partners Listing Customisation", max_num=1),
+        ], 'Partners'),
         SnippetChooserPanel('call_to_action'),
+        MultiFieldPanel([
+            InlinePanel('articles_customisation', label="Articles Listing Customisation", max_num=1),
+        ], 'Articles Listing'),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels \
