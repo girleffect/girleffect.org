@@ -9,14 +9,14 @@
     {# Intro - RichText. To be styled as 'large text' #}
     {% image page.introduction_customisations.image max-100x100 as introduction_background %}
     <section class="section wrapper wrapper--small wrapper--bottom-space-xl large-text"
-             style="{% if introduction_background %}background:url({{ introduction_background.url }});{% endif %}
+             style="{% if introduction_background %}background-image:url({{ introduction_background.url }});{% endif %}
                     {% if page.introduction_customisations.background_hex %}background:{{ page.introduction_customisations.background_hex }};{% endif %}">
         {{ page.introduction|richtext }}
     </section>
 
     {# People listed by Category #}
     {% image page.people_customisations.image max-100x100 as people_background %}
-    <section style="{% if people_background %}background:url({{ people_background.url }});{% endif %}
+    <section style="{% if people_background %}background-image:url({{ people_background.url }});{% endif %}
                     {% if page.people_customisations.background_hex %}background:{{ page.people_customisations.background_hex }};{% endif %}">
     {% for category in page.categories %}
         {% if category.people.exists %}

@@ -37,7 +37,7 @@
         display: none;
         position: absolute;
         top: 0;
-        background: $white-95;
+        background: $white;
         width: 100%;
         align-items: center;
         justify-content: center;
@@ -297,7 +297,6 @@
             padding: 0 10px;
             width: 40px;
 
-
             .is-open > & {
                 transform: rotate(180deg);
             }
@@ -311,7 +310,7 @@
     &__search-bar {
         position: absolute;
         width: 100%;
-        background: rgba(255, 255, 255, 0.95);;
+        background: rgba(255, 255, 255, 0.95);
         left: 0;
         padding: 25px;
         display: flex;

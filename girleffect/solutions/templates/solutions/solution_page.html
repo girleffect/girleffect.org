@@ -25,7 +25,7 @@
     {% if page.partners %}
         {% image page.partners_customisations.image max-100x100 as partners_image %}
         <section class="section section--partners"
-                 style="{% if partners_image %}background:url({{ partners_image.url }});{% endif %}
+                 style="{% if partners_image %}background-image:url({{ partners_image.url }});{% endif %}
                         {% if page.partners_customisations.background_hex %}background:{{ page.partners_customisations.background_hex }};{% endif %}">
             <h2 class="section__title"
                 {% if page.partners_customisations.heading_hex %}style="color:{{ page.partners_customisations.heading_hex }};"{% endif %}>Our partners</h2>

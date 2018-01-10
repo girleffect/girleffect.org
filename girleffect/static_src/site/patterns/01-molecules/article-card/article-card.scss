@@ -43,7 +43,6 @@
     }
 
     &__content {
-        font: map-get($font-styles, 'body');
         background: $light-grey;
         padding: 30px;
         min-height: 320px;

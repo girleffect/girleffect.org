@@ -3,7 +3,7 @@
 
 {# StreamField customisations in parent DIV to blocks, include rich text headings #}
 <div class="collapsible-body-text"
-     style="{% if bg_img %}background:url({{ bg_img.url }});{% endif %}
+     style="{% if bg_img %}background-image:url({{ bg_img.url }});{% endif %}
                 {% if value.customisation.background_hex %}background:{{ value.customisation.background_hex }};{% endif %}"
                 {% if value.customisation.body_heading_hex %}data-hex="{{value.customisation.body_heading_hex}}"{% endif %}>
     

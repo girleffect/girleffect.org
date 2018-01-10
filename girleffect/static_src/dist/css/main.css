@@ -576,9 +576,6 @@ textarea {
    Breakpoints
 */
 /* ============================================
-   Font styles
-*/
-/* ============================================
    Transition speeds
 */
 /*------------------------------------*    $Base
@@ -598,7 +595,9 @@ html {
 html,
 body {
   height: 100%;
-  font: 400 21px/27px "lineto-circular";
+  font-family: 'lineto-circular';
+  font-size: 16px;
+  line-height: 1.4;
   letter-spacing: 0.5px;
   color: #2f6165;
 }
@@ -677,20 +676,68 @@ h6 {
 }
 
 h1 {
+  font-size: 6.74603vw;
   color: #fff;
-  font: 700 60px/65px "lineto-circular";
+}
+
+@media (max-width: 444.70588px) {
+  h1 {
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 1260px) {
+  h1 {
+    font-size: 85px;
+  }
 }
 
 h2 {
-  font: 700 45px/50px "lineto-circular";
+  font-size: 5.15873vw;
+}
+
+@media (max-width: 387.69231px) {
+  h2 {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1260px) {
+  h2 {
+    font-size: 65px;
+  }
 }
 
 h3 {
-  font: 700 38px/43px "lineto-circular";
+  font-size: 3.57143vw;
+}
+
+@media (max-width: 560px) {
+  h3 {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1260px) {
+  h3 {
+    font-size: 45px;
+  }
 }
 
 h4, .stat-block__content b {
-  font: 500 25px/29px "lineto-circular";
+  font-size: 1.98413vw;
+}
+
+@media (max-width: 907.2px) {
+  h4, .stat-block__content b {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1260px) {
+  h4, .stat-block__content b {
+    font-size: 25px;
+  }
 }
 
 /*------------------------------------*	$Patterns
@@ -1202,7 +1249,7 @@ blockquote cite {
 }
 
 .link--with-arrow {
-  font: 500 17px "lineto-circular";
+  font-weight: 700;
   display: flex;
   align-items: center;
 }
@@ -1593,7 +1640,6 @@ article .share-icons--hide-mobile {
 }
 
 .article-card__content {
-  font: 400 21px/27px "lineto-circular";
   background: #f4f4f3;
   padding: 30px;
   min-height: 320px;
@@ -2819,7 +2865,6 @@ article .share-icons--hide-mobile {
   position: absolute;
   top: 0;
   background: #fff;
-  opacity: 0.95;
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -3286,6 +3331,9 @@ article .share-icons--hide-mobile {
   position: relative;
   margin: 50px 20px;
   max-width: 1200px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -3402,6 +3450,10 @@ article .share-icons--hide-mobile {
 .quote:only-child {
   max-width: 790px;
   margin: 0;
+}
+
+.quote--drop-shadow {
+  text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);
 }
 
 .quote__image + .quote__content {
@@ -3616,7 +3668,19 @@ article .share-icons--hide-mobile {
 }
 
 .video__copy {
-  font: 400 21px/27px "lineto-circular";
+  font-size: 1.42857vw;
+}
+
+@media (max-width: 1120px) {
+  .video__copy {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1260px) {
+  .video__copy {
+    font-size: 18px;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
