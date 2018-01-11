@@ -1,7 +1,7 @@
 .quote-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    // justify-content: center;
     max-width: $wrapper--large;
     margin: 0 auto;
     align-items: center;
@@ -14,12 +14,17 @@
 
 .quote {
     position: relative;
-    max-width: 657px;
-    margin-bottom: 2rem;
+    // max-width: 657px;
+    margin-bottom: 1rem;
     overflow: hidden;
+    // box-sizing: border-box;
+
+    @include media-query(tablet-landscape) {
+        margin-bottom: 3rem;
+    }
 
     &::before {
-        background: linear-gradient(to bottom, transparent 60%, $black-60 90%);
+        background: linear-gradient(to bottom, transparent 60%, $black-70 90%);
         content: '';
         position: absolute;
         top: 0;
@@ -30,19 +35,22 @@
 
     &:nth-child(odd) {
         @include media-query(tablet-landscape) {
-            margin-right: 10px;
+            width: calc(50% - 1.5rem);
+            margin-right: 1.5rem;
+        }
+
+        &:last-child,
+        &:only-child {
+            width: 100%;
+            margin-right: 0;
         }
     }
 
     &:nth-child(even) {
         @include media-query(tablet-landscape) {
-            margin-left: 10px;
+            margin-left: 1.5rem;
+            width: calc(50% - 1.5rem);
         }
-    }
-
-    &:only-child {
-        max-width: $wrapper--small;
-        margin: 0;
     }
 
     &--drop-shadow {
@@ -50,6 +58,8 @@
     }
 
     &__image {
+        min-width: 100%;
+
         + .quote__content {
             position: absolute;
             bottom: 0;
@@ -104,4 +114,3 @@
         color: $light-grey;
     }
 }
-
