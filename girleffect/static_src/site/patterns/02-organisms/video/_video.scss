@@ -109,7 +109,6 @@
         }
 
         > p {
-            @include font-size(16px, 30px);
             color: $white;
             margin: 0;
             position: absolute;
@@ -129,7 +128,7 @@
     }
 
     &__title {
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
 
     &__copy {

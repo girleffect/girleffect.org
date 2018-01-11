@@ -1,11 +1,13 @@
 <a class="article-card" href="#">
-    <img src="http://placehold.it/385x255" alt="">
+    <div class="article-card__image">
+        <img src="http://placehold.it/385x255" alt="">
+    </div>
     <div class="article-card__content">
         <div>
             <span class="article-card__category">Lorem Ipsum</span>
             <span class="article-card__date">26.08.17</span>
         </div>
         <div class="article-card__title">Distinctio ab deserunt nobis illum reprehenderit</div>
-        <div class="arrow"></div>
+        {% include 'atoms-link--with-arrow' %}
     </div>
 </a>

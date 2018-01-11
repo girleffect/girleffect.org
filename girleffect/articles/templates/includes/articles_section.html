@@ -2,7 +2,7 @@
 {% if page.articles %}
 {% image customisations.image max-100x100 as articles_image %}
 <section class="section section--articles"
-         style="{% if articles_image %}background:url({{ articles_image.url }});{% endif %}
+         style="{% if articles_image %}background-image:url({{ articles_image.url }});{% endif %}
                 {% if customisations.background_hex %}background:{{ customisations.background_hex }};{% endif %}">
     <h2 class="section__title"
         {% if customisations.heading_hex %}style="color:{{ customisations.heading_hex }};"{% endif %}>

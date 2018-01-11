@@ -15,14 +15,14 @@
         </div>
         {% image page.introduction_customisations.image max-100x100 as introduction_image %}
         <div class="wrapper wrapper--small wrapper--bottom-space-xl large-text"
-             style="{% if introduction_image %}background:url({{ introduction_image.url }});{% endif %}
+             style="{% if introduction_image %}background-image:url({{ introduction_image.url }});{% endif %}
                     {% if page.introduction_customisations.background_hex %}background:{{ page.introduction_customisations.background_hex }};{% endif %}">
             <p>{{ page.introduction }}</p>
         </div>
         {% if page.partners.exists %}
             {% image page.partner_customisations.image max-100x100 as partner_background %}
             <div class="media-block-container media-block-container--partners"
-                 style="{% if partner_background %}background:url({{ partner_background.url }});{% endif %}
+                 style="{% if partner_background %}background-image:url({{ partner_background.url }});{% endif %}
                         {% if page.partner_customisations.background_hex %}background:{{ page.partner_customisations.background_hex }};{% endif %}">
                 {# Partners exist #}
                 {% for partner in page.partners.all %}

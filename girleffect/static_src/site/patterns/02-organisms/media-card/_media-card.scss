@@ -3,6 +3,9 @@
     position: relative;
     margin: 50px 20px;
     max-width: $wrapper--medium;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
 
     @include media-query(tablet-landscape) {
         margin: 50px auto;
