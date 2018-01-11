@@ -105,14 +105,6 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
         else:
             return None
 
-    @cached_property
-    def article_customisations(self):
-        return self.articles_customisation.first()
-
-    @cached_property
-    def partners_customisations(self):
-        return self.partners_customisation.first()
-
     def get_link_text(self):
         if self.link_text:
             return self.link_text
@@ -121,6 +113,14 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
             return self.link_page.title
 
         return ''
+
+    @cached_property
+    def article_customisations(self):
+        return self.articles_customisation.first()
+
+    @cached_property
+    def partners_customisations(self):
+        return self.partners_customisation.first()
 
     search_fields = Page.search_fields + [
         index.SearchField('body'),
