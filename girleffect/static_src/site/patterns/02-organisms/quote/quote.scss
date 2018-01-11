@@ -93,20 +93,41 @@
 
     &__copy {
         @include font-size(16px, 25px);
+        position: relative;
         color: $white;
         margin: 0 0 5px;
         padding: 0;
         border: 0;
+        padding-left: 5rem;
 
         * {
             text-shadow: inherit;
             font-size: inherit;
             margin-bottom: 0;
+            display: inline;
         }
-    }
 
-    &__title {
-        color: $yellow;
+        &::before,
+        &::after {
+            color: $yellow;
+            font-size: 100px;
+            line-height: 0;
+            letter-spacing: 0;
+            vertical-align: -0.5em;
+        }
+
+        &::before {
+            padding-top: 2rem;
+            position: absolute;
+            left: 2rem;
+            display: inline-block;
+            height: 100%;
+            content: '“';
+        }
+
+        &::after {
+            content: '”';
+        }
     }
 
     &__cite {

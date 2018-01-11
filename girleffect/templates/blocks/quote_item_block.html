@@ -20,11 +20,11 @@
             {% endif %}
 
             <blockquote class="quote__copy">
-                <span class="quote-mark"
-                      {% if value.quote_mark_hex %}style="color: {{ value.quote_mark_hex }};"{% endif %}>&quot;</span>
-                    <div {% if value.drop_shadow_options.text_hex %}style="text-shadow: 0px 0px 70px {{ value.drop_shadow_options.text_hex }};"{% endif %}>{{ value.text }}</div>
-                <span class="quote-mark"
-                      {% if value.quote_mark_hex %}style="color: {{ value.quote_mark_hex }};"{% endif %}>&quot;</span>
+                <!-- <span class="quote__mark"
+                      {% if value.quote_mark_hex %}style="color: {{ value.quote_mark_hex }};"{% endif %}>&ldquo;</span> -->
+                    <div {% if value.drop_shadow_options.text_hex %}style="text-shadow: 0px 0px 30px {{ value.drop_shadow_options.text_hex }};"{% endif %}>{{ value.text }}</div>
+                <!-- <span class="quote__mark"
+                      {% if value.quote_mark_hex %}style="color: {{ value.quote_mark_hex }};"{% endif %}>&rdquo;</span> -->
             </blockquote>
 
             {% if value.citation %}
