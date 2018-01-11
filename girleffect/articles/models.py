@@ -15,6 +15,7 @@ from wagtail.wagtailadmin.edit_handlers import (
 )
 from wagtail.wagtailsearch import index
 
+from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
     HeroImageFields, ListingFields, SocialFields, RelatedPage,
     RelatedDocument, CustomisableFeature
@@ -131,6 +132,7 @@ class ArticleIndexCustomisableArticles(CustomisableFeature):
 
 class ArticleIndex(Page, HeroImageFields, SocialFields):
     introduction = models.TextField(max_length=350, blank=True)
+    body = StreamField(StoryBlock(), blank=True)
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([
@@ -141,6 +143,11 @@ class ArticleIndex(Page, HeroImageFields, SocialFields):
             InlinePanel('introduction_customisation', label="Introduction Customisation", max_num=1),
         ], 'Introduction'),
         InlinePanel('article_customisation', label="Article Listing Customisation", max_num=1),
+        StreamFieldPanel('body')
+    ]
+
+    search_fields = Page.search_fields + HeroImageFields.search_fields + [
+        index.SearchField('body'),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels
