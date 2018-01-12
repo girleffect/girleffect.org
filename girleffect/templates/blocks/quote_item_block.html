@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
     {# text colour within div should inherit from here if value.text_hex if set #}
     {# drop shadow within div should inherit from here if value.drop_shadow_is_on if set #}
-    <div class="quote {% if value.image %} quote--gradient {% endif %}"
+    <div class="quote {% if value.image %} quote--gradient {% endif %} {% if value.drop_shadow_options.drop_shadow_is_on %} quote--drop-shadow {% endif %}"
     {% if value.drop_shadow_options.text_hex %}style="color: {{ value.drop_shadow_options.text_hex }};"{% endif %}
     {% if value.quote_mark_hex %} style="--quote-mark-hex: {{value.quote_mark_hex}};"" {% endif %}>
         {% if value.image %}
@@ -22,7 +22,7 @@
             {% endif %}
 
             <blockquote class="quote__copy">
-                <div {% if value.drop_shadow_options.drop_shadow_is_on %} style="text-shadow: 0px 0px 30px #000"{% endif %}>{{ value.text }}</div>
+                {{value.text}}
             </blockquote>
 
             {% if value.citation %}

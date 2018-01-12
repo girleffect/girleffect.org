@@ -2878,7 +2878,7 @@ article .share-icons--hide-mobile {
   display: none;
   position: absolute;
   top: 0;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.9);
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -3422,17 +3422,13 @@ article .share-icons--hide-mobile {
   flex-wrap: wrap;
 }
 
-@media only screen and (min-width: 1024px) {
-  .quote-container {
-    flex-direction: row;
-  }
-}
-
 .quote {
+  align-self: stretch;
   position: relative;
   margin-bottom: 1rem;
   overflow: hidden;
   color: #fff;
+  background: rgba(0, 0, 0, 0.1);
 }
 
 @media only screen and (min-width: 1024px) {
@@ -3441,7 +3437,7 @@ article .share-icons--hide-mobile {
   }
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 768px) {
   .quote:nth-child(odd) {
     width: calc(50% - 1.5rem);
     margin-right: 1.5rem;
@@ -3453,14 +3449,18 @@ article .share-icons--hide-mobile {
   margin-right: 0;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 768px) {
   .quote:nth-child(even) {
-    margin-left: 1.5rem;
     width: calc(50% - 1.5rem);
+    margin-left: 1.5rem;
   }
 }
 
 .quote--drop-shadow {
+  border: 6px solid red;
+}
+
+.quote--drop-shadow .quote__copy {
   text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);
 }
 
@@ -3477,7 +3477,6 @@ article .share-icons--hide-mobile {
 .quote__content {
   position: relative;
   padding: 10px;
-  background: #767676;
 }
 
 @media only screen and (min-width: 480px) {
@@ -3493,9 +3492,16 @@ article .share-icons--hide-mobile {
 }
 
 .quote__content--has-link {
+  bottom: 0;
   padding: 2rem 2rem 40px;
   margin-bottom: -60px;
   transition: margin-bottom 0.25s ease-in-out;
+}
+
+@media only screen and (min-width: 1024px) {
+  .quote__content--has-link {
+    position: absolute;
+  }
 }
 
 .quote:hover .quote__content--has-link {
@@ -3506,9 +3512,7 @@ article .share-icons--hide-mobile {
   font-size: 1.98413vw;
   position: relative;
   margin: 0 0 5px;
-  padding: 0;
   border: 0;
-  padding-left: 5rem;
   color: inherit;
 }
 
@@ -3524,28 +3528,48 @@ article .share-icons--hide-mobile {
   }
 }
 
+@media only screen and (min-width: 1024px) {
+  .quote__copy {
+    padding: 0 0 0 5rem;
+  }
+}
+
 .quote__copy * {
+  display: inline;
+  margin-bottom: 0;
   text-shadow: inherit;
   font-size: inherit;
-  margin-bottom: 0;
-  display: inline;
 }
 
 .quote__copy::before, .quote__copy::after {
   color: var(--quote-mark-hex, #ffc700);
-  font-size: 100px;
+  font-size: 32px;
   line-height: 0;
   letter-spacing: 0;
-  vertical-align: -0.5em;
+  vertical-align: -0.5rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .quote__copy::before, .quote__copy::after {
+    font-size: 100px;
+    vertical-align: -0.5em;
+  }
 }
 
 .quote__copy::before {
-  padding-top: 2rem;
   position: absolute;
-  left: 2rem;
+  padding-top: 1rem;
+  left: 1rem;
   display: inline-block;
   height: 100%;
   content: '“';
+}
+
+@media only screen and (min-width: 1024px) {
+  .quote__copy::before {
+    padding-top: 2rem;
+    left: 2rem;
+  }
 }
 
 .quote__copy::after {

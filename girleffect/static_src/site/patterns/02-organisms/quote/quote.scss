@@ -1,49 +1,51 @@
 .quote-container {
     display: flex;
     flex-direction: row;
-    // justify-content: center;
     max-width: $wrapper--large;
     margin: 0 auto;
     align-items: stretch;
     flex-wrap: wrap;
-
-    @include media-query(tablet-landscape) {
-        flex-direction: row;
-    }
 }
 
 .quote {
+    align-self: stretch;
     position: relative;
     margin-bottom: 1rem;
     overflow: hidden;
     color: $white;
+    background: $black-10;
 
     @include media-query(tablet-landscape) {
         margin-bottom: 3rem;
     }
 
     &:nth-child(odd) {
-        @include media-query(tablet-landscape) {
+        @include media-query(tablet-portrait) {
             width: calc(50% - 1.5rem);
             margin-right: 1.5rem;
         }
 
         &:last-child,
         &:only-child {
+            // TODO:: ADD CONTAINER WIDTH
             width: 100%;
             margin-right: 0;
         }
     }
 
     &:nth-child(even) {
-        @include media-query(tablet-landscape) {
-            margin-left: 1.5rem;
+        @include media-query(tablet-portrait) {
             width: calc(50% - 1.5rem);
+            margin-left: 1.5rem;
         }
     }
 
     &--drop-shadow {
-        text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);
+        border: 6px solid red;
+
+        .quote__copy {
+            text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);
+        }
     }
 
     &__image {
@@ -59,7 +61,6 @@
     &__content {
         position: relative;
         padding: 10px;
-        background: $mid-grey;
 
         @include media-query(mob-landscape) {
             padding: 1rem;
@@ -70,9 +71,14 @@
         }
 
         &--has-link {
+            bottom: 0;
             padding: 2rem 2rem 40px;
             margin-bottom: -60px;
             transition: margin-bottom 0.25s ease-in-out;
+
+            @include media-query(tablet-landscape) {
+                position: absolute;
+            }
 
             .quote:hover & {
                 margin-bottom: 0;
@@ -84,34 +90,47 @@
         @include font-size(16px, 25px);
         position: relative;
         margin: 0 0 5px;
-        padding: 0;
         border: 0;
-        padding-left: 5rem;
         color: inherit;
 
+        @include media-query(tablet-landscape) {
+            padding: 0 0 0 5rem;
+        }
+
         * {
+            display: inline;
+            margin-bottom: 0;
             text-shadow: inherit;
             font-size: inherit;
-            margin-bottom: 0;
-            display: inline;
         }
 
         &::before,
         &::after {
+            // TODO JUMBO & TEXT SIZE
             color: var(--quote-mark-hex, $yellow);
-            font-size: 100px;
+            font-size: 32px;
             line-height: 0;
             letter-spacing: 0;
-            vertical-align: -0.5em;
+            vertical-align: -0.5rem;
+
+            @include media-query(tablet-landscape) {
+                font-size: 100px;
+                vertical-align: -0.5em;
+            }
         }
 
         &::before {
-            padding-top: 2rem;
             position: absolute;
-            left: 2rem;
+            padding-top: 1rem;
+            left: 1rem;
             display: inline-block;
             height: 100%;
             content: '“';
+
+            @include media-query(tablet-landscape) {
+                padding-top: 2rem;
+                left: 2rem;
+            }
         }
 
         &::after {
