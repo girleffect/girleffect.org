@@ -1334,6 +1334,7 @@ blockquote cite {
   font-size: 1.42857vw;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-shadow: inherit;
 }
 
 @media (max-width: 1120px) {
@@ -3417,7 +3418,7 @@ article .share-icons--hide-mobile {
   flex-direction: row;
   max-width: 1400px;
   margin: 0 auto;
-  align-items: center;
+  align-items: stretch;
   flex-wrap: wrap;
 }
 
@@ -3431,22 +3432,13 @@ article .share-icons--hide-mobile {
   position: relative;
   margin-bottom: 1rem;
   overflow: hidden;
+  color: #fff;
 }
 
 @media only screen and (min-width: 1024px) {
   .quote {
     margin-bottom: 3rem;
   }
-}
-
-.quote::before {
-  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.7) 90%);
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -3512,10 +3504,12 @@ article .share-icons--hide-mobile {
 
 .quote__copy {
   font-size: 1.98413vw;
-  color: #fff;
+  position: relative;
   margin: 0 0 5px;
   padding: 0;
   border: 0;
+  padding-left: 5rem;
+  color: inherit;
 }
 
 @media (max-width: 806.4px) {
@@ -3531,18 +3525,48 @@ article .share-icons--hide-mobile {
 }
 
 .quote__copy * {
+  text-shadow: inherit;
   font-size: inherit;
   margin-bottom: 0;
+  display: inline;
 }
 
-.quote__title {
-  color: #ffc700;
+.quote__copy::before, .quote__copy::after {
+  color: var(--quote-mark-hex, #ffc700);
+  font-size: 100px;
+  line-height: 0;
+  letter-spacing: 0;
+  vertical-align: -0.5em;
+}
+
+.quote__copy::before {
+  padding-top: 2rem;
+  position: absolute;
+  left: 2rem;
+  display: inline-block;
+  height: 100%;
+  content: '“';
+}
+
+.quote__copy::after {
+  content: '”';
 }
 
 .quote__cite {
+  padding-left: 5rem;
   font-size: 12px;
   font-weight: 400;
-  color: #f4f4f3;
+  color: inherit;
+}
+
+.quote--gradient::before {
+  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.7) 90%);
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .video-container {

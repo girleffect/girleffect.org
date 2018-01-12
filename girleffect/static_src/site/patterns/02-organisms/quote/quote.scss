@@ -4,7 +4,7 @@
     // justify-content: center;
     max-width: $wrapper--large;
     margin: 0 auto;
-    align-items: center;
+    align-items: stretch;
     flex-wrap: wrap;
 
     @include media-query(tablet-landscape) {
@@ -14,23 +14,12 @@
 
 .quote {
     position: relative;
-    // max-width: 657px;
     margin-bottom: 1rem;
     overflow: hidden;
-    // box-sizing: border-box;
+    color: $white;
 
     @include media-query(tablet-landscape) {
         margin-bottom: 3rem;
-    }
-
-    &::before {
-        background: linear-gradient(to bottom, transparent 60%, $black-70 90%);
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
     }
 
     &:nth-child(odd) {
@@ -94,11 +83,11 @@
     &__copy {
         @include font-size(16px, 25px);
         position: relative;
-        color: $white;
         margin: 0 0 5px;
         padding: 0;
         border: 0;
         padding-left: 5rem;
+        color: inherit;
 
         * {
             text-shadow: inherit;
@@ -109,7 +98,7 @@
 
         &::before,
         &::after {
-            color: $yellow;
+            color: var(--quote-mark-hex, $yellow);
             font-size: 100px;
             line-height: 0;
             letter-spacing: 0;
@@ -131,8 +120,25 @@
     }
 
     &__cite {
+        padding-left: 5rem;
         font-size: 12px;
         font-weight: 400;
-        color: $light-grey;
+        color: inherit;
+    }
+
+    &--gradient {
+        &::before {
+            background: linear-gradient(
+                to bottom,
+                transparent 60%,
+                $black-70 90%
+            );
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
     }
 }
