@@ -43,11 +43,6 @@ blockquote {
 }
 
 cite {
-    @include sub-text;
+    @include small-text;
     font-style: normal;
-}
-
-.read-more {
-    font-size: 16px;
-    line-height: 1;
 }

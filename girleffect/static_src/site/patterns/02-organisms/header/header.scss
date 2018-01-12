@@ -232,7 +232,7 @@
     }
 
     &__link-tertiary {
-        @include sub-text;
+        @include small-text;
         font-weight: $weight-normal;
         padding: 10px 0 10px 25px;
         transition: padding $transition;

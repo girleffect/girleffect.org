@@ -789,11 +789,6 @@ cite {
   font-style: normal;
 }
 
-.read-more {
-  font-size: 16px;
-  line-height: 1;
-}
-
 /*------------------------------------*	$Patterns
 \*------------------------------------*/
 .arrow {
@@ -1291,6 +1286,8 @@ blockquote cite {
 }
 
 .link--with-arrow {
+  font-size: 16px;
+  line-height: 1;
   font-weight: 700;
   display: flex;
   align-items: center;

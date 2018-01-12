@@ -98,7 +98,7 @@
     }
 
     &__cite {
-        @include sub-text;
+        @include small-text;
         font-weight: 400;
         color: $light-grey;
     }
