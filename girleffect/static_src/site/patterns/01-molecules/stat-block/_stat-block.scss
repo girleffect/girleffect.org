@@ -11,7 +11,6 @@
         margin: 0 40px;
     }
 
-
     &::after {
         content: '';
         border: 1px solid $green;
@@ -43,16 +42,6 @@
 
     &__label,
     &__cite {
-        font-size: 12px;
-    }
-
-    &__figure {
-        @include font-size(34px, 65px);
-        font-weight: $weight-bold;
-    }
-
-    &__unit {
-        @include font-size(24px, 45px);
-        font-weight: $weight-normal;
+        @include sub-text;
     }
 }

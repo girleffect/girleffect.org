@@ -1,12 +1,10 @@
 .label {
-
     &--small {
-        font-size: 15px;
+        @include sub-text;
     }
 
     &--large {
         font-weight: $weight-bold;
-        font-size: 20px;
     }
 
     &--grey {

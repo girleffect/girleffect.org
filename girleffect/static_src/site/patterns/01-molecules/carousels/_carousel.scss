@@ -56,7 +56,11 @@
 
         &::before {
             content: '';
-            background: linear-gradient(to bottom, transparent 80%, $black-90 90%);
+            background: linear-gradient(
+                to bottom,
+                transparent 80%,
+                $black-90 90%
+            );
             position: absolute;
             top: 0;
             bottom: 0;
@@ -73,7 +77,6 @@
         @include media-query(tablet-portrait) {
             min-height: 700px;
         }
-
 
         &--hidden {
             position: absolute;
@@ -140,12 +143,10 @@
     }
 
     &__title {
-        @include font-size(18px, 65px);
         color: $white;
     }
 
     &__label {
-        @include font-size(16px, 45px);
         color: $yellow;
     }
 
@@ -165,8 +166,8 @@
             right: 0;
 
             @include media-query(tablet-portrait) {
+                @include xx-large-text;
                 display: flex;
-                font-size: 3rem;
                 padding: 30px 45px;
             }
         }
@@ -275,7 +276,7 @@
     }
 
     &__home-title {
-        @include font-size(20px, 115px);
+        @include x-large-text;
         position: absolute;
         left: 50%;
         top: 50%;
@@ -283,13 +284,12 @@
         text-align: center;
         width: 100%;
         color: $white;
-        font-weight: $weight-bold;
 
         &--mobile {
+            @include xx-large-text;
             z-index: 5;
             top: 50px;
             left: 50px;
-            font-size: 35px;
             transform: translate(0);
             text-align: left;
         }

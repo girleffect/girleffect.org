@@ -9,7 +9,7 @@
 @mixin media-query($queries...) {
     @each $query in $queries {
         @each $breakpoint in $breakpoints {
-            $name:        nth($breakpoint, 1);
+            $name: nth($breakpoint, 1);
             $declaration: nth($breakpoint, 2);
 
             @if $query == $name and $declaration {
@@ -27,13 +27,23 @@
 
 @mixin placeholder-text {
     // sass-lint:disable no-vendor-prefixes
-    &.placeholder { @content; }
-    &:-moz-placeholder { @content; }
-    &::-moz-placeholder { @content; }
-    &:-ms-input-placeholder { @content; }
-    &::-webkit-input-placeholder { @content; }
+    &.placeholder {
+        @content;
+    }
+    &:-moz-placeholder {
+        @content;
+    }
+    &::-moz-placeholder {
+        @content;
+    }
+    &:-ms-input-placeholder {
+        @content;
+    }
+    &::-webkit-input-placeholder {
+        @content;
+    }
     // sass-lint:enddisable
-};
+}
 
 /* ============================================
   iOS Native vertical scroll
@@ -61,7 +71,6 @@
    Gutter spacing
 */
 @mixin gutter($top: 0.5, $right: 0.5, $bottom: 0.5, $left: 0.5) {
-
     @if $top > 0 {
         padding-top: $gutter--mobile * $top;
         @include media-query(tablet-portrait) {
@@ -118,8 +127,8 @@
 /* ============================================
    Viewport sized typography mixin that takes a min and max pixel-based value
 */
-@mixin font-size($min, $max) {
 
+@mixin font-size($min, $max) {
     $vw-context: (1260 * 0.1) * 1px;
     $responsive: ($max / $vw-context) * 10vw;
 
@@ -138,4 +147,25 @@
     }
 
     font-size: $responsive;
+}
+
+@mixin xx-large-text {
+    @include font-size(34px, 45px);
+    line-height: 1.1;
+}
+
+@mixin x-large-text {
+    @include font-size(21px, 115px);
+    font-weight: $weight-bold;
+    line-height: 1.08;
+}
+
+@mixin large-text {
+    @include font-size(19px, 25px);
+    line-height: 1.16;
+}
+
+@mixin sub-text {
+    font-size: 16px;
+    line-height: 1;
 }

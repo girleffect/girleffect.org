@@ -92,6 +92,6 @@
     }
 
     &--small {
-        font-size: 12px;
+        @include sub-text;
     }
 }
