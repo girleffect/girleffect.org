@@ -59,7 +59,7 @@
                 transition: height $transition--link-boxed 0.2s;
             }
 
-            &::after  {
+            &::after {
                 width: 0;
                 height: 2px;
                 top: 0;
@@ -87,6 +87,7 @@
     }
 
     &--with-arrow {
+        @include small-text;
         font-weight: $weight-bold;
         display: flex;
         align-items: center;

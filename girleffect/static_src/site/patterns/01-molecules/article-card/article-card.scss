@@ -29,21 +29,21 @@
         max-width: 32%;
         width: 100%; // required for IE11
 
-        &:nth-child(3n+1) {
+        &:nth-child(3n + 1) {
             margin: 0 10px 20px 0;
         }
 
-        &:nth-child(3n+2) {
+        &:nth-child(3n + 2) {
             margin: 0 10px 20px;
         }
 
-        &:nth-child(3n+3) {
+        &:nth-child(3n + 3) {
             margin: 0 0 20px 10px;
         }
     }
 
     &__content {
-        @include font-size(20px, 25px);
+        @include large-text;
         background: $light-grey;
         padding: 30px;
         min-height: 320px;
@@ -70,7 +70,7 @@
     &__copy,
     &__date,
     &__category {
-        font-size: 14px;
+        @include small-text;
         font-weight: $weight-normal;
     }
 
