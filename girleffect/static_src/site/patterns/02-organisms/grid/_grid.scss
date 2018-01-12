@@ -4,7 +4,6 @@
     flex-wrap: wrap;
 
     &--three {
-
         > div {
             flex-basis: 100%;
 
@@ -13,7 +12,7 @@
             }
 
             @include media-query(tablet-landscape) {
-                flex-basis: 33%;
+                flex-basis: 33.33%;
             }
         }
     }

@@ -1,20 +1,46 @@
 .list-item {
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
 
-    &:nth-child(3n+1) {
-        padding: 0 10px 20px 0;
+    @include media-query(mob-landscape) {
+        margin-bottom: 3rem;
+
+        &:nth-child(2n + 1) {
+            padding: 0 1.5rem 20px 0;
+        }
+
+        &:nth-child(2n + 2) {
+            padding: 0 0 20px 1.5rem;
+        }
     }
 
-    &:nth-child(3n+2) {
-        padding: 0 10px 20px;
-    }
+    @include media-query(tablet-landscape) {
+        &:nth-child(3n + 1) {
+            padding: 0 1.5rem 20px 0;
+        }
 
-    &:nth-child(3n+3) {
-        padding: 0 0 20px 10px;
+        &:nth-child(3n + 2) {
+            padding: 0 0.75rem 20px 0.75rem;
+        }
+
+        &:nth-child(3n + 3) {
+            padding: 0 0 20px 1.5rem;
+        }
     }
 
     &__image {
         margin-bottom: 1rem;
+        min-width: 100%;
+        height: auto;
+
+        @include media-query(mob-landscape) {
+            // TODO CALC WIDTH OF CONTAINER - paddings / 2
+            height: 366px;
+        }
+
+        @include media-query(tablet-landscape) {
+            // TODO CALC WIDTH OF CONTAINER - paddings / 2
+            height: 366px;
+        }
     }
 
     &__title {
