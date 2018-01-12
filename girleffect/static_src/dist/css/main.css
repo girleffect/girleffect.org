@@ -1439,15 +1439,15 @@ blockquote cite {
   padding: 0;
 }
 
-.section--body h2 {
-  max-width: 790px;
+.section--body h3 {
+  max-width: 1200px;
   margin: 1rem auto;
   line-height: 1.2;
   padding: 0 20px;
 }
 
 @media only screen and (min-width: 1024px) {
-  .section--body h2 {
+  .section--body h3 {
     margin: 3rem auto 2rem;
     padding: 0;
   }
@@ -2456,12 +2456,13 @@ article .share-icons--hide-mobile {
 
 .list-item__image {
   margin-bottom: 1rem;
-  min-width: 100%;
+  width: 100%;
   height: auto;
 }
 
 @media only screen and (min-width: 480px) {
   .list-item__image {
+    width: auto;
     height: 366px;
   }
 }
