@@ -166,7 +166,7 @@
             right: 0;
 
             @include media-query(tablet-portrait) {
-                @include xx-large-text;
+                @include x-large-text;
                 display: flex;
                 padding: 30px 45px;
             }
@@ -276,7 +276,7 @@
     }
 
     &__home-title {
-        @include x-large-text;
+        @include jumbo-text;
         position: absolute;
         left: 50%;
         top: 50%;
@@ -286,7 +286,7 @@
         color: $white;
 
         &--mobile {
-            @include xx-large-text;
+            @include x-large-text;
             z-index: 5;
             top: 50px;
             left: 50px;

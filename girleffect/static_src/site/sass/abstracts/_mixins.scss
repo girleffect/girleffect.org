@@ -149,15 +149,15 @@
     font-size: $responsive;
 }
 
-@mixin xx-large-text {
-    @include font-size(34px, 45px);
-    line-height: 1.1;
-}
-
-@mixin x-large-text {
+@mixin jumbo-text {
     @include font-size(21px, 115px);
     font-weight: $weight-bold;
     line-height: 1.08;
+}
+
+@mixin x-large-text {
+    @include font-size(34px, 45px);
+    line-height: 1.1;
 }
 
 @mixin large-text {
