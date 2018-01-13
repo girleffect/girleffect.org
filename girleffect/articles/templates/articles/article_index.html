@@ -27,7 +27,7 @@
 
         {% if articles %}
             {% image page.article_customisations.image max-100x100 as article_background %}
-            <div class="article-container wrapper wrapper--medium"
+            <div class="article-container grid grid--three wrapper wrapper--medium"
                  style="{% if article_background %}background:url({{ article_background.url }});{% endif %}
                         {% if page.article_customisations.background_hex %}background:{{ page.article_customisations.background_hex }};{% endif %}">
                 {% for article in articles %}
@@ -44,7 +44,7 @@
                                         </a>
                                     </span>
                                 {% endif %}
-                                <span class="article-card__date">{{ article.publication_date|date:"d.m.y" }}</span>
+                                <span class="article-card__date">{{ article.publication_date|date:"d.m.y H:i" }}</span>
                                 {% if article.listing_title %}
                                     <div class="article-card__title"><a href="{% pageurl article %}">{{ article.listing_title }}</a></div>
                                 {% else %}
@@ -54,7 +54,10 @@
                                     <p>{{ article.listing_summary }}</p>
                                 {% endif %}
                             </div>
-                            <div class="arrow"></div>
+                            <a class="link link--with-arrow" href="{% pageurl article %}" {% if link_is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                                Read more
+                                <div class="link__arrow"></div>
+                            </a>
                         </div>
                     </div>
                 {% endfor %}
