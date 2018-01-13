@@ -129,7 +129,7 @@
 */
 
 @mixin font-size($min, $max) {
-    $vw-context: (1260 * 0.1) * 1px;
+    $vw-context: (1366 * 0.1) * 1px;
     $responsive: ($max / $vw-context) * 10vw;
 
     $responsive-unitless: $responsive / ($responsive - $responsive + 1);
@@ -168,4 +168,48 @@
 @mixin small-text {
     font-size: 16px;
     line-height: 1;
+}
+
+/* ============================================
+   Container widths
+*/
+
+@mixin mid-width {
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    @include media-query(tablet-portrait) {
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
+
+    @include media-query(tablet-portrait) {
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
+
+    @include media-query(desktop) {
+        margin: 0 auto;
+        max-width: $site-width;
+    }
+}
+
+@mixin body-width {
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    @include media-query(tablet-portrait) {
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
+
+    @include media-query(tablet-portrait) {
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
+
+    @include media-query(desktop) {
+        margin: 0 auto;
+        max-width: $wrapper--small;
+    }
 }
