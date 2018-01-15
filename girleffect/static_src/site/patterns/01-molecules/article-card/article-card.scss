@@ -1,55 +1,55 @@
 .article-container {
     display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    flex-direction: column;
-
-    @include media-query(mob-landscape) {
-        justify-content: center;
-        flex-direction: row;
-    }
+    flex-direction: row;
+    align-items: stretch;
 }
 
 .article-card {
-    color: $green;
+    margin-bottom: 1rem;
     display: flex;
+    position: relative;
     flex-direction: column;
-    margin: 0 20px 20px;
-    max-width: 380px;
 
-    &:hover {
-        cursor: pointer;
-    }
+    @include media-query(mob-landscape) {
+        margin-bottom: 3rem;
 
-    @include media-query(tablet-portrait) {
-        margin: 0 10px 20px;
+        &:nth-child(2n + 1) {
+            padding: 0 1.5rem 20px 0;
+        }
+
+        &:nth-child(2n + 2) {
+            padding: 0 0 20px 1.5rem;
+        }
     }
 
     @include media-query(tablet-landscape) {
-        max-width: 32%;
-        width: 100%; // required for IE11
-
         &:nth-child(3n + 1) {
-            margin: 0 10px 20px 0;
+            padding: 0 1.5rem 20px 0;
         }
 
         &:nth-child(3n + 2) {
-            margin: 0 10px 20px;
+            padding: 0 0.75rem 20px 0.75rem;
         }
 
         &:nth-child(3n + 3) {
-            margin: 0 0 20px 10px;
+            padding: 0 0 20px 1.5rem;
         }
     }
 
-    &__content {
+    &__title {
         @include large-text;
+        margin: 1rem 0;
+        font-weight: $weight-bold;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         background: $light-grey;
         padding: 30px;
-        min-height: 320px;
-        position: relative;
+        flex-grow: 1;
         font-weight: $weight-medium;
-        display: block;
         -webkit-font-smoothing: antialiased; // sass-lint:disable-line no-vendor-prefixes
         -moz-osx-font-smoothing: grayscale; // sass-lint:disable-line no-vendor-prefixes
     }
@@ -64,19 +64,7 @@
     }
 
     &__copy {
-        margin-top: 15px;
-    }
-
-    &__copy,
-    &__date,
-    &__category {
         @include small-text;
         font-weight: $weight-normal;
-    }
-
-    &__title {
-        font-weight: $weight-medium;
-        margin-top: 15px;
-        line-height: 1.3;
     }
 }
