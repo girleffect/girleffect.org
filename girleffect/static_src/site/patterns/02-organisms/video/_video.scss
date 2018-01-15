@@ -1,13 +1,11 @@
 .video-container {
+    @include mid-container;
     display: flex;
     flex-direction: column;
-    max-width: $wrapper--small;
-    margin: 2rem auto;
     align-items: center;
 
     @include media-query(tablet-landscape) {
-        max-width: $wrapper--medium;
-        margin: 6rem auto;
+        max-width: $mid-width;
         flex-direction: row;
         justify-content: center;
     }
@@ -15,10 +13,11 @@
 
 .video {
     &__content {
+        display: flex;
+        flex-direction: column;
         background-color: $light-grey;
-        padding: 2rem;
+        padding: 2rem 1rem;
         color: $color--primary;
-        min-height: 315px;
         width: 100%;
 
         @include media-query(mob-landscape) {
@@ -32,7 +31,8 @@
         }
 
         @include media-query(tablet-landscape) {
-            padding: 3.125rem;
+            min-height: 315px;
+            padding: 2rem;
             flex-basis: 400px;
             margin: 0;
             align-self: center;
@@ -49,7 +49,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            min-width: 600px;
+            width: 100%;
             height: 100%;
         }
     }
@@ -68,6 +68,7 @@
         left: 0;
         right: 0;
         bottom: 0;
+        background-color: $black;
         z-index: 10;
 
         &::before {
@@ -129,6 +130,12 @@
     }
 
     &__title {
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    &__copy {
+        @include media-query(tablet-portrait) {
+            margin-bottom: 3rem;
+        }
     }
 }

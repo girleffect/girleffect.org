@@ -7,14 +7,14 @@
 
     {% image page.introduction_customisations.image max-100x100 as intro_background %}
     <section class="section">
-        <div class="wrapper wrapper--medium wrapper--bottom-space"
+        <div class="wrapper wrapper--mid wrapper--bottom-space"
              style="{% if intro_background %}background:url({{ intro_background.url }});{% endif %}
                     {% if page.introduction_customisations.background_hex %}background:{{ page.introduction_customisations.background_hex }};{% endif %}">
             {# Intro is RichText #}
             {{ page.introduction|richtext }}
         </div>
 
-        <div class="wrapper wrapper--medium wrapper--bottom-space">
+        <div class="wrapper wrapper--mid wrapper--bottom-space">
             <form method="GET">
                 <select name="category" class="js-article-filter">
                     <option value="">All</option>
@@ -27,7 +27,7 @@
 
         {% if articles %}
             {% image page.article_customisations.image max-100x100 as article_background %}
-            <div class="article-container grid grid--three wrapper wrapper--medium"
+            <div class="article-container grid grid--three wrapper wrapper--mid"
                  style="{% if article_background %}background:url({{ article_background.url }});{% endif %}
                         {% if page.article_customisations.background_hex %}background:{{ page.article_customisations.background_hex }};{% endif %}">
                 {% for article in articles %}
@@ -63,7 +63,7 @@
                 {% endfor %}
             </div>
 
-            <div class="wrapper wrapper--medium">
+            <div class="wrapper wrapper--mid">
                 {% include "includes/pagination.html" with subpages=articles %}
             </div>
         {% else %}

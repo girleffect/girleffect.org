@@ -17,10 +17,11 @@ html {
 
 html,
 body {
+    @include font-size(16px, 21px);
+
     // Breaks position sticky
     height: 100%;
     font-family: 'lineto-circular';
-    @include font-size(16px, 21px);
     font-weight: $weight-normal;
     line-height: 1.29;
     letter-spacing: 0.5px;
