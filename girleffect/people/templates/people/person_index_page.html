@@ -8,7 +8,7 @@
 
     {# Intro - RichText. To be styled as 'large text' #}
     {% image page.introduction_customisations.image max-100x100 as introduction_background %}
-    <section class="section wrapper wrapper--small wrapper--bottom-space-xl large-text"
+    <section class="section wrapper wrapper--mid wrapper--bottom-space-xl large-text"
              style="{% if introduction_background %}background:url({{ introduction_background.url }});{% endif %}
                     {% if page.introduction_customisations.background_hex %}background:{{ page.introduction_customisations.background_hex }};{% endif %}">
         {{ page.introduction|richtext }}
@@ -24,7 +24,7 @@
                 <h3>{{ category.title }}</h3>
             </div>
             {# category.description is also available #}
-            <div class="article-container wrapper wrapper--medium wrapper--bottom-space-xl">
+            <div class="article-container wrapper wrapper--mid wrapper--bottom-space-xl">
                 {% for person in category.people %}
                     {# Person card here #}
                     {% include "includes/person_index_card.html" with person=person %}
