@@ -39,8 +39,7 @@
         }
 
         &:only-child {
-            @include font-size(34px, 65px);
-            max-width: $wrapper--small;
+            max-width: $body-width;
             color: $green;
             margin: 10px auto 0;
 
@@ -70,7 +69,6 @@
         margin-bottom: 1rem;
 
         .template-home-page & {
-            @include font-size(20px, 65px);
             padding: 0 30px;
 
             @include media-query(tablet-landscape) {
@@ -105,4 +103,3 @@
         width: 100%;
     }
 }
-

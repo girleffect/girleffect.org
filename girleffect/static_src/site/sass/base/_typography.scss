@@ -9,19 +9,40 @@ h6 {
     margin: 0;
 }
 
+h1,
+h2,
+h3 {
+    font-weight: $weight-bold;
+}
+
 h1 {
-    @include font-size(30px, 85px);
+    @include font-size(46px, 60px);
     color: $white;
+    line-height: 1.08;
 }
 
 h2 {
-    @include font-size(20px, 65px);
+    @include font-size(34px, 45px);
+    line-height: 1.1;
 }
 
 h3 {
-    @include font-size(20px, 45px);
+    @include font-size(29px, 38px);
+    line-height: 1.13;
 }
 
 h4 {
-    @include font-size(18px, 25px);
+    @include font-size(19px, 25px);
+    font-weight: $weight-medium;
+    line-height: 1.16;
+}
+
+blockquote {
+    @include font-size(19px, 25px);
+    font-weight: $weight-normal;
+}
+
+cite {
+    @include small-text;
+    font-style: normal;
 }

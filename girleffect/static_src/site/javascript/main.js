@@ -26,7 +26,7 @@ $(function() {
     $('.video__button').on('click', function(ev) {
         const video = $(this).parent().siblings().find('iframe');
         const overlay = $(this).parent('.video__overlay');
-        $(video)[0].src += '&autoplay=1';
+        $(video)[0].src += '&autoplay=1&modestbranding=1&showinfo=0';
         $(overlay).hide();
         ev.preventDefault();
     });
@@ -94,7 +94,7 @@ $(function() {
     $('.js-close-search-mobile').on('click', function() {
         $('.header__search-bar--mobile').removeClass('is-visible');
     });
-  
+
     // Sticky share icons on the article page
     if($('.js-share-icons').length){
         $('.js-share-icons').scrollToFixed({
@@ -110,7 +110,7 @@ $(function() {
             $(this).children('.header__nav-secondary').addClass('is-visible');
             $('.header__nav-overlay').addClass('is-visible');
         });
-    
+
         $('.header__nav-item-primary-parent, .header__nav-overlay, .header__nav-secondary').mouseout(function() {
             $(this).children('.header__link-primary').removeClass('is-active');
             $('.header__nav-overlay, .header__nav-secondary').removeClass('is-visible');
@@ -129,7 +129,7 @@ $(function() {
             $(this).next('ul').slideToggle(250);
         });
     }
-    
+
     // Home page carousel - changes to Owl Carousel on mobile
     $('.carousel__panel').mouseover(function(){
         const panelNumber = $(this).data('panel');

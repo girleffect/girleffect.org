@@ -1,7 +1,7 @@
 .quote-container {
+    @include mid-container;
     display: flex;
     flex-direction: row;
-    max-width: $wrapper--large;
     margin: 0 auto;
     align-items: stretch;
     flex-wrap: wrap;

@@ -1,6 +1,6 @@
 .input {
     &--search {
-        @include font-size(20px, 30px);
+        @include large-text;
         background: transparent;
         border: 0;
         padding: 10px;
