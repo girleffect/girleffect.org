@@ -3644,25 +3644,17 @@ article .share-icons--hide-mobile {
   width: 100%;
 }
 
-@media only screen and (min-width: 480px) {
-  .video__content {
-    width: 75%;
-  }
-}
-
 @media only screen and (min-width: 768px) {
   .video__content {
-    padding: 5.125rem 3.125rem 3.125rem;
+    padding: 2rem;
     align-self: flex-end;
-    margin-top: -2rem;
   }
 }
 
 @media only screen and (min-width: 1024px) {
   .video__content {
     min-height: 315px;
-    padding: 2rem;
-    flex-basis: 400px;
+    flex-basis: 40%;
     margin: 0;
     align-self: center;
   }
@@ -3685,9 +3677,15 @@ article .share-icons--hide-mobile {
 
 .video__player {
   position: relative;
-  max-width: 600px;
+  max-width: 100%;
   width: 100%;
   z-index: 5;
+}
+
+@media only screen and (min-width: 1024px) {
+  .video__player {
+    max-width: 60%;
+  }
 }
 
 .video__overlay {
