@@ -1,5 +1,5 @@
 .article-info {
-    font-size: 16px;
+    @include small-text;
     color: $green;
     padding: 50px 0;
 

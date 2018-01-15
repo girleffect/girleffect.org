@@ -37,7 +37,7 @@
         display: none;
         position: absolute;
         top: 0;
-        background: $white;
+        background: $white-90;
         width: 100%;
         align-items: center;
         justify-content: center;
@@ -183,7 +183,6 @@
     }
 
     &__link-primary {
-        font-size: 18px;
         width: 100%;
         display: inline-block;
         padding: 12px 0;
@@ -233,7 +232,7 @@
     }
 
     &__link-tertiary {
-        font-size: 14px;
+        @include small-text;
         font-weight: $weight-normal;
         padding: 10px 0 10px 25px;
         transition: padding $transition;
