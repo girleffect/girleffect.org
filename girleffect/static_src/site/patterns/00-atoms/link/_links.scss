@@ -110,6 +110,10 @@
                 justify-content: center;
             }
         }
+
+        .video__content & {
+            margin-top: auto;
+        }
     }
 
     &__arrow {

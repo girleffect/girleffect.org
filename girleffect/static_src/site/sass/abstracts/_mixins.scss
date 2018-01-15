@@ -30,15 +30,19 @@
     &.placeholder {
         @content;
     }
+
     &:-moz-placeholder {
         @content;
     }
+
     &::-moz-placeholder {
         @content;
     }
+
     &:-ms-input-placeholder {
         @content;
     }
+
     &::-webkit-input-placeholder {
         @content;
     }
@@ -68,68 +72,11 @@
 }
 
 /* ============================================
-   Gutter spacing
-*/
-@mixin gutter($top: 0.5, $right: 0.5, $bottom: 0.5, $left: 0.5) {
-    @if $top > 0 {
-        padding-top: $gutter--mobile * $top;
-        @include media-query(tablet-portrait) {
-            padding-top: $gutter--tablet * $top;
-        }
-        @include media-query(desktop) {
-            padding-top: $gutter--desktop * $top;
-        }
-        @include media-query(desktop-wide) {
-            padding-top: $gutter--desktop-wide * $top;
-        }
-    }
-
-    @if $bottom > 0 {
-        padding-bottom: $gutter--mobile * $bottom;
-        @include media-query(tablet-portrait) {
-            padding-bottom: $gutter--tablet * $bottom;
-        }
-        @include media-query(desktop) {
-            padding-bottom: $gutter--desktop * $bottom;
-        }
-        @include media-query(desktop-wide) {
-            padding-bottom: $gutter--desktop-wide * $bottom;
-        }
-    }
-
-    @if $right > 0 {
-        padding-right: $gutter--mobile * $right;
-        @include media-query(tablet-portrait) {
-            padding-right: $gutter--tablet * $right;
-        }
-        @include media-query(desktop) {
-            padding-right: $gutter--desktop * $right;
-        }
-        @include media-query(desktop-wide) {
-            padding-right: $gutter--desktop-wide * $right;
-        }
-    }
-
-    @if $left > 0 {
-        padding-left: $gutter--mobile * $left;
-        @include media-query(tablet-portrait) {
-            padding-left: $gutter--tablet * $left;
-        }
-        @include media-query(desktop) {
-            padding-left: $gutter--desktop * $left;
-        }
-        @include media-query(desktop-wide) {
-            padding-left: $gutter--desktop-wide * $left;
-        }
-    }
-}
-
-/* ============================================
    Viewport sized typography mixin that takes a min and max pixel-based value
 */
 
 @mixin font-size($min, $max) {
-    $vw-context: (1260 * 0.1) * 1px;
+    $vw-context: (1366 * 0.1) * 1px;
     $responsive: ($max / $vw-context) * 10vw;
 
     $responsive-unitless: $responsive / ($responsive - $responsive + 1);
@@ -168,4 +115,50 @@
 @mixin small-text {
     font-size: 16px;
     line-height: 1;
+}
+
+/* ============================================
+   Container widths
+*/
+
+// TODO:: Update mobile margins when we have confirmation from GE
+
+@mixin mid-container {
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    @include media-query(tablet-portrait) {
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
+
+    @include media-query(tablet-portrait) {
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
+
+    @include media-query(desktop) {
+        margin: 0 auto;
+        max-width: $mid-width;
+    }
+}
+
+@mixin body-container {
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    @include media-query(tablet-portrait) {
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
+
+    @include media-query(tablet-portrait) {
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
+
+    @include media-query(desktop) {
+        margin: 0 auto;
+        max-width: $body-width;
+    }
 }

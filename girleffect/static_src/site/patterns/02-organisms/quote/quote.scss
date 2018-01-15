@@ -1,11 +1,12 @@
 .quote-container {
+    @include mid-container;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: $wrapper--large;
     margin: 0 auto;
     align-items: center;
     flex-wrap: wrap;
+    align-items: stretch;
 
     @include media-query(tablet-landscape) {
         flex-direction: row;
@@ -17,6 +18,11 @@
     max-width: 657px;
     margin-bottom: 2rem;
     overflow: hidden;
+    background-color: $black-10;
+
+    @include media-query(tablet-landscape) {
+        margin-bottom: 3rem;
+    }
 
     &::before {
         background: linear-gradient(to bottom, transparent 60%, $black-60 90%);
@@ -41,7 +47,7 @@
     }
 
     &:only-child {
-        max-width: $wrapper--small;
+        max-width: $body-width;
         margin: 0;
     }
 
