@@ -3395,6 +3395,7 @@ article .share-icons--hide-mobile {
   margin: 0 auto;
   align-items: center;
   flex-wrap: wrap;
+  align-items: stretch;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -3408,6 +3409,14 @@ article .share-icons--hide-mobile {
   max-width: 657px;
   margin-bottom: 2rem;
   overflow: hidden;
+  min-height: 300px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media only screen and (min-width: 1024px) {
+  .quote {
+    margin-bottom: 3rem;
+  }
 }
 
 .quote::before {
@@ -3445,6 +3454,10 @@ article .share-icons--hide-mobile {
   position: absolute;
   bottom: 0;
   background: transparent;
+}
+
+.quote__image::before {
+  border: 5px solid red;
 }
 
 .quote__content {

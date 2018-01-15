@@ -6,6 +6,7 @@
     margin: 0 auto;
     align-items: center;
     flex-wrap: wrap;
+    align-items: stretch;
 
     @include media-query(tablet-landscape) {
         flex-direction: row;
@@ -17,6 +18,12 @@
     max-width: 657px;
     margin-bottom: 2rem;
     overflow: hidden;
+    min-height: 300px;
+    background-color: $black-10;
+
+    @include media-query(tablet-landscape) {
+        margin-bottom: 3rem;
+    }
 
     &::before {
         background: linear-gradient(to bottom, transparent 60%, $black-60 90%);
@@ -54,6 +61,10 @@
             position: absolute;
             bottom: 0;
             background: transparent;
+        }
+
+        @at-root &::before {
+            border: 5px solid red;
         }
     }
 
