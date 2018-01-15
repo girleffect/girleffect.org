@@ -1539,13 +1539,15 @@ article .share-icons--hide-mobile {
   }
 }
 
-.wrapper {
-  margin: 0 auto;
-}
-
 @media only screen and (min-width: 1024px) {
   .wrapper {
     padding: 0;
+  }
+}
+
+@media only screen and (min-width: 1366px) {
+  .wrapper {
+    margin: 0 auto;
   }
 }
 
@@ -1566,13 +1568,6 @@ article .share-icons--hide-mobile {
   }
 }
 
-@media only screen and (min-width: 768px) {
-  .wrapper--mid {
-    margin-left: 3rem;
-    margin-right: 3rem;
-  }
-}
-
 @media only screen and (min-width: 1366px) {
   .wrapper--mid {
     margin: 0 auto;
@@ -1583,13 +1578,6 @@ article .share-icons--hide-mobile {
 .wrapper--body {
   margin-left: 1rem;
   margin-right: 1rem;
-}
-
-@media only screen and (min-width: 768px) {
-  .wrapper--body {
-    margin-left: 3rem;
-    margin-right: 3rem;
-  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -2471,7 +2459,7 @@ article .share-icons--hide-mobile {
   }
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1172px) {
   .list-item:nth-child(3n + 1) {
     padding: 0 1.5rem 20px 0;
   }
@@ -2492,13 +2480,14 @@ article .share-icons--hide-mobile {
 @media only screen and (min-width: 480px) {
   .list-item__image {
     width: auto;
-    height: 366px;
+    height: calc((100vw - 6rem - 1.5rem * 2)/2);
   }
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1172px) {
   .list-item__image {
-    height: 366px;
+    width: auto;
+    height: calc((1172px - 1.5rem * 3)/3);
   }
 }
 
@@ -2827,7 +2816,8 @@ article .share-icons--hide-mobile {
 }
 
 .grid {
-  margin: 3rem auto;
+  margin-top: 3rem;
+  margin-top: bottom;
   display: flex;
   flex-wrap: wrap;
 }
@@ -2842,7 +2832,7 @@ article .share-icons--hide-mobile {
   }
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1172px) {
   .grid--three > div {
     flex-basis: 33.33%;
   }
@@ -3459,13 +3449,6 @@ article .share-icons--hide-mobile {
   }
 }
 
-@media only screen and (min-width: 768px) {
-  .quote-container {
-    margin-left: 3rem;
-    margin-right: 3rem;
-  }
-}
-
 @media only screen and (min-width: 1366px) {
   .quote-container {
     margin: 0 auto;
@@ -3587,13 +3570,6 @@ article .share-icons--hide-mobile {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-@media only screen and (min-width: 768px) {
-  .video-container {
-    margin-left: 3rem;
-    margin-right: 3rem;
-  }
 }
 
 @media only screen and (min-width: 768px) {
