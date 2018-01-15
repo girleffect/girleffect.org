@@ -10,7 +10,7 @@
     }
 
     &--mid {
-        max-width: $mid-width;
+        @include mid-container;
     }
 
     &--body {

@@ -926,7 +926,7 @@ blockquote cite {
 .breadcrumb-container {
   display: flex;
   align-items: center;
-  max-width: 768px;
+  max-width: 1172px;
   margin: 0 auto;
   padding: 20px 20px 0;
 }
@@ -1551,7 +1551,29 @@ article .share-icons--hide-mobile {
 }
 
 .wrapper--mid {
-  max-width: 1172px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapper--mid {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapper--mid {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1366px) {
+  .wrapper--mid {
+    margin: 0 auto;
+    max-width: 1172px;
+  }
 }
 
 .wrapper--body {
@@ -3431,7 +3453,6 @@ article .share-icons--hide-mobile {
   max-width: 657px;
   margin-bottom: 2rem;
   overflow: hidden;
-  min-height: 300px;
   background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -3476,10 +3497,6 @@ article .share-icons--hide-mobile {
   position: absolute;
   bottom: 0;
   background: transparent;
-}
-
-.quote__image::before {
-  border: 5px solid red;
 }
 
 .quote__content {
