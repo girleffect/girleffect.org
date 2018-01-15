@@ -1566,13 +1566,6 @@ article .share-icons--hide-mobile {
   }
 }
 
-@media only screen and (min-width: 768px) {
-  .wrapper--mid {
-    margin-left: 3rem;
-    margin-right: 3rem;
-  }
-}
-
 @media only screen and (min-width: 1366px) {
   .wrapper--mid {
     margin: 0 auto;
@@ -1583,13 +1576,6 @@ article .share-icons--hide-mobile {
 .wrapper--body {
   margin-left: 1rem;
   margin-right: 1rem;
-}
-
-@media only screen and (min-width: 768px) {
-  .wrapper--body {
-    margin-left: 3rem;
-    margin-right: 3rem;
-  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -2363,13 +2349,6 @@ article .share-icons--hide-mobile {
   transform: translate(-50%, -50%);
   text-align: center;
   width: 100%;
-}
-
-@media only screen and (min-width: 768px) {
-  .hero__content--centered {
-    margin-left: 3rem;
-    margin-right: 3rem;
-  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -3476,13 +3455,6 @@ article .share-icons--hide-mobile {
   }
 }
 
-@media only screen and (min-width: 768px) {
-  .quote-container {
-    margin-left: 3rem;
-    margin-right: 3rem;
-  }
-}
-
 @media only screen and (min-width: 1366px) {
   .quote-container {
     margin: 0 auto;
@@ -3604,13 +3576,6 @@ article .share-icons--hide-mobile {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-@media only screen and (min-width: 768px) {
-  .video-container {
-    margin-left: 3rem;
-    margin-right: 3rem;
-  }
 }
 
 @media only screen and (min-width: 768px) {
