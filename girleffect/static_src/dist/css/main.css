@@ -1141,10 +1141,8 @@ blockquote cite {
 .large-text {
   font-size: 1.83016vw;
   line-height: 1.16;
-  font-weight: 700;
-  max-width: 768px;
+  max-width: 1172px;
   margin: 0 auto 1rem;
-  padding: 0 20px;
 }
 
 @media (max-width: 1038.16px) {
@@ -1167,7 +1165,6 @@ blockquote cite {
 }
 
 .template-home-page .large-text {
-  font-weight: 700;
   margin: 2rem auto;
 }
 
@@ -1437,7 +1434,7 @@ blockquote cite {
 }
 
 .section--body h2 {
-  max-width: 768px;
+  max-width: 1172px;
   margin: 1rem auto;
   line-height: 1.2;
   padding: 0 20px;
@@ -1540,7 +1537,6 @@ article .share-icons--hide-mobile {
 
 .wrapper {
   margin: 0 auto;
-  padding: 0 20px;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -1554,31 +1550,31 @@ article .share-icons--hide-mobile {
   position: relative;
 }
 
-.wrapper--site {
-  max-width: 1366px;
+.wrapper--mid {
+  max-width: 1172px;
 }
 
-.wrapper--small {
+.wrapper--body {
   margin-left: 1rem;
   margin-right: 1rem;
 }
 
 @media only screen and (min-width: 768px) {
-  .wrapper--small {
+  .wrapper--body {
     margin-left: 3rem;
     margin-right: 3rem;
   }
 }
 
 @media only screen and (min-width: 768px) {
-  .wrapper--small {
+  .wrapper--body {
     margin-left: 3rem;
     margin-right: 3rem;
   }
 }
 
 @media only screen and (min-width: 1366px) {
-  .wrapper--small {
+  .wrapper--body {
     margin: 0 auto;
     max-width: 768px;
   }
@@ -2391,7 +2387,7 @@ article .share-icons--hide-mobile {
 }
 
 .image-embed--full-width {
-  max-width: 1366px;
+  max-width: 1172px;
   margin: 0 auto 4rem;
 }
 
@@ -3228,7 +3224,7 @@ article .share-icons--hide-mobile {
 }
 
 .media-block-container {
-  max-width: 1366px;
+  max-width: 1172px;
   margin: 0 auto;
   display: flex;
   justify-content: space-evenly;
@@ -3322,7 +3318,7 @@ article .share-icons--hide-mobile {
 .media-card {
   position: relative;
   margin: 50px 20px;
-  max-width: 1366px;
+  max-width: 1172px;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -3420,7 +3416,7 @@ article .share-icons--hide-mobile {
 @media only screen and (min-width: 1366px) {
   .quote-container {
     margin: 0 auto;
-    max-width: 1366px;
+    max-width: 1172px;
   }
 }
 
@@ -3547,7 +3543,7 @@ article .share-icons--hide-mobile {
 
 @media only screen and (min-width: 1024px) {
   .video-container {
-    max-width: 1366px;
+    max-width: 1172px;
     margin: 6rem auto;
     flex-direction: row;
     justify-content: center;

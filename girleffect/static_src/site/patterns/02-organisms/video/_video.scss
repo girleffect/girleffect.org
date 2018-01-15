@@ -1,12 +1,12 @@
 .video-container {
     display: flex;
     flex-direction: column;
-    max-width: $wrapper--small;
+    max-width: $body-width;
     margin: 2rem auto;
     align-items: center;
 
     @include media-query(tablet-landscape) {
-        max-width: $site-width;
+        max-width: $mid-width;
         margin: 6rem auto;
         flex-direction: row;
         justify-content: center;

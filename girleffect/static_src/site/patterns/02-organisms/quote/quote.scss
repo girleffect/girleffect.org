@@ -1,5 +1,5 @@
 .quote-container {
-    @include mid-width;
+    @include mid-container;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,7 +48,7 @@
     }
 
     &:only-child {
-        max-width: $wrapper--small;
+        max-width: $body-width;
         margin: 0;
     }
 

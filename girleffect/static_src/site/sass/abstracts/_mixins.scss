@@ -117,7 +117,7 @@
    Container widths
 */
 
-@mixin mid-width {
+@mixin mid-container {
     margin-left: 1rem;
     margin-right: 1rem;
 
@@ -133,11 +133,11 @@
 
     @include media-query(desktop) {
         margin: 0 auto;
-        max-width: $site-width;
+        max-width: $mid-width;
     }
 }
 
-@mixin body-width {
+@mixin body-container {
     margin-left: 1rem;
     margin-right: 1rem;
 
@@ -153,6 +153,6 @@
 
     @include media-query(desktop) {
         margin: 0 auto;
-        max-width: $wrapper--small;
+        max-width: $body-width;
     }
 }
