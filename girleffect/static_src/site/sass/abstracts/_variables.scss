@@ -7,19 +7,19 @@
 */
 
 // Colour variables
-$black:        #000;
-$white:        #fff;
-$green:        #2f6165;
-$yellow:       #ffc700;
-$light-grey:   #f4f4f3;
-$mid-grey:     #767676;
-$concrete:     #e5e5e5;
-$steel:        #afafaf;
-$brand-grey:   #dad9d6;
+$black: #000;
+$white: #fff;
+$green: #2f6165;
+$yellow: #ffc700;
+$light-grey: #f4f4f3;
+$mid-grey: #767676;
+$concrete: #e5e5e5;
+$steel: #afafaf;
+$brand-grey: #dad9d6;
 
 // Asignment
 $color--primary: $green;
-$color--body:    $mid-grey;
+$color--body: $mid-grey;
 
 $black: #000;
 $black-90: rgba($black, 0.9);
@@ -59,32 +59,21 @@ $weight-normal: 400;
 $weight-light: 300;
 
 /* ============================================
-   Grid Dimentions
-*/
-$gutter--mobile:        10px;
-$gutter--tablet:        20px;
-$gutter--desktop:       26px;
-$gutter--desktop-wide:  40px;
-
-/* ============================================
    Max widths and wrappers
 */
-$site-width: 1800px;
-$wrapper--large: 1400px;
-$wrapper--medium: 1200px;
-$wrapper--small-medium: 1000px;
-$wrapper--small: 790px;
+$mid-width: 1172px;
+$body-width: 768px;
 
 /* ============================================
    Breakpoints
 */
 $breakpoints: (
-    'mob-portrait'      '(min-width: 320px)',
-    'mob-landscape'     '(min-width: 480px)',
-    'tablet-portrait'   '(min-width: 768px)',
-    'tablet-landscape'  '(min-width: 1024px)',
-    'desktop'           '(min-width: 1280px)',
-    'deskop-wide'       '(min-width: 2556px)'
+    'mob-portrait' '(min-width: 320px)',
+    'mob-landscape' '(min-width: 480px)',
+    'tablet-portrait' '(min-width: 768px)',
+    'tablet-landscape' '(min-width: 1024px)',
+    'desktop' '(min-width: 1366px)',
+    'deskop-wide' '(min-width: 2556px)'
 );
 
 /* ============================================
@@ -95,4 +84,3 @@ $anim--ease: ease-in-out;
 
 $transition: 0.25s ease-out;
 $transition--link-boxed: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-

@@ -1,7 +1,5 @@
 .wrapper {
     margin: 0 auto;
-    padding: 0 20px;
-
     @include media-query(tablet-landscape) {
         padding: 0;
     }
@@ -11,24 +9,12 @@
         position: relative;
     }
 
-    &--site {
-        max-width: $site-width;
+    &--mid {
+        @include mid-container;
     }
 
-    &--small {
-        max-width: $wrapper--small;
-    }
-
-    &--small-medium {
-        max-width: $wrapper--small-medium;
-    }
-
-    &--medium {
-        max-width: $wrapper--medium;
-    }
-
-    &--large {
-        max-width: $wrapper--large;
+    &--body {
+        @include body-container;
     }
 
     &--top-bottom-space {
@@ -47,7 +33,7 @@
         margin: 2rem auto 4rem;
 
         > * {
-            max-width: $wrapper--small;
+            max-width: $body-width;
             margin: 0 auto;
         }
     }
