@@ -16,19 +16,7 @@
     }
 
     &--small {
-        max-width: $wrapper--small;
-    }
-
-    &--small-medium {
-        max-width: $wrapper--small-medium;
-    }
-
-    &--medium {
-        max-width: $wrapper--medium;
-    }
-
-    &--large {
-        max-width: $wrapper--large;
+        @include body-width;
     }
 
     &--top-bottom-space {

@@ -8,7 +8,7 @@
         {% if customisations.heading_hex %}style="color:{{ customisations.heading_hex }};"{% endif %}>
         {{ title }}
     </h2>
-    <div class="article-container wrapper wrapper--medium">
+    <div class="article-container wrapper wrapper--site">
         {% for article in page.articles %}
             {% include "includes/article_card.html" %}
         {% endfor %}

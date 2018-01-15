@@ -6,7 +6,7 @@
     align-items: center;
 
     @include media-query(tablet-landscape) {
-        max-width: $wrapper--medium;
+        max-width: $site-width;
         margin: 6rem auto;
         flex-direction: row;
         justify-content: center;

@@ -68,63 +68,6 @@
 }
 
 /* ============================================
-   Gutter spacing
-*/
-@mixin gutter($top: 0.5, $right: 0.5, $bottom: 0.5, $left: 0.5) {
-    @if $top > 0 {
-        padding-top: $gutter--mobile * $top;
-        @include media-query(tablet-portrait) {
-            padding-top: $gutter--tablet * $top;
-        }
-        @include media-query(desktop) {
-            padding-top: $gutter--desktop * $top;
-        }
-        @include media-query(desktop-wide) {
-            padding-top: $gutter--desktop-wide * $top;
-        }
-    }
-
-    @if $bottom > 0 {
-        padding-bottom: $gutter--mobile * $bottom;
-        @include media-query(tablet-portrait) {
-            padding-bottom: $gutter--tablet * $bottom;
-        }
-        @include media-query(desktop) {
-            padding-bottom: $gutter--desktop * $bottom;
-        }
-        @include media-query(desktop-wide) {
-            padding-bottom: $gutter--desktop-wide * $bottom;
-        }
-    }
-
-    @if $right > 0 {
-        padding-right: $gutter--mobile * $right;
-        @include media-query(tablet-portrait) {
-            padding-right: $gutter--tablet * $right;
-        }
-        @include media-query(desktop) {
-            padding-right: $gutter--desktop * $right;
-        }
-        @include media-query(desktop-wide) {
-            padding-right: $gutter--desktop-wide * $right;
-        }
-    }
-
-    @if $left > 0 {
-        padding-left: $gutter--mobile * $left;
-        @include media-query(tablet-portrait) {
-            padding-left: $gutter--tablet * $left;
-        }
-        @include media-query(desktop) {
-            padding-left: $gutter--desktop * $left;
-        }
-        @include media-query(desktop-wide) {
-            padding-left: $gutter--desktop-wide * $left;
-        }
-    }
-}
-
-/* ============================================
    Viewport sized typography mixin that takes a min and max pixel-based value
 */
 

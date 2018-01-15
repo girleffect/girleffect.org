@@ -11,7 +11,7 @@
     {% if page.hero_image %}
         <div class="hero hero--article">
             {% include "navigation/breadcrumbs.html" %}
-            <div class="wrapper wrapper--small">
+            <div class="wrapper wrapper--site">
                 {% image page.hero_image fill-790x400 as hero_image %}
                 <img class="hero__image hero__image--top-space" src="{{ hero_image.url }}">
             </div>
@@ -22,7 +22,7 @@
     {% endblock %}
 
     {# Share Icons #}
-    <div class="wrapper wrapper--small-medium">
+    <div class="wrapper wrapper--site">
         <div class="share-icons share-icons--vertical js-share-icons share-icons--hide-mobile">
             <a class="share-icons__link" href="https://www.facebook.com/sharer/sharer.php?u={{ request.site.hostname }}{{ page.url }}">
                 <svg class="share-icons__icon"><use xlink:href="#facebook"></use></svg>
@@ -50,7 +50,7 @@
         <p class="large-text">{{ page.introduction }}</p>
         {{ page.body }}
 
-        <div class="wrapper wrapper--small-medium">
+        <div class="wrapper wrapper--site">
             <div class="share-icons share-icons--horizontal share-icons--show-mobile">
                 <a class="share-icons__link" href="https://www.facebook.com/sharer/sharer.php?u={{ request.site.hostname }}{{ page.url }}">
                     <svg class="share-icons__icon"><use xlink:href="#facebook"></use></svg>

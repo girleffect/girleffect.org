@@ -552,9 +552,6 @@ textarea {
    For want of a better place to put this I've left it here:
 */
 /* ============================================
-   Gutter spacing
-*/
-/* ============================================
    Viewport sized typography mixin that takes a min and max pixel-based value
 */
 /* ============================================
@@ -568,9 +565,6 @@ textarea {
 /* ============================================
    Typography
    :: Default to system font stack
-*/
-/* ============================================
-   Grid Dimentions
 */
 /* ============================================
    Max widths and wrappers
@@ -1561,23 +1555,33 @@ article .share-icons--hide-mobile {
 }
 
 .wrapper--site {
-  max-width: 1266px;
+  max-width: 1366px;
 }
 
 .wrapper--small {
-  max-width: 768px;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
-.wrapper--small-medium {
-  max-width: 1000px;
+@media only screen and (min-width: 768px) {
+  .wrapper--small {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
 }
 
-.wrapper--medium {
-  max-width: 1200px;
+@media only screen and (min-width: 768px) {
+  .wrapper--small {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
 }
 
-.wrapper--large {
-  max-width: 1400px;
+@media only screen and (min-width: 1366px) {
+  .wrapper--small {
+    margin: 0 auto;
+    max-width: 768px;
+  }
 }
 
 .wrapper--top-bottom-space {
@@ -2387,7 +2391,7 @@ article .share-icons--hide-mobile {
 }
 
 .image-embed--full-width {
-  max-width: 1200px;
+  max-width: 1366px;
   margin: 0 auto 4rem;
 }
 
@@ -2403,7 +2407,7 @@ article .share-icons--hide-mobile {
 }
 
 .wrapper--article .image-embed {
-  max-width: 1000px;
+  max-width: 768px;
   margin: 40px auto;
 }
 
@@ -3224,7 +3228,7 @@ article .share-icons--hide-mobile {
 }
 
 .media-block-container {
-  max-width: 1200px;
+  max-width: 1366px;
   margin: 0 auto;
   display: flex;
   justify-content: space-evenly;
@@ -3318,7 +3322,7 @@ article .share-icons--hide-mobile {
 .media-card {
   position: relative;
   margin: 50px 20px;
-  max-width: 1200px;
+  max-width: 1366px;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -3388,14 +3392,36 @@ article .share-icons--hide-mobile {
 }
 
 .quote-container {
+  margin-left: 1rem;
+  margin-right: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 1400px;
   margin: 0 auto;
   align-items: center;
   flex-wrap: wrap;
   align-items: stretch;
+}
+
+@media only screen and (min-width: 768px) {
+  .quote-container {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .quote-container {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1366px) {
+  .quote-container {
+    margin: 0 auto;
+    max-width: 1366px;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -3521,7 +3547,7 @@ article .share-icons--hide-mobile {
 
 @media only screen and (min-width: 1024px) {
   .video-container {
-    max-width: 1200px;
+    max-width: 1366px;
     margin: 6rem auto;
     flex-direction: row;
     justify-content: center;

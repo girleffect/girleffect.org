@@ -11,7 +11,7 @@
     {% if page.photo %}
         <div class="hero hero--article">
              {% include "navigation/breadcrumbs.html" %}
-            <div class="wrapper wrapper--small">
+            <div class="wrapper wrapper--site">
                 {% image page.photo fill-790x400 as hero_image %}
                 <img class="hero__image hero__image--top-space" src="{{ hero_image.url }}">
             </div>
@@ -21,7 +21,7 @@
     {% endif %}
     {% endblock %}
 
-    <div class="wrapper wrapper--small wrapper--top-bottom-space">
+    <div class="wrapper wrapper--site wrapper--top-bottom-space">
         <h3 class="heading heading--bottom-space">{{ page.first_name }} {{ page.last_name }}</h3>
         {% if page.job_title %}
             <p class="label label--large label--green">{{ page.job_title }}</p>

@@ -2,7 +2,7 @@
 {% if page.related_documents.exists %}
 <section class="section section--downloads">
     {# Related Documents #}
-    <div class="wrapper wrapper--small article-download">
+    <div class="wrapper wrapper--site article-download">
         <svg class="article-download__icon">
             <use xlink:href="#download-file"></use>
         </svg>
@@ -37,7 +37,7 @@
 
     <section class="section section--articles">
         <h2 class="section__title">Related News &amp; Stories</h2>
-        <div class="article-container wrapper wrapper--medium">
+        <div class="article-container wrapper wrapper--site">
             {# Related pages #}
             {% for related_page in page.related_pages.live %}
                 {# a related_page object links to the original page (related_page.source_page) and a related one (related_page.page) #}
