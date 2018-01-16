@@ -4,6 +4,7 @@
 }
 
 .slider {
+    $nav-border: 3px solid $white;
     display: flex;
     position: relative;
     flex-direction: column;
@@ -121,18 +122,25 @@
     &__nav-right {
         height: 2rem;
         width: 2rem;
+        cursor: pointer;
 
         @include media-query(container) {
-            height: 4rem;
-            width: 4rem;
+            height: 3rem;
+            width: 3rem;
         }
     }
 
     &__nav-left {
-        transform: rotate(90deg);
+        margin-left: 2rem;
+        border-bottom: $nav-border;
+        border-left: $nav-border;
+        transform: rotate(45deg);
     }
 
     &__nav-right {
-        transform: rotate(270deg);
+        margin-right: 2rem;
+        border-top: $nav-border;
+        border-right: $nav-border;
+        transform: rotate(45deg);
     }
 }

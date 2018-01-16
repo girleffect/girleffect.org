@@ -62,8 +62,8 @@ $(function() {
         autoHeight: false,
         navContainer: '.js-slider__nav--full-width',
         navText: [
-            '<svg class="slider__nav-left"><use xlink:href="#chevron"></use></svg>',
-            '<svg class="slider__nav-right"><use xlink:href="#chevron"></use></svg>'
+            '<svg class="slider__nav-left"></svg>',
+            '<svg class="slider__nav-right"></svg>'
         ],
         loop: true,
         autoplay: $('.slider-container').attr('data-delay') > 0,

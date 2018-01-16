@@ -2886,21 +2886,28 @@ article .share-icons--hide-mobile {
 .slider__nav-left, .slider__nav-right {
   height: 2rem;
   width: 2rem;
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 1172px) {
   .slider__nav-left, .slider__nav-right {
-    height: 4rem;
-    width: 4rem;
+    height: 3rem;
+    width: 3rem;
   }
 }
 
 .slider__nav-left {
-  transform: rotate(90deg);
+  margin-left: 2rem;
+  border-bottom: 3px solid #fff;
+  border-left: 3px solid #fff;
+  transform: rotate(45deg);
 }
 
 .slider__nav-right {
-  transform: rotate(270deg);
+  margin-right: 2rem;
+  border-top: 3px solid #fff;
+  border-right: 3px solid #fff;
+  transform: rotate(45deg);
 }
 
 .stat-block {
