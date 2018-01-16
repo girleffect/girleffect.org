@@ -2828,14 +2828,12 @@ article .share-icons--hide-mobile {
 
 @media only screen and (min-width: 480px) {
   .grid--three > div {
-    background-color: green;
     flex-basis: 50%;
   }
 }
 
 @media only screen and (min-width: 1172px) {
   .grid--three > div {
-    background-color: red;
     flex-basis: 33.33%;
   }
 }
