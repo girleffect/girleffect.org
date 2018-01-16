@@ -101,8 +101,8 @@
         }
 
         .quote__content--has-link & {
-            color: $white;
-            margin-top: 30px;
+            color: inherit;
+            margin-top: 1rem;
         }
 
         .carousel__panel-content & {
