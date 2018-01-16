@@ -11,8 +11,10 @@
         {% if value.statistic_customisations.heading_hex %}
             style="color: {{ value.statistic_customisations.heading_hex }}"{% endif %}>{{ value.title }}</p>
         <div class="stat-block__copy">
-            <h4>{{ value.description|richtext }}</h4>
-            <p class="stat-block__cite">{{ value.citation_text }}</p>
+            <div>
+                <h4>{{ value.description|richtext }}</h4>
+                <p class="stat-block__cite">{{ value.citation_text }}</p>
+            </div>
             {% if value.link_page %}
                 <div class="arrow"></div>
             {% elif value.link_url %}
