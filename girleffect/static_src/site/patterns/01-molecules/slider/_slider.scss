@@ -1,0 +1,138 @@
+.slider-container {
+    min-height: 340px;
+    position: relative;
+}
+
+.slider {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+
+    &__image {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-height: 100%;
+        min-width: 100%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__item {
+        min-width: 100vw;
+        min-height: 80vh;
+        position: relative;
+
+        @include media-query(tablet-portrait) {
+            min-height: 80vh;
+        }
+
+        @include media-query(container) {
+            min-height: 95vh;
+        }
+
+        @include media-query(desktop-wide) {
+            min-height: 50vh;
+        }
+
+        &::before {
+            background: linear-gradient(
+                to bottom,
+                transparent 60%,
+                $black-60 90%
+            );
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        padding-bottom: 2rem;
+        color: $white;
+        font-weight: $weight-bold;
+
+        @include media-query(tablet-portrait) {
+            padding: 4rem;
+            width: 60%;
+        }
+
+        @include media-query(container) {
+            width: $mid-width;
+            margin: 4rem auto 6rem auto;
+            padding: 0;
+
+            > * {
+                width: 40%;
+            }
+        }
+    }
+
+    &__title {
+        color: $yellow;
+
+        @include media-query(container) {
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    &__textbox {
+        margin-top: auto;
+        padding: 1rem;
+        font-weight: $weight-normal;
+        color: $green;
+        background-color: $light-grey;
+        opacity: 0.9;
+        z-index: 3;
+
+        .slider__title {
+            color: $green;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    &__text {
+        margin-bottom: 2rem;
+    }
+
+    &__nav {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        top: calc(50% - 2rem);
+        right: 0;
+        left: 0;
+        z-index: 2;
+    }
+
+    &__nav-left,
+    &__nav-right {
+        height: 2rem;
+        width: 2rem;
+
+        @include media-query(container) {
+            height: 4rem;
+            width: 4rem;
+        }
+    }
+
+    &__nav-left {
+        transform: rotate(90deg);
+    }
+
+    &__nav-right {
+        transform: rotate(270deg);
+    }
+}

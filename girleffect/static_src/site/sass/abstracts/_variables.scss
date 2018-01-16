@@ -49,8 +49,10 @@ $white-05: rgba($white, 0.05);
    Typography
    :: Default to system font stack
 */
-$font-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-$font-serif: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif;
+$font-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+$font-serif: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua',
+    Georgia, serif;
 
 $weight-bold: 700;
 $weight-semibold: 600;
@@ -72,8 +74,9 @@ $breakpoints: (
     'mob-landscape' '(min-width: 480px)',
     'tablet-portrait' '(min-width: 768px)',
     'tablet-landscape' '(min-width: 1024px)',
+    'container' '(min-width: 1172px)',
     'desktop' '(min-width: 1366px)',
-    'deskop-wide' '(min-width: 2556px)'
+    'desktop-wide' '(min-width: 2556px)'
 );
 
 /* ============================================
