@@ -26,7 +26,6 @@ vagrant ssh
 Then within the SSH session:
 
 ``` bash
-dj migrate
 dj createsuperuser
 djrun
 ```

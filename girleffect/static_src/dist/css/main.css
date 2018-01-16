@@ -1562,7 +1562,7 @@ article .share-icons--hide-mobile {
   }
 }
 
-@media only screen and (min-width: 1366px) {
+@media only screen and (min-width: 1172px) {
   .wrapper--mid {
     margin: 0 auto;
     max-width: 1172px;
@@ -1581,7 +1581,7 @@ article .share-icons--hide-mobile {
   }
 }
 
-@media only screen and (min-width: 1366px) {
+@media only screen and (min-width: 1172px) {
   .wrapper--body {
     margin: 0 auto;
     max-width: 768px;
@@ -2343,7 +2343,7 @@ article .share-icons--hide-mobile {
   }
 }
 
-@media only screen and (min-width: 1366px) {
+@media only screen and (min-width: 1172px) {
   .hero__content--centered {
     margin: 0 auto;
     max-width: 1172px;
@@ -3512,7 +3512,7 @@ article .share-icons--hide-mobile {
   }
 }
 
-@media only screen and (min-width: 1366px) {
+@media only screen and (min-width: 1172px) {
   .quote-container {
     margin: 0 auto;
     max-width: 1172px;
@@ -3713,7 +3713,7 @@ article .share-icons--hide-mobile {
   }
 }
 
-@media only screen and (min-width: 1366px) {
+@media only screen and (min-width: 1172px) {
   .video-container {
     margin: 0 auto;
     max-width: 1172px;
