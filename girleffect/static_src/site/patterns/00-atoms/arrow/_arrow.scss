@@ -33,7 +33,6 @@
     }
 
     .stat-block & {
-        position: absolute;
-        bottom: 50px;
+        align-self: flex-end;
     }
 }

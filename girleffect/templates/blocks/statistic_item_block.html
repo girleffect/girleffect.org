@@ -6,18 +6,20 @@
 {% else %}
     <div class="stat-block">
 {% endif %}
-        <div class="stat-block__content">
-            <p class="stat-block__label"
-            {% if value.statistic_customisations.heading_hex %}
-                style="color: {{ value.statistic_customisations.heading_hex }}"{% endif %}>{{ value.title }}</p>
-            {{ value.description|richtext }}
+    <div class="stat-block__content">
+        <p class="stat-block__label"
+        {% if value.statistic_customisations.heading_hex %}
+            style="color: {{ value.statistic_customisations.heading_hex }}"{% endif %}>{{ value.title }}</p>
+        <div class="stat-block__copy">
+            <h4>{{ value.description|richtext }}</h4>
             <p class="stat-block__cite">{{ value.citation_text }}</p>
+            {% if value.link_page %}
+                <div class="arrow"></div>
+            {% elif value.link_url %}
+                <div class="arrow"></div>
+            {% endif %}
         </div>
-        {% if value.link_page %}
-            <div class="arrow"></div>
-        {% elif value.link_url %}
-            <div class="arrow"></div>
-        {% endif %}
+    </div>
 {% if value.link_page %}
     </a>
 {% elif value.link_url  %}
@@ -25,6 +27,3 @@
 {% else %}
     </div>
 {% endif %}
-
-
-

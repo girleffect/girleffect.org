@@ -8,7 +8,7 @@
         <h3 {% if value.customisation.heading_hex %}style="color:{{ value.customisation.heading_hex }};"{% endif %}>{{ value.title }}</h3>
     {% endif %}
 
-    <div class="grid grid--three grid--center grid--statistics">
+    <div class="stat-block-container grid grid--three wrapper wrapper--mid">
         {% for item in value.statistics %}
             {% include "blocks/statistic_item_block.html" with value=item %}
             {# found in statistic_item_block.html #}

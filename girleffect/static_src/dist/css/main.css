@@ -824,8 +824,7 @@ cite {
 }
 
 .stat-block .arrow {
-  position: absolute;
-  bottom: 50px;
+  align-self: flex-end;
 }
 
 .article-info {
@@ -2584,48 +2583,66 @@ article .share-icons--hide-mobile {
   margin-right: 30px;
 }
 
+.stat-block-container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
 .stat-block {
   position: relative;
   z-index: 10;
-  padding: 30px 50px 30px 30px;
-  max-width: 260px;
-  margin: 0 40px 60px;
-  background: #fff;
-  min-height: 350px;
+  width: 100%;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 480px) {
   .stat-block {
-    margin: 0 40px;
+    margin-bottom: 3rem;
+  }
+  .stat-block:nth-child(2n + 1) {
+    padding: 0 1.5rem 20px 0;
+  }
+  .stat-block:nth-child(2n + 2) {
+    padding: 0 0 20px 1.5rem;
   }
 }
 
-.stat-block::after {
-  content: '';
-  border: 1px solid #2f6165;
-  position: absolute;
-  top: -12px;
-  left: -12px;
-  right: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  transition: top, left, 0.2s ease-in-out;
+@media only screen and (min-width: 1172px) {
+  .stat-block:nth-child(3n + 1) {
+    padding: 0 1.5rem 20px 0;
+  }
+  .stat-block:nth-child(3n + 2) {
+    padding: 0 0.75rem 20px 0.75rem;
+  }
+  .stat-block:nth-child(3n + 3) {
+    padding: 0 0 20px 1.5rem;
+  }
 }
 
-.stat-block:not(div):hover::after {
-  top: -5px;
-  left: -5px;
+.stat-block__label {
+  padding: 0 1rem;
+}
+
+.stat-block__copy {
+  background: #fff;
+  border: 5 px solid green;
+  padding: 1rem;
+  flex-grow: 1;
 }
 
 .stat-block__content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
   z-index: 10;
   position: relative;
 }
 
-.stat-block__label, .stat-block__cite {
+.stat-block__cite {
   font-size: 16px;
   line-height: 1;
+  margin-top: 1rem;
 }
 
 .article-download {
@@ -2822,18 +2839,21 @@ article .share-icons--hide-mobile {
   flex-wrap: wrap;
 }
 
-.grid--three > div {
+.grid--three > div,
+.grid--three > a {
   flex-basis: 100%;
 }
 
 @media only screen and (min-width: 480px) {
-  .grid--three > div {
+  .grid--three > div,
+  .grid--three > a {
     flex-basis: 50%;
   }
 }
 
 @media only screen and (min-width: 1172px) {
-  .grid--three > div {
+  .grid--three > div,
+  .grid--three > a {
     flex-basis: 33.33%;
   }
 }

@@ -5,7 +5,8 @@
     flex-wrap: wrap;
 
     &--three {
-        > div {
+        > div,
+        > a {
             flex-basis: 100%;
 
             @include media-query(mob-landscape) {
