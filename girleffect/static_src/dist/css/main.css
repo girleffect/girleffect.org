@@ -1654,7 +1654,7 @@ article .share-icons--hide-mobile {
   }
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1172px) {
   .article-card:nth-child(3n + 1) {
     padding: 0 1.5rem 20px 0;
   }
@@ -1710,6 +1710,10 @@ article .share-icons--hide-mobile {
   font-size: 16px;
   line-height: 1;
   font-weight: 400;
+}
+
+.article-card img {
+  width: 100%;
 }
 
 .carousel-container {

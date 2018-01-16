@@ -22,7 +22,7 @@
         }
     }
 
-    @include media-query(tablet-landscape) {
+    @include media-query(container) {
         &:nth-child(3n + 1) {
             padding: 0 1.5rem 20px 0;
         }
@@ -66,5 +66,9 @@
     &__copy {
         @include small-text;
         font-weight: $weight-normal;
+    }
+
+    img {
+        width: 100%;
     }
 }
