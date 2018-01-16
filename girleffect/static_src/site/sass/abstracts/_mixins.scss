@@ -132,7 +132,7 @@
         margin-right: 3rem;
     }
 
-    @include media-query(desktop) {
+    @include media-query(container) {
         margin: 0 auto;
         max-width: $mid-width;
     }
@@ -147,7 +147,7 @@
         margin-right: 3rem;
     }
 
-    @include media-query(desktop) {
+    @include media-query(container) {
         margin: 0 auto;
         max-width: $body-width;
     }
