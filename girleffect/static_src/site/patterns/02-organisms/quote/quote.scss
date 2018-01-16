@@ -90,7 +90,6 @@
 
         &::before,
         &::after {
-            // TODO JUMBO & TEXT SIZE
             color: var(--quote-mark-hex, $yellow);
             font-size: 32px;
             line-height: 0;
