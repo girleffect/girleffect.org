@@ -3541,12 +3541,15 @@ article .share-icons--hide-mobile {
 }
 
 .quote {
+  min-height: 300px;
+  max-height: 300px;
+  width: 100%;
   align-self: stretch;
   position: relative;
   margin-bottom: 1rem;
   overflow: hidden;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.1);
+  color: #2f6165;
+  background: #f4f4f3;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -3567,8 +3570,10 @@ article .share-icons--hide-mobile {
   margin-right: 0;
 }
 
-.quote:nth-child(odd):last-child .quote__content, .quote:nth-child(odd):only-child .quote__content {
-  padding: 2rem 10rem;
+@media only screen and (min-width: 768px) {
+  .quote:nth-child(odd):last-child .quote__content, .quote:nth-child(odd):only-child .quote__content {
+    padding: 2rem 10rem;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -3590,11 +3595,13 @@ article .share-icons--hide-mobile {
   position: absolute;
   bottom: 0;
   background: transparent;
+  z-index: 2;
 }
 
 .quote__content {
-  position: relative;
-  padding: 1rem;
+  position: absolute;
+  bottom: 0;
+  padding: 2rem;
 }
 
 @media only screen and (min-width: 480px) {
@@ -3610,24 +3617,11 @@ article .share-icons--hide-mobile {
 }
 
 .quote__copy {
-  font-size: 1.83016vw;
   position: relative;
   margin: 0 0 1rem;
   border: 0;
   color: inherit;
   padding: 0;
-}
-
-@media (max-width: 874.24px) {
-  .quote__copy {
-    font-size: 16px;
-  }
-}
-
-@media (min-width: 1366px) {
-  .quote__copy {
-    font-size: 25px;
-  }
 }
 
 .quote__copy * {
@@ -3639,22 +3633,22 @@ article .share-icons--hide-mobile {
 
 .quote__copy::before, .quote__copy::after {
   color: var(--quote-mark-hex, #ffc700);
-  font-size: 32px;
+  font-size: 48px;
   line-height: 0;
   letter-spacing: 0;
-  vertical-align: -0.5rem;
+  vertical-align: -1.5rem;
 }
 
 @media only screen and (min-width: 1024px) {
   .quote__copy::before, .quote__copy::after {
-    font-size: 100px;
+    font-size: 90px;
     vertical-align: -0.5em;
   }
 }
 
 .quote__copy::before {
   position: absolute;
-  padding-top: 1rem;
+  padding-top: 1.4rem;
   left: 0;
   display: inline-block;
   height: 100%;
@@ -3663,19 +3657,19 @@ article .share-icons--hide-mobile {
 
 @media only screen and (min-width: 1024px) {
   .quote__copy::before {
-    padding-top: 2rem;
+    padding-top: 1.8rem;
     left: 0;
   }
 }
 
 .quote__copy::after {
-  padding-left: 0.2rem;
+  padding-left: 5px;
   content: '”';
 }
 
 .quote__copy, .quote__cite,
 .quote .link--with-arrow {
-  padding-left: 1rem;
+  padding-left: 1.6rem;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -3693,6 +3687,10 @@ article .share-icons--hide-mobile {
   color: inherit;
 }
 
+.quote--gradient {
+  color: #fff;
+}
+
 .quote--gradient::before {
   background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.7) 90%);
   content: '';
@@ -3701,6 +3699,24 @@ article .share-icons--hide-mobile {
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 1;
+}
+
+.quote img {
+  max-width: inherit;
+  height: auto;
+  width: auto;
+  margin-top: 50%;
+  margin-left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media only screen and (min-width: 480px) {
+  .quote img {
+    margin-top: 0;
+    margin-left: 0;
+    transform: translate(0, 0);
+  }
 }
 
 .video-container {
