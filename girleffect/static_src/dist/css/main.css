@@ -1294,8 +1294,8 @@ blockquote cite {
 }
 
 .quote__content--has-link .link--with-arrow {
-  color: #fff;
-  margin-top: 30px;
+  color: inherit;
+  margin-top: 1rem;
 }
 
 @media only screen and (min-width: 768px) {
@@ -2049,7 +2049,7 @@ article .share-icons--hide-mobile {
 }
 
 .carousel__home-title {
-  font-size: 8.41874vw;
+  font-size: 6.58858vw;
   font-weight: 700;
   line-height: 1.08;
   position: absolute;
@@ -2061,7 +2061,7 @@ article .share-icons--hide-mobile {
   color: #fff;
 }
 
-@media (max-width: 249.44348px) {
+@media (max-width: 318.73333px) {
   .carousel__home-title {
     font-size: 21px;
   }
@@ -2069,7 +2069,7 @@ article .share-icons--hide-mobile {
 
 @media (min-width: 1366px) {
   .carousel__home-title {
-    font-size: 115px;
+    font-size: 90px;
   }
 }
 
@@ -3422,6 +3422,7 @@ article .share-icons--hide-mobile {
   margin: 0 auto;
   align-items: stretch;
   flex-wrap: wrap;
+  background-color: red;
 }
 
 @media only screen and (min-width: 768px) {
@@ -3456,14 +3457,14 @@ article .share-icons--hide-mobile {
 
 @media only screen and (min-width: 1024px) {
   .quote {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 }
 
 @media only screen and (min-width: 768px) {
   .quote:nth-child(odd) {
-    width: calc(50% - 1.5rem);
-    margin-right: 1.5rem;
+    width: calc(50% - 1rem);
+    margin-right: 1rem;
   }
 }
 
@@ -3472,15 +3473,15 @@ article .share-icons--hide-mobile {
   margin-right: 0;
 }
 
-@media only screen and (min-width: 768px) {
-  .quote:nth-child(even) {
-    width: calc(50% - 1.5rem);
-    margin-left: 1.5rem;
-  }
+.quote:nth-child(odd):last-child .quote__content, .quote:nth-child(odd):only-child .quote__content {
+  padding: 2rem 10rem;
 }
 
-.quote--drop-shadow {
-  border: 6px solid red;
+@media only screen and (min-width: 768px) {
+  .quote:nth-child(even) {
+    width: calc(50% - 1rem);
+    margin-left: 1rem;
+  }
 }
 
 .quote--drop-shadow .quote__copy {
@@ -3499,7 +3500,7 @@ article .share-icons--hide-mobile {
 
 .quote__content {
   position: relative;
-  padding: 10px;
+  padding: 1rem;
 }
 
 @media only screen and (min-width: 480px) {
@@ -3514,29 +3515,13 @@ article .share-icons--hide-mobile {
   }
 }
 
-.quote__content--has-link {
-  bottom: 0;
-  padding: 2rem 2rem 40px;
-  margin-bottom: -60px;
-  transition: margin-bottom 0.25s ease-in-out;
-}
-
-@media only screen and (min-width: 1024px) {
-  .quote__content--has-link {
-    position: absolute;
-  }
-}
-
-.quote:hover .quote__content--has-link {
-  margin-bottom: 0;
-}
-
 .quote__copy {
   font-size: 1.83016vw;
   position: relative;
-  margin: 0 0 5px;
+  margin: 0 0 1rem;
   border: 0;
   color: inherit;
+  padding: 0;
 }
 
 @media (max-width: 874.24px) {
@@ -3548,12 +3533,6 @@ article .share-icons--hide-mobile {
 @media (min-width: 1366px) {
   .quote__copy {
     font-size: 25px;
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  .quote__copy {
-    padding: 0 0 0 5rem;
   }
 }
 
@@ -3582,7 +3561,7 @@ article .share-icons--hide-mobile {
 .quote__copy::before {
   position: absolute;
   padding-top: 1rem;
-  left: 1rem;
+  left: 0;
   display: inline-block;
   height: 100%;
   content: '“';
@@ -3591,17 +3570,31 @@ article .share-icons--hide-mobile {
 @media only screen and (min-width: 1024px) {
   .quote__copy::before {
     padding-top: 2rem;
-    left: 2rem;
+    left: 0;
   }
 }
 
 .quote__copy::after {
+  padding-left: 0.2rem;
   content: '”';
 }
 
+.quote__copy, .quote__cite,
+.quote .link--with-arrow {
+  padding-left: 1rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .quote__copy, .quote__cite,
+  .quote .link--with-arrow {
+    padding-left: 2.2rem;
+  }
+}
+
 .quote__cite {
-  padding-left: 5rem;
-  font-size: 12px;
+  font-size: 16px;
+  line-height: 1;
+  display: block;
   font-weight: 400;
   color: inherit;
 }

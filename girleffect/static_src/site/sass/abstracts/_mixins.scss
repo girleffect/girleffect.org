@@ -97,7 +97,7 @@
 }
 
 @mixin jumbo-text {
-    @include font-size(21px, 115px);
+    @include font-size(21px, 90px);
     font-weight: $weight-bold;
     line-height: 1.08;
 }

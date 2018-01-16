@@ -5,6 +5,7 @@
     margin: 0 auto;
     align-items: stretch;
     flex-wrap: wrap;
+    background-color: red;
 }
 
 .quote {
@@ -16,33 +17,34 @@
     background: $black-10;
 
     @include media-query(tablet-landscape) {
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
     }
 
     &:nth-child(odd) {
         @include media-query(tablet-portrait) {
-            width: calc(50% - 1.5rem);
-            margin-right: 1.5rem;
+            width: calc(50% - 1rem);
+            margin-right: 1rem;
         }
 
         &:last-child,
         &:only-child {
-            // TODO:: ADD CONTAINER WIDTH
             width: 100%;
             margin-right: 0;
+
+            .quote__content {
+                padding: 2rem 10rem;
+            }
         }
     }
 
     &:nth-child(even) {
         @include media-query(tablet-portrait) {
-            width: calc(50% - 1.5rem);
-            margin-left: 1.5rem;
+            width: calc(50% - 1rem);
+            margin-left: 1rem;
         }
     }
 
     &--drop-shadow {
-        border: 6px solid red;
-
         .quote__copy {
             text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);
         }
@@ -60,7 +62,7 @@
 
     &__content {
         position: relative;
-        padding: 10px;
+        padding: 1rem;
 
         @include media-query(mob-landscape) {
             padding: 1rem;
@@ -69,33 +71,15 @@
         @include media-query(tablet-landscape) {
             padding: 2rem;
         }
-
-        &--has-link {
-            bottom: 0;
-            padding: 2rem 2rem 40px;
-            margin-bottom: -60px;
-            transition: margin-bottom 0.25s ease-in-out;
-
-            @include media-query(tablet-landscape) {
-                position: absolute;
-            }
-
-            .quote:hover & {
-                margin-bottom: 0;
-            }
-        }
     }
 
     &__copy {
         @include font-size(16px, 25px);
         position: relative;
-        margin: 0 0 5px;
+        margin: 0 0 1rem;
         border: 0;
         color: inherit;
-
-        @include media-query(tablet-landscape) {
-            padding: 0 0 0 5rem;
-        }
+        padding: 0;
 
         * {
             display: inline;
@@ -122,25 +106,36 @@
         &::before {
             position: absolute;
             padding-top: 1rem;
-            left: 1rem;
+            left: 0;
             display: inline-block;
             height: 100%;
             content: '“';
 
             @include media-query(tablet-landscape) {
                 padding-top: 2rem;
-                left: 2rem;
+                left: 0;
             }
         }
 
         &::after {
+            padding-left: 0.2rem;
             content: '”';
         }
     }
 
+    &__copy,
+    &__cite,
+    .link--with-arrow {
+        padding-left: 1rem;
+
+        @include media-query(tablet-landscape) {
+            padding-left: 2.2rem;
+        }
+    }
+
     &__cite {
-        padding-left: 5rem;
-        font-size: 12px;
+        @include small-text;
+        display: block;
         font-weight: 400;
         color: inherit;
     }
