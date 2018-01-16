@@ -1,10 +1,10 @@
 .grid {
-    margin: 3rem auto;
+    margin-top: 3rem;
+    margin-top: bottom;
     display: flex;
     flex-wrap: wrap;
 
     &--three {
-
         > div {
             flex-basis: 100%;
 
@@ -12,8 +12,8 @@
                 flex-basis: 50%;
             }
 
-            @include media-query(tablet-landscape) {
-                flex-basis: 33%;
+            @include media-query(container) {
+                flex-basis: 33.33%;
             }
         }
     }

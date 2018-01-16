@@ -132,11 +132,6 @@
         margin-right: 3rem;
     }
 
-    @include media-query(tablet-portrait) {
-        margin-left: 3rem;
-        margin-right: 3rem;
-    }
-
     @include media-query(desktop) {
         margin: 0 auto;
         max-width: $mid-width;
@@ -146,11 +141,6 @@
 @mixin body-container {
     margin-left: 1rem;
     margin-right: 1rem;
-
-    @include media-query(tablet-portrait) {
-        margin-left: 3rem;
-        margin-right: 3rem;
-    }
 
     @include media-query(tablet-portrait) {
         margin-left: 3rem;
