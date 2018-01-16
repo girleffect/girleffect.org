@@ -1307,6 +1307,10 @@ blockquote cite {
   margin-top: auto;
 }
 
+.stat-block__copy .link--with-arrow {
+  margin-top: 2rem;
+}
+
 .link__arrow {
   display: inline-flex;
   align-items: center;
@@ -1436,7 +1440,7 @@ blockquote cite {
   padding: 0;
 }
 
-.section--body h3 {
+.section--body > h3 {
   max-width: 1172px;
   margin: 1rem auto;
   line-height: 1.2;
@@ -1444,7 +1448,7 @@ blockquote cite {
 }
 
 @media only screen and (min-width: 1024px) {
-  .section--body h3 {
+  .section--body > h3 {
     margin: 3rem auto 2rem;
     padding: 0;
   }
@@ -2590,14 +2594,19 @@ article .share-icons--hide-mobile {
 }
 
 .stat-block {
+  width: 100%;
   position: relative;
   z-index: 10;
-  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.stat-block:last-child {
+  margin-bottom: 0;
 }
 
 @media only screen and (min-width: 480px) {
   .stat-block {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
   .stat-block:nth-child(2n + 1) {
     padding: 0 1.5rem 20px 0;
@@ -2605,9 +2614,16 @@ article .share-icons--hide-mobile {
   .stat-block:nth-child(2n + 2) {
     padding: 0 0 20px 1.5rem;
   }
+  .stat-block:last-child {
+    padding-right: 0;
+    flex-basis: 100% !important;
+  }
 }
 
 @media only screen and (min-width: 1172px) {
+  .stat-block {
+    margin-bottom: 0;
+  }
   .stat-block:nth-child(3n + 1) {
     padding: 0 1.5rem 20px 0;
   }
@@ -2616,6 +2632,9 @@ article .share-icons--hide-mobile {
   }
   .stat-block:nth-child(3n + 3) {
     padding: 0 0 20px 1.5rem;
+  }
+  .stat-block:last-child {
+    flex-basis: 33.33% !important;
   }
 }
 
@@ -2626,11 +2645,19 @@ article .share-icons--hide-mobile {
 .stat-block__copy {
   background: #fff;
   border: 5 px solid green;
-  padding: 1rem;
+  padding: 2rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.stat-block__copy h2,
+.stat-block__copy h3,
+.stat-block__copy h4,
+.stat-block__copy .stat-block__content b, .stat-block__content
+.stat-block__copy b {
+  margin-bottom: 0.5rem;
 }
 
 .stat-block__content {
@@ -2836,8 +2863,6 @@ article .share-icons--hide-mobile {
 }
 
 .grid {
-  margin-top: 3rem;
-  margin-top: bottom;
   display: flex;
   flex-wrap: wrap;
 }
