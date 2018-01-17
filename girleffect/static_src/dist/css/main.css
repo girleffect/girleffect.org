@@ -1766,11 +1766,13 @@ article .share-icons--hide-mobile {
   min-height: 340px;
   margin: 4rem auto;
   display: none;
+  border: 5px solid red;
 }
 
 @media only screen and (min-width: 768px) {
   .carousel--home-desktop {
     display: block;
+    min-height: 700px;
   }
 }
 
@@ -1826,6 +1828,9 @@ article .share-icons--hide-mobile {
 }
 
 .carousel__image {
+  position: absolute;
+  top: 0;
+  bottom: 0;
   min-height: 340px;
   width: 100%;
   object-fit: cover;
@@ -1860,6 +1865,7 @@ article .share-icons--hide-mobile {
   opacity: 1;
   transition: opacity 0.25s ease-out;
   visibility: hidden;
+  z-index: -1;
 }
 
 @media only screen and (min-width: 768px) {
@@ -2010,11 +2016,17 @@ article .share-icons--hide-mobile {
 
 .carousel__panel-mobile {
   position: relative;
+  min-height: 400px;
+  padding: 1rem;
 }
 
 .carousel__panel-mobile > img {
+  position: absolute;
+  top: 0;
+  left: 0;
   min-height: 400px;
   object-fit: cover;
+  z-index: -1;
 }
 
 .carousel__panel-title {
@@ -2050,58 +2062,29 @@ article .share-icons--hide-mobile {
 
 .carousel__panel-content-mobile {
   background: rgba(255, 255, 255, 0.9);
-  padding: 20px;
+  padding: 1.5rem;
   position: absolute;
-  bottom: 30px;
-  left: 30px;
-  width: 90%;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  margin-top: auto;
 }
 
 .carousel__home-title {
-  font-size: 4.39239vw;
-  font-weight: 700;
-  line-height: 1.08;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
   width: 100%;
-  color: #fff;
-}
-
-@media (max-width: 478.1px) {
-  .carousel__home-title {
-    font-size: 21px;
-  }
-}
-
-@media (min-width: 1366px) {
-  .carousel__home-title {
-    font-size: 60px;
-  }
+  color: #ffc700;
+  margin-bottom: 0.5rem;
 }
 
 .carousel__home-title--mobile {
-  font-size: 3.29429vw;
-  line-height: 1.1;
-  z-index: 5;
   top: 50px;
   left: 50px;
   transform: translate(0);
   text-align: left;
 }
 
-@media (max-width: 1032.08889px) {
-  .carousel__home-title--mobile {
-    font-size: 34px;
-  }
-}
-
-@media (min-width: 1366px) {
-  .carousel__home-title--mobile {
-    font-size: 45px;
-  }
+.carousel__home-text {
+  color: #fff;
 }
 
 .carousel__icon {

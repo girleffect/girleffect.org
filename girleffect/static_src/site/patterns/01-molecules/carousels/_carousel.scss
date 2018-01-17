@@ -11,8 +11,11 @@
         margin: 4rem auto;
         display: none;
 
+        border: 5px solid red;
+
         @include media-query(tablet-portrait) {
             display: block;
+            min-height: 700px;
         }
 
         &::after {
@@ -70,6 +73,9 @@
     }
 
     &__image {
+        position: absolute;
+        top: 0;
+        bottom: 0;
         min-height: 340px;
         width: 100%;
         object-fit: cover;
@@ -99,6 +105,7 @@
             opacity: 1;
             transition: opacity $transition;
             visibility: hidden;
+            z-index: -1;
 
             @include media-query(tablet-portrait) {
                 visibility: visible;
@@ -230,10 +237,16 @@
 
     &__panel-mobile {
         position: relative;
+        min-height: 400px;
+        padding: 1rem;
 
         > img {
+            position: absolute;
+            top: 0;
+            left: 0;
             min-height: 400px;
             object-fit: cover;
+            z-index: -1;
         }
     }
 
@@ -268,31 +281,29 @@
 
     &__panel-content-mobile {
         background: $white-90;
-        padding: 20px;
+        padding: 1.5rem;
         position: absolute;
-        bottom: 30px;
-        left: 30px;
-        width: 90%;
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        margin-top: auto;
     }
 
     &__home-title {
-        @include jumbo-text;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
         width: 100%;
-        color: $white;
+        color: $yellow;
+        margin-bottom: 0.5rem;
 
         &--mobile {
-            @include x-large-text;
-            z-index: 5;
             top: 50px;
             left: 50px;
             transform: translate(0);
             text-align: left;
         }
+    }
+
+    &__home-text {
+        color: $white;
     }
 
     &__icon {
