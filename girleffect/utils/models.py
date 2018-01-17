@@ -317,6 +317,12 @@ class StatisticCustomisableHeading(CustomisableFeature):
 @register_snippet
 class Statistic(ClusterableModel, LinkFields):
     title = models.CharField(max_length=80)
+    cms_title = models.CharField(
+        max_length=225,
+        null=True,
+        blank=True,
+        help_text="Snippet CMS title only viewable in admin area"
+    )
     description = RichTextField(
         blank=True,
         max_length=180,
@@ -335,6 +341,7 @@ class Statistic(ClusterableModel, LinkFields):
 
     panels = [
         FieldPanel('title'),
+        FieldPanel('cms_title'),
         FieldPanel('description'),
         FieldPanel('citation_text'),
         MultiFieldPanel([
