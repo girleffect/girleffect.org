@@ -1,7 +1,8 @@
 .large-text {
     @include large-text;
-    max-width: $mid-width;
+    max-width: $body-width;
     margin: 0 auto 1rem;
+    padding: 1rem;
 
     @include media-query(tablet-landscape) {
         margin: 0 auto 2rem;

@@ -854,30 +854,27 @@ blockquote cite {
 }
 
 .body-text {
-  max-width: 768px;
-  margin: 0 auto 1rem;
-  padding: 0 20px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding: 0;
 }
 
-.section--body .body-text:first-child {
-  margin: 1rem auto 2rem;
+@media only screen and (min-width: 768px) {
+  .body-text {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
 }
 
-@media only screen and (min-width: 1024px) {
-  .section--body .body-text:first-child {
-    margin: 2rem auto 4rem;
+@media only screen and (min-width: 1172px) {
+  .body-text {
+    margin: 0 auto;
+    max-width: 768px;
   }
 }
 
 .template-article-page .body-text {
   padding: 0;
-}
-
-@media only screen and (min-width: 1024px) {
-  .body-text {
-    margin: 0 auto 2rem;
-    padding: 0;
-  }
 }
 
 .brand-pattern {
@@ -1144,8 +1141,9 @@ blockquote cite {
 .large-text {
   font-size: 1.83016vw;
   line-height: 1.16;
-  max-width: 1172px;
+  max-width: 768px;
   margin: 0 auto 1rem;
+  padding: 1rem;
 }
 
 @media (max-width: 1038.16px) {
@@ -1461,16 +1459,28 @@ blockquote cite {
 }
 
 .section--body > h3 {
-  max-width: 1172px;
-  margin: 1rem auto;
-  line-height: 1.2;
-  padding: 0 20px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .section--body > h3 {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .section--body > h3 {
+    margin: 0 auto;
+    max-width: 768px;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
   .section--body > h3 {
-    margin: 3rem auto 2rem;
-    padding: 0;
+    margin-bottom: 2rem;
   }
 }
 

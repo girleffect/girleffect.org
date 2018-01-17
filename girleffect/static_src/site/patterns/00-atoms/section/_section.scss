@@ -28,14 +28,11 @@
         padding: 0;
 
         > h3 {
-            max-width: $mid-width;
-            margin: 1rem auto;
-            line-height: 1.2;
-            padding: 0 20px;
+            @include body-container;
+            margin-bottom: 0.5rem;
 
             @include media-query(tablet-landscape) {
-                margin: 3rem auto 2rem;
-                padding: 0;
+                margin-bottom: 2rem;
             }
         }
     }
