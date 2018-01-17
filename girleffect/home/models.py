@@ -88,7 +88,7 @@ class HomePage(Page, HeroVideoFields, SocialFields):
 
     @cached_property
     def articles(self):
-        return ArticlePage.objects.all().live().public().order_by('-publication_date')[:3]
+        return ArticlePage.objects.all().live().public().order_by('-publication_date')[:6]
 
     promote_panels = (
         Page.promote_panels +  # slug, seo_title, show_in_menus, search_description
