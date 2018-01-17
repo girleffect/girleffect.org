@@ -9,7 +9,7 @@
     }
 
     .template-home-page & {
-        margin: 2rem auto;
+        @include body-container;
 
         @include media-query(tablet-landscape) {
             margin: 7rem auto;
