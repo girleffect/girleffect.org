@@ -1320,7 +1320,8 @@ blockquote cite {
   }
 }
 
-.video__content .link--with-arrow {
+.video__content .link--with-arrow,
+.list-item .link--with-arrow {
   margin-top: auto;
 }
 
@@ -2503,6 +2504,8 @@ article .share-icons--hide-mobile {
 }
 
 .list-item {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 1rem;
 }
 

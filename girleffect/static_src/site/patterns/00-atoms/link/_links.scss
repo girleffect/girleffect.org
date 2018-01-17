@@ -111,7 +111,8 @@
             }
         }
 
-        .video__content & {
+        .video__content &,
+        .list-item & {
             margin-top: auto;
         }
 
