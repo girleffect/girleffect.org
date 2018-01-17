@@ -1,20 +1,53 @@
 .list-item {
-    margin-bottom: 3rem;
+    $padding: 1.5rem;
+    $padding-small: ($padding / 2);
 
-    &:nth-child(3n+1) {
-        padding: 0 10px 20px 0;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    @include media-query(mob-landscape) {
+        margin-bottom: 3rem;
+
+        &:nth-child(2n + 1) {
+            padding: 0 $padding 20px 0;
+        }
+
+        &:nth-child(2n + 2) {
+            padding: 0 0 20px $padding;
+        }
     }
 
-    &:nth-child(3n+2) {
-        padding: 0 10px 20px;
-    }
+    @include media-query(container) {
+        &:nth-child(3n + 1) {
+            padding: 0 $padding 20px 0;
+        }
 
-    &:nth-child(3n+3) {
-        padding: 0 0 20px 10px;
+        &:nth-child(3n + 2) {
+            padding: 0 $padding-small 20px $padding-small;
+        }
+
+        &:nth-child(3n + 3) {
+            padding: 0 0 20px $padding;
+        }
     }
 
     &__image {
         margin-bottom: 1rem;
+        width: 100%;
+        height: auto;
+
+        @include media-query(mob-landscape) {
+            width: auto;
+            // To calculate hight of square image: (View width - container margins - (padding * columns)) / columns
+            height: (calc((100vw - 6rem - #{$padding} * 2)/2));
+        }
+
+        @include media-query(container) {
+            width: auto;
+            // To calculate hight of square image: (Width of container - (padding * columns)) / columns
+            height: (calc((#{$mid-width} - #{$padding} * 3)/3));
+        }
     }
 
     &__title {

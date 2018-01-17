@@ -1,7 +1,10 @@
 .wrapper {
-    margin: 0 auto;
     @include media-query(tablet-landscape) {
         padding: 0;
+    }
+
+    @include media-query(desktop) {
+        margin: 0 auto;
     }
 
     &--center {
@@ -18,15 +21,17 @@
     }
 
     &--top-bottom-space {
-        margin: 1rem auto;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
 
         @include media-query(tablet-landscape) {
-            margin: 2rem auto;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
         }
     }
 
     &--bottom-space {
-        margin: 0 auto 2rem;
+        margin-bottom: 2rem;
     }
 
     &--article {
@@ -43,7 +48,7 @@
     }
 
     &--bottom-space-xl {
-        margin: 0 auto 4rem;
+        margin-bottom: 4rem;
     }
 
     &--people {

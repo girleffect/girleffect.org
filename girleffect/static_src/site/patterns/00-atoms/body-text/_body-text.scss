@@ -1,24 +1,8 @@
 .body-text {
-    max-width: $body-width;
-    margin: 0 auto 1rem;
-    padding: 0 20px;
-
-    &:first-child {
-        .section--body & {
-            margin: 1rem auto 2rem;
-
-            @include media-query(tablet-landscape) {
-                margin: 2rem auto 4rem;
-            }
-        }
-    }
+    @include body-container;
+    padding: 0;
 
     .template-article-page & {
-        padding: 0;
-    }
-
-    @include media-query(tablet-landscape) {
-        margin: 0 auto 2rem;
         padding: 0;
     }
 }
