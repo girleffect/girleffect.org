@@ -93,7 +93,7 @@ $(function() {
         variant: 'modal-container', // add class for custom styling
         afterOpen: () => {
             const video = $('.featherlight iframe')[0];
-            video.src += '&autoplay=1';
+            video.src += '&autoplay=1&modestbranding=1&showinfo=0';
         }
     });
 
