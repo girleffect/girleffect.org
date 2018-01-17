@@ -70,6 +70,44 @@ class LinkFields(models.Model):
     ]
 
 
+class EmailLinkFields(LinkFields):
+    link_email = models.EmailField(blank=True, null=False)
+
+    class Meta:
+        abstract = True
+
+    content_panels = [
+        MultiFieldPanel([
+            PageChooserPanel('link_page'),
+            FieldPanel('link_url'),
+            FieldPanel('link_email'),
+            FieldPanel('link_text'),
+        ], 'Link'),
+    ]
+
+    def clean(self):
+        errors = {}
+
+        fields = [f for f in [self.link_email, self.link_page, self.link_url] if f is not None if f is not '']
+
+        if len(fields) > 1:
+            error_message = 'Please choose one of link url, link page or link email.'
+            errors.update(
+                {'link_email': _(error_message)},
+            )
+            errors.update(
+                {'link_page': _(error_message)},
+            )
+            errors.update(
+                {'link_url': _(error_message)},
+            )
+
+        if errors:
+            raise ValidationError(errors)
+
+        return super().clean()
+
+
 # Linked fields for pages - includes related name
 class PageLinkFields(LinkFields):
     link_page = models.ForeignKey(
@@ -195,7 +233,7 @@ class ListingFields(models.Model):
 
 
 @register_snippet
-class CallToActionSnippet(LinkFields):
+class CallToActionSnippet(EmailLinkFields):
     title = models.CharField(max_length=80)
     summary = models.CharField(blank=True, max_length=80, verbose_name="Description")
     image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
@@ -203,7 +241,7 @@ class CallToActionSnippet(LinkFields):
     panels = [
         FieldPanel('title'),
         FieldPanel('summary'),
-    ] + LinkFields.content_panels + [
+    ] + EmailLinkFields.content_panels + [
         ImageChooserPanel('image'),
     ]
 
