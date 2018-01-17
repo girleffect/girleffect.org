@@ -3601,7 +3601,7 @@ article .share-icons--hide-mobile {
 
 @media only screen and (min-width: 1024px) {
   .media-card {
-    margin: 50px auto;
+    margin: 5rem auto;
   }
 }
 
