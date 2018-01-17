@@ -913,11 +913,25 @@ blockquote cite {
 }
 
 .breadcrumb-container {
+  margin-left: 1rem;
+  margin-right: 1rem;
   display: flex;
   align-items: center;
-  max-width: 1172px;
-  margin: 0 auto;
-  padding: 20px 20px 0;
+  padding: 20px 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .breadcrumb-container {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .breadcrumb-container {
+    margin: 0 auto;
+    max-width: 1172px;
+  }
 }
 
 .search-result .breadcrumb-container {
@@ -926,7 +940,7 @@ blockquote cite {
 
 @media only screen and (min-width: 1024px) {
   .breadcrumb-container {
-    padding: 50px 0 0;
+    padding: 1rem 0;
   }
   .search-result .breadcrumb-container {
     padding: 0;

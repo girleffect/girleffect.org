@@ -24,7 +24,7 @@
                 <h3>{{ category.title }}</h3>
             </div>
             {# category.description is also available #}
-            <div class="article-container wrapper wrapper--mid wrapper--bottom-space-xl">
+            <div class="article-container grid grid--three wrapper wrapper--mid">
                 {% for person in category.people %}
                     {# Person card here #}
                     {% include "includes/person_index_card.html" with person=person %}
