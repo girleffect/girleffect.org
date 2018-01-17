@@ -7,14 +7,20 @@ import Hamburger from './../patterns/00-atoms/buttons/hamburger/hamburger.js';
 
 // Open the header callback
 function openHeader() {
-    $('.header').addClass('nav-open').find('.header__row').fadeIn(250);
+    $('.header')
+        .addClass('nav-open')
+        .find('.header__row')
+        .fadeIn(250);
 }
 
 // Close the header callback.
 function closeHeader() {
-    $('.header').removeClass('nav-open').find('.header__row').fadeOut(250, () => {
-        this.node.next().removeAttr('style');
-    });
+    $('.header')
+        .removeClass('nav-open')
+        .find('.header__row')
+        .fadeOut(250, () => {
+            this.node.next().removeAttr('style');
+        });
 }
 
 $(function() {
@@ -24,7 +30,10 @@ $(function() {
 
     // Autoplays YouTube embed in a video streamfield
     $('.video__button').on('click', function(ev) {
-        const video = $(this).parent().siblings().find('iframe');
+        const video = $(this)
+            .parent()
+            .siblings()
+            .find('iframe');
         const overlay = $(this).parent('.video__overlay');
         $(video)[0].src += '&autoplay=1&modestbranding=1&showinfo=0';
         $(overlay).hide();
@@ -38,7 +47,10 @@ $(function() {
         dots: true,
         autoHeight: false,
         navContainer: '.js-full-width-nav',
-        navText: ['<svg class="carousel__nav-left"><use xlink:href="#arrow"></use></svg>','<svg class="carousel__nav-right"><use xlink:href="#arrow"></use></svg>'],
+        navText: [
+            '<svg class="carousel__nav-left"><use xlink:href="#arrow"></use></svg>',
+            '<svg class="carousel__nav-right"><use xlink:href="#arrow"></use></svg>'
+        ],
         loop: $('.owl-carousel .carousel__item').length > 1 ? true : false
     });
 
@@ -96,54 +108,99 @@ $(function() {
     });
 
     // Sticky share icons on the article page
-    if($('.js-share-icons').length){
+    if ($('.js-share-icons').length) {
         $('.js-share-icons').scrollToFixed({
             marginTop: 30,
-            limit: $($('.footer')).offset().top - $('.js-share-icons').outerHeight(true) - 30
+            limit:
+                $($('.footer')).offset().top -
+                $('.js-share-icons').outerHeight(true) -
+                30
         });
     }
 
     // Desktop navigation
     if (window.matchMedia('(min-width: 1024px)').matches) {
-        $('.header__nav-item-primary-parent, .header__nav-secondary').mouseover(function() {
-            $(this).children('.header__link-primary').addClass('is-active');
-            $(this).children('.header__nav-secondary').addClass('is-visible');
-            $('.header__nav-overlay').addClass('is-visible');
-        });
+        $('.header__nav-item-primary-parent, .header__nav-secondary').mouseover(
+            function() {
+                $(this)
+                    .children('.header__link-primary')
+                    .addClass('is-active');
+                $(this)
+                    .children('.header__nav-secondary')
+                    .addClass('is-visible');
+                $('.header__nav-overlay').addClass('is-visible');
+            }
+        );
 
-        $('.header__nav-item-primary-parent, .header__nav-overlay, .header__nav-secondary').mouseout(function() {
-            $(this).children('.header__link-primary').removeClass('is-active');
-            $('.header__nav-overlay, .header__nav-secondary').removeClass('is-visible');
+        $(
+            '.header__nav-item-primary-parent, .header__nav-overlay, .header__nav-secondary'
+        ).mouseout(function() {
+            $(this)
+                .children('.header__link-primary')
+                .removeClass('is-active');
+            $('.header__nav-overlay, .header__nav-secondary').removeClass(
+                'is-visible'
+            );
         });
     }
 
     // Mobile navigation
     if (window.matchMedia('(max-width: 1024px)').matches) {
         $('.header__link-primary').on('click', function() {
-            $(this).parent().toggleClass('is-open');
-            $(this).siblings('ul').slideToggle(250);
+            $(this)
+                .parent()
+                .toggleClass('is-open');
+            $(this)
+                .siblings('ul')
+                .slideToggle(250);
         });
 
         $('.js-mobile-dropdown').on('click', function() {
-            $(this).parent().toggleClass('is-open');
-            $(this).next('ul').slideToggle(250);
+            $(this)
+                .parent()
+                .toggleClass('is-open');
+            $(this)
+                .next('ul')
+                .slideToggle(250);
         });
     }
 
     // Home page carousel - changes to Owl Carousel on mobile
-    $('.carousel__panel').mouseover(function(){
+    $('.carousel__panel').mouseover(function() {
         const panelNumber = $(this).data('panel');
-        const image = document.querySelector(`img[data-image="${panelNumber}"]`);
+        const image = document.querySelector(
+            `img[data-image="${panelNumber}"]`
+        );
         $('.carousel__panel').removeClass('is-expanded');
         $(this).addClass('is-expanded');
 
         this.addEventListener('transitionend', function(e) {
-            if(e.propertyName !== 'height') return;
-            $(this).children('.carousel__panel-content').css('opacity', 1);
+            if (e.propertyName !== 'height') return;
+            $(this)
+                .children('.carousel__panel-content')
+                .css('opacity', 1);
         });
 
         $('.carousel__image--hidden').removeClass('is-visible');
         $(image).addClass('is-visible');
+    });
+
+    // TODO ADD COMMENT ---------------------------
+    $('.js-carousel-container').each((index, el) => {
+        $(el).addClass(
+            `carousel-container--${$(el).find('.carousel__block-item').length /
+                2}`
+        );
+    });
+
+    $('.carousel__controls').mouseover(function() {
+        let panel = $(this).closest('.carousel__block-item');
+        panel.addClass('is-selected');
+    });
+
+    $('.carousel__controls').mouseout(function() {
+        let panel = $(this).closest('.carousel__block-item');
+        panel.removeClass('is-selected');
     });
 
     // Always show the main slide when not hovering on the home page carousel
@@ -152,7 +209,7 @@ $(function() {
     });
 
     // Hide the carousel panels when not being hovered over
-    $('.carousel__panel').mouseout(function(){
+    $('.carousel__panel').mouseout(function() {
         $('.carousel__panel').removeClass('is-expanded');
     });
 
@@ -160,7 +217,6 @@ $(function() {
     $('.js-carousel--home-mobile').owlCarousel({
         items: 1,
         nav: false,
-        dots: true,
+        dots: true
     });
-
 });

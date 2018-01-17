@@ -1,47 +1,72 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
-    <div class="carousel__item">
-        {% image value.image fill-1600x800 class="carousel__image" %}
-
-        <div class="carousel__content">
-            <h3 class="carousel__title"
+<div class="carousel__block-item">
+    <div class="carousel__panel-desktop">
+        {% image value.image fill-1600x800  %}
+        <div class="carousel__overview">
+            <h3 class="carousel__home-title"
                 style="{% if value.overview_title_shadow.text_hex %}color: {{ value.overview_title_shadow.text_hex }};{% endif %}
                        {% if value.overview_title_shadow.drop_shadow_is_on %}text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);{% endif %}"
-            >
-            {{ value.overview_title }}
-        </h3>
-            <p style="{% if value.overview_text_shadow.text_hex %}color: {{ value.overview_text_shadow.text_hex }};{% endif %}
-                      {% if value.overview_text_shadow.drop_shadow_is_on %}text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);{% endif %}"
+            >{{ value.overview_title }}</h3>
+            <p class="carousel__home-text" style="{% if value.overview_text_shadow.text_hex %}color: {{ value.overview_text_shadow.text_hex }};{% endif %}
+                      {% if value.overview_text_shadow.drop_shadow_is_on %}text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);{% endif %}"
             >{{ value.overview_text }}</p>
-
-            {% if value.textbox_title or value.textbox_text or value.textbox_link %}
-                <div class="carousel__textbox">
-                    <h2 class="carousel__title">{{ value.textbox_title }}</h2>
-
-                    <p>{{ value.textbox_text }}</p>
-
-                    {% if value.textbox_link.external_textbox_link %}
-                        {# template for this is in textbox_link_block.html #}
-                        {% include_block value.textbox_link %}
-                    {% elif value.textbox_link.internal_textbox_link %}
-                        {% include_block value.textbox_link %}
-                    {% elif value.textbox_link.document_textbox_link %}
-                        {% include_block value.textbox_link %}
-                    {% endif %}
-                </div>
-            {% endif %}
         </div>
 
-        {# Unstyled #}
-        <div class="carousel-label"
-             {% if value.slide_title_hex %}style="color: {{ value.slide_title_hex }};"{% endif %}>
-            {% if value.slide_logo %}
-                {% image value.slide_logo max-300x300 %}
-            {% elif value.slide_title %}
-                {{ value.slide_title }}
-            {% else %}
-                {# No logo or title #}
-            {% endif %}
-        </div>
 
-        {# value.slide_title_hex to change chevron colour also #}
+
+        <div class="carousel__controls">
+            <div class="carousel__panel-content">
+                <h4 class="carousel__title">{{ value.textbox_title }}</h4>
+
+                <p>{{ value.textbox_text }}</p>
+                {% if value.textbox_link.external_link %}
+                    {# template for this is in textbox_link_block.html #}
+                    {% include_block value.textbox_link %}
+                {% elif value.textbox_link.internal_link %}
+                    {% include_block value.textbox_link %}
+                {% elif value.textbox_link.document_link %}
+                    {% include_block value.textbox_link %}
+                {% endif %}
+            </div>
+            <svg class="carousel__icon"
+                 {% if value.slide_title_hex %}style="stroke:{{ value.slide_title_hex }};"{% endif %}>
+                <use xlink:href="#chevron"></use>
+            </svg>
+            <h4 class="carousel__panel-title"
+                {% if value.slide_title_hex %}style="color: {{ value.slide_title_hex }};"{% endif %}>
+                {% if value.slide_logo %}
+                    {% image value.slide_logo max-300x300 %}
+                {% elif value.slide_title %}
+                    {{ value.slide_title }}
+                {% else %}
+                    {# No logo or title #}
+                {% endif %}
+            </h4>
+        </div>
     </div>
+
+    <div class="carousel__panel-mobile">
+        {% image value.image fill-1600x800 class="carousel__image" %}
+        <h3 class="carousel__home-title carousel__home-title--mobile"
+            style="{% if value.overview_title_shadow.text_hex %}color: {{ value.overview_title_shadow.text_hex }};{% endif %}
+                   {% if value.overview_title_shadow.drop_shadow_is_on %}text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);{% endif %}"
+        >{{ value.overview_title }}</h3>
+        <p class="carousel__home-text" style="{% if value.overview_text_shadow.text_hex %}color: {{ value.overview_text_shadow.text_hex }};{% endif %}
+                  {% if value.overview_text_shadow.drop_shadow_is_on %}text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);{% endif %}"
+        >{{ value.overview_text }}</p>
+        <div class="carousel__panel-content-mobile">
+            <h4 class="carousel__panel-title">{{ value.textbox_title }}</h4>
+            <div class="carousel__panel-content">
+                <p>{{ value.textbox_text }}</p>
+                {% if value.textbox_link.external_link %}
+                    {# template for this is in textbox_link_block.html #}
+                    {% include_block value.textbox_link %}
+                {% elif value.textbox_link.internal_link %}
+                    {% include_block value.textbox_link %}
+                {% elif value.textbox_link.document_link %}
+                    {% include_block value.textbox_link %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
