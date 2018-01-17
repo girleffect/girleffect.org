@@ -10,8 +10,7 @@
         min-height: 340px;
         margin: 4rem auto;
         display: none;
-
-        border: 5px solid red;
+        padding-top: 4rem;
 
         @include media-query(tablet-portrait) {
             display: block;
@@ -26,6 +25,15 @@
             left: 0;
             right: 0;
             bottom: 0;
+        }
+
+        .carousel__home-title,
+        .carousel__home-text {
+            @include mid-container;
+
+            @include media-query(desktop) {
+                padding-right: calc(#{$mid-width} / 1.5);
+            }
         }
     }
 
@@ -218,21 +226,14 @@
     }
 
     &__panel {
-        padding: 20px;
         flex: 1;
         background: transparent;
         transition: height, background, $transition;
-        height: 70px;
         text-align: center;
         display: flex;
         flex-direction: column;
         justify-content: center;
         position: relative;
-
-        &:hover {
-            background: $white-90;
-            height: 220px;
-        }
     }
 
     &__panel-mobile {
@@ -256,17 +257,19 @@
         font-weight: $weight-medium;
 
         .carousel__panel:hover & {
-            color: $green;
+            color: $yellow;
         }
 
         .carousel__panel-mobile & {
-            color: $green;
+            color: $yellow;
         }
     }
 
     &__panel-content {
         color: $green;
         transition: opacity $transition;
+        background-color: $light-grey;
+        padding: 1rem;
 
         @include media-query(tablet-portrait) {
             opacity: 0;
@@ -300,6 +303,10 @@
             transform: translate(0);
             text-align: left;
         }
+
+        @include media-query(tablet-portrait) {
+            margin-bottom: 1rem;
+        }
     }
 
     &__home-text {
@@ -307,22 +314,21 @@
     }
 
     &__icon {
+        width: 100%;
         fill: none;
-        stroke: $yellow;
-        stroke-width: 3px;
-        position: absolute;
+        stroke: $white;
+        stroke-width: 2px;
         right: 0;
         height: 35px;
-        width: 15px;
-        left: 50%;
-        transform: translateX(-50%) rotate(180deg);
-        bottom: 50px;
+        width: 1.5rem;
+        transform: rotate(180deg);
         opacity: 1;
         transition: opacity, bottom $transition;
+        margin: auto;
+        margin-bottom: 0.5rem;
 
         .is-expanded & {
-            opacity: 0;
-            bottom: 210px;
+            stroke: $yellow;
         }
     }
 }

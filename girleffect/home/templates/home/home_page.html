@@ -12,7 +12,7 @@
     {# Homepage Carousel #}
     {% if page.carousel_items.exists %}
     <div class="carousel carousel--home-desktop">
-        <h3 class="carousel__home-title">{{ page.overview_title }}</h3>
+        <h2 class="carousel__home-title">{{ page.overview_title }}</h2>
         <p class="carousel__home-text"></p>
         {% image page.overview_image fill-1600x800 class="carousel__image carousel__image--main" %}
 
@@ -30,16 +30,6 @@
                 {% else %}
                     <div data-panel="{{ forloop.counter }}" class="carousel__panel">
                 {% endif %}
-
-                        <svg class="carousel__icon"
-                             {% if item.title_colour_hex %}style="stroke:{{ item.title_colour_hex }};"{% endif %}>
-                            <use xlink:href="#chevron"></use>
-                        </svg>
-
-                        <h4 class="carousel__panel-title"
-                            {% if item.title_colour_hex %}style="color:{{ item.title_colour_hex }};"{% endif %}>
-                            {{ item.title }}
-                        </h4>
                         <div class="carousel__panel-content">
                             <p>{{ item.description }}</p>
 
@@ -55,6 +45,16 @@
                                 </span>
                             {% endif %}
                         </div>
+                        <svg class="carousel__icon"
+                             {% if item.title_colour_hex %}style="stroke:{{ item.title_colour_hex }};"{% endif %}>
+                            <use xlink:href="#chevron"></use>
+                        </svg>
+
+                        <h4 class="carousel__panel-title"
+                            {% if item.title_colour_hex %}style="color:{{ item.title_colour_hex }};"{% endif %}>
+                            {{ item.title }}
+                        </h4>
+
 
                 {% if item.link_page %}
                     </a>

@@ -1,5 +1,5 @@
 <div class="carousel carousel--home-desktop">
-  <h3 class="carousel__home-title">Lorem Ipsum</h3>
+  <h2 class="carousel__home-title">Lorem Ipsum</h2>
   <p class="carousel__home-text">Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
   <img class="carousel__image carousel__image--main" src="http://placehold.it/1600x800/cccccc/ffffff" alt="">
   <img data-image="1" class="carousel__image carousel__image--hidden" src="http://placehold.it/1600x800/cccccc/ffffff" alt="">
@@ -9,36 +9,37 @@
 
   <div class="carousel__panels">
     <div data-panel="1" class="carousel__panel">
+      <div class="carousel__panel-content">
+          <p>Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
+          {% include 'atoms-link--with-arrow' %}
+      </div>
       <svg class="carousel__icon">
         <use xlink:href="#chevron"></use>
       </svg>
       <h4 class="carousel__panel-title">Our Approach</h4>
+
+    </div>
+
+    <div data-panel="2" class="carousel__panel">
       <div class="carousel__panel-content">
           <p>Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
           {% include 'atoms-link--with-arrow' %}
       </div>
-    </div>
-
-    <div data-panel="2" class="carousel__panel">
       <svg class="carousel__icon">
         <use xlink:href="#chevron"></use>
       </svg>
       <h4 class="carousel__panel-title">Brands for social change</h4>
+    </div>
+
+    <div data-panel="3" class="carousel__panel">
       <div class="carousel__panel-content">
           <p>Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
           {% include 'atoms-link--with-arrow' %}
       </div>
-    </div>
-
-    <div data-panel="3" class="carousel__panel">
       <svg class="carousel__icon">
         <use xlink:href="#chevron"></use>
       </svg>
       <h4 class="carousel__panel-title">The third panel</h4>
-      <div class="carousel__panel-content">
-          <p>Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
-          {% include 'atoms-link--with-arrow' %}
-      </div>
     </div>
   </div>
 </div>
