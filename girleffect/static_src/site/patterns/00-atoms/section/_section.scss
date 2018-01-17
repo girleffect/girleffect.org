@@ -29,10 +29,10 @@
 
         > h3 {
             @include body-container;
-            margin-bottom: 0.5rem;
+            margin: 0.5rem auto;
 
             @include media-query(tablet-landscape) {
-                margin-bottom: 2rem;
+                margin: 2rem auto;
             }
         }
     }

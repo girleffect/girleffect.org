@@ -1461,7 +1461,7 @@ blockquote cite {
 .section--body > h3 {
   margin-left: 1rem;
   margin-right: 1rem;
-  margin-bottom: 0.5rem;
+  margin: 0.5rem auto;
 }
 
 @media only screen and (min-width: 768px) {
@@ -1480,7 +1480,7 @@ blockquote cite {
 
 @media only screen and (min-width: 1024px) {
   .section--body > h3 {
-    margin-bottom: 2rem;
+    margin: 2rem auto;
   }
 }
 
