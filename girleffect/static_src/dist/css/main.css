@@ -1462,7 +1462,8 @@ blockquote cite {
 .section--body > h3 {
   margin-left: 1rem;
   margin-right: 1rem;
-  margin: 0.5rem auto;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 @media only screen and (min-width: 768px) {
@@ -1481,7 +1482,8 @@ blockquote cite {
 
 @media only screen and (min-width: 1024px) {
   .section--body > h3 {
-    margin: 2rem auto;
+    margin-top: 2em;
+    margin-bottom: 2rem;
   }
 }
 
@@ -1629,17 +1631,19 @@ article .share-icons--hide-mobile {
 }
 
 .wrapper--top-bottom-space {
-  margin: 1rem auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 @media only screen and (min-width: 1024px) {
   .wrapper--top-bottom-space {
-    margin: 2rem auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 }
 
 .wrapper--bottom-space {
-  margin: 0 auto 2rem;
+  margin-bottom: 2rem;
 }
 
 .wrapper--article {
@@ -1656,7 +1660,7 @@ article .share-icons--hide-mobile {
 }
 
 .wrapper--bottom-space-xl {
-  margin: 0 auto 4rem;
+  margin-bottom: 4rem;
 }
 
 .wrapper--people {
