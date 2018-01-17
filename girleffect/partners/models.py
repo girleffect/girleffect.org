@@ -26,7 +26,7 @@ from girleffect.utils.models import (
 
 class Partner(Orderable, models.Model):
     page = ParentalKey('PartnerIndexPage', related_name='partners')
-    title = models.CharField(blank=False, max_length=80)
+    title = models.CharField(blank=False, max_length=255)
     description = models.TextField(blank=True)
     logo = models.ForeignKey(
         'images.CustomImage',
