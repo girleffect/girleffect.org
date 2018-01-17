@@ -201,7 +201,7 @@ class MediaTextOverlayBlock(blocks.StructBlock):
     title = blocks.CharBlock(
         required=False,
         label="Title Text",
-        max_length=25,
+        max_length=255,
         help_text="Appears above the module."
     )
     image = ImageChooserBlock()
@@ -278,7 +278,7 @@ class QuoteBlock(blocks.StructBlock):
     )
     citation = blocks.CharBlock(
         required=False,
-        max_length=80,
+        max_length=255,
     )
     link_block = LinkBlock(required=False)
     drop_shadow_options = DropShadowBlock()
@@ -309,7 +309,7 @@ class QuoteListBlock(blocks.StructBlock):
 
 class ListItemBlock(blocks.StructBlock):
     image = ImageChooserBlock(required=False)
-    title = blocks.CharBlock(max_length=80, required=False)
+    title = blocks.CharBlock(max_length=255, required=False)
     description = blocks.RichTextBlock(
         max_length=250,
         features=["bold", "italic", "link", "document-link"],
@@ -334,7 +334,7 @@ class ContentSectionBlock(blocks.StructBlock):
 
 
 class StatisticBlock(blocks.StructBlock):
-    title = blocks.CharBlock(max_length=80, required=False)
+    title = blocks.CharBlock(max_length=255, required=False)
     statistics = blocks.ListBlock(
         SnippetChooserBlock(Statistic),
     )
@@ -401,12 +401,12 @@ class ExtendableBodyTextBlock(blocks.StructBlock):
         ],
     )
     extend_button_text = blocks.CharBlock(
-        max_length=80,
+        max_length=255,
         required=False,
         help_text="Customise text for the extend button"
     )
     collapse_button_text = blocks.CharBlock(
-        max_length=80,
+        max_length=255,
         required=False,
         help_text="Customise text for the collapse button"
     )

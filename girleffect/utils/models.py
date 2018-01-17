@@ -234,7 +234,7 @@ class ListingFields(models.Model):
 
 @register_snippet
 class CallToActionSnippet(EmailLinkFields):
-    title = models.CharField(max_length=80)
+    title = models.CharField(max_length=255)
     summary = models.CharField(blank=True, max_length=80, verbose_name="Description")
     image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
 
@@ -292,7 +292,7 @@ class SocialMediaSettings(BaseSetting):
 @register_snippet
 class PartnerWithUsSnippet(CallToActionSnippet):
     email = models.EmailField()
-    phone = models.CharField(max_length=18)
+    phone = models.CharField(max_length=255)
 
     panels = CallToActionSnippet.panels + [
         FieldPanel('email'),
@@ -316,7 +316,7 @@ class StatisticCustomisableHeading(CustomisableFeature):
 
 @register_snippet
 class Statistic(ClusterableModel, LinkFields):
-    title = models.CharField(max_length=80)
+    title = models.CharField(max_length=255)
     cms_title = models.CharField(
         max_length=225,
         null=True,
