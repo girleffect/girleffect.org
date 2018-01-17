@@ -270,6 +270,7 @@
         transition: opacity $transition;
         background-color: $light-grey;
         padding: 1rem;
+        margin-bottom: 1rem;
 
         @include media-query(tablet-portrait) {
             opacity: 0;
