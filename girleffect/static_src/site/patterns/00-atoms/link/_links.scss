@@ -105,7 +105,9 @@
             margin-top: 1rem;
         }
 
-        .video__content & {
+        .video__content &,
+        .list-item &,
+        .carousel__panel-content & {
             margin-top: auto;
         }
 

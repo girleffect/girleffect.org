@@ -2,6 +2,8 @@
     $padding: 1.5rem;
     $padding-small: ($padding / 2);
 
+    display: flex;
+    flex-direction: column;
     margin-bottom: 1rem;
 
     @include media-query(mob-landscape) {
