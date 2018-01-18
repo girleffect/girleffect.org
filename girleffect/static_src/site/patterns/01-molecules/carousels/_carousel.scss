@@ -410,30 +410,34 @@
     }
 
     &--2-panel {
-        .carousel__controls {
-            width: calc(50% - 8rem);
-            margin: auto 4rem;
+        @include media-query(tablet-portrait) {
+            .carousel__controls {
+                width: calc(50% - 8rem);
+                margin: auto 4rem;
+            }
         }
     }
 
     &--3-panel {
-        .carousel__controls {
-            width: calc(33.33%);
-        }
-
-        .carousel__block-item {
-            &:nth-of-type(1) .carousel__panel-content {
-                margin-left: 10rem;
+        @include media-query(tablet-portrait) {
+            .carousel__controls {
+                width: calc(33.33%);
             }
 
-            &:nth-of-type(2) .carousel__controls {
-                left: 0;
-                right: 0;
-                margin: auto;
-            }
+            .carousel__block-item {
+                &:nth-of-type(1) .carousel__panel-content {
+                    margin-left: 10rem;
+                }
 
-            &:nth-of-type(3) .carousel__panel-content {
-                margin-right: 10rem;
+                &:nth-of-type(2) .carousel__controls {
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                }
+
+                &:nth-of-type(3) .carousel__panel-content {
+                    margin-right: 10rem;
+                }
             }
         }
     }
