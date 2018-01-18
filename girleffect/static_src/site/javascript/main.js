@@ -219,4 +219,11 @@ $(function() {
         nav: false,
         dots: true
     });
+
+    // Extendable body toggleClass
+    $('.extendable-body--toggle').on('click', function() {
+        $('.extendable-body--collapsible').slideToggle();
+        $('.extendable-body--open').toggle();
+        $('.extendable-body--close').toggle();
+    });
 });

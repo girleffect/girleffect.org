@@ -2397,6 +2397,10 @@ article .share-icons--hide-mobile {
   background: #dad9d6;
 }
 
+.extendable-body--close, .extendable-body--collapsible {
+  display: none;
+}
+
 .form--search {
   display: flex;
   justify-content: center;
