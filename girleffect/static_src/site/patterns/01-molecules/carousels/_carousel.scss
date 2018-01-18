@@ -1,44 +1,9 @@
 .carousel-container {
     position: relative;
     margin-bottom: 3rem;
-
-    // TODO ADD THIS CLASS ON CAROUSEL
-    &--2 {
-        .carousel--home-desktop {
-            .carousel__controls {
-                width: calc(50% - 8rem);
-                margin: auto 4rem;
-            }
-        }
-
-        // TODO Left and right
-    }
-
-    &--3 {
-        .carousel--home-desktop {
-            .carousel__controls {
-                width: calc(33.33%);
-            }
-
-            .carousel__block-item:nth-of-type(1) .carousel__panel-content {
-                margin-left: 8rem;
-            }
-
-            .carousel__block-item:nth-of-type(2) .carousel__controls {
-                left: 0;
-                right: 0;
-                margin: auto;
-            }
-
-            .carousel__block-item:nth-of-type(3) .carousel__panel-content {
-                margin-right: 8rem;
-            }
-        }
-    }
 }
 
 .carousel {
-    // MOBILE STYLING
     margin: 2rem auto;
     display: block;
     position: relative;
@@ -52,8 +17,6 @@
             display: none;
         }
     }
-
-    // DESKTOP STYLING
 
     @include media-query(tablet-portrait) {
         position: relative;
@@ -75,54 +38,6 @@
             right: 0;
             bottom: 0;
         }
-
-        .carousel__home-title,
-        .carousel__home-text {
-            @include mid-container;
-
-            @include media-query(desktop) {
-                // margin: 0;
-                padding-right: calc(#{$mid-width} / 1.5);
-            }
-        }
-
-        .carousel__home-title {
-            padding-bottom: 1rem;
-        }
-
-        .carousel__overview {
-            margin-top: 5rem;
-            margin-top: 4rem;
-        }
-
-        .carousel__controls {
-            // border: 5px solid green;
-            // background-color: green;
-            display: flex;
-
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            right: 0;
-            bottom: 0;
-
-            z-index: 2;
-
-            // TODO Comment
-            &:hover {
-                .carousel__icon {
-                    stroke: $yellow !important;
-                }
-
-                .carousel__panel-title {
-                    color: $yellow !important;
-                }
-            }
-        }
-    }
-
-    &--home-desktop {
     }
 
     &__item {
@@ -154,10 +69,6 @@
         width: 100%;
         object-fit: cover;
         z-index: -1;
-
-        @include media-query(tablet-portrait) {
-            // min-height: 700px;
-        }
 
         &--hidden {
             position: absolute;
@@ -300,7 +211,7 @@
     &__panel {
         flex: 1;
         background: transparent;
-        transition: height, background, $transition;
+        transition: height $transition;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -309,15 +220,11 @@
     }
 
     &__block-item {
-        .carousel__overview {
-            display: none;
-        }
-        //
         &:first-of-type {
             .carousel__controls {
                 left: 0;
             }
-            //
+
             .carousel__overview {
                 display: block;
             }
@@ -329,13 +236,10 @@
 
         &.is-selected {
             .carousel__controls {
-                // background-color: yellow;
             }
 
             .carousel__overview {
-                // border: 5px solid red;
                 display: block;
-                // z-index: 5;
             }
 
             .carousel__panel-content {
@@ -425,6 +329,15 @@
         margin-top: auto;
     }
 
+    &__home-title,
+    &__home-text {
+        @include mid-container;
+
+        @include media-query(desktop) {
+            padding-right: calc(#{$mid-width} / 1.5);
+        }
+    }
+
     &__home-title {
         width: 100%;
         color: $yellow;
@@ -446,6 +359,38 @@
         color: $white;
     }
 
+    &__overview {
+        @include media-query(tablet-portrait) {
+            display: none;
+            margin-top: 4rem;
+        }
+    }
+
+    &__controls {
+        @include media-query(tablet-portrait) {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            z-index: 2;
+
+            // TODO Have to overide hover colors with important because we are using inline styling
+            &:hover {
+                cursor: pointer;
+                .carousel__icon {
+                    stroke: $yellow !important;
+                }
+
+                .carousel__panel-title {
+                    color: $yellow !important;
+                }
+            }
+        }
+    }
+
     &__icon {
         width: 100%;
         fill: none;
@@ -457,11 +402,39 @@
         transform: rotate(180deg);
         opacity: 1;
         transition: opacity, bottom $transition;
-        // margin: auto;
         margin-bottom: 0.5rem;
 
         .is-expanded & {
             stroke: $yellow;
+        }
+    }
+
+    &--2-panel {
+        .carousel__controls {
+            width: calc(50% - 8rem);
+            margin: auto 4rem;
+        }
+    }
+
+    &--3-panel {
+        .carousel__controls {
+            width: calc(33.33%);
+        }
+
+        .carousel__block-item {
+            &:nth-of-type(1) .carousel__panel-content {
+                margin-left: 10rem;
+            }
+
+            &:nth-of-type(2) .carousel__controls {
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+
+            &:nth-of-type(3) .carousel__panel-content {
+                margin-right: 10rem;
+            }
         }
     }
 }

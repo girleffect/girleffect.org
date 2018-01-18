@@ -25,7 +25,7 @@ function closeHeader() {
 
 // Change carousel component to owl carousel
 function setCarousel() {
-    $('.carousel').addClass('owl-carousel');
+    $('.js-carousel').addClass('owl-carousel');
 
     $('.js-carousel').owlCarousel({
         items: 1,
@@ -39,7 +39,7 @@ function isMobileScreen() {
 }
 
 function isOwlCarousel() {
-    return $('.carousel').hasClass('owl-carousel');
+    return $('.js-carousel').hasClass('owl-carousel');
 }
 
 function removeCarousel() {
@@ -215,11 +215,10 @@ $(function() {
         $(image).addClass('is-visible');
     });
 
-    // TODO ADD COMMENT ---------------------------
-    $('.js-carousel-container').each((index, el) => {
+    // Count items in carousel to set styling class
+    $('.js-carousel').each((index, el) => {
         $(el).addClass(
-            `carousel-container--${$(el).find('.carousel__block-item').length /
-                2}`
+            `carousel--${$(el).find('.carousel__block-item').length}-panel`
         );
     });
 
