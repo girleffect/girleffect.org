@@ -2819,6 +2819,7 @@ article .share-icons--hide-mobile {
 .slider-container {
   min-height: 340px;
   position: relative;
+  margin: 2rem 0;
 }
 
 .slider {
