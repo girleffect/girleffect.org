@@ -88,7 +88,7 @@
 
     &--with-arrow {
         @include small-text;
-        font-weight: $weight-bold;
+        font-weight: $weight-medium;
         display: flex;
         align-items: center;
 
@@ -101,8 +101,8 @@
         }
 
         .quote__content--has-link & {
-            color: $white;
-            margin-top: 30px;
+            color: inherit;
+            margin-top: 1rem;
         }
 
         .carousel__panel-content & {
@@ -111,8 +111,13 @@
             }
         }
 
-        .video__content & {
+        .video__content &,
+        .list-item & {
             margin-top: auto;
+        }
+
+        .stat-block__copy & {
+            margin-top: 2rem;
         }
     }
 

@@ -49,10 +49,8 @@ $white-05: rgba($white, 0.05);
    Typography
    :: Default to system font stack
 */
-$font-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-$font-serif: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua',
-    Georgia, serif;
+$font-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+$font-serif: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif;
 
 $weight-bold: 700;
 $weight-semibold: 600;

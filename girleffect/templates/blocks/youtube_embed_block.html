@@ -1,20 +1,22 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 {% image value.customisation.background_image max-100x100 as bg_img %}
-<div class="video video-container"
-     style="{% if bg_img %}background:url({{ bg_img.url }});{% endif %}
-            {% if value.customisation.background_hex %}background:{{ value.customisation.background_hex }};{% endif %}">
-    <div class="video__player">
-        {# renders the YouTube video and cover photo #}
-        {# template is templates/wagtailembeds/embed_frontend.html #}
-        {% include_block value.youtube_embed %}
-    </div>
+<div class="video-container">
+    <div class="video"
+         style="{% if bg_img %}background:url({{ bg_img.url }});{% endif %}
+                {% if value.customisation.background_hex %}background:{{ value.customisation.background_hex }};{% endif %}">
+        <div class="video__player">
+            {# renders the YouTube video and cover photo #}
+            {# template is templates/wagtailembeds/embed_frontend.html #}
+            {% include_block value.youtube_embed %}
+        </div>
 
-    <div class="video__content">
-        <h4 class="video__title">{{ value.heading }}</h4>
-        <div class="video__copy">{{ value.text }}</div>
-        {# template for this is in link_block.html #}
-        {% if value.link.link_text %}
-            {% include_block value.link %}
-        {% endif %}
+        <div class="video__content">
+            <h4 class="video__title">{{ value.heading }}</h4>
+            <div class="video__copy">{{ value.text }}</div>
+            {# template for this is in link_block.html #}
+            {% if value.link.link_text %}
+                {% include_block value.link %}
+            {% endif %}
+        </div>
     </div>
 </div>
