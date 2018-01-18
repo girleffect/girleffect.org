@@ -113,6 +113,10 @@
         width: 100%;
         padding: 0.5rem;
 
+        @include media-query(tablet-portrait) {
+            bottom: 1rem;
+        }
+
         @include media-query(container) {
             bottom: 3rem;
         }

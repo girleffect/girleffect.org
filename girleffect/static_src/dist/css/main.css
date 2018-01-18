@@ -2767,6 +2767,12 @@ article .share-icons--hide-mobile {
   padding: 0.5rem;
 }
 
+@media only screen and (min-width: 768px) {
+  .slider.owl-slider .owl-dots {
+    bottom: 1rem;
+  }
+}
+
 @media only screen and (min-width: 1172px) {
   .slider.owl-slider .owl-dots {
     bottom: 3rem;
