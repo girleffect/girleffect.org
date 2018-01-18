@@ -70,7 +70,7 @@ $(function() {
         ev.preventDefault();
     });
 
-    // Full width carousel streamfield
+    // Full width slider streamfield
     $('.js-carousel--full-width').owlCarousel({
         items: 1,
         nav: true,
@@ -82,6 +82,22 @@ $(function() {
             '<svg class="carousel__nav-right"><use xlink:href="#arrow"></use></svg>'
         ],
         loop: $('.owl-carousel .carousel__item').length > 1 ? true : false
+    });
+
+    // Full width slider streamfield
+    $('.js-slider--full-width').owlCarousel({
+        items: 1,
+        nav: true,
+        dots: true,
+        autoHeight: false,
+        navContainer: '.js-slider__nav--full-width',
+        navText: [
+            '<svg class="slider__nav-left"></svg>',
+            '<svg class="slider__nav-right"></svg>'
+        ],
+        loop: true,
+        autoplay: $('.slider-container').attr('data-delay') > 0,
+        autoplayTimeout: $('.slider-container').attr('data-delay')
     });
 
     // Hide the carousel nav if there's only one slide - relies on the result of the loop ternary above
