@@ -13,21 +13,21 @@
                 {{ value.overview_text }}
             </p>
 
-            {% if value.textbox_title or value.textbox_text or value.textbox_link %}
-            <div class="slider__textbox">
-                <h4 class="slider__title">{{ value.textbox_title }}</h4>
-                <p>{{ value.textbox_text }}</p>
+            {% if value.textbox_title or value.textbox_text or value.external_link or value.textbox_link.internal_link or value.textbox_link.document_link%}
+                <div class="slider__textbox">
+                    <h4 class="slider__title">{{ value.textbox_title }}</h4>
+                    <p>{{ value.textbox_text }}</p>
 
 
-                {% if value.textbox_link.external_link %}
-                    {# template for this is in textbox_link_block.html #}
-                    {% include_block value.textbox_link %}
-                {% elif value.textbox_link.internal_link %}
-                    {% include_block value.textbox_link %}
-                {% elif value.textbox_link.document_link %}
-                    {% include_block value.textbox_link %}
-                {% endif %}
-            </div>
+                    {% if value.textbox_link.external_link %}
+                        {# template for this is in textbox_link_block.html #}
+                        {% include_block value.textbox_link %}
+                    {% elif value.textbox_link.internal_link %}
+                        {% include_block value.textbox_link %}
+                    {% elif value.textbox_link.document_link %}
+                        {% include_block value.textbox_link %}
+                    {% endif %}
+                </div>
             {% endif %}
         </div>
     </div>
