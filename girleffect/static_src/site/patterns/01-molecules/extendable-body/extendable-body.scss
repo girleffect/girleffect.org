@@ -1,6 +1,17 @@
+.extendable-body-container {
+    @include body-container;
+}
+
 .extendable-body {
     &--close,
     &--collapsible {
         display: none;
+    }
+
+    &__controls {
+        min-height: 4rem;
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
     }
 }

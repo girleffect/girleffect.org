@@ -1229,8 +1229,8 @@ blockquote cite {
   bottom: -1px;
   height: 2px;
   background: #ffc700;
-  left: 28px;
-  right: 28px;
+  left: 0;
+  right: 0;
   transition: left, right, width, 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.4s;
 }
 
@@ -2403,8 +2403,34 @@ article .share-icons--hide-mobile {
   background: #dad9d6;
 }
 
+.extendable-body-container {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .extendable-body-container {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .extendable-body-container {
+    margin: 0 auto;
+    max-width: 768px;
+  }
+}
+
 .extendable-body--close, .extendable-body--collapsible {
   display: none;
+}
+
+.extendable-body__controls {
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
 .form--search {
