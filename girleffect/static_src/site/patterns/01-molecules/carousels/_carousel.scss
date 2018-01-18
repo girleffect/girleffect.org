@@ -38,22 +38,29 @@
 }
 
 .carousel {
+    // MOBILE STYLING
     margin: 2rem auto;
     display: block;
     position: relative;
 
+    &__panel-mobile {
+        position: relative;
+        min-height: 400px;
+        padding: 1rem;
+
+        @include media-query(tablet-portrait) {
+            display: none;
+        }
+    }
+
+    // DESKTOP STYLING
+
     @include media-query(tablet-portrait) {
         position: relative;
         overflow: hidden;
-        min-height: 340px;
+        min-height: 700px;
         margin: 4rem auto;
-        display: none;
         padding-top: 4rem;
-
-        @include media-query(tablet-portrait) {
-            display: block;
-            min-height: 700px;
-        }
 
         &::after {
             background: linear-gradient(
@@ -140,10 +147,13 @@
     &__image {
         position: absolute;
         top: 0;
+        right: 0;
         bottom: 0;
-        min-height: 340px;
+        left: 0;
+        min-height: 400px;
         width: 100%;
         object-fit: cover;
+        z-index: -1;
 
         @include media-query(tablet-portrait) {
             // min-height: 700px;
@@ -296,25 +306,6 @@
         flex-direction: column;
         justify-content: center;
         position: relative;
-    }
-
-    &__panel-mobile {
-        position: relative;
-        min-height: 400px;
-        padding: 1rem;
-
-        > img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            min-height: 400px;
-            object-fit: cover;
-            z-index: -1;
-        }
-
-        @include media-query(tablet-portrait) {
-            display: none;
-        }
     }
 
     &__block-item {

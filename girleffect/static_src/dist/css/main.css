@@ -1797,25 +1797,26 @@ article .share-icons--hide-mobile {
   position: relative;
 }
 
+.carousel__panel-mobile {
+  position: relative;
+  min-height: 400px;
+  padding: 1rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .carousel__panel-mobile {
+    display: none;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   .carousel {
     position: relative;
     overflow: hidden;
-    min-height: 340px;
+    min-height: 700px;
     margin: 4rem auto;
-    display: none;
     padding-top: 4rem;
   }
-}
-
-@media only screen and (min-width: 768px) and (min-width: 768px) {
-  .carousel {
-    display: block;
-    min-height: 700px;
-  }
-}
-
-@media only screen and (min-width: 768px) {
   .carousel::after {
     background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.7) 90%);
     position: absolute;
@@ -1903,10 +1904,13 @@ article .share-icons--hide-mobile {
 .carousel__image {
   position: absolute;
   top: 0;
+  right: 0;
   bottom: 0;
-  min-height: 340px;
+  left: 0;
+  min-height: 400px;
   width: 100%;
   object-fit: cover;
+  z-index: -1;
 }
 
 .carousel__image--hidden {
@@ -2079,27 +2083,6 @@ article .share-icons--hide-mobile {
   flex-direction: column;
   justify-content: center;
   position: relative;
-}
-
-.carousel__panel-mobile {
-  position: relative;
-  min-height: 400px;
-  padding: 1rem;
-}
-
-.carousel__panel-mobile > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-height: 400px;
-  object-fit: cover;
-  z-index: -1;
-}
-
-@media only screen and (min-width: 768px) {
-  .carousel__panel-mobile {
-    display: none;
-  }
 }
 
 .carousel__block-item .carousel__overview {

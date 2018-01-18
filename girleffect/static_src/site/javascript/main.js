@@ -23,6 +23,36 @@ function closeHeader() {
         });
 }
 
+// Change carousel component to owl carousel
+function setCarousel() {
+    $('.carousel').addClass('owl-carousel');
+
+    $('.js-carousel').owlCarousel({
+        items: 1,
+        nav: false,
+        dots: true
+    });
+}
+
+function isMobileScreen() {
+    return $(window).width() < 768;
+}
+
+function isOwlCarousel() {
+    return $('.carousel').hasClass('owl-carousel');
+}
+
+function removeCarousel() {
+    let carousel = $('.owl-carousel');
+    carousel
+        .trigger('destroy.owl.carousel')
+        .removeClass('owl-carousel owl-loaded');
+    carousel
+        .find('.owl-stage-outer')
+        .children()
+        .unwrap();
+}
+
 $(function() {
     $(Hamburger.selector()).each((index, el) => {
         new Hamburger($(el), openHeader, closeHeader);
@@ -203,25 +233,20 @@ $(function() {
         panel.removeClass('is-selected');
     });
 
-    if ($(window).width() < 768) {
-        // TODO:: Reafactor to method
-        $('.carousel').addClass('owl-carousel');
-
-        $('.js-carousel').owlCarousel({
-            items: 1,
-            nav: false,
-            dots: true
-        });
+    if (isMobileScreen()) {
+        setCarousel();
     }
 
-    // Change home page to owl carousel if tablet size reached.
+    // Change carousel to owl carousel when mobile screensize reaced
     $(window).on('resize', () => {
-        if ($(window).width() < 768) {
-            if (!$('.carousel').hasClass('owl-carousel')) {
-                $('.carousel').addClass('owl-carousel');
+        if (isMobileScreen()) {
+            if (!isOwlCarousel()) {
+                setCarousel();
             }
         } else {
-            $('.carousel').removeClass('owl-carousel');
+            if (isOwlCarousel()) {
+                removeCarousel();
+            }
         }
     });
 
