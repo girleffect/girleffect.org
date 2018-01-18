@@ -10,7 +10,10 @@
         margin-bottom: 3rem;
     }
 
-    &--statistics,
+    &--statistics {
+        background: $yellow;
+    }
+
     &--partners {
         background: $light-grey;
     }

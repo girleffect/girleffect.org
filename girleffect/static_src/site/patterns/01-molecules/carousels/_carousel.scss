@@ -438,3 +438,15 @@
         }
     }
 }
+
+.js-carousel--full-width {
+    min-height: auto;
+
+    &__content {
+        z-index: 10;
+    }
+}
+
+.boom {
+    border: 5px solid red;
+}

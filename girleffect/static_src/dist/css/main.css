@@ -1445,7 +1445,11 @@ blockquote cite {
   margin-bottom: 3rem;
 }
 
-.section--statistics, .section--partners {
+.section--statistics {
+  background: #ffc700;
+}
+
+.section--partners {
   background: #f4f4f3;
 }
 
@@ -2230,6 +2234,18 @@ article .share-icons--hide-mobile {
 
 .carousel--3-panel .carousel__block-item:nth-of-type(3) .carousel__panel-content {
   margin-right: 10rem;
+}
+
+.js-carousel--full-width {
+  min-height: auto;
+}
+
+.js-carousel--full-width__content {
+  z-index: 10;
+}
+
+.boom {
+  border: 5px solid red;
 }
 
 .owl-carousel {

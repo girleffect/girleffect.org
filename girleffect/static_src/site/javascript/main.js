@@ -224,11 +224,20 @@ $(function() {
 
     $('.carousel__controls').mouseover(function() {
         let panel = $(this).closest('.carousel__block-item');
+        let panel_overview = panel.parent().find('.carousel__overview')[0];
+        let panel_first = panel.parent().find('.carousel__block-item');
+
+        if (panel[0] !== panel_first[0]) {
+            $(panel_overview).hide();
+        }
+
         panel.addClass('is-selected');
     });
 
     $('.carousel__controls').mouseout(function() {
         let panel = $(this).closest('.carousel__block-item');
+        let panel_overview = panel.parent().find('.carousel__overview')[0];
+        $(panel_overview).show();
         panel.removeClass('is-selected');
     });
 
