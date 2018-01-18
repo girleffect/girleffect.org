@@ -5,7 +5,7 @@
     max-width: $mid-width;
 
     @include media-query(tablet-landscape) {
-        margin: 50px auto;
+        margin: 5rem auto;
     }
 
     &__image {

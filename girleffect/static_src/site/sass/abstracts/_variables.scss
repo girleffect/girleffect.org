@@ -72,8 +72,9 @@ $breakpoints: (
     'mob-landscape' '(min-width: 480px)',
     'tablet-portrait' '(min-width: 768px)',
     'tablet-landscape' '(min-width: 1024px)',
+    'container' '(min-width: 1172px)',
     'desktop' '(min-width: 1366px)',
-    'deskop-wide' '(min-width: 2556px)'
+    'desktop-wide' '(min-width: 2556px)'
 );
 
 /* ============================================

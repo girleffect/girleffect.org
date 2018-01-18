@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
     <div class="list-item">
-        {% image value.image fill-375x300 class="list-item__image" %}
+        {% image value.image fill-360x360 class="list-item__image" %}
 
         <h4 class="list-item__title" {% if heading_hex %}style="color:{{ heading_hex }};"{% endif %}>{{ value.title }}</h4>
 
@@ -17,4 +17,3 @@
         {% else %}
         {% endif %}
     </div>
-

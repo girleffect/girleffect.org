@@ -1,30 +1,26 @@
 {% load wagtailcore_tags wagtailimages_tags %}
-{% if value.link_page %}
-    <a class="stat-block" href="{{ value.link_page.url }}">
-{% elif value.link_url  %}
-    <a class="stat-block" href="{{ value.link_url }}">
-{% else %}
-    <div class="stat-block">
-{% endif %}
-        <div class="stat-block__content">
-            <p class="stat-block__label"
-            {% if value.statistic_customisations.heading_hex %}
-                style="color: {{ value.statistic_customisations.heading_hex }}"{% endif %}>{{ value.title }}</p>
-            {{ value.description|richtext }}
-            <p class="stat-block__cite">{{ value.citation_text }}</p>
+
+<div class="stat-block">
+    <div class="stat-block__content">
+        <p class="stat-block__label"
+        {% if value.statistic_customisations.heading_hex %}
+            style="color: {{ value.statistic_customisations.heading_hex }}"{% endif %}>{{ value.title }}</p>
+        <div class="stat-block__copy">
+            <div>
+                <h4>{{ value.description|richtext }}</h4>
+                <p class="stat-block__cite">{{ value.citation_text }}</p>
+            </div>
+            {% if value.link_page %}
+                <a class="link link--with-arrow" href="{{ value.link_page.url }}">
+                    {{ value.link_text }}
+                    <div class="link__arrow"></div>
+                </a>
+            {% elif value.link_url %}
+                <a class="link link--with-arrow" href="{{ value.link_url  }}" target="_blank" rel="noopener noreferrer">
+                    {{ value.link_text }}
+                    <div class="link__arrow"></div>
+                </a>
+            {% endif %}
         </div>
-        {% if value.link_page %}
-            <div class="arrow"></div>
-        {% elif value.link_url %}
-            <div class="arrow"></div>
-        {% endif %}
-{% if value.link_page %}
-    </a>
-{% elif value.link_url  %}
-    </a>
-{% else %}
     </div>
-{% endif %}
-
-
-
+</div>
