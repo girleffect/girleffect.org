@@ -29,10 +29,10 @@
 
         > h3 {
             @include body-container;
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
 
-            @include media-query(tablet-landscape) {
+            @include media-query(tablet-portrait) {
                 margin-top: 2em;
                 margin-bottom: 2rem;
             }
