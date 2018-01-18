@@ -222,12 +222,13 @@ $(function() {
         );
     });
 
+    // Show carousel content & hide first overview text
     $('.carousel__controls').mouseover(function() {
         let panel = $(this).closest('.carousel__block-item');
         let panel_overview = panel.parent().find('.carousel__overview')[0];
-        let panel_first = panel.parent().find('.carousel__block-item');
+        let panel_first = panel.parent().find('.carousel__block-item')[0];
 
-        if (panel[0] !== panel_first[0]) {
+        if (panel[0] !== panel_first) {
             $(panel_overview).hide();
         }
 
