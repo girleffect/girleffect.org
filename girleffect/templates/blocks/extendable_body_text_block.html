@@ -1,31 +1,32 @@
 {% load wagtailimages_tags %}
-{% image value.customisation.background_image max-100x100 as bg_img %}
+{% image value.customisation.background_image max-200x200 as bg_img %}
 
 {# StreamField customisations in parent DIV to blocks, include rich text headings #}
 <div class="extendable-body-container"
-     style="{% if bg_img %}background:url({{ bg_img.url }});{% endif %}
-                {% if value.customisation.background_hex %}background:{{ value.customisation.background_hex }};{% endif %}"
-                {% if value.customisation.body_heading_hex %}data-hex="{{value.customisation.body_heading_hex}}"{% endif %}>
-
+     style="{% if bg_img %}background-image:url({{ bg_img.url }});{% endif %}
+                {% if value.customisation.background_hex %}background:{{ value.customisation.background_hex }};{% endif %}
+                {% if value.customisation.body_heading_hex %}color:{{value.customisation.body_heading_hex}}{% endif %}">
     <div class="extendable-body">
-        {{ value.body_upper }}
-    </div>
+        <div class="extendable-body__content">
+            {{ value.body_upper }}
+        </div>
 
-    <div class="extendable-body__controls">
-        <a class="link link--boxed extendable-body--open extendable-body--toggle">
-            {{ value.extend_button_text|default:"See more" }}
-            <span></span>
-            <span></span>
-        </a>
+        <div class="extendable-body__controls">
+            <a class="link link--boxed extendable-body--open extendable-body--toggle">
+                {{ value.extend_button_text|default:"See more" }}
+                <span></span>
+                <span></span>
+            </a>
 
-        <a class="link link--boxed extendable-body--close extendable-body--toggle">
-            {{ value.collapse_button_text|default:"See less" }}
-            <span></span>
-            <span></span>
-        </a>
-    </div>
-    {# Will be hidden/shown on button toggle #}
-    <div class="extendable-body extendable-body--collapsible">
-        {{ value.body_lower }}
+            <a class="link link--boxed extendable-body--close extendable-body--toggle">
+                {{ value.collapse_button_text|default:"See less" }}
+                <span></span>
+                <span></span>
+            </a>
+        </div>
+        {# Will be hidden/shown on button toggle #}
+        <div class="extendable-body__content extendable-body--collapsible">
+            {{ value.body_lower }}
+        </div>
     </div>
 </div>

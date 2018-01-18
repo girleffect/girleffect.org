@@ -1,8 +1,22 @@
 .extendable-body-container {
-    @include body-container;
+    margin: 1rem 0;
 }
 
 .extendable-body {
+    @include body-container;
+    padding: 2rem 0;
+
+    h2,
+    h3,
+    h4 {
+        color: inherit;
+    }
+
+    p,
+    li {
+        color: $green;
+    }
+
     &--close,
     &--collapsible {
         display: none;

@@ -1422,6 +1422,14 @@ blockquote cite {
   list-style-type: disc;
 }
 
+.rich-text h2,
+.rich-text h3,
+.rich-text h4,
+.rich-text .stat-block__content b, .stat-block__content
+.rich-text b {
+  margin-bottom: 1rem;
+}
+
 .section {
   padding: 2rem 0;
 }
@@ -2404,22 +2412,40 @@ article .share-icons--hide-mobile {
 }
 
 .extendable-body-container {
+  margin: 1rem 0;
+}
+
+.extendable-body {
   margin-left: 1rem;
   margin-right: 1rem;
+  padding: 2rem 0;
 }
 
 @media only screen and (min-width: 768px) {
-  .extendable-body-container {
+  .extendable-body {
     margin-left: 3rem;
     margin-right: 3rem;
   }
 }
 
 @media only screen and (min-width: 1172px) {
-  .extendable-body-container {
+  .extendable-body {
     margin: 0 auto;
     max-width: 768px;
   }
+}
+
+.extendable-body h2,
+.extendable-body h3,
+.extendable-body h4,
+.extendable-body .stat-block__content b, .stat-block__content
+.extendable-body b {
+  color: inherit;
+}
+
+.extendable-body p,
+.extendable-body li {
+  color: #2f6165;
 }
 
 .extendable-body--close, .extendable-body--collapsible {
