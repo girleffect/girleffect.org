@@ -95,6 +95,7 @@ if all(v in env for v in ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'AWS_STO
     AWS_S3_OBJECT_PARAMETERS = {
         'CacheControl': 'max-age=86400',
     }
+    AWS_S3_FILE_OVERWRITE = False
     S3_USE_SIGV4 = True
 
 # Sentry Config
