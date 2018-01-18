@@ -1,19 +1,9 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
 <div class="carousel-container js-carousel-container">
-    <div class="carousel carousel--home-desktop">
-        {% image value.image fill-1600x800 class="carousel__image" %}
+    <div class="carousel js-carousel owl-carousel">
         {% for carousel_item in value %}
             {% include_block carousel_item %}
             {# found in carousel_item_block.html #}
         {% endfor %}
-    </div>
-
-    <div class="carousel carousel--home-mobile">
-        <div class="js-carousel--home-mobile owl-carousel">
-            {% for carousel_item in value %}
-                {% include_block carousel_item %}
-                {# found in carousel_item_block.html #}
-            {% endfor %}
-        </div>
     </div>
 </div>

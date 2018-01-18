@@ -1,86 +1,72 @@
-<div class="carousel carousel--home-desktop">
-  <h2 class="carousel__home-title">Lorem Ipsum</h2>
-  <p class="carousel__home-text">Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
-  <img class="carousel__image carousel__image--main" src="http://placehold.it/1600x800/cccccc/ffffff" alt="">
-  <img data-image="1" class="carousel__image carousel__image--hidden" src="http://placehold.it/1600x800/cccccc/ffffff" alt="">
-  <img data-image="2" class="carousel__image carousel__image--hidden" src="http://placehold.it/1600x800/cccccc/c1c1c1" alt="">
-  <img data-image="3" class="carousel__image carousel__image--hidden" src="http://placehold.it/1600x800/cccccc/000000" alt="">
+<div class="carousel-container js-carousel-container">
+    <div class="carousel carousel--home-desktop">
+        <div class="carousel__block-item">
+            <div class="carousel__panel-desktop">
+                <img data-image="1" class="carousel__image carousel__image--hidden" src="http://placehold.it/1600x800/cccccc/ffffff" alt="">
+                <div class="carousel__overview">
+                    <h3 class="carousel__home-title">Lorum Ipsum</h3>
+                    <p class="carousel__home-text">Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
+                </div>
 
+                <div class="carousel__controls">
+                    <div class="carousel__panel-content">
+                        <h4 class="carousel__title">Lorum Ipsum</h4>
+                        <p>Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
+                        {% include 'atoms-link--with-arrow' %}
+                    </div>
+                    <svg class="carousel__icon">
+                        <use xlink:href="#chevron"></use>
+                    </svg>
+                    <h4 class="carousel__panel-title">Lorum Ipsum</h4>
+                </div>
+            </div>
 
-  <div class="carousel__panels">
-    <div data-panel="1" class="carousel__panel">
-      <div class="carousel__panel-content">
-          <p>Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
-          {% include 'atoms-link--with-arrow' %}
-      </div>
-      <svg class="carousel__icon">
-        <use xlink:href="#chevron"></use>
-      </svg>
-      <h4 class="carousel__panel-title">Our Approach</h4>
-
-    </div>
-
-    <div data-panel="2" class="carousel__panel">
-      <div class="carousel__panel-content">
-          <p>Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
-          {% include 'atoms-link--with-arrow' %}
-      </div>
-      <svg class="carousel__icon">
-        <use xlink:href="#chevron"></use>
-      </svg>
-      <h4 class="carousel__panel-title">Brands for social change</h4>
-    </div>
-
-    <div data-panel="3" class="carousel__panel">
-      <div class="carousel__panel-content">
-          <p>Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
-          {% include 'atoms-link--with-arrow' %}
-      </div>
-      <svg class="carousel__icon">
-        <use xlink:href="#chevron"></use>
-      </svg>
-      <h4 class="carousel__panel-title">The third panel</h4>
-    </div>
-  </div>
-</div>
-
-<div class="carousel carousel--home-mobile">
-  <div class="js-carousel--home-mobile owl-carousel">
-    <div class="carousel__panel-mobile">
-      <h3 class="carousel__home-title carousel__home-title--mobile">Lorem Ipsum</h3>
-      <p class="carousel__home-text">Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
-      <img data-image="1" src="http://placehold.it/720x400/cccccc/ffffff" alt="">
-      <div class="carousel__panel-content-mobile">
-        <h4 class="carousel__panel-title">Our Approach</h4>
-        <div class="carousel__panel-content">
-          <p>Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
-          {% include 'atoms-link--with-arrow' %}
+            <div class="carousel__panel-mobile">
+                <img data-image="1" class="carousel__image carousel__image--hidden" src="http://placehold.it/1600x800/cccccc/ffffff" alt="">
+                <h3 class="carousel__home-title carousel__home-title--mobile">Lorum Ipsum</h3>
+                <p class="carousel__home-text">{{ value.overview_text }}</p>
+                <div class="carousel__panel-content-mobile">
+                    <h4 class="carousel__panel-title">{{ value.textbox_title }}</h4>
+                    <div class="carousel__panel-content">
+                        {% include 'atoms-link--with-arrow' %}
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
+    <div class="carousel carousel--home-mobile">
+        <div class="carousel__block-item">
+            <div class="carousel__panel-desktop">
+                <img data-image="1" class="carousel__image carousel__image--hidden" src="http://placehold.it/1600x800/cccccc/ffffff" alt="">
+                <div class="carousel__overview">
+                    <h3 class="carousel__home-title">Lorum Ipsum</h3>
+                    <p class="carousel__home-text">Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
+                </div>
 
-    <div class="carousel__panel-mobile">
-      <h4 class="carousel__home-title carousel__home-title--mobile">Lorem Ipsum</h4>
-      <img data-image="2" src="http://placehold.it/720x400/cccccc/c1c1c1" alt="">
-      <div class="carousel__panel-content-mobile">
-        <h4 class="carousel__panel-title">Brands for Social Change</h4>
-        <div class="carousel__panel-content">
-          <p>Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
-          {% include 'atoms-link--with-arrow' %}
-        </div>
-      </div>
-    </div>
+                <div class="carousel__controls">
+                    <div class="carousel__panel-content">
+                        <h4 class="carousel__title">Lorum Ipsum</h4>
+                        <p>Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
+                        {% include 'atoms-link--with-arrow' %}
+                    </div>
+                    <svg class="carousel__icon">
+                        <use xlink:href="#chevron"></use>
+                    </svg>
+                    <h4 class="carousel__panel-title">Lorum Ipsum</h4>
+                </div>
+            </div>
 
-    <div class="carousel__panel-mobile">
-      <h4 class="carousel__home-title carousel__home-title--mobile">Lorem Ipsum</h4>
-      <img data-image="3" src="http://placehold.it/720x400/cccccc/000000" alt="">
-      <div class="carousel__panel-content-mobile">
-        <h4 class="carousel__panel-title">The third panel</h4>
-        <div class="carousel__panel-content">
-          <p>Tempor exercitation duis amet sunt pariatur duis voluptate ipsum.</p>
-          {% include 'atoms-link--with-arrow' %}
+            <div class="carousel__panel-mobile">
+                <img data-image="1" class="carousel__image carousel__image--hidden" src="http://placehold.it/1600x800/cccccc/ffffff" alt="">
+                <h3 class="carousel__home-title carousel__home-title--mobile">Lorum Ipsum</h3>
+                <p class="carousel__home-text">{{ value.overview_text }}</p>
+                <div class="carousel__panel-content-mobile">
+                    <h4 class="carousel__panel-title">{{ value.textbox_title }}</h4>
+                    <div class="carousel__panel-content">
+                        {% include 'atoms-link--with-arrow' %}
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

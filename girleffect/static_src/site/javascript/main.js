@@ -203,6 +203,28 @@ $(function() {
         panel.removeClass('is-selected');
     });
 
+    if ($(window).width() < 768) {
+        // TODO:: Reafactor to method
+        $('.carousel').addClass('owl-carousel');
+
+        $('.js-carousel').owlCarousel({
+            items: 1,
+            nav: false,
+            dots: true
+        });
+    }
+
+    // Change home page to owl carousel if tablet size reached.
+    $(window).on('resize', () => {
+        if ($(window).width() < 768) {
+            if (!$('.carousel').hasClass('owl-carousel')) {
+                $('.carousel').addClass('owl-carousel');
+            }
+        } else {
+            $('.carousel').removeClass('owl-carousel');
+        }
+    });
+
     // Always show the main slide when not hovering on the home page carousel
     $('.carousel--home-desktop').mouseout(function() {
         $('.carousel__image.is-visible').removeClass('is-visible');
@@ -211,13 +233,6 @@ $(function() {
     // Hide the carousel panels when not being hovered over
     $('.carousel__panel').mouseout(function() {
         $('.carousel__panel').removeClass('is-expanded');
-    });
-
-    // Home page carsouel on mobile
-    $('.js-carousel--home-mobile').owlCarousel({
-        items: 1,
-        nav: false,
-        dots: true
     });
 
     // Extendable body toggleClass
