@@ -360,7 +360,6 @@ class BlockQuote(blocks.StructBlock):
 class LargeTextBlock(blocks.StructBlock):
     body = blocks.RichTextBlock(
         label="Large Text",
-        max_length=350,
         features=["bold", "italic", "link", "document-link"],
         required=False,
     )
