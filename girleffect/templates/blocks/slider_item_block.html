@@ -1,7 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
     <div class="slider__item">
-        {% image value.image fill-1600x800 class="slider__image" %}
-
+        {% image value.image original class="slider__image" %}
         <div class="slider__content">
             <h3 class="slider__title"
                 style="{% if value.overview_title_shadow.text_hex %}color:{{ value.overview_title_shadow.text_hex }};{% endif %}
@@ -14,21 +13,21 @@
                 {{ value.overview_text }}
             </p>
 
-            {% if value.textbox_title or value.textbox_text or value.textbox_link %}
-            <div class="slider__textbox">
-                <h2 class="slider__title">{{ value.textbox_title }}</h2>
+            {% if value.textbox_title or value.textbox_text or value.external_link or value.textbox_link.internal_link or value.textbox_link.document_link%}
+                <div class="slider__textbox">
+                    <h4 class="slider__title">{{ value.textbox_title }}</h4>
+                    <p>{{ value.textbox_text }}</p>
 
-                <p>{{ value.textbox_text }}</p>
 
-                {% if value.textbox_link.external_textbox_link %}
-                    {# template for this is in textbox_link_block.html #}
-                    {% include_block value.textbox_link %}
-                {% elif value.textbox_link.internal_textbox_link %}
-                    {% include_block value.textbox_link %}
-                {% elif value.textbox_link.document_textbox_link %}
-                    {% include_block value.textbox_link %}
-                {% endif %}
-            </div>
+                    {% if value.textbox_link.external_link %}
+                        {# template for this is in textbox_link_block.html #}
+                        {% include_block value.textbox_link %}
+                    {% elif value.textbox_link.internal_link %}
+                        {% include_block value.textbox_link %}
+                    {% elif value.textbox_link.document_link %}
+                        {% include_block value.textbox_link %}
+                    {% endif %}
+                </div>
             {% endif %}
         </div>
     </div>

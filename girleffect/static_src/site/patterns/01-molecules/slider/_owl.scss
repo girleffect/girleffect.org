@@ -1,0 +1,159 @@
+// Owl Carousel stylings - unfortunatley classes do not conform to BEM
+.slider.owl-slider {
+    width: 100%;
+    -webkit-tap-highlight-color: transparent;
+    /* position relative and z-index fix webkit rendering fonts issue */
+    position: relative;
+    z-index: 1;
+
+    .owl-stage {
+        display: flex;
+        position: relative;
+        -ms-touch-action: pan-Y;
+        -moz-backface-visibility: hidden; /* fix firefox animation glitch */
+    }
+
+    .owl-stage:after {
+        content: '.';
+        display: block;
+        clear: both;
+        visibility: hidden;
+        line-height: 0;
+        height: 0;
+    }
+
+    .owl-stage-outer {
+        display: flex;
+        position: relative;
+        overflow: hidden;
+        /* fix for flashing background */
+        -webkit-transform: translate3d(0px, 0px, 0px);
+        flex: 1;
+    }
+
+    .owl-wrapper,
+    .owl-item {
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+    }
+
+    .owl-item {
+        position: relative;
+        min-height: 1px;
+        float: left;
+        -webkit-backface-visibility: hidden;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+    }
+
+    .owl-nav.disabled,
+    .owl-dots.disabled {
+        display: none;
+    }
+
+    .owl-nav .owl-prev,
+    .owl-nav .owl-next,
+    .owl-dot {
+        cursor: pointer;
+        cursor: hand;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    &.owl-loaded {
+        display: flex;
+    }
+
+    &.owl-loading {
+        opacity: 0;
+        display: block;
+    }
+
+    &.owl-hidden {
+        opacity: 0;
+    }
+
+    &.owl-refresh .owl-item {
+        visibility: hidden;
+    }
+
+    &.owl-drag .owl-item {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    &.owl-grab {
+        cursor: move;
+        cursor: grab;
+    }
+
+    &.owl-rtl {
+        direction: rtl;
+    }
+
+    &.owl-rtl .owl-item {
+        float: right;
+    }
+
+    .owl-dots {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 0.5rem;
+
+        @include media-query(tablet-portrait) {
+            bottom: 1rem;
+        }
+
+        @include media-query(container) {
+            bottom: 3rem;
+        }
+    }
+
+    .owl-dot {
+        flex: 0;
+        margin-right: 0.5rem;
+
+        @include media-query(container) {
+            margin-right: 0.75rem;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &.active {
+            span {
+                background: $yellow;
+            }
+        }
+
+        span {
+            height: 10px;
+            width: 10px;
+            background: $white;
+
+            @include media-query(container) {
+                height: 0.75rem;
+                width: 0.75rem;
+            }
+        }
+    }
+}
+
+/* No Js */
+.no-js .owl-carousel {
+    display: block;
+}
