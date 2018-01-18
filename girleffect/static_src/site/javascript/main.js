@@ -23,6 +23,36 @@ function closeHeader() {
         });
 }
 
+// Change carousel component to owl carousel
+function setCarousel() {
+    $('.js-carousel').addClass('owl-carousel');
+
+    $('.js-carousel').owlCarousel({
+        items: 1,
+        nav: false,
+        dots: true
+    });
+}
+
+function isMobileScreen() {
+    return $(window).width() < 768;
+}
+
+function isOwlCarousel() {
+    return $('.js-carousel').hasClass('owl-carousel');
+}
+
+function removeCarousel() {
+    let carousel = $('.owl-carousel');
+    carousel
+        .trigger('destroy.owl.carousel')
+        .removeClass('owl-carousel owl-loaded');
+    carousel
+        .find('.owl-stage-outer')
+        .children()
+        .unwrap();
+}
+
 $(function() {
     $(Hamburger.selector()).each((index, el) => {
         new Hamburger($(el), openHeader, closeHeader);
@@ -201,6 +231,50 @@ $(function() {
         $(image).addClass('is-visible');
     });
 
+    // Count items in carousel to set styling class
+    $('.js-carousel').each((index, el) => {
+        $(el).addClass(
+            `carousel--${$(el).find('.carousel__block-item').length}-panel`
+        );
+    });
+
+    // Show carousel content & hide first overview text
+    $('.carousel__controls').mouseover(function() {
+        let panel = $(this).closest('.carousel__block-item');
+        let panel_overview = panel.parent().find('.carousel__overview')[0];
+        let panel_first = panel.parent().find('.carousel__block-item')[0];
+
+        if (panel[0] !== panel_first) {
+            $(panel_overview).hide();
+        }
+
+        panel.addClass('is-selected');
+    });
+
+    $('.carousel__controls').mouseout(function() {
+        let panel = $(this).closest('.carousel__block-item');
+        let panel_overview = panel.parent().find('.carousel__overview')[0];
+        $(panel_overview).show();
+        panel.removeClass('is-selected');
+    });
+
+    if (isMobileScreen()) {
+        setCarousel();
+    }
+
+    // Change carousel to owl carousel when mobile screensize reaced
+    $(window).on('resize', () => {
+        if (isMobileScreen()) {
+            if (!isOwlCarousel()) {
+                setCarousel();
+            }
+        } else {
+            if (isOwlCarousel()) {
+                removeCarousel();
+            }
+        }
+    });
+
     // Always show the main slide when not hovering on the home page carousel
     $('.carousel--home-desktop').mouseout(function() {
         $('.carousel__image.is-visible').removeClass('is-visible');
@@ -211,10 +285,10 @@ $(function() {
         $('.carousel__panel').removeClass('is-expanded');
     });
 
-    // Home page carsouel on mobile
-    $('.js-carousel--home-mobile').owlCarousel({
-        items: 1,
-        nav: false,
-        dots: true
+    // Extendable body toggleClass
+    $('.extendable-body--toggle').on('click', function() {
+        $('.extendable-body--collapsible').slideToggle();
+        $('.extendable-body--open').toggle();
+        $('.extendable-body--close').toggle();
     });
 });
