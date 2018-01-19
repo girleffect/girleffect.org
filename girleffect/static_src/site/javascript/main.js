@@ -228,8 +228,6 @@ $('.js-article-filter').each(function() {
     $this.after('<div class="article-select--styled"></div>');
 
     var $styledSelect = $this.next('div.article-select--styled');
-
-    // TODO FROM THIS SELECT
     $styledSelect.text(
         $('option[selected]').text() ||
             $this
@@ -237,8 +235,6 @@ $('.js-article-filter').each(function() {
                 .eq(0)
                 .text()
     );
-
-    console.log();
 
     var $list = $('<ul />', {
         class: 'article-select__options'
@@ -266,6 +262,11 @@ $('.js-article-filter').each(function() {
 
     var $listItems = $list.children('li');
 
+    var selectedItems = $list.children('.is-selected');
+    if (selectedItems.length === 0) {
+        $($list.children('li')[0]).addClass('is-selected');
+    }
+
     $styledSelect.click(function(e) {
         e.stopPropagation();
         $('div.article-select--styled.is-active')
@@ -285,8 +286,6 @@ $('.js-article-filter').each(function() {
     $listItems.click(function(e) {
         e.stopPropagation();
         $styledSelect.text($(this).text()).removeClass('is-active');
-        $this.val();
-        $list.hide();
 
         $('option[selected]').attr('selected', false);
         if ($(this).attr('rel')) {
