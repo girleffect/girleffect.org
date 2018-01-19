@@ -866,10 +866,6 @@ cite {
   background: #f4f4f3;
 }
 
-.article-select__options li[rel='hide'] {
-  display: none;
-}
-
 @media only screen and (min-width: 1024px) {
   .article-select__options {
     display: flex;

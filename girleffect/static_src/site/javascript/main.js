@@ -129,7 +129,7 @@ $(function() {
 
     // Desktop search
     $('.js-search-desktop').on('click', function() {
-        $(this).toggleClass('is-is-active');
+        $(this).toggleClass('is-active');
         const headerHeight = $('.header').outerHeight();
         const searchBar = $('.header__search-bar--desktop');
         const form = $('.form--search');
@@ -170,7 +170,7 @@ $(function() {
             function() {
                 $(this)
                     .children('.header__link-primary')
-                    .addClass('is-is-active');
+                    .addClass('is-active');
                 $(this)
                     .children('.header__nav-secondary')
                     .addClass('is-visible');
@@ -183,7 +183,7 @@ $(function() {
         ).mouseout(function() {
             $(this)
                 .children('.header__link-primary')
-                .removeClass('is-is-active');
+                .removeClass('is-active');
             $('.header__nav-overlay, .header__nav-secondary').removeClass(
                 'is-visible'
             );

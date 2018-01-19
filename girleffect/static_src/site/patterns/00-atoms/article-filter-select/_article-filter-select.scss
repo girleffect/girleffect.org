@@ -39,10 +39,6 @@
             &:hover {
                 background: $light-grey;
             }
-
-            &[rel='hide'] {
-                display: none;
-            }
         }
 
         @include media-query(tablet-landscape) {
