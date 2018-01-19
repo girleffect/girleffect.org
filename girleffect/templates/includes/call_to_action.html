@@ -13,9 +13,15 @@
                 <span></span>
                 <span></span>
             </a>
-        {% elif call_to_action.link_url  %}
+        {% elif page.call_to_action.link_url  %}
             <a class="link link--boxed" href="{{ page.call_to_action.link_url }}">
                 {{ page.call_to_action.get_link_text }}
+                <span></span>
+                <span></span>
+            </a>
+        {% elif page.call_to_action.link_email  %}
+            <a class="link link--boxed" href="mailto:{{ page.call_to_action.link_email }}">
+                {{ page.call_to_action.link_text }}
                 <span></span>
                 <span></span>
             </a>

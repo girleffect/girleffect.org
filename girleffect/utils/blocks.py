@@ -201,7 +201,7 @@ class MediaTextOverlayBlock(blocks.StructBlock):
     title = blocks.CharBlock(
         required=False,
         label="Title Text",
-        max_length=25,
+        max_length=255,
         help_text="Appears above the module."
     )
     image = ImageChooserBlock()
@@ -278,7 +278,7 @@ class QuoteBlock(blocks.StructBlock):
     )
     citation = blocks.CharBlock(
         required=False,
-        max_length=80,
+        max_length=255,
     )
     link_block = LinkBlock(required=False)
     drop_shadow_options = DropShadowBlock()
@@ -309,7 +309,7 @@ class QuoteListBlock(blocks.StructBlock):
 
 class ListItemBlock(blocks.StructBlock):
     image = ImageChooserBlock(required=False)
-    title = blocks.CharBlock(max_length=80, required=False)
+    title = blocks.CharBlock(max_length=255, required=False)
     description = blocks.RichTextBlock(
         max_length=250,
         features=["bold", "italic", "link", "document-link"],
@@ -334,7 +334,7 @@ class ContentSectionBlock(blocks.StructBlock):
 
 
 class StatisticBlock(blocks.StructBlock):
-    title = blocks.CharBlock(max_length=80, required=False)
+    title = blocks.CharBlock(max_length=255, required=False)
     statistics = blocks.ListBlock(
         SnippetChooserBlock(Statistic),
     )
@@ -360,7 +360,6 @@ class BlockQuote(blocks.StructBlock):
 class LargeTextBlock(blocks.StructBlock):
     body = blocks.RichTextBlock(
         label="Large Text",
-        max_length=350,
         features=["bold", "italic", "link", "document-link"],
         required=False,
     )
@@ -401,12 +400,12 @@ class ExtendableBodyTextBlock(blocks.StructBlock):
         ],
     )
     extend_button_text = blocks.CharBlock(
-        max_length=80,
+        max_length=255,
         required=False,
         help_text="Customise text for the extend button"
     )
     collapse_button_text = blocks.CharBlock(
-        max_length=80,
+        max_length=255,
         required=False,
         help_text="Customise text for the collapse button"
     )
@@ -446,23 +445,21 @@ class SliderItemBlock(blocks.StructBlock):
     image = ImageChooserBlock()
     overview_title = blocks.CharBlock(
         required=False,
-        max_length=80,
+        max_length=255,
         help_text="Slider item overview title"
     )
     overview_title_shadow = DropShadowBlock(required=False)
     overview_text = blocks.TextBlock(
-        max_length=255,
         required=False,
         help_text="Slider item overview text",
     )
     overview_text_shadow = DropShadowBlock(required=False)
     textbox_title = blocks.CharBlock(
         required=False,
-        max_length=30,
+        max_length=255,
         help_text="Slider item textbox title"
     )
     textbox_text = blocks.TextBlock(
-        max_length=75,
         required=False,
         help_text="Slider item textbox text",
     )
@@ -488,14 +485,16 @@ class SliderBlock(blocks.StructBlock):
 class CarouselItemBlock(SliderItemBlock):
     slide_title = blocks.CharBlock(
         required=False,
-        help_text="Title to appear at bottom of carousel, for example \"Youth Brands\""
+        help_text="Title to appear at bottom of carousel, for example \"Youth Brands\"",
+        max_length=255
     )
     slide_logo = ImageChooserBlock(
         required=False
     )
     slide_title_hex = blocks.CharBlock(
         max_length=7,
-        help_text="Add valid hex for slide title and chevron colours."
+        help_text="Add valid hex for slide title and chevron colours.",
+        required=False
     )
 
     class Meta:

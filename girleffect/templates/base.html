@@ -35,7 +35,7 @@
 
 
         {% with page.introduction as page_intro %}
-        <meta name="twitter:description" content="{{ page.social_text|default:page_intro|default:settings.utils.SocialMediaSettings.default_sharing_text }}">
+        
         {% endwith %}
         {% if page.social_image  %}
             {% image page.social_image width-320 as social_img %}
@@ -67,7 +67,7 @@
             <meta property="og:image" content="{{ request.site.hostname }}{{ settings.utils.SocialMediaSettings.default_sharing_image.file.url }}" />
         {% endif %}
         {% with page.introduction as page_intro %}
-        <meta property="og:description" content="{{ page.social_text|default:page_intro|default:settings.utils.SocialMediaSettings.default_sharing_text }}" />
+        
         {% endwith %}
         <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
 

@@ -35,7 +35,7 @@ class SocialMediaProfile(models.Model):
         ('linkedin', 'https://www.linkedin.com/in/')
     )
     service = models.CharField(
-        max_length=200,
+        max_length=255,
         choices=site_titles
     )
     username = models.CharField(max_length=255)
