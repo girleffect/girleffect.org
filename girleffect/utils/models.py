@@ -232,6 +232,47 @@ class ListingFields(models.Model):
     ]
 
 
+class FullWidthMediaAndTextSnippetCustomisableHeading(CustomisableFeature):
+    media = ParentalKey(
+        'FullWidthMediaAndTextSnippet',
+        related_name='media_customisation'
+    )
+
+    content_panels = [
+        ImageChooserPanel('image'),
+        FieldPanel('background_hex'),
+    ]
+
+
+@register_snippet
+class FullWidthMediaAndTextSnippet(ClusterableModel, LinkFields):
+    title = models.CharField(max_length=255)
+    image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    logo = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    text = RichTextField(
+        null=True,
+        blank=True,
+        features=["bold", "italic", "ol", "ul", "link", "document-link"]
+    )
+
+    @cached_property
+    def media_customisations(self):
+        return self.media_customisation.first()
+
+    panels = [
+        FieldPanel('title'),
+        ImageChooserPanel('image'),
+        ImageChooserPanel('logo'),
+        FieldPanel('text'),
+        MultiFieldPanel([
+            InlinePanel('media_customisation', label="Media Customisation", max_num=1),
+        ], 'Customisations'),
+    ] + LinkFields.content_panels
+
+    def __str__(self):
+        return self.title
+
+
 @register_snippet
 class CallToActionSnippet(EmailLinkFields):
     title = models.CharField(max_length=255)
