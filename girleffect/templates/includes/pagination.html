@@ -1,16 +1,27 @@
-
 <nav role="navigation" aria-label="Pagination">
-    <ul class="pagination">
-        {% if subpages.has_previous %}
-            <li><a class="link link--underlined" href="?page={{ subpages.previous_page_number }}{% if search_query %}&amp;query={{ search_query|urlencode }}{% endif %}{% if extra_url_params %}&amp;{{ extra_url_params }}{% endif %}" class="previous">Previous page</a></li>
-        {% endif %}
+    <div class="pagination">
+        <div class="pagination__item">
+            {% if subpages.has_previous %}
+                <a class="pagination__prev" href="?page={{ subpages.previous_page_number }}{% if search_query %}&amp;query={{ search_query|urlencode }}{% endif %}{% if extra_url_params %}&amp;{{ extra_url_params }}{% endif %}">
+                    <div class="link__arrow"></div>
+                    <span class="pagination__label">Previous page</span>
+                </a>
+            {% endif %}
+        </div>
 
-        <li class="current">
-            {{ subpages.number }}/{{ subpages.paginator.num_pages }}
-        </li>
+        <div class="pagination__item">
+            <div class="pagination__pages">
+                {{ subpages.number }}/{{ subpages.paginator.num_pages }}
+            </div>
+        </div>
 
-        {% if subpages.has_next %}
-            <li><a class="link link--underlined" href="?page={{ subpages.next_page_number }}{% if search_query %}&amp;query={{ search_query|urlencode }}{% endif %}{% if extra_url_params %}&amp;{{ extra_url_params }}{% endif %}" class="next">Next page</a></li>
-        {% endif %}
-    </ul>
+        <div class="pagination__item">
+            {% if subpages.has_next %}
+                <a class="pagination__next" href="?page={{ subpages.next_page_number }}{% if search_query %}&amp;query={{ search_query|urlencode }}{% endif %}{% if extra_url_params %}&amp;{{ extra_url_params }}{% endif %}">
+                    <span class="pagination__label">Next page</span>
+                    <div class="link__arrow"></div>
+                </a>
+            {% endif %}
+        </div>
+    </div>
 </nav>

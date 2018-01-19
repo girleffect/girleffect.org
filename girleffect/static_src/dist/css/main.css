@@ -1503,8 +1503,63 @@ blockquote cite {
   text-transform: uppercase;
 }
 
-.pagination li {
-  display: inline-block;
+.pagination {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+
+@media only screen and (min-width: 768px) {
+  .pagination {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .pagination {
+    margin: 0 auto;
+    max-width: 1172px;
+  }
+}
+
+.pagination__item {
+  flex-grow: 1;
+}
+
+.pagination__pages {
+  text-align: center;
+}
+
+.pagination__label {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .pagination__label {
+    display: inline-block;
+  }
+}
+
+.pagination__label:hover {
+  color: #ffc700;
+}
+
+.pagination__next, .pagination__prev {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pagination__next {
+  justify-content: flex-end;
+}
+
+.pagination__prev .link__arrow {
+  transform: rotate(180deg);
+  margin-left: 0;
+  margin-right: 10px;
 }
 
 .rich-text {

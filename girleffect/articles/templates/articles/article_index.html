@@ -62,10 +62,7 @@
                     </div>
                 {% endfor %}
             </div>
-
-            <div class="wrapper wrapper--mid">
-                {% include "includes/pagination.html" with subpages=articles %}
-            </div>
+            {% include "includes/pagination.html" with subpages=articles %}
         {% else %}
             {# no items #}
         {% endif %}
