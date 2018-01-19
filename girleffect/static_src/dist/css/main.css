@@ -652,6 +652,81 @@ strong {
   font-weight: 700;
 }
 
+.select {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  color: #2f6165;
+  border: 1px solid #2f6165;
+  width: 280px;
+  height: 40px;
+}
+
+.select--hidden {
+  display: none;
+  visibility: hidden;
+}
+
+.select--styled {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  padding: 8px 15px;
+  transition: all 0.2s ease-in;
+}
+
+.select--styled:after {
+  content: '';
+  width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  border-color: rgba(255, 255, 255, 0.2) transparent transparent transparent;
+  position: absolute;
+  top: 16px;
+  right: 10px;
+}
+
+.select--styled:hover {
+  background-color: #f4f4f3;
+}
+
+.select--styled:active:after, .select--styled.is-active:after {
+  top: 9px;
+  border-color: transparent transparent #fff transparent;
+}
+
+.select__options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: #fff;
+  border: 1px solid #2f6165;
+}
+
+.select__options li {
+  margin: 0;
+  padding: 12px 0;
+  text-indent: 15px;
+  transition: all 0.2s ease-in;
+}
+
+.select__options li:hover {
+  background: #f4f4f3;
+}
+
+.select__options li[rel='hide'] {
+  display: none;
+}
+
 @font-face {
   font-family: 'lineto-circular';
   src: url("./../fonts/lineto-circular/lineto-circular-book.eot"), url("./../fonts/lineto-circular/lineto-circular-book.eot?#iefix") format("embedded-opentype"), url("./../fonts/lineto-circular/lineto-circular-book.woff") format("woff");

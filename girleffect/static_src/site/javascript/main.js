@@ -99,7 +99,7 @@ $(function() {
 
     // Desktop search
     $('.js-search-desktop').on('click', function() {
-        $(this).toggleClass('is-active');
+        $(this).toggleClass('is-is-active');
         const headerHeight = $('.header').outerHeight();
         const searchBar = $('.header__search-bar--desktop');
         const form = $('.form--search');
@@ -140,7 +140,7 @@ $(function() {
             function() {
                 $(this)
                     .children('.header__link-primary')
-                    .addClass('is-active');
+                    .addClass('is-is-active');
                 $(this)
                     .children('.header__nav-secondary')
                     .addClass('is-visible');
@@ -153,7 +153,7 @@ $(function() {
         ).mouseout(function() {
             $(this)
                 .children('.header__link-primary')
-                .removeClass('is-active');
+                .removeClass('is-is-active');
             $('.header__nav-overlay, .header__nav-secondary').removeClass(
                 'is-visible'
             );
@@ -216,5 +216,72 @@ $(function() {
         items: 1,
         nav: false,
         dots: true
+    });
+});
+
+$('select').each(function() {
+    var $this = $(this),
+        numberOfOptions = $(this).children('option').length;
+
+    $this.addClass('select--hidden');
+    $this.wrap('<div class="select"></div>');
+    $this.after('<div class="select--styled"></div>');
+
+    var $styledSelect = $this.next('div.select--styled');
+    $styledSelect.text(
+        $this
+            .children('option')
+            .eq(0)
+            .text()
+    );
+
+    var $list = $('<ul />', {
+        class: 'select__options'
+    }).insertAfter($styledSelect);
+
+    for (var i = 0; i < numberOfOptions; i++) {
+        $('<li />', {
+            text: $this
+                .children('option')
+                .eq(i)
+                .text(),
+            rel: $this
+                .children('option')
+                .eq(i)
+                .val()
+        }).appendTo($list);
+    }
+
+    var $listItems = $list.children('li');
+
+    $styledSelect.click(function(e) {
+        e.stopPropagation();
+        $('div.select--styled.is-active')
+            .not(this)
+            .each(function() {
+                $(this)
+                    .removeClass('is-active')
+                    .next('ul.select__options')
+                    .hide();
+            });
+        $(this)
+            .toggleClass('is-active')
+            .next('ul.select__options')
+            .toggle();
+    });
+
+    $listItems.click(function(e) {
+        $styledSelect.text($(this).text()).removeClass('is-active');
+        $this.val($(this).attr('rel'));
+        $list.hide();
+
+        $('option[selected]').attr('selected', false);
+        $(`option[value=${$(this).attr('rel')}]`).attr('selected', 'selected');
+        $('form').submit();
+    });
+
+    $(document).click(function() {
+        $styledSelect.removeClass('is-active');
+        $list.hide();
     });
 });

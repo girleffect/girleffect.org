@@ -4,9 +4,11 @@ from .base import *  # noqa
 DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
+ALLOWED_HOSTS = ['*']
+
 SECRET_KEY = 'CHANGEME!!!'
 
-INTERNAL_IPS = ('127.0.0.1', '10.0.2.2')
+INTERNAL_IPS = ('127.0.0.1', '10.0.2.2', '10.0.0.4')
 
 BASE_URL = 'http://localhost:8000'
 
