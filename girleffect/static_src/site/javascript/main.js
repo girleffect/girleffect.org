@@ -219,24 +219,27 @@ $(function() {
     });
 });
 
-$('select').each(function() {
+$('.js-article-filter').each(function() {
     var $this = $(this),
         numberOfOptions = $(this).children('option').length;
 
-    $this.addClass('select--hidden');
-    $this.wrap('<div class="select"></div>');
-    $this.after('<div class="select--styled"></div>');
+    $this.addClass('article-select--hidden');
+    $this.wrap('<div class="article-select"></div>');
+    $this.after('<div class="article-select--styled"></div>');
 
-    var $styledSelect = $this.next('div.select--styled');
+    var $styledSelect = $this.next('div.article-select--styled');
+
+    // TODO FROM THIS SELECT
     $styledSelect.text(
-        $this
-            .children('option')
-            .eq(0)
-            .text()
+        $('option[selected]').text() ||
+            $this
+                .children('option')
+                .eq(0)
+                .text()
     );
 
     var $list = $('<ul />', {
-        class: 'select__options'
+        class: 'article-select__options'
     }).insertAfter($styledSelect);
 
     for (var i = 0; i < numberOfOptions; i++) {
@@ -256,7 +259,7 @@ $('select').each(function() {
 
     $styledSelect.click(function(e) {
         e.stopPropagation();
-        $('div.select--styled.is-active')
+        $('div.article-select--styled.is-active')
             .not(this)
             .each(function() {
                 $(this)
@@ -266,17 +269,25 @@ $('select').each(function() {
             });
         $(this)
             .toggleClass('is-active')
-            .next('ul.select__options')
+            .next('ul.article-select__options')
             .toggle();
     });
 
     $listItems.click(function(e) {
+        e.stopPropagation();
         $styledSelect.text($(this).text()).removeClass('is-active');
-        $this.val($(this).attr('rel'));
+        $this.val();
         $list.hide();
 
         $('option[selected]').attr('selected', false);
-        $(`option[value=${$(this).attr('rel')}]`).attr('selected', 'selected');
+        if ($(this).attr('rel')) {
+            $(`option[value=${$(this).attr('rel')}]`).attr(
+                'selected',
+                'selected'
+            );
+        } else {
+            $('option[value=""]').attr('selected', 'selected');
+        }
         $('form').submit();
     });
 
