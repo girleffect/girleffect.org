@@ -61,6 +61,11 @@
                     color: $yellow;
                     border-bottom: 2px solid $green;
                 }
+
+                &.is-selected {
+                    color: $green;
+                    border-bottom: 2px solid $green;
+                }
             }
         }
     }

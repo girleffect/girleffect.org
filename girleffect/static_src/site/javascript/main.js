@@ -238,6 +238,8 @@ $('.js-article-filter').each(function() {
                 .text()
     );
 
+    console.log();
+
     var $list = $('<ul />', {
         class: 'article-select__options'
     }).insertAfter($styledSelect);
@@ -251,7 +253,14 @@ $('.js-article-filter').each(function() {
             rel: $this
                 .children('option')
                 .eq(i)
-                .val()
+                .val(),
+            class:
+                $this
+                    .children('option')
+                    .eq(i)
+                    .val() === $('option[selected]').val()
+                    ? 'is-selected'
+                    : null
         }).appendTo($list);
     }
 

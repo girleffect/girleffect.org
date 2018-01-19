@@ -887,6 +887,10 @@ cite {
     color: #ffc700;
     border-bottom: 2px solid #2f6165;
   }
+  .article-select__options li.is-selected {
+    color: #2f6165;
+    border-bottom: 2px solid #2f6165;
+  }
 }
 
 .article-select--hidden {
