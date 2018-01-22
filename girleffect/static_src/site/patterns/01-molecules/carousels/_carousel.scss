@@ -334,7 +334,7 @@
         @include mid-container;
 
         @include media-query(desktop) {
-            padding-right: calc(#{$mid-width} / 1.5);
+            padding-right: calc(#{$mid-width} / 1.7);
         }
     }
 
