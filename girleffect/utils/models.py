@@ -385,6 +385,12 @@ class HeroVideoFields(models.Model):
         max_length=255,
         help_text="Shows text over the hero. If no strapline is entered, no page title will show."
     )
+    hero_strapline_hex = models.CharField(
+        blank=True,
+        max_length=7,
+        help_text="Add valid hex to change colour of strapline."
+    )
+
     link_page = models.ForeignKey(
         Page,
         blank=True,
@@ -414,6 +420,7 @@ class HeroVideoFields(models.Model):
             MediaChooserPanel('hero_video'),
             ImageChooserPanel('hero_fallback_image'),
             FieldPanel('hero_strapline'),
+            FieldPanel('hero_strapline_hex'),
             MultiFieldPanel([
                 PageChooserPanel('link_page'),
                 FieldPanel('link_youtube'),
@@ -423,6 +430,12 @@ class HeroVideoFields(models.Model):
     ]
 
     def clean(self):
+        from girleffect.utils.blocks import validate_hex
+
+        if self.hero_strapline_hex:
+            if not validate_hex(self.hero_strapline_hex):
+                raise ValidationError({'hero_strapline_hex': _('Please enter a valid hex code')})
+
         # Validating if URL is a valid YouTube URL
         youtube_embed = self.link_youtube
         if youtube_embed:
@@ -479,6 +492,7 @@ class HeroVideoFieldsLogo(HeroVideoFields):
             ImageChooserPanel('hero_fallback_image'),
             ImageChooserPanel('hero_logo'),
             FieldPanel('hero_strapline'),
+            FieldPanel('hero_strapline_hex'),
             MultiFieldPanel([
                 PageChooserPanel('link_page'),
                 FieldPanel('link_youtube'),
@@ -505,6 +519,11 @@ class HeroImageFields(models.Model):
         help_text='Shows text over the hero. If no strapline is entered, no page title will show.',
         max_length=255
     )
+    hero_strapline_hex = models.CharField(
+        blank=True,
+        max_length=7,
+        help_text="Add valid hex to change colour of strapline."
+    )
 
     search_fields = Page.search_fields + [
         index.SearchField('hero_strapline'),
@@ -514,8 +533,18 @@ class HeroImageFields(models.Model):
         MultiFieldPanel([
             ImageChooserPanel('hero_image'),
             FieldPanel('hero_strapline'),
+            FieldPanel('hero_strapline_hex'),
         ], 'Hero Image'),
     ]
+
+    def clean(self):
+        from girleffect.utils.blocks import validate_hex
+
+        if self.hero_strapline_hex:
+            if not validate_hex(self.hero_strapline_hex):
+                raise ValidationError({'hero_strapline_hex': _('Please enter a valid hex code')})
+
+        return super(HeroImageFields, self).clean()
 
     class Meta:
         abstract = True
