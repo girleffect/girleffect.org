@@ -1,5 +1,5 @@
 {% load wagtailimages_tags %}
-{% if page.articles %}
+{% if page.articles or page.featured_article %}
 {% image customisations.image max-100x100 as articles_image %}
 <section class="section section--articles section--top-bottom-space"
          style="{% if articles_image %}background:url({{ articles_image.url }});{% endif %}
@@ -9,6 +9,9 @@
         {{ title }}
     </h2>
     <div class="article-container grid grid--three wrapper wrapper--mid">
+        {% if page.featured_article %}
+            {% include "includes/article_card.html" with article=page.featured_article %}
+        {% endif %}
         {% for article in page.articles %}
             {% include "includes/article_card.html" %}
         {% endfor %}
