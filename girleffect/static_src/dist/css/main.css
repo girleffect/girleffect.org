@@ -1865,7 +1865,7 @@ article .share-icons--hide-mobile {
 
 @media only screen and (min-width: 480px) {
   .article-card {
-    margin-bottom: 3rem;
+    margin-bottom: 20px;
   }
   .article-card:nth-child(2n + 1) {
     padding: 0 1.5rem 20px 0;
