@@ -93,10 +93,7 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
         index.SearchField('body')
     ]
 
-    content_panels = Page.content_panels + [
-        MultiFieldPanel([
-            ImageChooserPanel('hero_image'),
-        ], 'Hero Image'),
+    content_panels = Page.content_panels + HeroImageFields.content_panels + [
         FieldPanel('publication_date'),
         FieldPanel('author'),
         FieldPanel('introduction'),
@@ -158,10 +155,7 @@ class ArticleIndex(Page, HeroImageFields, SocialFields):
     )
     body = StreamField(StoryBlock(), blank=True)
 
-    content_panels = Page.content_panels + [
-        MultiFieldPanel([
-            ImageChooserPanel('hero_image'),
-        ], 'Hero Image'),
+    content_panels = Page.content_panels + HeroImageFields.content_panels + [
         MultiFieldPanel([
             FieldPanel('introduction'),
             InlinePanel('introduction_customisation', label="Introduction Customisation", max_num=1),

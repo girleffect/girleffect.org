@@ -383,7 +383,7 @@ class HeroVideoFields(models.Model):
     hero_strapline = models.TextField(
         blank=True,
         max_length=255,
-        help_text="Shows text over the hero."
+        help_text="Shows text over the hero. If no strapline is entered, no page title will show."
     )
     link_page = models.ForeignKey(
         Page,
@@ -500,7 +500,11 @@ class HeroImageFields(models.Model):
         help_text="Hero Image to be used as full width feature image for page.",
         on_delete=models.SET_NULL
     )
-    hero_strapline = models.CharField(blank=True, max_length=255)
+    hero_strapline = models.CharField(
+        blank=True,
+        help_text='Shows text over the hero. If no strapline is entered, no page title will show.',
+        max_length=255
+    )
 
     search_fields = Page.search_fields + [
         index.SearchField('hero_strapline'),
