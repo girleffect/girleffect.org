@@ -2,7 +2,7 @@
     {% if block.block_type == 'heading' %}
         <h3>{{ block.value }}</h3>
     {% elif block.block_type == 'body_text' %}
-        <div class="body-text">{{ block }}</div>
+        {{ block }}
     {% elif block.block_type == 'large_text' %}
         {# large_text is a rich text field, limited to bold, italic, link, document link #}
         <div class="large-text">{{ block }}</div>

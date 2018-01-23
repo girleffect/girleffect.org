@@ -1,8 +1,26 @@
+.body-text-container {
+    // TODO Refactor to mixin
+    margin-bottom: 1rem;
+    padding: 2rem 0;
+    background-size: cover;
+    background-position: 50% 50%;
+
+    @include media-query(tablet-portrait) {
+        padding: 3rem 0;
+    }
+}
+
 .body-text {
     @include body-container;
     padding: 0;
 
     .template-article-page & {
         padding: 0;
+    }
+
+    h2,
+    h3,
+    h4 {
+        color: var(--heading-hex, $yellow);
     }
 }
