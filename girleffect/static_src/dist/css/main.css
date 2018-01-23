@@ -2587,13 +2587,22 @@ article .share-icons--hide-mobile {
 }
 
 .extendable-body-container {
-  margin: 1rem 0;
+  margin-bottom: 1rem;
+  padding: 2rem 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-position: 0 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .extendable-body-container {
+    padding: 3rem 0;
+  }
 }
 
 .extendable-body {
   margin-left: 1rem;
   margin-right: 1rem;
-  padding: 2rem 0;
 }
 
 @media only screen and (min-width: 768px) {
