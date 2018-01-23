@@ -968,6 +968,19 @@ blockquote cite {
   margin: 35px auto;
 }
 
+.body-text-container {
+  margin-bottom: 1rem;
+  padding: 2rem 0;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+@media only screen and (min-width: 768px) {
+  .body-text-container {
+    padding: 3rem 0;
+  }
+}
+
 .body-text {
   margin-left: 1rem;
   margin-right: 1rem;
@@ -990,6 +1003,14 @@ blockquote cite {
 
 .template-article-page .body-text {
   padding: 0;
+}
+
+.body-text h2,
+.body-text h3,
+.body-text h4,
+.body-text .stat-block__content b, .stat-block__content
+.body-text b {
+  color: var(--heading-hex, #ffc700);
 }
 
 .brand-pattern {
