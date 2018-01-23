@@ -1,13 +1,5 @@
 .large-text-container {
-    // TODO Refactor to mixin
-    margin-bottom: 1rem;
-    padding: 2rem 0;
-    background-size: cover;
-    background-position: 50% 50%;
-
-    @include media-query(tablet-portrait) {
-        padding: 3rem 0;
-    }
+    @include background-container;
 }
 
 .large-text {
