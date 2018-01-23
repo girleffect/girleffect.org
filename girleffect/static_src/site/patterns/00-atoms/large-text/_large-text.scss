@@ -1,20 +1,22 @@
+.large-text-container {
+    // TODO Refactor to mixin
+    margin-bottom: 1rem;
+    padding: 2rem 0;
+    background-size: cover;
+    background-position: 50% 50%;
+
+    @include media-query(tablet-portrait) {
+        padding: 3rem 0;
+    }
+}
+
 .large-text {
     @include large-text;
+    @include body-container;
     max-width: $body-width;
-    margin: 0 auto 1rem;
-    padding: 1rem;
 
     @include media-query(tablet-landscape) {
-        margin: 0 auto 2rem;
         padding: 0;
-    }
-
-    .template-home-page & {
-        @include body-container;
-
-        @include media-query(tablet-landscape) {
-            margin: 7rem auto;
-        }
     }
 
     .template-article-page & {

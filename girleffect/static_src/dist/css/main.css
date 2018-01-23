@@ -1274,12 +1274,25 @@ blockquote cite {
   color: #2f6165;
 }
 
+.large-text-container {
+  margin-bottom: 1rem;
+  padding: 2rem 0;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+@media only screen and (min-width: 768px) {
+  .large-text-container {
+    padding: 3rem 0;
+  }
+}
+
 .large-text {
   font-size: 1.83016vw;
   line-height: 1.16;
+  margin-left: 1rem;
+  margin-right: 1rem;
   max-width: 768px;
-  margin: 0 auto 1rem;
-  padding: 1rem;
 }
 
 @media (max-width: 1038.16px) {
@@ -1294,35 +1307,23 @@ blockquote cite {
   }
 }
 
-@media only screen and (min-width: 1024px) {
-  .large-text {
-    margin: 0 auto 2rem;
-    padding: 0;
-  }
-}
-
-.template-home-page .large-text {
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
 @media only screen and (min-width: 768px) {
-  .template-home-page .large-text {
+  .large-text {
     margin-left: 3rem;
     margin-right: 3rem;
   }
 }
 
 @media only screen and (min-width: 1172px) {
-  .template-home-page .large-text {
+  .large-text {
     margin: 0 auto;
     max-width: 768px;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .template-home-page .large-text {
-    margin: 7rem auto;
+  .large-text {
+    padding: 0;
   }
 }
 
