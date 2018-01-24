@@ -1,7 +1,23 @@
 <nav role="navigation" aria-label="Pagination">
-    <ul class="pagination">
-        <li><a class="link link--underlined" href="#">previous</a></li>
-        <li class="current">1/10</li>
-        <li><a class="link link--underlined" href="#">next</a></li>
-    </ul>
+    <div class="pagination">
+        <div class="pagination__item">
+            <a class="pagination__prev">
+                <div class="link__arrow"></div>
+                <span class="pagination__label">Previous page</span>
+            </a>
+        </div>
+
+        <div class="pagination__item">
+            <div class="pagination__pages">
+                1/10
+            </div>
+        </div>
+
+        <div class="pagination__item">
+            <a class="pagination__next">
+                <span class="pagination__label">Next page</span>
+                <div class="link__arrow"></div>
+            </a>
+        </div>
+    </div>
 </nav>

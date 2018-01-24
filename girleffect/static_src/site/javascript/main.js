@@ -23,6 +23,36 @@ function closeHeader() {
         });
 }
 
+// Change carousel component to owl carousel
+function setCarousel() {
+    $('.js-carousel').addClass('owl-carousel');
+
+    $('.js-carousel').owlCarousel({
+        items: 1,
+        nav: false,
+        dots: true
+    });
+}
+
+function isMobileScreen() {
+    return $(window).width() < 768;
+}
+
+function isOwlCarousel() {
+    return $('.js-carousel').hasClass('owl-carousel');
+}
+
+function removeCarousel() {
+    let carousel = $('.owl-carousel');
+    carousel
+        .trigger('destroy.owl.carousel')
+        .removeClass('owl-carousel owl-loaded');
+    carousel
+        .find('.owl-stage-outer')
+        .children()
+        .unwrap();
+}
+
 $(function() {
     $(Hamburger.selector()).each((index, el) => {
         new Hamburger($(el), openHeader, closeHeader);
@@ -201,6 +231,50 @@ $(function() {
         $(image).addClass('is-visible');
     });
 
+    // Count items in carousel to set styling class
+    $('.js-carousel').each((index, el) => {
+        $(el).addClass(
+            `carousel--${$(el).find('.carousel__block-item').length}-panel`
+        );
+    });
+
+    // Show carousel content & hide first overview text
+    $('.carousel__controls').mouseover(function() {
+        let panel = $(this).closest('.carousel__block-item');
+        let panel_overview = panel.parent().find('.carousel__overview')[0];
+        let panel_first = panel.parent().find('.carousel__block-item')[0];
+
+        if (panel[0] !== panel_first) {
+            $(panel_overview).hide();
+        }
+
+        panel.addClass('is-selected');
+    });
+
+    $('.carousel__controls').mouseout(function() {
+        let panel = $(this).closest('.carousel__block-item');
+        let panel_overview = panel.parent().find('.carousel__overview')[0];
+        $(panel_overview).show();
+        panel.removeClass('is-selected');
+    });
+
+    if (isMobileScreen()) {
+        setCarousel();
+    }
+
+    // Change carousel to owl carousel when mobile screensize reaced
+    $(window).on('resize', () => {
+        if (isMobileScreen()) {
+            if (!isOwlCarousel()) {
+                setCarousel();
+            }
+        } else {
+            if (isOwlCarousel()) {
+                removeCarousel();
+            }
+        }
+    });
+
     // Always show the main slide when not hovering on the home page carousel
     $('.carousel--home-desktop').mouseout(function() {
         $('.carousel__image.is-visible').removeClass('is-visible');
@@ -211,10 +285,125 @@ $(function() {
         $('.carousel__panel').removeClass('is-expanded');
     });
 
-    // Home page carsouel on mobile
-    $('.js-carousel--home-mobile').owlCarousel({
-        items: 1,
-        nav: false,
-        dots: true
+    // Extendable body toggleClass
+    $('.extendable-body--toggle').on('click', function() {
+        $('.extendable-body--collapsible').slideToggle();
+        $('.extendable-body--open').toggle();
+        $('.extendable-body--close').toggle();
+    });
+
+    // Article Page Filter Setup
+    function constructFilter(filter) {
+        filter.addClass('article-select--hidden');
+        filter.wrap('<div class="article-select"></div>');
+        filter.after('<div class="article-select--styled"></div>');
+    }
+
+    function defaultFilterItem(filter) {
+        var styledArticleFilter = filter.next('div.article-select--styled');
+        styledArticleFilter.text(
+            $('option[selected]').text() ||
+                filter
+                    .children('option')
+                    .eq(0)
+                    .text()
+        );
+
+        return styledArticleFilter;
+    }
+
+    function createFilterListItems(
+        articleFilter,
+        articleFilterOptionsCount,
+        filterList
+    ) {
+        for (var i = 0; i < articleFilterOptionsCount; i++) {
+            $('<li />', {
+                text: articleFilter
+                    .children('option')
+                    .eq(i)
+                    .text(),
+                rel: articleFilter
+                    .children('option')
+                    .eq(i)
+                    .val(),
+                class:
+                    articleFilter
+                        .children('option')
+                        .eq(i)
+                        .val() === $('option[selected]').val()
+                        ? 'is-selected'
+                        : null
+            }).appendTo(filterList);
+        }
+    }
+
+    function createFilterList(styledArticleFilter) {
+        return $('<ul />', {
+            class: 'article-select__options'
+        }).insertAfter(styledArticleFilter);
+    }
+
+    function setDefaultSelectedFilterItem(filterList) {
+        var selectedItems = filterList.children('.is-selected');
+        if (selectedItems.length === 0) {
+            $(filterList.children('li')[0]).addClass('is-selected');
+        }
+    }
+
+    $('.js-article-filter').each(function() {
+        const articleFilter = $(this);
+        const articleFilterOptionsCount = articleFilter.children('option')
+            .length;
+        constructFilter(articleFilter);
+        const styledArticleFilter = defaultFilterItem(articleFilter);
+        const filterList = createFilterList(styledArticleFilter);
+        createFilterListItems(
+            articleFilter,
+            articleFilterOptionsCount,
+            filterList
+        );
+        const filterListItems = filterList.children('li');
+        setDefaultSelectedFilterItem(filterList);
+
+        styledArticleFilter.click(function(e) {
+            e.stopPropagation();
+            $('div.article-select--styled.is-active')
+                .not(this)
+                .each(function() {
+                    $(this)
+                        .removeClass('is-active')
+                        .next('ul.select__options')
+                        .hide();
+                });
+            $(this)
+                .toggleClass('is-active')
+                .next('ul.article-select__options')
+                .toggle();
+        });
+
+        filterListItems.click(function(e) {
+            e.stopPropagation();
+            styledArticleFilter.text($(this).text()).removeClass('is-active');
+            $(articleFilter.children('option[selected]')).attr(
+                'selected',
+                false
+            );
+            if ($(this).attr('rel')) {
+                $(`option[value=${$(this).attr('rel')}]`).attr(
+                    'selected',
+                    'selected'
+                );
+            } else {
+                $(filterListItems[0]).attr('selected', 'selected');
+            }
+
+            $('form').submit();
+        });
+
+        $(document).click(function() {
+            styledArticleFilter.removeClass('is-active');
+            filterList.hide();
+        });
     });
 });

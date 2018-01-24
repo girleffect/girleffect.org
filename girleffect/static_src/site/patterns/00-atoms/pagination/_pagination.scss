@@ -1,5 +1,44 @@
 .pagination {
-    li {
-        display: inline-block;
+    @include mid-container;
+    display: flex;
+    flex-direction: row;
+
+    &__item {
+        flex-grow: 1;
+    }
+
+    &__pages {
+        text-align: center;
+    }
+
+    &__label {
+        display: none;
+
+        @include media-query(tablet-portrait) {
+            display: inline-block;
+        }
+
+        &:hover {
+            color: $yellow;
+        }
+    }
+
+    &__next,
+    &__prev {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    &__next {
+        justify-content: flex-end;
+    }
+
+    &__prev {
+        .link__arrow {
+            transform: rotate(180deg);
+            margin-left: 0;
+            margin-right: 10px;
+        }
     }
 }

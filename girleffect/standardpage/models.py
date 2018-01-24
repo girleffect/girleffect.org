@@ -46,10 +46,16 @@ class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
 
 class StandardIndex(Page, HeroImageFields, SocialFields):
     body = StreamField(StoryBlock(), blank=True)
+    exclude_from_navigation = models.BooleanField(
+        blank=True,
+        default=False,
+        help_text="Check to prevent linking to this page in the navigation and breadcrumbs,\
+            for example if the page is empty."
+    )
 
     content_panels = Page.content_panels + HeroImageFields.content_panels + [
         StreamFieldPanel('body'),
-
+        FieldPanel('exclude_from_navigation'),
     ]
 
     search_fields = Page.search_fields + HeroImageFields.search_fields + [
