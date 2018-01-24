@@ -8,6 +8,7 @@ from django.db import migrations
 def copy_title_to_strapline(apps, schema_editor):
     ArticlePage = apps.get_model('articles', 'ArticlePage')
     for article in ArticlePage.objects.all():
+        article.hero_strapline = article.title
         for revision in article.revisions.all():
             content = json.loads(revision.content_json)
 
@@ -16,6 +17,7 @@ def copy_title_to_strapline(apps, schema_editor):
 
             revision.content_json = json.dumps(content)
             revision.save()
+        article.save()
 
 
 class Migration(migrations.Migration):
