@@ -4101,6 +4101,10 @@ article .share-icons--hide-mobile {
   }
 }
 
+.media-block__heading {
+  margin-bottom: 0.5rem;
+}
+
 .media-block__content {
   background-color: #fff;
   padding: 40px;
