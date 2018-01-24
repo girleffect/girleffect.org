@@ -35,7 +35,7 @@ function setCarousel() {
 }
 
 function isMobileScreen() {
-    return $(window).width() <= 768;
+    return $(window).width() < 768;
 }
 
 function isOwlCarousel() {
