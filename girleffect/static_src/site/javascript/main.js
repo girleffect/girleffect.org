@@ -35,7 +35,7 @@ function setCarousel() {
 }
 
 function isMobileScreen() {
-    return $(window).width() < 768;
+    return $(window).width() <= 768;
 }
 
 function isOwlCarousel() {
@@ -401,9 +401,12 @@ $(function() {
             $('form').submit();
         });
 
+        // NOTE Close select box if clicked anywhere else on page
         $(document).click(function() {
             styledArticleFilter.removeClass('is-active');
-            filterList.hide();
+            if (isMobileScreen()) {
+                filterList.hide();
+            }
         });
     });
 });
