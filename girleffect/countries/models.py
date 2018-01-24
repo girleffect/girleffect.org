@@ -98,8 +98,7 @@ class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
         all_articles = ArticlePage.objects.filter(related_pages__page=self).live().public().order_by('-publication_date')
         if featured_article:
             all_articles = all_articles.exclude(pk=featured_article.id)
-        articles = all_articles[:2] if featured_article else all_articles[:3]
-        return articles
+        return all_articles[:3]
 
     @cached_property
     def people(self):

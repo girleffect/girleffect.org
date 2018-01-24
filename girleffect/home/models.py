@@ -52,8 +52,7 @@ class HomePage(Page, HeroVideoFields, SocialFields):
         all_articles = ArticlePage.objects.all().live().public().order_by('-publication_date')
         if featured_article:
             all_articles = all_articles.exclude(pk=featured_article.id)
-        articles = all_articles[:5] if featured_article else all_articles[:6]
-        return articles
+        return all_articles[:6]
 
     promote_panels = (
         Page.promote_panels +  # slug, seo_title, show_in_menus, search_description
