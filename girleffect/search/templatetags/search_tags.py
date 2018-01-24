@@ -11,9 +11,11 @@ def show_preview_text(result):
         return result.search_description
     if hasattr(result, 'listing_summary') and result.listing_summary:
         return result.listing_summary
-    elif hasattr(result, 'introduction'):
+    if hasattr(result, 'introduction') and result.introduction:
         return result.introduction
-    elif hasattr(result, 'body'):
+    if hasattr(result, 'body'):
         for block in result.body:
             if block.block_type in body_text_blocks:
-                return block.value
+                return block.value['body']
+            if block.block_type == 'extendable_body':
+                return block.value['body_upper']
