@@ -291,13 +291,6 @@ class SocialMediaSettings(BaseSetting):
 
 @register_snippet
 class PartnerWithUsSnippet(CallToActionSnippet):
-    email = models.EmailField()
-    phone = models.CharField(max_length=255)
-
-    panels = CallToActionSnippet.panels + [
-        FieldPanel('email'),
-        FieldPanel('phone'),
-    ]
 
     def __str__(self):
         return self.title
