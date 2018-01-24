@@ -4320,6 +4320,16 @@ article .share-icons--hide-mobile {
   font-size: inherit;
 }
 
+.quote__copy > * {
+  padding-right: 20px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .quote__copy > * {
+    padding-right: 20px;
+  }
+}
+
 .quote__copy::before, .quote__copy::after {
   color: var(--quote-mark-hex, #ffc700);
   font-size: 48px;
@@ -4352,8 +4362,14 @@ article .share-icons--hide-mobile {
 }
 
 .quote__copy::after {
-  padding-left: 5px;
+  margin-left: -20px;
   content: '”';
+}
+
+@media only screen and (min-width: 1024px) {
+  .quote__copy::after {
+    margin-left: -20px;
+  }
 }
 
 .quote__copy, .quote__cite,
