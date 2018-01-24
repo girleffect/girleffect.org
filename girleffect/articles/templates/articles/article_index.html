@@ -44,7 +44,7 @@
                                         </a>
                                     </span>
                                 {% endif %}
-                                <span class="article-card__date">{{ article.publication_date|date:"d.m.y H:i" }}</span>
+                                <span class="article-card__date">{{ article.publication_date|date:"d.m.y" }}</span>
                                 {% if article.listing_title %}
                                     <div class="article-card__title"><a href="{% pageurl article %}">{{ article.listing_title }}</a></div>
                                 {% else %}
