@@ -292,9 +292,11 @@ class SocialMediaSettings(BaseSetting):
 @register_setting
 class BrandingSettings(BaseSetting):
     logo_image = models.ForeignKey('images.CustomImage', null=True, blank=True, on_delete=models.SET_NULL)
+    footer_text = models.TextField(blank=True)
 
     panels = [
         ImageChooserPanel('logo_image'),
+        FieldPanel('footer_text'),
     ]
 
 
