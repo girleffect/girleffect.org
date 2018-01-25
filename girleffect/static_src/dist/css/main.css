@@ -4326,7 +4326,7 @@ article .share-icons--hide-mobile {
 
 @media only screen and (min-width: 1024px) {
   .quote__copy > * {
-    padding-right: 20px;
+    padding-right: 50px;
   }
 }
 
@@ -4368,7 +4368,7 @@ article .share-icons--hide-mobile {
 
 @media only screen and (min-width: 1024px) {
   .quote__copy::after {
-    margin-left: -20px;
+    margin-left: -50px;
   }
 }
 
