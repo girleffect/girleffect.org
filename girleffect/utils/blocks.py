@@ -212,7 +212,7 @@ class MediaTextOverlayBlock(blocks.StructBlock):
     text = blocks.RichTextBlock(
         max_length=75,
         required=False,
-        features=["bold", "italic", "ol", "ul", "link", "document-link"]
+        features=["bold", "italic", "ol", "ul", "link", "document-link", "justify"]
     )
     link = LinkBlock(required=False)
     customisation = CustomisationBlock(required=False)
@@ -242,7 +242,7 @@ class YouTubeEmbed(blocks.StructBlock):
     text = blocks.RichTextBlock(
         max_length=255,
         required=False,
-        features=["bold", "italic", "ol", "ul", "link", "document-link"]
+        features=["bold", "italic", "ol", "ul", "link", "document-link", "justify"]
     )
     youtube_embed = EmbedBlock(
         label="YouTube Video URL",
@@ -274,7 +274,7 @@ class QuoteBlock(blocks.StructBlock):
     text = blocks.RichTextBlock(
         max_length=255,
         required=True,
-        features=["bold", "italic", "ol", "ul", "link", "document-link"]
+        features=["bold", "italic", "ol", "ul", "link", "document-link", "justify"]
     )
     citation = blocks.CharBlock(
         required=False,
@@ -312,7 +312,7 @@ class ListItemBlock(blocks.StructBlock):
     title = blocks.CharBlock(max_length=255, required=False)
     description = blocks.RichTextBlock(
         max_length=250,
-        features=["bold", "italic", "link", "document-link"],
+        features=["bold", "italic", "link", "document-link", "justify"],
         required=False,
         icon="pilcrow"
     )
@@ -360,7 +360,7 @@ class BlockQuote(blocks.StructBlock):
 class LargeTextBlock(blocks.StructBlock):
     body = blocks.RichTextBlock(
         label="Large Text",
-        features=["bold", "italic", "link", "document-link"],
+        features=["bold", "italic", "link", "document-link", "justify"],
         required=False,
     )
     customisation = BodyHeadingCustomisationBlock(
@@ -378,7 +378,7 @@ class BodyTextBlock(blocks.StructBlock):
         features=[
             "h2", "h3", "h4",
             "bold", "italic", "link",
-            "ol", "ul", "hr"
+            "ol", "ul", "hr", "justify"
         ],
     )
     customisation = BodyHeadingCustomisationBlock(
@@ -396,7 +396,7 @@ class ExtendableBodyTextBlock(blocks.StructBlock):
         features=[
             "h2", "h3", "h4",
             "bold", "italic", "link",
-            "ol", "ul", "hr"
+            "ol", "ul", "hr", "justify"
         ],
     )
     extend_button_text = blocks.CharBlock(
@@ -415,7 +415,7 @@ class ExtendableBodyTextBlock(blocks.StructBlock):
         features=[
             "h2", "h3", "h4",
             "bold", "italic", "link",
-            "ol", "ul", "hr"
+            "ol", "ul", "hr", "justify"
         ],
     )
 
