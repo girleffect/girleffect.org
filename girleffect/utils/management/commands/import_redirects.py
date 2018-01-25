@@ -17,9 +17,7 @@ def get_page_from_path(path):
     """
     parsed_path = urlparse(path)
     netloc = parsed_path.netloc
-    scheme = parsed_path.scheme
-    root_url = "{scheme}://{netloc}/".format(scheme=scheme, netloc=netloc)
-    site = Site.objects.get(hostname=root_url)
+    site = Site.objects.get(hostname=netloc)
 
     path_components = [component for component in parsed_path.path.split('/')
                        if component]
@@ -66,17 +64,15 @@ class Command(BaseCommand):
                     old_path = '//' + old_path
 
                 netloc = urlparse(old_path).netloc
-                scheme = urlparse(old_path).scheme
-                if not netloc or not scheme:
+
+                if not netloc:
                     print("Line {} - No domain provided: {}".format(reader.line_num, old_path))
                     continue
 
-                root_url = "{scheme}://{netloc}/".format(scheme=scheme, netloc=netloc)
-
                 try:
-                    old_site = Site.objects.get(hostname=root_url)
+                    old_site = Site.objects.get(hostname=netloc)
                 except Site.DoesNotExist:
-                    print("Line {} - Site does not exist: {}".format(reader.line_num, netloc))
+                    print("Line {} - Old Site does not exist: {}".format(reader.line_num, netloc))
                     error_count += 1
                     continue
 
@@ -89,7 +85,7 @@ class Command(BaseCommand):
                     error_count += 1
                     continue
                 except Site.DoesNotExist:
-                    print("Line {} - Site does not exist: {}".format(reader.line_num, netloc))
+                    print("Line {} - New Site does not exist: {}".format(reader.line_num, netloc))
                     error_count += 1
                     continue
 
