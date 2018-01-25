@@ -5,7 +5,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel
-from wagtail.wagtailcore.models import Page
+from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
@@ -134,6 +134,22 @@ class ArticleIndexCustomisableArticles(CustomisableFeature):
     )
 
 
+class ArticleIndexCategory(Orderable):
+    page = ParentalKey(
+        'articles.ArticleIndex',
+        related_name='categories'
+    )
+    category = models.ForeignKey(
+        'articles.ArticleCategory',
+        related_name='+',
+        on_delete=models.CASCADE
+    )
+
+    panels = [
+        SnippetChooserPanel('category')
+    ]
+
+
 class ArticleIndex(Page, HeroImageFields, SocialFields):
     introduction = RichTextField(
         blank=True,
@@ -151,7 +167,8 @@ class ArticleIndex(Page, HeroImageFields, SocialFields):
             InlinePanel('introduction_customisation', label="Introduction Customisation", max_num=1),
         ], 'Introduction'),
         InlinePanel('article_customisation', label="Article Listing Customisation", max_num=1),
-        StreamFieldPanel('body')
+        StreamFieldPanel('body'),
+        InlinePanel('categories', label="Article Index Categories")
     ]
 
     search_fields = Page.search_fields + HeroImageFields.search_fields + [
@@ -188,7 +205,7 @@ class ArticleIndex(Page, HeroImageFields, SocialFields):
         context.update(
             articles=articles,
             # Only show categories that have been used
-            categories=ArticlePageCategory.objects.all().values_list(
+            categories=self.categories.values_list(
                 'category__pk', 'category__title'
             ).distinct()
         )
