@@ -17,6 +17,11 @@ def register_collection_permissions():
 def whitelister_element_rules():
     return {
         'p': attribute_rule({'style': True}),
+        'h2': attribute_rule({'style': True}),
+        'h3': attribute_rule({'style': True}),
+        'h4': attribute_rule({'style': True}),
+        'h5': attribute_rule({'style': True}),
+        'h6': attribute_rule({'style': True}),
     }
 
 
