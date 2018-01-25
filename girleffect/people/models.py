@@ -116,7 +116,7 @@ class PersonIndexPage(Page, HeroImageFields):
     introduction = RichTextField(
         null=True,
         blank=True,
-        features=['bold', 'italic', 'link']
+        features=['bold', 'italic', 'link', 'justify']
     )
     call_to_action = models.ForeignKey(
         'utils.CallToActionSnippet',

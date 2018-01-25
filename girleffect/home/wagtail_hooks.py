@@ -2,6 +2,7 @@ from django.contrib.auth.models import Permission
 
 from wagtail.wagtailadmin.rich_text import HalloPlugin
 from wagtail.wagtailcore import hooks
+from wagtail.wagtailcore.whitelist import attribute_rule, check_url
 
 
 @hooks.register('register_permissions')
@@ -10,6 +11,13 @@ def register_collection_permissions():
         content_type__app_label='wagtailcore',
         codename__in=['add_collection', 'change_collection', 'delete_collection']
     )
+
+
+@hooks.register('construct_whitelister_element_rules')
+def whitelister_element_rules():
+    return {
+        'p': attribute_rule({'class': True}),
+    }
 
 
 @hooks.register('register_rich_text_features')
