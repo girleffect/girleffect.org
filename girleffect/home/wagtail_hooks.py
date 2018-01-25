@@ -16,7 +16,7 @@ def register_collection_permissions():
 @hooks.register('construct_whitelister_element_rules')
 def whitelister_element_rules():
     return {
-        'p': attribute_rule({'class': True}),
+        'p': attribute_rule({'style': True}),
     }
 
 
