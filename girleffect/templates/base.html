@@ -99,7 +99,11 @@
             </div>
 
             <a href="/" class="header__logo">
-                <img src="{% static "images/girl-effect-logo.jpg" %}" alt="Girl Effect Logo">
+                {% if settings.utils.BrandingSettings.logo_image %}
+                    {% image settings.utils.BrandingSettings.logo_image max-170x112 %}
+                {% else %}
+                    <img src="{% static "images/girl-effect-logo.jpg" %}" alt="Girl Effect Logo">
+                {% endif %}
             </a>
 
             <div class="header__mobile-icons">

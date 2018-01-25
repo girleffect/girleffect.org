@@ -289,6 +289,15 @@ class SocialMediaSettings(BaseSetting):
     ]
 
 
+@register_setting
+class BrandingSettings(BaseSetting):
+    logo_image = models.ForeignKey('images.CustomImage', null=True, blank=True, on_delete=models.SET_NULL)
+
+    panels = [
+        ImageChooserPanel('logo_image'),
+    ]
+
+
 @register_snippet
 class PartnerWithUsSnippet(CallToActionSnippet):
 
