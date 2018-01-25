@@ -1641,7 +1641,17 @@ blockquote cite {
 }
 
 .section--statistics {
-  background: #ffc700;
+  margin-bottom: 1rem;
+  padding: 2rem 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-color: #ffc700;
+}
+
+@media only screen and (min-width: 768px) {
+  .section--statistics {
+    padding: 3rem 0;
+  }
 }
 
 .section--partners {
@@ -2933,7 +2943,6 @@ article .share-icons--hide-mobile {
 }
 
 .list-item__image {
-  margin-bottom: 1rem;
   width: 100%;
   height: auto;
 }
@@ -2954,6 +2963,11 @@ article .share-icons--hide-mobile {
 
 .list-item__title {
   margin-bottom: 0.5rem;
+}
+
+.list-item__content {
+  padding: 1.5rem;
+  background-color: #fff;
 }
 
 .modal--hidden {

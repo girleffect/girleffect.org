@@ -11,7 +11,8 @@
     }
 
     &--statistics {
-        background: $yellow;
+        @include background-container;
+        background-color: $yellow;
     }
 
     &--partners {

@@ -37,7 +37,6 @@
     }
 
     &__image {
-        margin-bottom: 1rem;
         width: 100%;
         height: auto;
 
@@ -56,5 +55,10 @@
 
     &__title {
         margin-bottom: 0.5rem;
+    }
+
+    &__content {
+        padding: 1.5rem;
+        background-color: $white;
     }
 }
