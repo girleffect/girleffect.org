@@ -47,7 +47,7 @@
             <p class="article-info__author">{% if page.author %}<span>By {{ page.author }}</span>{% endif %} {{ page.display_date|date }}</p>
         </div>
 
-        <p class="large-text">{{ page.introduction }}</p>
+        <p class="large-text">{{ page.introduction|richtext }}</p>
         {{ page.body }}
 
         <div class="wrapper wrapper--mid">

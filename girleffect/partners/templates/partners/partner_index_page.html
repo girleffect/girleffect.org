@@ -17,7 +17,7 @@
         <div class="wrapper wrapper--mid wrapper--bottom-space-xl large-text"
              style="{% if introduction_image %}background:url({{ introduction_image.url }});{% endif %}
                     {% if page.introduction_customisations.background_hex %}background:{{ page.introduction_customisations.background_hex }};{% endif %}">
-            <p>{{ page.introduction }}</p>
+            <p>{{ page.introduction|richtext }}</p>
         </div>
         {% if page.partners.exists %}
             {% image page.partner_customisations.image max-100x100 as partner_background %}

@@ -13,7 +13,7 @@
     {% if page.introduction %}
         {# Introduction #}
         <section class="wrapper wrapper--mid wrapper--top-bottom-space large-text">
-            <p>{{ page.introduction }}</p>
+            {{ page.introduction|richtext }}
         </section>    
     {% endif %}
 

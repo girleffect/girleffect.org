@@ -9,7 +9,7 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailadmin.edit_handlers import (
     StreamFieldPanel, FieldPanel, InlinePanel
 )
@@ -80,7 +80,11 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
         blank=True,
         max_length=255,
         help_text="Optional Author name.")
-    introduction = models.TextField(blank=True, max_length=350)
+    introduction = RichTextField(
+        blank=True,
+        null=True,
+        features=['bold', 'italic', 'link', 'justify']
+    )
     body = StreamField(ArticleBlock())
 
     search_fields = Page.search_fields + HeroImageFields.search_fields + [
@@ -131,7 +135,11 @@ class ArticleIndexCustomisableArticles(CustomisableFeature):
 
 
 class ArticleIndex(Page, HeroImageFields, SocialFields):
-    introduction = models.TextField(max_length=350, blank=True)
+    introduction = RichTextField(
+        blank=True,
+        null=True,
+        features=['bold', 'italic', 'link', 'justify']
+    )
     body = StreamField(StoryBlock(), blank=True)
 
     content_panels = Page.content_panels + [
