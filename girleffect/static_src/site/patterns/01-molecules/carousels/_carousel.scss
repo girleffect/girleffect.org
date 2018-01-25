@@ -333,7 +333,11 @@
     &__home-text {
         @include mid-container;
 
-        @include media-query(desktop) {
+        @include media-query(tablet-portrait) {
+            padding-right: calc(#{$mid-width} / 4);
+        }
+
+        @include media-query(container) {
             padding-right: calc(#{$mid-width} / 1.7);
         }
     }

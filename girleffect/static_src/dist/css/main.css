@@ -2311,7 +2311,13 @@ article .share-icons--hide-mobile {
   }
 }
 
-@media only screen and (min-width: 1366px) {
+@media only screen and (min-width: 768px) {
+  .carousel__home-title, .carousel__home-text {
+    padding-right: calc(1172px / 4);
+  }
+}
+
+@media only screen and (min-width: 1172px) {
   .carousel__home-title, .carousel__home-text {
     padding-right: calc(1172px / 1.7);
   }
