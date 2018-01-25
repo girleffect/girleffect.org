@@ -42,6 +42,10 @@
         font-weight: $weight-bold;
     }
 
+    &__heading {
+        margin-bottom: 0.5rem;
+    }
+
     &__content {
         display: flex;
         flex-direction: column;
