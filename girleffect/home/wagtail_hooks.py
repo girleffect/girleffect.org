@@ -2,7 +2,7 @@ from django.contrib.auth.models import Permission
 
 from wagtail.wagtailadmin.rich_text import HalloPlugin
 from wagtail.wagtailcore import hooks
-from wagtail.wagtailcore.whitelist import attribute_rule, check_url
+from wagtail.wagtailcore.whitelist import attribute_rule
 
 
 @hooks.register('register_permissions')
