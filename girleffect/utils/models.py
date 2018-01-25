@@ -261,6 +261,21 @@ class SocialMediaSettings(BaseSetting):
         blank=True,
         help_text='Your Facebook app ID.',
     )
+    facebook_page_handle = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text='Your Facebook page handle. For example, if your Facebook page URL is "https://www.facebook.com/girleffect/" then this field should be set to "girleffect" (case sensitive)'
+    )
+    instagram_handle = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text='Your Instagram handle. For example, if your Instagram URL is "https://www.instagram.com/girleffect/" then this field should be set to "girleffect" (case sensitive)'
+    )
+    linkedin_handle = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text='Your LinkedIn handle. For example, if your LinkedIn URL is "https://www.linkedin.com/company/girleffect/" then this field should be set to "girleffect" (case sensitive)'
+    )
     default_sharing_text = models.CharField(
         max_length=255,
         blank=True,
@@ -283,6 +298,9 @@ class SocialMediaSettings(BaseSetting):
     panels = [
         FieldPanel('twitter_handle'),
         FieldPanel('facebook_app_id'),
+        FieldPanel('facebook_page_handle'),
+        FieldPanel('instagram_handle'),
+        FieldPanel('linkedin_handle'),
         FieldPanel('default_sharing_text'),
         FieldPanel('site_name'),
         ImageChooserPanel('default_sharing_image')

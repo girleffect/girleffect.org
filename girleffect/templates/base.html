@@ -126,21 +126,26 @@
                 </a>
 
                 <div class="header__social-icons">
-                    <a class="header__link" href="https://www.facebook.com/girleffect/">
-                        <svg class="header__icon"><use xlink:href="#facebook"></use></svg>
-                    </a>
-                    <a class="header__link" href="https://www.instagram.com/girleffect/">
-                        <svg class="header__icon"><use xlink:href="#instagram"></use></svg>
-                    </a>
-                    <a class="header__link" href="https://twitter.com/girleffect/">
-                        <svg class="header__icon"><use xlink:href="#twitter"></use></svg>
-                    </a>
-                    <a class="header__link" href="https://www.linkedin.com/company/girl-effect/">
-                        <svg class="header__icon"><use xlink:href="#linkedin"></use></svg>
-                    </a>
-                    <a class="header__link" href="https://www.linkedin.com/company/girl-effect/">
-                        <svg class="header__icon"><use xlink:href="#youtube"></use></svg>
-                    </a>
+                    {% if settings.utils.SocialMediaSettings.facebook_page_handle %}
+                        <a class="header__link" href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_page_handle }}/">
+                            <svg class="header__icon"><use xlink:href="#facebook"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.instagram_handle %}
+                        <a class="header__link" href="https://www.instagram.com/{{ settings.utils.SocialMediaSettings.instagram_handle }}/">
+                            <svg class="header__icon"><use xlink:href="#instagram"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.twitter_handle %}
+                        <a class="header__link" href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}/">
+                            <svg class="header__icon"><use xlink:href="#twitter"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.linkedin_handle %}
+                        <a class="header__link" href="https://www.linkedin.com/company/{{ settings.utils.SocialMediaSettings.linkedin_handle }}/">
+                            <svg class="header__icon"><use xlink:href="#linkedin"></use></svg>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -164,18 +169,26 @@
             <div class="footer-row">
                 {% secondarynav %}
                 <div class="footer__social-icons">
-                    <a class="footer__link" href="https://www.facebook.com/girleffect/">
-                        <svg class="footer__icon"><use xlink:href="#facebook"></use></svg>
-                    </a>
-                    <a class="footer__link" href="https://www.instagram.com/girleffect/">
-                        <svg class="footer__icon"><use xlink:href="#instagram"></use></svg>
-                    </a>
-                    <a class="footer__link" href="https://twitter.com/girleffect/">
-                        <svg class="footer__icon"><use xlink:href="#twitter"></use></svg>
-                    </a>
-                    <a class="footer__link" href="https://www.linkedin.com/company/girl-effect/">
-                        <svg class="footer__icon"><use xlink:href="#linkedin"></use></svg>
-                    </a>
+                    {% if settings.utils.SocialMediaSettings.facebook_page_handle %}
+                        <a class="footer__link" href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_page_handle }}/">
+                            <svg class="footer__icon"><use xlink:href="#facebook"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.instagram_handle %}
+                        <a class="footer__link" href="https://www.instagram.com/{{ settings.utils.SocialMediaSettings.instagram_handle }}/">
+                            <svg class="footer__icon"><use xlink:href="#instagram"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.twitter_handle %}
+                        <a class="footer__link" href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}/">
+                            <svg class="footer__icon"><use xlink:href="#twitter"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.linkedin_handle %}
+                        <a class="footer__link" href="https://www.linkedin.com/company/{{ settings.utils.SocialMediaSettings.linkedin_handle }}/">
+                            <svg class="footer__icon"><use xlink:href="#linkedin"></use></svg>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
 
