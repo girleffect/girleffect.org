@@ -16,7 +16,7 @@ from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
+from girleffect.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from girleffect.articles.models import ArticlePage
 from girleffect.utils.models import (
     CallToActionSnippet,

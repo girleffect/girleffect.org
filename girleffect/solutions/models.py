@@ -21,7 +21,7 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
+from girleffect.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 
 class SolutionPageRelatedPartner(Orderable, models.Model):

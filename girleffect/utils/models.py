@@ -21,7 +21,7 @@ from wagtail.wagtailembeds.exceptions import EmbedException
 from wagtail.wagtailembeds.finders.oembed import OEmbedFinder as OEmbedFinder
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
-from wagtail.wagtailsnippets.models import register_snippet
+from girleffect.wagtailsnippets.models import register_snippet
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtailmedia.models import AbstractMedia
 from wagtailmedia.edit_handlers import MediaChooserPanel

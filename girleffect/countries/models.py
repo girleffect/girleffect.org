@@ -20,7 +20,7 @@ from wagtail.wagtailadmin.edit_handlers import (
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailsearch import index
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
+from girleffect.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 
 class CountryPageRelatedPartner(Orderable, models.Model):

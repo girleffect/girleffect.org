@@ -1,6 +1,6 @@
 from django.db import models
 
-from wagtail.wagtailsnippets.models import register_snippet
+from girleffect.wagtailsnippets.models import register_snippet
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 
 
