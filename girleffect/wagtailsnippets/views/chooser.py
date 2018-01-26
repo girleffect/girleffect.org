@@ -9,16 +9,17 @@ from django.utils.translation import ugettext as _
 from wagtail.utils.pagination import paginate
 from wagtail.wagtailadmin.forms import SearchForm
 from wagtail.wagtailadmin.modal_workflow import render_modal_workflow
+from wagtail.wagtailcore.models import Site
 from wagtail.wagtailsearch.backends import get_search_backend
 from wagtail.wagtailsearch.index import class_is_indexed
 
-from .snippets import get_snippet_model_from_url_params
+from .snippets import get_snippet_model_from_url_params, get_editable_sites, get_site
 
 
-def choose(request, app_label, model_name):
+def choose(request, app_label, model_name, site_id):
     model = get_snippet_model_from_url_params(app_label, model_name)
-
-    items = model.objects.all()
+    site = get_site(get_editable_sites(request.user), site_id)
+    items = model.objects.filter(site=site)
 
     # Preserve the snippet's model-level ordering if specified, but fall back on PK if not
     # (to ensure pagination is consistent)
@@ -52,6 +53,7 @@ def choose(request, app_label, model_name):
     # If paginating or searching, render "results.html"
     if request.GET.get('results', None) == 'true':
         return render(request, "wagtailsnippets/chooser/results.html", {
+            'site': site,
             'model_opts': model._meta,
             'items': paginated_items,
             'query_string': search_query,
@@ -62,6 +64,7 @@ def choose(request, app_label, model_name):
         request,
         'wagtailsnippets/chooser/choose.html', 'wagtailsnippets/chooser/choose.js',
         {
+            'site': site,
             'model_opts': model._meta,
             'items': paginated_items,
             'is_searchable': is_searchable,
@@ -72,15 +75,16 @@ def choose(request, app_label, model_name):
     )
 
 
-def chosen(request, app_label, model_name, id):
+def chosen(request, app_label, model_name, site_id, id):
     model = get_snippet_model_from_url_params(app_label, model_name)
-    item = get_object_or_404(model, id=id)
+    site = get_site(get_editable_sites(request.user), site_id)
+    item = get_object_or_404(model, site=site, id=id)
 
     snippet_json = json.dumps({
         'id': item.id,
         'string': text_type(item),
         'edit_link': reverse('wagtailsnippets:edit', args=(
-            app_label, model_name, item.id))
+            app_label, model_name, site.id, item.id))
     })
 
     return render_modal_workflow(

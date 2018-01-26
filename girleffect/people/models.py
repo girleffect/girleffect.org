@@ -14,7 +14,7 @@ from wagtail.wagtailadmin.edit_handlers import (
     StreamFieldPanel
 )
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from girleffect.wagtailsnippets.models import register_snippet
+from girleffect.wagtailsnippets.models import SiteSpecificSnippetMixin, register_snippet
 from girleffect.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from girleffect.utils.blocks import StoryBlock
@@ -50,7 +50,7 @@ class SocialMediaProfile(models.Model):
 
 
 @register_snippet
-class PersonCategory(models.Model):
+class PersonCategory(SiteSpecificSnippetMixin, models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(
         blank=True,

@@ -45,7 +45,7 @@ def editor_js():
             <script>window.chooserUrls.snippetChooser = '{1}';</script>
         """,
         static('wagtailsnippets/js/snippet-chooser.js'),
-        urlresolvers.reverse('wagtailsnippets:choose_generic')
+        urlresolvers.reverse('wagtailsnippets:choose_generic', args=[1])  # FIXME
     )
 
 

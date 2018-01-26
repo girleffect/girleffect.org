@@ -5,13 +5,27 @@
     {% trans "Snippets" as snippets_str %}
     {% include "wagtailadmin/shared/header.html" with title=snippets_str icon="snippet" %}
 
+    {% if editable_sites|length > 1 %}
+        <ul>
+            {% for site_option in editable_sites %}
+                <li>
+                    {% if site_option == site %}
+                        <b>{{ site_option }}</b>
+                    {% else %}
+                        <a href="{% url 'wagtailsnippets:index' site_option.id %}">{{ site_option }}</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <div class="nice-padding">
         <ul class="listing">
             {% for model_opts in snippet_model_opts %}
                 <li>
                     <div class="row row-flush title">
                         <h2>
-                            <a href="{% url 'wagtailsnippets:list' model_opts.app_label model_opts.model_name %}" class="col6">
+                            <a href="{% url 'wagtailsnippets:list' model_opts.app_label model_opts.model_name site.id %}" class="col6">
                                 {{ model_opts.verbose_name_plural|capfirst }}
                             </a>
                         </h2>

@@ -1,11 +1,11 @@
 from django.db import models
 
-from girleffect.wagtailsnippets.models import register_snippet
+from girleffect.wagtailsnippets.models import SiteSpecificSnippetMixin, register_snippet
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 
 
 @register_snippet
-class Category(models.Model):
+class Category(SiteSpecificSnippetMixin, models.Model):
     name = models.TextField()
 
     panels = [
