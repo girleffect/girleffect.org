@@ -16,12 +16,12 @@ def register_collection_permissions():
 @hooks.register('construct_whitelister_element_rules')
 def whitelister_element_rules():
     return {
-        'p': attribute_rule({'style': True}),
-        'h2': attribute_rule({'style': True}),
-        'h3': attribute_rule({'style': True}),
-        'h4': attribute_rule({'style': True}),
-        'h5': attribute_rule({'style': True}),
-        'h6': attribute_rule({'style': True}),
+        'p': attribute_rule({'style': True, 'align': True}),
+        'h2': attribute_rule({'style': True, 'align': True}),
+        'h3': attribute_rule({'style': True, 'align': True}),
+        'h4': attribute_rule({'style': True, 'align': True}),
+        'h5': attribute_rule({'style': True, 'align': True}),
+        'h6': attribute_rule({'style': True, 'align': True}),
     }
 
 
