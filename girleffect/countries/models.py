@@ -17,7 +17,7 @@ from wagtail.wagtailadmin.edit_handlers import (
     MultiFieldPanel, StreamFieldPanel
 )
 
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
@@ -54,9 +54,17 @@ class CountryCustomisableArticles(CustomisableFeature):
 
 class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
     body = StreamField(StoryBlock())
-    partners_description = models.TextField(
+    partners_title = models.CharField(
         blank=True,
-        help_text='Description text to appear below Partnerships heading for Partnership block.'
+        null=True,
+        max_length=255,
+        help_text='Title text to appear as Partnerships heading.'
+    )
+    partners_description = RichTextField(
+        blank=True,
+        null=True,
+        help_text='Description text to appear below Partnerships heading for Partnership block.',
+        features=['bold', 'italic', 'link', 'justify']
     )
     person_category = models.ForeignKey(
         'people.PersonCategory',
@@ -107,14 +115,15 @@ class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
 
     content_panels = Page.content_panels + HeroImageFields.content_panels + [
         StreamFieldPanel('body'),
-        FieldPanel('partners_description'),
         MultiFieldPanel([
             InlinePanel('articles_customisation', label="Articles Listing Customisation", max_num=1),
         ], 'Articles Listing'),
         MultiFieldPanel([
+            FieldPanel('partners_title'),
+            FieldPanel('partners_description'),
             InlinePanel('related_partners', label="Related partners"),
             InlinePanel('partners_customisation', label="Partners Customisation", max_num=1),
-        ], 'Articles Listing'),
+        ], 'Partners Listing'),
         SnippetChooserPanel('call_to_action'),
     ]
 

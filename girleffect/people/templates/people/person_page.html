@@ -42,7 +42,7 @@
 
         <div class="wrapper wrapper--top-bottom-space">
             {% if page.introduction %}
-                <p class="rich-text">{{ page.introduction }}</p>
+                <p class="rich-text">{{ page.introduction|richtext }}</p>
             {% endif %}
 
             {{ page.biography }}

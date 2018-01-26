@@ -17,7 +17,7 @@ from wagtail.wagtailadmin.edit_handlers import (
     MultiFieldPanel, StreamFieldPanel
 )
 
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
@@ -78,6 +78,18 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
         related_name='+',
         help_text='Add an image to appear as background for page introduction'
     )
+    partners_title = models.CharField(
+        blank=True,
+        null=True,
+        max_length=255,
+        help_text='Title text to appear as Partnerships heading.'
+    )
+    partners_description = RichTextField(
+        blank=True,
+        null=True,
+        help_text='Description text to appear below Partnerships heading for Partnership block.',
+        features=['bold', 'italic', 'link', 'justify']
+    )
 
     @cached_property
     def articles(self):
@@ -132,9 +144,11 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
         ], 'Top Background Customisations'),
         StreamFieldPanel('body'),
         MultiFieldPanel([
+            FieldPanel('partners_title'),
+            FieldPanel('partners_description'),
             InlinePanel('related_partners', label="Related partners"),
             InlinePanel('partners_customisation', label="Partners Listing Customisation", max_num=1),
-        ], 'Partners'),
+        ], 'Partners Listing'),
         SnippetChooserPanel('call_to_action'),
         MultiFieldPanel([
             InlinePanel('articles_customisation', label="Articles Listing Customisation", max_num=1),

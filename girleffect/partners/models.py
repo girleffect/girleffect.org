@@ -12,6 +12,7 @@ from wagtail.wagtailadmin.edit_handlers import (
     PageChooserPanel
 )
 
+from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
@@ -81,7 +82,11 @@ class PartnerCustomisableIntroduction(CustomisableFeature):
 
 
 class PartnerIndexPage(Page, HeroImageFields, SocialFields):
-    introduction = models.TextField(blank=True)
+    introduction = RichTextField(
+        blank=True,
+        null=True,
+        features=['bold', 'italic', 'link', 'justify']
+    )
     call_to_action = models.ForeignKey(
         'utils.CallToActionSnippet',
         null=True,
