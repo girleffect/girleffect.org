@@ -20,14 +20,18 @@
       var _this = this;
 
       var buttonset = jQuery('<span class="' + this.widgetName + '"></span>');
-      var buttonize = function buttonize(alignment) {
+      var buttonize = function buttonize(alignment, icon) {
+        if (icon===undefined) {
+          icon = alignment;
+        }
+
         var buttonElement = jQuery('<span></span>');
         buttonElement.hallobutton({
           uuid: _this.options.uuid,
           editable: _this.options.editable,
           label: alignment,
           command: 'justify' + alignment,
-          icon: 'icon icon-fa-align-' + alignment.toLowerCase(),
+          icon: 'icon icon-fa-align-' + icon.toLowerCase(),
           cssClass: _this.options.buttonCssClass
         });
         return buttonset.append(buttonElement);
@@ -35,6 +39,7 @@
       buttonize("Left");
       buttonize("Center");
       buttonize("Right");
+      buttonize("Full", "justify");
 
       buttonset.hallobuttonset();
       return toolbar.append(buttonset);
