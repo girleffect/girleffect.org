@@ -8,10 +8,10 @@
         {% if customisations.heading_hex %}style="color:{{ customisations.heading_hex }};"{% endif %}>
         {{ title }}
     </h2>
+    {% if page.featured_article %}
+        {% include "includes/article_card.html" with article=page.featured_article featured=True %}
+    {% endif %}
     <div class="article-container grid grid--three wrapper wrapper--mid">
-        {% if page.featured_article %}
-            {% include "includes/article_card.html" with article=page.featured_article %}
-        {% endif %}
         {% for article in page.articles %}
             {% include "includes/article_card.html" %}
         {% endfor %}
