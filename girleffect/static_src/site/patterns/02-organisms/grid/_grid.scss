@@ -5,13 +5,16 @@
     &--three {
         > div,
         > a {
+            max-width: 100%;
             flex-basis: 100%;
 
             @include media-query(mob-landscape) {
+                max-width: 50%;
                 flex-basis: 50%;
             }
 
             @include media-query(container) {
+                max-width: 33.33%;
                 flex-basis: 33.33%;
             }
         }

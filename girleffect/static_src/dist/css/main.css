@@ -3599,12 +3599,14 @@ article .share-icons--hide-mobile {
 
 .grid--three > div,
 .grid--three > a {
+  max-width: 100%;
   flex-basis: 100%;
 }
 
 @media only screen and (min-width: 480px) {
   .grid--three > div,
   .grid--three > a {
+    max-width: 50%;
     flex-basis: 50%;
   }
 }
@@ -3612,6 +3614,7 @@ article .share-icons--hide-mobile {
 @media only screen and (min-width: 1172px) {
   .grid--three > div,
   .grid--three > a {
+    max-width: 33.33%;
     flex-basis: 33.33%;
   }
 }
