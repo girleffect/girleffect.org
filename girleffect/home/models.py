@@ -1,26 +1,18 @@
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.functional import cached_property
-from django.utils.translation import ugettext_lazy as _
-
-from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
-    InlinePanel,
-    MultiFieldPanel,
     StreamFieldPanel
 )
 
-from wagtail.wagtailcore.models import Orderable, Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailcore.models import Page
 
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from girleffect.articles.models import ArticlePage
 from girleffect.utils.models import (
     CallToActionSnippet,
-    LinkFields,
     HeroVideoFields,
     SocialFields
 )
@@ -29,7 +21,11 @@ from girleffect.utils.blocks import StoryBlock
 
 
 class HomePage(Page, HeroVideoFields, SocialFields):
-    introduction = models.TextField(blank=True, null=True)
+    introduction = RichTextField(
+        blank=True,
+        null=True,
+        features=['bold', 'italic', 'link', 'justify']
+    )
     call_to_action = models.ForeignKey(CallToActionSnippet, blank=True, null=True, on_delete=models.SET_NULL, related_name='+')
     overview_image = models.ForeignKey(
         'images.CustomImage',
