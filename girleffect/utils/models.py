@@ -232,9 +232,8 @@ class ListingFields(models.Model):
     ]
 
 
-@register_snippet
-class CallToActionSnippet(EmailLinkFields):
-    title = models.CharField(max_length=255)
+class CallToActionFields(EmailLinkFields):
+    title = models.CharField(blank=True, max_length=255)
     summary = models.CharField(blank=True, max_length=80, verbose_name="Description")
     image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
 
@@ -244,6 +243,27 @@ class CallToActionSnippet(EmailLinkFields):
     ] + EmailLinkFields.content_panels + [
         ImageChooserPanel('image'),
     ]
+
+    class Meta:
+        abstract = True
+
+
+@register_snippet
+class CallToActionSnippet(CallToActionFields):
+
+    def __str__(self):
+        return self.title
+
+
+@register_snippet
+class PartnerWithUsSnippetOld(CallToActionSnippet):
+
+    def __str__(self):
+        return self.title
+
+
+@register_snippet
+class PartnerWithUsSnippetNew(CallToActionFields):
 
     def __str__(self):
         return self.title
@@ -287,13 +307,6 @@ class SocialMediaSettings(BaseSetting):
         FieldPanel('site_name'),
         ImageChooserPanel('default_sharing_image')
     ]
-
-
-@register_snippet
-class PartnerWithUsSnippet(CallToActionSnippet):
-
-    def __str__(self):
-        return self.title
 
 
 class StatisticCustomisableHeading(CustomisableFeature):
