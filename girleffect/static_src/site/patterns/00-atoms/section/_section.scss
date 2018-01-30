@@ -27,6 +27,22 @@
         }
     }
 
+    &--intro {
+        padding: 0;
+        @include body-container;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+
+        .rich-text {
+            @include body-container;
+        }
+        
+        @include media-query(tablet-portrait) {
+            margin-top: 2em;
+            max-width: 100%;
+        }
+    }
+
     &--body {
         padding: 0;
 

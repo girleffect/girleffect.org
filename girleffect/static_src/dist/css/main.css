@@ -1632,6 +1632,54 @@ blockquote cite {
   margin-bottom: 40px;
 }
 
+.section--intro {
+  padding: 0;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .section--intro {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .section--intro {
+    margin: 0 auto;
+    max-width: 768px;
+  }
+}
+
+.section--intro .rich-text {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .section--intro .rich-text {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .section--intro .rich-text {
+    margin: 0 auto;
+    max-width: 768px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .section--intro {
+    margin-top: 2em;
+    max-width: 100%;
+  }
+}
+
 .section--body {
   padding: 0;
 }
@@ -2772,7 +2820,13 @@ article .share-icons--hide-mobile {
   padding: 0 30px;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1172px) {
+  .template-home-page .hero__strapline {
+    padding: 0 80px;
+  }
+}
+
+@media only screen and (min-width: 1366px) {
   .template-home-page .hero__strapline {
     padding: 0;
   }
