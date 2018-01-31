@@ -3,7 +3,7 @@
     {# drop shadow within div should inherit from here if value.drop_shadow_is_on if set #}
     <div class="quote {% if value.image %} quote--gradient {% endif %} {% if value.drop_shadow_options.drop_shadow_is_on %} quote--drop-shadow {% endif %}"
     {% if value.drop_shadow_options.text_hex %}style="color: {{ value.drop_shadow_options.text_hex }};"{% endif %}
-    {% if value.quote_mark_hex %} style="--quote-mark-hex: {{value.quote_mark_hex}};"" {% endif %}>
+    {% if value.quote_mark_hex %} style="--quote-mark-hex: {{value.quote_mark_hex}};" {% endif %}>
         {% if value.image %}
             {% image value.image fill-790x400 class="quote__image" %}
         {% endif %}
