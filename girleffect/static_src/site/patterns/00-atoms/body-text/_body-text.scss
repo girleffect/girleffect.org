@@ -1,8 +1,18 @@
+.body-text-container {
+    @include background-container;
+}
+
 .body-text {
     @include body-container;
     padding: 0;
 
     .template-article-page & {
         padding: 0;
+    }
+
+    h2,
+    h3,
+    h4 {
+        color: var(--heading-hex, $yellow);
     }
 }

@@ -557,6 +557,9 @@ textarea {
 /* ============================================
    Container widths
 */
+/* ============================================
+   Container background
+*/
 /*------------------------------------*    $VARIABLES
 \*------------------------------------*/
 /* ============================================
@@ -968,6 +971,19 @@ blockquote cite {
   margin: 35px auto;
 }
 
+.body-text-container {
+  margin-bottom: 1rem;
+  padding: 2rem 0;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+@media only screen and (min-width: 768px) {
+  .body-text-container {
+    padding: 3rem 0;
+  }
+}
+
 .body-text {
   margin-left: 1rem;
   margin-right: 1rem;
@@ -990,6 +1006,14 @@ blockquote cite {
 
 .template-article-page .body-text {
   padding: 0;
+}
+
+.body-text h2,
+.body-text h3,
+.body-text h4,
+.body-text .stat-block__content b, .stat-block__content
+.body-text b {
+  color: var(--heading-hex, #ffc700);
 }
 
 .brand-pattern {
@@ -1253,12 +1277,25 @@ blockquote cite {
   color: #2f6165;
 }
 
+.large-text-container {
+  margin-bottom: 1rem;
+  padding: 2rem 0;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+@media only screen and (min-width: 768px) {
+  .large-text-container {
+    padding: 3rem 0;
+  }
+}
+
 .large-text {
   font-size: 1.83016vw;
   line-height: 1.16;
+  margin-left: 1rem;
+  margin-right: 1rem;
   max-width: 768px;
-  margin: 0 auto 1rem;
-  padding: 1rem;
 }
 
 @media (max-width: 1038.16px) {
@@ -1273,35 +1310,23 @@ blockquote cite {
   }
 }
 
-@media only screen and (min-width: 1024px) {
-  .large-text {
-    margin: 0 auto 2rem;
-    padding: 0;
-  }
-}
-
-.template-home-page .large-text {
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
 @media only screen and (min-width: 768px) {
-  .template-home-page .large-text {
+  .large-text {
     margin-left: 3rem;
     margin-right: 3rem;
   }
 }
 
 @media only screen and (min-width: 1172px) {
-  .template-home-page .large-text {
+  .large-text {
     margin: 0 auto;
     max-width: 768px;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .template-home-page .large-text {
-    margin: 7rem auto;
+  .large-text {
+    padding: 0;
   }
 }
 
@@ -1616,7 +1641,17 @@ blockquote cite {
 }
 
 .section--statistics {
-  background: #ffc700;
+  margin-bottom: 1rem;
+  padding: 2rem 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-color: #ffc700;
+}
+
+@media only screen and (min-width: 768px) {
+  .section--statistics {
+    padding: 3rem 0;
+  }
 }
 
 .section--partners {
@@ -1630,6 +1665,35 @@ blockquote cite {
 .section--statistics > h3 {
   text-align: center;
   margin-bottom: 40px;
+}
+
+.section--intro {
+  padding: 0;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  max-width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .section--intro {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .section--intro {
+    margin: 0 auto;
+    max-width: 768px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .section--intro {
+    margin-top: 2em;
+  }
 }
 
 .section--body {
@@ -2572,13 +2636,22 @@ article .share-icons--hide-mobile {
 }
 
 .extendable-body-container {
-  margin: 1rem 0;
+  margin-bottom: 1rem;
+  padding: 2rem 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-position: 0 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .extendable-body-container {
+    padding: 3rem 0;
+  }
 }
 
 .extendable-body {
   margin-left: 1rem;
   margin-right: 1rem;
-  padding: 2rem 0;
 }
 
 @media only screen and (min-width: 768px) {
@@ -2769,10 +2842,16 @@ article .share-icons--hide-mobile {
 }
 
 .template-home-page .hero__strapline {
-  padding: 0 30px;
+  padding: 0 40px;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1172px) {
+  .template-home-page .hero__strapline {
+    padding: 0 80px;
+  }
+}
+
+@media only screen and (min-width: 1366px) {
   .template-home-page .hero__strapline {
     padding: 0;
   }
@@ -2855,6 +2934,19 @@ article .share-icons--hide-mobile {
   }
 }
 
+.list-item-container {
+  margin-bottom: 1rem;
+  padding: 2rem 0;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+@media only screen and (min-width: 768px) {
+  .list-item-container {
+    padding: 3rem 0;
+  }
+}
+
 .list-item {
   display: flex;
   flex-direction: column;
@@ -2886,7 +2978,6 @@ article .share-icons--hide-mobile {
 }
 
 .list-item__image {
-  margin-bottom: 1rem;
   width: 100%;
   height: auto;
 }
@@ -2907,6 +2998,11 @@ article .share-icons--hide-mobile {
 
 .list-item__title {
   margin-bottom: 0.5rem;
+}
+
+.list-item__content {
+  padding: 1.5rem;
+  background-color: #fff;
 }
 
 .modal--hidden {
@@ -4140,15 +4236,43 @@ article .share-icons--hide-mobile {
   z-index: 2;
 }
 
+.media-card-container {
+  margin-bottom: 1rem;
+  padding: 2rem 0;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+@media only screen and (min-width: 768px) {
+  .media-card-container {
+    padding: 3rem 0;
+  }
+}
+
 .media-card {
+  margin-left: 1rem;
+  margin-right: 1rem;
   position: relative;
-  margin: 50px 20px;
   max-width: 1172px;
+}
+
+@media only screen and (min-width: 768px) {
+  .media-card {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .media-card {
+    margin: 0 auto;
+    max-width: 1172px;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
   .media-card {
-    margin: 5rem auto;
+    margin: 2rem auto;
   }
 }
 
@@ -4203,12 +4327,6 @@ article .share-icons--hide-mobile {
   .media-card:nth-child(odd) .media-card__image {
     position: relative;
     left: 15%;
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  .media-card:last-child {
-    margin: 50px auto 100px;
   }
 }
 

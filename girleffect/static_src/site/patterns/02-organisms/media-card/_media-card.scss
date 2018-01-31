@@ -1,11 +1,15 @@
+.media-card-container {
+    @include background-container;
+}
+
 .media-card {
     $root: &;
+    @include mid-container;
     position: relative;
-    margin: 50px 20px;
     max-width: $mid-width;
 
     @include media-query(tablet-landscape) {
-        margin: 5rem auto;
+        margin: 2rem auto;
     }
 
     &__image {
@@ -62,12 +66,6 @@
                 position: relative;
                 left: 15%;
             }
-        }
-    }
-
-    &:last-child {
-        @include media-query(tablet-landscape) {
-            margin: 50px auto 100px;
         }
     }
 }
