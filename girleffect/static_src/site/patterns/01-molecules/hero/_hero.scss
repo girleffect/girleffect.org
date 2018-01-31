@@ -75,9 +75,13 @@
         }
 
         .template-home-page & {
-            padding: 0 30px;
+            padding: 0 40px;
 
-            @include media-query(tablet-landscape) {
+            @include media-query(container) {
+                padding: 0 80px;
+            }
+
+            @include media-query(desktop) {
                 padding: 0;
             }
         }
