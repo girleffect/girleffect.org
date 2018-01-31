@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from modelcluster.models import ClusterableModel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel
@@ -6,8 +7,32 @@ from wagtail.wagtailcore.fields import StreamField
 
 
 class MenuItemBlock(blocks.StructBlock):
-    page = blocks.PageChooserBlock()
-    title = blocks.CharBlock(help_text="Leave blank to use the page's own title", required=False)
+    page = blocks.PageChooserBlock(required=False)
+    external_url = blocks.URLBlock(required=False)
+    title = blocks.CharBlock(required=False)
+
+    def clean(self, value):
+        value = super().clean(value)
+        errors = {}
+
+        validation_field_names = ['page', 'external_url']
+        validation_field_values = [value[field] for field in validation_field_names]
+
+        if all(value for value in validation_field_values):
+            errors = {field: ['Please choose only one of page or external url'] for field in validation_field_names}
+
+        if all(not value for value in validation_field_values):
+            errors = {field: ['Please choose one of page or external url'] for field in validation_field_names}
+
+        if value['external_url'] and not value['title']:
+            errors.update({'title': ['Please add a title for the navigation link']})
+
+        if errors:
+            raise ValidationError(
+                "Validation error in MenuItemBlock",
+                params=errors,
+            )
+        return value
 
 
 class SecondaryMenuItemWithSubItemsBlock(MenuItemBlock):

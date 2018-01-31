@@ -11,6 +11,12 @@
                         {{ block.value.title|default:block.value.page.title }}
                     </a>
                 </li>
+            {% elif block.value.external_url %}
+                <li class="footer__nav-item" role="presentation">
+                    <a href="{{ block.value.external_url }}" role="menuitem">
+                        {{ block.value.title }}
+                    </a>
+                </li>
             {% endif %}
         {% endfor %}
     </ul>
