@@ -10,7 +10,7 @@
             {% endif %}
             <h4 class="heading heading--medium">{{ person.first_name }} {{ person.last_name }}</h4>
             {% if person.introduction %}
-                <p class="article-card__copy">{{ person.introduction|truncatechars_html:145 }}</p>
+                <p class="article-card__copy">{{ person.introduction|truncatechars_html:145|striptags }}</p>
             {% endif %}
 
             {% if person.email %}

@@ -323,7 +323,7 @@ class Statistic(ClusterableModel, LinkFields):
         help_text="The statistic. For example, '66% of girls complete primary school'",
         features=[
             "bold", "italic", "link", "document-link",
-            "h2", "h3", "h4", "h5", "h6"
+            "h2", "h3", "h4", "h5", "h6", "justify"
         ]
     )
     citation_text = models.CharField(max_length=80, blank=True)
