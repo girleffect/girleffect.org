@@ -3,6 +3,7 @@
 *.swp
 *.sql
 *.gz
+*.csv
 /venv/
 /static/
 /media/

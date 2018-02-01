@@ -41,7 +41,11 @@
 
     {# Title, introduction and Streamfields #}
     <section class="section wrapper wrapper--article">
-        <h3 class="heading heading--squashed">{{ page.title }}</h3>
+        <h3 class="heading heading--squashed">
+            {% if page.hero_strapline %}
+                {{ page.hero_strapline }}
+            {% endif %}
+        </h3>
 
         <div class="article-info">
             <p class="article-info__author">{% if page.author %}<span>By {{ page.author }}</span>{% endif %} {{ page.display_date|date }}</p>

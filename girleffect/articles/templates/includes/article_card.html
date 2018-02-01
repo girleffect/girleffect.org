@@ -1,9 +1,9 @@
 {% load wagtailimages_tags %}
-<div class="article-card" >
+<div class="article-card {% if featured %}article-card--featured{% endif %}" >
     {# Single article #}
     {% if article.listing_image or article.hero_image|default:settings.utils.SocialMediaSettings.default_sharing_image %}
-        {% image article.listing_image|default:article.hero_image fill-385x255 as article_image %}
-        <a href="{{ article.url }}">
+        {% image article.listing_image|default:article.hero_image fill-770x510 as article_image %}
+        <a class="article-card__link" href="{{ article.url }}">
             <img src="{{ article_image.url }}" alt="{{ article.listing_title }}">
         </a>
     {% endif %}
