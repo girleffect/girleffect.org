@@ -20,6 +20,10 @@ def copy_title_to_strapline(apps, schema_editor):
         article.save()
 
 
+def pass_reverse(apps, schema_editor):
+    pass
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -27,5 +31,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(copy_title_to_strapline)
+        migrations.RunPython(copy_title_to_strapline, pass_reverse)
     ]

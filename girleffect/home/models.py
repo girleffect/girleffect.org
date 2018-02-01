@@ -48,10 +48,9 @@ class HomePage(Page, HeroVideoFields, SocialFields):
 
     @cached_property
     def articles(self):
-        featured_article = self.featured_article.specific if self.featured_article else None
         all_articles = ArticlePage.objects.all().live().public().order_by('-publication_date')
-        if featured_article:
-            all_articles = all_articles.exclude(pk=featured_article.id)
+        if self.featured_article_id:
+            all_articles = all_articles.exclude(pk=self.featured_article_id)
         return all_articles[:6]
 
     promote_panels = (

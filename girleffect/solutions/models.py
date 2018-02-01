@@ -103,11 +103,10 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
     @cached_property
     def articles(self):
         # returns articles that have solution selected as a related page
-        featured_article = self.featured_article.specific if self.featured_article else None
         all_articles = ArticlePage.objects.filter(related_pages__page=self).live().public().order_by('-publication_date')
-        if featured_article:
-            all_articles = all_articles.exclude(pk=featured_article.id)
-        return all_articles
+        if self.featured_article_id:
+            all_articles = all_articles.exclude(pk=self.featured_article_id)
+        return all_articles[:3]
 
     @cached_property
     def countries(self):
