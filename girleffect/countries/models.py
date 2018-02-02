@@ -96,7 +96,7 @@ class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
         # returns articles that have solution selected as a related page
         all_articles = ArticlePage.objects.filter(related_pages__page=self).live().public().order_by('-publication_date')
         if self.featured_article_id:
-            all_articles = all_articles.exclude(pk=featured_article_id)
+            all_articles = all_articles.exclude(pk=self.featured_article_id)
         return all_articles[:3]
 
     @cached_property
