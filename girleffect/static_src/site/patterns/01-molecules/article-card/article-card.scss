@@ -5,6 +5,7 @@
 }
 
 .article-card {
+    $block: &;
     margin-bottom: 1rem;
     display: flex;
     position: relative;
@@ -74,5 +75,32 @@
 
     img {
         width: 100%;
+    }
+
+    &--featured {
+        @include mid-container;
+        @include media-query(tablet-portrait) {
+            display: flex;
+            flex-direction: row-reverse;
+            flex-basis: 33%;
+
+            #{$block}__content {
+                flex-grow: 0;
+                flex-basis: calc(33.33% - 1.5rem);
+            }
+
+            #{$block}__link {
+                flex-grow: 1;
+            }
+        }
+
+        &:nth-child(2n + 1),
+        &:nth-child(2n + 2),
+        &:nth-child(3n + 1),
+        &:nth-child(3n + 2),
+        &:nth-child(3n + 3) {
+            padding: 0;
+            margin-bottom: 2rem;
+        }
     }
 }
