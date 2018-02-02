@@ -4544,25 +4544,8 @@ article .share-icons--hide-mobile {
 .quote img {
   flex: none;
   max-width: inherit;
-  height: auto;
+  height: 100%;
   width: auto;
-  margin-top: 50%;
-  margin-left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-@media only screen and (min-width: 480px) {
-  .quote img {
-    margin-top: 0;
-    margin-left: 0;
-    transform: translate(0, 0);
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .quote img {
-    height: 100%;
-  }
 }
 
 .video-container {
