@@ -1,5 +1,24 @@
 .media-card-container {
     @include background-container;
+
+    &:nth-of-type(even) {
+        .media-card__content {
+            right: 0;
+        }
+    }
+
+    &:nth-of-type(odd) {
+        .media-card__content {
+            left: 0;
+        }
+
+        .media-card__image {
+            @include media-query(tablet-portrait) {
+                position: relative;
+                left: 15%;
+            }
+        }
+    }
 }
 
 .media-card {
@@ -50,22 +69,4 @@
         }
     }
 
-    &:nth-child(even) {
-        .media-card__content {
-            right: 0;
-        }
-    }
-
-    &:nth-child(odd) {
-        .media-card__content {
-            left: 0;
-        }
-
-        .media-card__image {
-            @include media-query(tablet-portrait) {
-                position: relative;
-                left: 15%;
-            }
-        }
-    }
 }

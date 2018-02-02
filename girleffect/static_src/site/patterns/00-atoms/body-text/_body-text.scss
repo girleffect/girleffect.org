@@ -1,5 +1,6 @@
 .body-text-container {
     @include background-container;
+    margin-bottom: 0;
 }
 
 .body-text {

@@ -973,14 +973,15 @@ blockquote cite {
 
 .body-text-container {
   margin-bottom: 1rem;
-  padding: 2rem 0;
+  padding: 1rem 0;
   background-size: cover;
   background-position: 50% 50%;
+  margin-bottom: 0;
 }
 
 @media only screen and (min-width: 768px) {
   .body-text-container {
-    padding: 3rem 0;
+    padding: 2rem 0;
   }
 }
 
@@ -1046,6 +1047,12 @@ blockquote cite {
 
 .template-springster .brand-pattern {
   background-image: url("../images/springster-pattern.png");
+}
+
+@media (min-width: 2000px) {
+  .brand-pattern {
+    background-size: contain;
+  }
 }
 
 .breadcrumb-container {
@@ -1279,14 +1286,15 @@ blockquote cite {
 
 .large-text-container {
   margin-bottom: 1rem;
-  padding: 2rem 0;
+  padding: 1rem 0;
   background-size: cover;
   background-position: 50% 50%;
+  margin-bottom: 0;
 }
 
 @media only screen and (min-width: 768px) {
   .large-text-container {
-    padding: 3rem 0;
+    padding: 2rem 0;
   }
 }
 
@@ -1642,7 +1650,7 @@ blockquote cite {
 
 .section--statistics {
   margin-bottom: 1rem;
-  padding: 2rem 0;
+  padding: 1rem 0;
   background-size: cover;
   background-position: 50% 50%;
   background-color: #ffc700;
@@ -1650,7 +1658,7 @@ blockquote cite {
 
 @media only screen and (min-width: 768px) {
   .section--statistics {
-    padding: 3rem 0;
+    padding: 2rem 0;
   }
 }
 
@@ -2676,7 +2684,7 @@ article .share-icons--hide-mobile {
 
 .extendable-body-container {
   margin-bottom: 1rem;
-  padding: 2rem 0;
+  padding: 1rem 0;
   background-size: cover;
   background-position: 50% 50%;
   background-position: 0 0;
@@ -2684,7 +2692,7 @@ article .share-icons--hide-mobile {
 
 @media only screen and (min-width: 768px) {
   .extendable-body-container {
-    padding: 3rem 0;
+    padding: 2rem 0;
   }
 }
 
@@ -2975,14 +2983,14 @@ article .share-icons--hide-mobile {
 
 .list-item-container {
   margin-bottom: 1rem;
-  padding: 2rem 0;
+  padding: 1rem 0;
   background-size: cover;
   background-position: 50% 50%;
 }
 
 @media only screen and (min-width: 768px) {
   .list-item-container {
-    padding: 3rem 0;
+    padding: 2rem 0;
   }
 }
 
@@ -4277,14 +4285,29 @@ article .share-icons--hide-mobile {
 
 .media-card-container {
   margin-bottom: 1rem;
-  padding: 2rem 0;
+  padding: 1rem 0;
   background-size: cover;
   background-position: 50% 50%;
 }
 
 @media only screen and (min-width: 768px) {
   .media-card-container {
-    padding: 3rem 0;
+    padding: 2rem 0;
+  }
+}
+
+.media-card-container:nth-of-type(even) .media-card__content {
+  right: 0;
+}
+
+.media-card-container:nth-of-type(odd) .media-card__content {
+  left: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .media-card-container:nth-of-type(odd) .media-card__image {
+    position: relative;
+    left: 15%;
   }
 }
 
@@ -4354,21 +4377,6 @@ article .share-icons--hide-mobile {
   right: -20px;
 }
 
-.media-card:nth-child(even) .media-card__content {
-  right: 0;
-}
-
-.media-card:nth-child(odd) .media-card__content {
-  left: 0;
-}
-
-@media only screen and (min-width: 768px) {
-  .media-card:nth-child(odd) .media-card__image {
-    position: relative;
-    left: 15%;
-  }
-}
-
 .quote-container {
   margin-left: 1rem;
   margin-right: 1rem;
@@ -4395,7 +4403,9 @@ article .share-icons--hide-mobile {
 .quote {
   width: 100%;
   height: 320px;
-  align-self: stretch;
+  align-items: center;
+  display: flex;
+  justify-content: center;
   position: relative;
   margin-bottom: 1rem;
   overflow: hidden;
@@ -4571,26 +4581,16 @@ article .share-icons--hide-mobile {
 }
 
 .quote img {
+  flex: none;
   max-width: inherit;
-  height: auto;
+  height: 100%;
   width: auto;
-  margin-top: 50%;
-  margin-left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-@media only screen and (min-width: 480px) {
-  .quote img {
-    margin-top: 0;
-    margin-left: 0;
-    transform: translate(0, 0);
-  }
 }
 
 .video-container {
   margin-left: 1rem;
   margin-right: 1rem;
-  padding: 5rem 0;
+  padding: 3rem 0 5rem;
 }
 
 @media only screen and (min-width: 768px) {
