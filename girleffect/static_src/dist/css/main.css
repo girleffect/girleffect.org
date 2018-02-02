@@ -976,7 +976,7 @@ blockquote cite {
   padding: 1rem 0;
   background-size: cover;
   background-position: 50% 50%;
-  margin-bottom: .5rem;
+  margin-bottom: 0;
 }
 
 @media only screen and (min-width: 768px) {
@@ -1289,7 +1289,7 @@ blockquote cite {
   padding: 1rem 0;
   background-size: cover;
   background-position: 50% 50%;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
 }
 
 @media only screen and (min-width: 768px) {
