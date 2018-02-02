@@ -29,3 +29,8 @@
     background-image: url('../images/springster-pattern.png');
   }
 }
+@media (min-width: 2000px) {
+  .brand-pattern {
+    background-size: contain;
+  }
+}
