@@ -2013,6 +2013,45 @@ article .share-icons--hide-mobile {
   width: 100%;
 }
 
+.article-card--featured {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .article-card--featured {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .article-card--featured {
+    margin: 0 auto;
+    max-width: 1172px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .article-card--featured {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-basis: 33%;
+  }
+  .article-card--featured .article-card__content {
+    flex-grow: 0;
+    flex-basis: calc(33.33% - 1.5rem);
+  }
+  .article-card--featured .article-card__link {
+    flex-grow: 1;
+  }
+}
+
+.article-card--featured:nth-child(2n + 1), .article-card--featured:nth-child(2n + 2), .article-card--featured:nth-child(3n + 1), .article-card--featured:nth-child(3n + 2), .article-card--featured:nth-child(3n + 3) {
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
 .carousel-container {
   position: relative;
   margin-bottom: 3rem;

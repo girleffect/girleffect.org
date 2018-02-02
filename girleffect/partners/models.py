@@ -95,10 +95,7 @@ class PartnerIndexPage(Page, HeroImageFields, SocialFields):
         related_name='+'
     )
 
-    content_panels = Page.content_panels + [
-        MultiFieldPanel([
-            ImageChooserPanel('hero_image'),
-        ], 'Hero Image'),
+    content_panels = Page.content_panels + HeroImageFields.content_panels + [
         MultiFieldPanel([
             FieldPanel('introduction'),
             InlinePanel('introduction_customisation', label="Introduction Customisation", max_num=1),

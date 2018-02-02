@@ -14,7 +14,7 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel, InlinePanel,
-    MultiFieldPanel, StreamFieldPanel
+    MultiFieldPanel, PageChooserPanel, StreamFieldPanel
 )
 
 from wagtail.wagtailcore.fields import StreamField, RichTextField
@@ -81,11 +81,23 @@ class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    featured_article = models.ForeignKey(
+        'articles.ArticlePage',
+        verbose_name="Featured News",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        help_text="Select a featured article to display first in article section",
+        related_name='+',
+    )
 
     @cached_property
     def articles(self):
         # returns articles that have solution selected as a related page
-        return ArticlePage.objects.filter(related_pages__page=self).live().public().order_by('-publication_date')[:3]
+        all_articles = ArticlePage.objects.filter(related_pages__page=self).live().public().order_by('-publication_date')
+        if self.featured_article_id:
+            all_articles = all_articles.exclude(pk=featured_article_id)
+        return all_articles[:3]
 
     @cached_property
     def people(self):
@@ -117,6 +129,7 @@ class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
         StreamFieldPanel('body'),
         MultiFieldPanel([
             InlinePanel('articles_customisation', label="Articles Listing Customisation", max_num=1),
+            PageChooserPanel('featured_article'),
         ], 'Articles Listing'),
         MultiFieldPanel([
             FieldPanel('partners_title'),
