@@ -1091,7 +1091,7 @@ blockquote cite {
 
 @media only screen and (min-width: 1024px) {
   .breadcrumb-container {
-    padding: 1rem 0;
+    padding: 1rem 0 0;
   }
   .search-result .breadcrumb-container {
     padding: 0;
@@ -1740,7 +1740,7 @@ blockquote cite {
 
 @media only screen and (min-width: 1172px) {
   .section--body {
-    padding-top: 3rem;
+    padding-top: 4rem;
   }
 }
 
@@ -1804,6 +1804,7 @@ blockquote cite {
 
 .section--bottom-space-no-padding {
   margin: 0 0 4rem;
+  padding: 0;
 }
 
 .share-icons {
@@ -1961,12 +1962,12 @@ article .share-icons--hide-mobile {
 }
 
 .wrapper--people {
-  padding: 2rem 0;
+  padding: 0 0 2rem;
 }
 
 @media only screen and (min-width: 768px) {
   .wrapper--people {
-    padding: 2rem 0 4rem;
+    padding: 0 0 4rem;
   }
 }
 
@@ -4369,7 +4370,6 @@ article .share-icons--hide-mobile {
   padding: 0 0 2rem;
   background-size: cover;
   background-position: 50% 50%;
-  margin-bottom: 2rem;
 }
 
 @media only screen and (min-width: 768px) {
@@ -4417,12 +4417,6 @@ article .share-icons--hide-mobile {
   .media-card {
     margin: 0 auto;
     max-width: 1172px;
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  .media-card {
-    margin-top: 4rem;
   }
 }
 
@@ -4523,6 +4517,9 @@ article .share-icons--hide-mobile {
 @media only screen and (min-width: 768px) {
   .quote:nth-child(odd):last-child .quote__content, .quote:nth-child(odd):only-child .quote__content {
     padding: 2rem 5rem;
+  }
+  .quote:nth-child(odd):last-child img, .quote:nth-child(odd):only-child img {
+    height: auto;
   }
 }
 

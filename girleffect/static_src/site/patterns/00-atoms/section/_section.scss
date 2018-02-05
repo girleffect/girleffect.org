@@ -53,7 +53,7 @@
         }
 
         @include media-query(container) {
-            padding-top: 3rem;
+            padding-top: 4rem;
         }
 
         > h3 {
@@ -102,5 +102,6 @@
 
     &--bottom-space-no-padding {
         margin: 0 0 4rem;
+        padding: 0;
     }
 }

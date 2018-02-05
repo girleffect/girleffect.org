@@ -58,10 +58,10 @@
     }
 
     &--people {
-        padding: 2rem 0;
+        padding: 0 0 2rem;
 
         @include media-query(tablet-portrait) {
-            padding: 2rem 0 4rem;
+            padding: 0 0 4rem;
         }
     }
 }

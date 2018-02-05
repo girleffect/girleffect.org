@@ -9,7 +9,7 @@
     }
 
     @include media-query(tablet-landscape) {
-        padding: 1rem 0;
+        padding: 1rem 0 0;
 
         .search-result & {
             padding: 0;

@@ -37,10 +37,14 @@
             width: 100%;
             margin-right: 0;
 
-            .quote__content {
-                @include media-query(tablet-portrait) {
+            @include media-query(tablet-portrait) {
+                .quote__content {
                     padding: 2rem 5rem;
-                }
+                  }
+
+                  img {
+                    height: auto;
+                  }
             }
         }
     }
