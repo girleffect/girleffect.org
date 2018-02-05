@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
 {% image value.customisation.background_image max-1800x400 as bg_img %}
-<section class="section section--statistics section--top-bottom-space"
+<section class="section section--statistics section--bottom-space"
          style="{% if bg_img %}background-image:url({{ bg_img.url }});{% endif %}
                 {% if value.customisation.background_hex %}background-color:{{ value.customisation.background_hex }};{% endif %}">
     {# Rows are to have a maximum of 3 list items per row #}

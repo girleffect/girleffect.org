@@ -41,15 +41,21 @@
     }
 
     &--body {
-        padding: 0;
+        padding: 1rem 0 0;
+
+        @include media-query(tablet-portrait) {
+            padding-top: 2em;
+        }
+
+        @include media-query(container) {
+            padding-top: 3rem;
+        }
 
         > h3 {
             @include body-container;
-            margin-top: 1rem;
             margin-bottom: 1rem;
 
             @include media-query(tablet-portrait) {
-                margin-top: 2em;
                 margin-bottom: 2rem;
             }
         }
@@ -87,5 +93,9 @@
 
     &--top-bottom-space {
         padding: 5rem 0;
+    }
+
+    &--bottom-space-no-padding {
+        margin: 0 0 4rem;
     }
 }

@@ -8,11 +8,9 @@
 
     <section class="section--partners">
 
-        <div class="wrapper wrapper--bottom-space">
-            {% block breadcrumbs %}
-                {% include "navigation/breadcrumbs.html" %}
-            {% endblock %}
-        </div>
+        {% block breadcrumbs %}
+            {% include "navigation/breadcrumbs.html" %}
+        {% endblock %}
         {% image page.introduction_customisations.image max-100x100 as introduction_image %}
         <div class="wrapper wrapper--mid wrapper--bottom-space-xl large-text"
              style="{% if introduction_image %}background:url({{ introduction_image.url }});{% endif %}

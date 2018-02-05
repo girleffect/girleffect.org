@@ -21,13 +21,15 @@
     }
 
     &--top-bottom-space {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
+      margin-top: 1rem;
 
-        @include media-query(tablet-landscape) {
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-        }
+      @include media-query(tablet-portrait) {
+          margin-top: 3rem;
+      }
+
+      @include media-query(container) {
+          margin-top: 4rem;
+      }
     }
 
     &--bottom-space {
@@ -49,6 +51,10 @@
 
     &--bottom-space-xl {
         margin-bottom: 4rem;
+
+        @include media-query(tablet-portrait) {
+            margin-top: 2rem;;
+        }
     }
 
     &--people {

@@ -641,6 +641,10 @@ p {
   margin: 0 0 1rem;
 }
 
+p:last-child {
+  margin: 0;
+}
+
 a {
   color: #2f6165;
   text-decoration: none;
@@ -972,16 +976,20 @@ blockquote cite {
 }
 
 .body-text-container {
-  margin-bottom: 1rem;
-  padding: 1rem 0;
+  padding: 0 0 2rem;
   background-size: cover;
   background-position: 50% 50%;
-  margin-bottom: 0;
 }
 
 @media only screen and (min-width: 768px) {
   .body-text-container {
-    padding: 2rem 0;
+    padding-bottom: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .body-text-container {
+    padding-bottom: 4rem;
   }
 }
 
@@ -1285,8 +1293,7 @@ blockquote cite {
 }
 
 .large-text-container {
-  margin-bottom: 1rem;
-  padding: 1rem 0;
+  padding: 0 0 2rem;
   background-size: cover;
   background-position: 50% 50%;
   margin-bottom: 0;
@@ -1294,7 +1301,13 @@ blockquote cite {
 
 @media only screen and (min-width: 768px) {
   .large-text-container {
-    padding: 2rem 0;
+    padding-bottom: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .large-text-container {
+    padding-bottom: 4rem;
   }
 }
 
@@ -1649,8 +1662,7 @@ blockquote cite {
 }
 
 .section--statistics {
-  margin-bottom: 1rem;
-  padding: 1rem 0;
+  padding: 0 0 2rem;
   background-size: cover;
   background-position: 50% 50%;
   background-color: #ffc700;
@@ -1658,7 +1670,13 @@ blockquote cite {
 
 @media only screen and (min-width: 768px) {
   .section--statistics {
-    padding: 2rem 0;
+    padding-bottom: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .section--statistics {
+    padding-bottom: 4rem;
   }
 }
 
@@ -1705,13 +1723,24 @@ blockquote cite {
 }
 
 .section--body {
-  padding: 0;
+  padding: 1rem 0 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .section--body {
+    padding-top: 2em;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .section--body {
+    padding-top: 3rem;
+  }
 }
 
 .section--body > h3 {
   margin-left: 1rem;
   margin-right: 1rem;
-  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -1731,7 +1760,6 @@ blockquote cite {
 
 @media only screen and (min-width: 768px) {
   .section--body > h3 {
-    margin-top: 2em;
     margin-bottom: 2rem;
   }
 }
@@ -1766,6 +1794,10 @@ blockquote cite {
 
 .section--top-bottom-space {
   padding: 5rem 0;
+}
+
+.section--bottom-space-no-padding {
+  margin: 0 0 4rem;
 }
 
 .share-icons {
@@ -1881,13 +1913,17 @@ article .share-icons--hide-mobile {
 
 .wrapper--top-bottom-space {
   margin-top: 1rem;
-  margin-bottom: 1rem;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 768px) {
   .wrapper--top-bottom-space {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .wrapper--top-bottom-space {
+    margin-top: 4rem;
   }
 }
 
@@ -1910,6 +1946,12 @@ article .share-icons--hide-mobile {
 
 .wrapper--bottom-space-xl {
   margin-bottom: 4rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapper--bottom-space-xl {
+    margin-top: 2rem;
+  }
 }
 
 .wrapper--people {
@@ -2054,11 +2096,23 @@ article .share-icons--hide-mobile {
 
 .carousel-container {
   position: relative;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .carousel-container {
+    margin-bottom: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .carousel-container {
+    margin-bottom: 4rem;
+  }
 }
 
 .carousel {
-  margin: 2rem auto;
+  margin: 0 auto 2rem;
   display: block;
   position: relative;
 }
@@ -2080,7 +2134,7 @@ article .share-icons--hide-mobile {
     position: relative;
     overflow: hidden;
     min-height: 700px;
-    margin: 4rem auto;
+    margin: 0 auto 2rem;
     padding-top: 4rem;
   }
   .carousel::after {
@@ -2683,8 +2737,7 @@ article .share-icons--hide-mobile {
 }
 
 .extendable-body-container {
-  margin-bottom: 1rem;
-  padding: 1rem 0;
+  padding: 0 0 2rem;
   background-size: cover;
   background-position: 50% 50%;
   background-position: 0 0;
@@ -2692,7 +2745,13 @@ article .share-icons--hide-mobile {
 
 @media only screen and (min-width: 768px) {
   .extendable-body-container {
-    padding: 2rem 0;
+    padding-bottom: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .extendable-body-container {
+    padding-bottom: 4rem;
   }
 }
 
@@ -2982,15 +3041,26 @@ article .share-icons--hide-mobile {
 }
 
 .list-item-container {
-  margin-bottom: 1rem;
-  padding: 1rem 0;
+  padding: 0 0 2rem;
   background-size: cover;
   background-position: 50% 50%;
 }
 
 @media only screen and (min-width: 768px) {
   .list-item-container {
-    padding: 2rem 0;
+    padding-bottom: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .list-item-container {
+    padding-bottom: 4rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .list-item-container {
+    padding-top: 2rem;
   }
 }
 
@@ -3311,6 +3381,12 @@ article .share-icons--hide-mobile {
   min-height: 340px;
   position: relative;
   margin: 2rem 0;
+}
+
+@media only screen and (min-width: 1024px) {
+  .slider-container {
+    margin-bottom: 4rem;
+  }
 }
 
 .slider {
@@ -4284,15 +4360,21 @@ article .share-icons--hide-mobile {
 }
 
 .media-card-container {
-  margin-bottom: 1rem;
-  padding: 1rem 0;
+  padding: 0 0 2rem;
   background-size: cover;
   background-position: 50% 50%;
+  margin-bottom: 2rem;
 }
 
 @media only screen and (min-width: 768px) {
   .media-card-container {
-    padding: 2rem 0;
+    padding-bottom: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .media-card-container {
+    padding-bottom: 4rem;
   }
 }
 
@@ -4334,7 +4416,7 @@ article .share-icons--hide-mobile {
 
 @media only screen and (min-width: 1024px) {
   .media-card {
-    margin: 2rem auto;
+    margin-top: 4rem;
   }
 }
 
@@ -4415,7 +4497,7 @@ article .share-icons--hide-mobile {
 
 @media only screen and (min-width: 1024px) {
   .quote {
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
     height: 360px;
   }
 }
