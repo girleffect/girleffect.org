@@ -1,11 +1,19 @@
 .carousel-container {
     position: relative;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+
+    @include media-query(tablet-portrait) {
+        margin-bottom: 3rem;
+    }
+
+    @include media-query(container) {
+        margin-bottom: 4rem;
+    }
 }
 
 .carousel {
     $mobile-panel-height: 530px;
-    margin: 2rem auto;
+    margin: 0 auto 2rem;
     display: block;
     position: relative;
 
@@ -22,7 +30,7 @@
         position: relative;
         overflow: hidden;
         min-height: 700px;
-        margin: 4rem auto;
+        margin: 0 auto 2rem;
         padding-top: 4rem;
 
         &::after {

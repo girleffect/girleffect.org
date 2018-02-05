@@ -1,7 +1,7 @@
 {% load wagtailimages_tags %}
 {% if page.articles or page.featured_article %}
 {% image customisations.image max-100x100 as articles_image %}
-<section class="section section--articles section--top-bottom-space"
+<section class="section section--articles section--bottom-space"
          style="{% if articles_image %}background:url({{ articles_image.url }});{% endif %}
                 {% if customisations.background_hex %}background:{{ customisations.background_hex }};{% endif %}">
     <h2 class="section__title"

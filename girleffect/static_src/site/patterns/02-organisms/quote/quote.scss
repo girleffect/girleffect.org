@@ -22,7 +22,7 @@
     background: $light-grey;
 
     @include media-query(tablet-landscape) {
-        margin-bottom: 2rem;
+        margin-bottom: 4rem;
         height: 360px;
     }
 

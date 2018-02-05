@@ -1,5 +1,6 @@
 .media-card-container {
     @include background-container;
+    margin-bottom: 2rem;
 
     &:nth-of-type(even) {
         .media-card__content {
@@ -28,7 +29,7 @@
     max-width: $mid-width;
 
     @include media-query(tablet-landscape) {
-        margin: 2rem auto;
+        margin-top: 4rem;
     }
 
     &__image {
