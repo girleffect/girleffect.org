@@ -641,10 +641,6 @@ p {
   margin: 0 0 1rem;
 }
 
-p:last-child {
-  margin-bottom: 0;
-}
-
 a {
   color: #2f6165;
   text-decoration: none;
@@ -943,7 +939,7 @@ cite {
   font-size: 16px;
   line-height: 1;
   color: #2f6165;
-  padding: 50px 0;
+  padding: 1rem 0 .5rem;
 }
 
 .article-info__author {
@@ -993,6 +989,10 @@ blockquote cite {
   }
 }
 
+.wrapper--article .body-text-container {
+  padding-bottom: 0;
+}
+
 .body-text {
   margin-left: 1rem;
   margin-right: 1rem;
@@ -1017,6 +1017,10 @@ blockquote cite {
   padding: 0;
 }
 
+.body-text p:last-child {
+  margin-bottom: 0;
+}
+
 .body-text h2,
 .body-text h3,
 .body-text h4,
@@ -1031,6 +1035,12 @@ blockquote cite {
   height: 100%;
   z-index: -1;
   background-repeat: no-repeat;
+}
+
+@media (min-width: 2000px) {
+  .brand-pattern {
+    background-size: contain;
+  }
 }
 
 .template-ni-nyampinga .brand-pattern {
@@ -1055,12 +1065,6 @@ blockquote cite {
 
 .template-springster .brand-pattern {
   background-image: url("../images/springster-pattern.png");
-}
-
-@media (min-width: 2000px) {
-  .brand-pattern {
-    background-size: contain;
-  }
 }
 
 .breadcrumb-container {
@@ -1774,28 +1778,40 @@ blockquote cite {
   background: #f4f4f3;
 }
 
+.section--articles {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 2000px) {
+  .section--articles {
+    background-size: contain;
+  }
+}
+
 .template-ni-nyampinga .section--articles {
-  background: url("../images/ni-nyampinga-pattern.png") no-repeat;
+  background-image: url("../images/ni-nyampinga-pattern.png");
 }
 
 .template-tega .section--articles {
-  background: url("../images/tega-pattern.png") no-repeat;
+  background-image: url("../images/tega-pattern.png");
 }
 
 .template-girls-connect .section--articles {
-  background: url("../images/girls-connect-pattern.png") no-repeat;
+  background-image: url("../images/girls-connect-pattern.png");
 }
 
 .template-zathu .section--articles {
-  background: url("../images/zathu-pattern.png") no-repeat;
+  background-image: url("../images/zathu-pattern.png");
 }
 
 .template-yegna .section--articles {
-  background: url("../images/yegna-pattern.png") no-repeat;
+  background-image: url("../images/yegna-pattern.png");
 }
 
 .template-springster .section--articles {
-  background: url("../images/springster-pattern.png") no-repeat;
+  background-image: url("../images/springster-pattern.png");
 }
 
 .section--top-bottom-space {
@@ -1819,6 +1835,7 @@ blockquote cite {
 
 .share-icons {
   display: inline-flex;
+  margin: 2rem 1rem;
 }
 
 .share-icons--vertical {
@@ -1832,6 +1849,8 @@ blockquote cite {
   margin-bottom: 10px;
   transition: border 0.25s ease-out;
   background: #fff;
+  width: 42px;
+  height: 42px;
 }
 
 .share-icons__link:hover {
@@ -1955,6 +1974,29 @@ article .share-icons--hide-mobile {
 .wrapper--article > * {
   max-width: 768px;
   margin: 0 auto;
+}
+
+.wrapper--article-inner {
+  max-width: 100%;
+  margin: 0 1rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapper--article-inner {
+    max-width: 673px;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .wrapper--article-inner {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+}
+
+.wrapper--article-inner .body-text-container {
+  margin-bottom: 0;
 }
 
 .wrapper--article-breadcrumbs {

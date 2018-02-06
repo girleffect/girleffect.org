@@ -71,28 +71,36 @@
     }
 
     &--articles {
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+
+        @media (min-width: 2000px) {
+            background-size: contain;
+        }
+
         .template-ni-nyampinga & {
-            background: url('../images/ni-nyampinga-pattern.png') no-repeat;
+            background-image:: url('../images/ni-nyampinga-pattern.png');
         }
 
         .template-tega & {
-            background: url('../images/tega-pattern.png') no-repeat;
+            background-image:: url('../images/tega-pattern.png');
         }
 
         .template-girls-connect & {
-            background: url('../images/girls-connect-pattern.png') no-repeat;
+            background-image:: url('../images/girls-connect-pattern.png');
         }
 
         .template-zathu & {
-            background: url('../images/zathu-pattern.png') no-repeat;
+            background-image:: url('../images/zathu-pattern.png');
         }
 
         .template-yegna & {
-            background: url('../images/yegna-pattern.png') no-repeat;
+            background-image:: url('../images/yegna-pattern.png');
         }
 
         .template-springster & {
-            background: url('../images/springster-pattern.png') no-repeat;
+            background-image:: url('../images/springster-pattern.png');
         }
     }
 

@@ -45,6 +45,26 @@
         }
     }
 
+
+    &--article-inner {
+        max-width: 100%;
+        margin: 0 1rem;
+        
+        @include media-query(tablet-portrait) {
+            max-width: 673px;
+            margin: 0 auto;
+        }
+
+        @include media-query(container) {
+            max-width: $body-width;
+            margin: 0 auto;
+        }
+
+        .body-text-container {
+          margin-bottom: 0;
+        }
+    }
+
     &--article-breadcrumbs {
         background: $light-grey;
     }

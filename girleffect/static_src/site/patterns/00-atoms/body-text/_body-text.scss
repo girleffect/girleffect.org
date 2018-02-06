@@ -1,5 +1,9 @@
 .body-text-container {
     @include background-container;
+
+    .wrapper--article & {
+        padding-bottom: 0;
+    }
 }
 
 .body-text {
@@ -8,6 +12,12 @@
 
     .template-article-page & {
         padding: 0;
+    }
+
+    p {
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 
     h2,
