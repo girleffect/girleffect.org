@@ -1,36 +1,35 @@
 .brand-pattern {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background-repeat: no-repeat;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-repeat: no-repeat;
 
-  .template-ni-nyampinga & {
-    background-image: url('../images/ni-nyampinga-pattern.png');
-  }
+    @media (min-width: 2000px) {
+        background-size: contain;
+    }
 
-  .template-tega & {
-    background-image: url('../images/tega-pattern.png');
-  }
+    .template-ni-nyampinga & {
+      background-image: url('../images/ni-nyampinga-pattern.png');
+    }
 
-  .template-girls-connect & {
-    background-image: url('../images/girls-connect-pattern.png');
-  }
+    .template-tega & {
+      background-image: url('../images/tega-pattern.png');
+    }
 
-  .template-zathu & {
-    background-image: url('../images/zathu-pattern.png');
-  }
+    .template-girls-connect & {
+      background-image: url('../images/girls-connect-pattern.png');
+    }
 
-  .template-yegna & {
-    background-image: url('../images/yegna-pattern.png');
-  }
+    .template-zathu & {
+      background-image: url('../images/zathu-pattern.png');
+    }
 
-  .template-springster & {
-    background-image: url('../images/springster-pattern.png');
-  }
-}
-@media (min-width: 2000px) {
-  .brand-pattern {
-    background-size: contain;
-  }
+    .template-yegna & {
+      background-image: url('../images/yegna-pattern.png');
+    }
+
+    .template-springster & {
+      background-image: url('../images/springster-pattern.png');
+    }
 }

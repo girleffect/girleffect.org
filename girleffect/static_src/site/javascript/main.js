@@ -154,15 +154,18 @@ $(function() {
     });
 
     // Sticky share icons on the article page
-    if ($('.js-share-icons').length) {
-        $('.js-share-icons').scrollToFixed({
-            marginTop: 30,
-            limit:
-                $($('.footer')).offset().top -
-                $('.js-share-icons').outerHeight(true) -
-                30
-        });
-    }
+    $(function() {
+        if ($('.js-share-icons').length) {
+            $('.js-share-icons').scrollToFixed({
+                marginTop: 30,
+                limit:
+                    $($('.footer')).offset().top -
+                    $('.js-share-icons').outerHeight(true) -
+                    30
+            });
+        }
+    });
+    
 
     // Desktop navigation
     if (window.matchMedia('(min-width: 1024px)').matches) {
