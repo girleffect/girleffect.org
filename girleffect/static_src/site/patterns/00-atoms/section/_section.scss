@@ -103,5 +103,13 @@
     &--bottom-space-no-padding {
         margin: 0 0 4rem;
         padding: 0;
+        
+        .template-solution-page &, .template-country-page & {
+            padding-top: 2rem;
+
+            @include media-query(tablet-portrait) {
+                padding-top: 4rem;
+            }
+        }
     }
 }
