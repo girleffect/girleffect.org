@@ -1072,7 +1072,7 @@ blockquote cite {
   margin-right: 1rem;
   display: flex;
   align-items: center;
-  padding: 20px 0;
+  padding: 1rem 0 0;
 }
 
 @media only screen and (min-width: 768px) {
@@ -1094,9 +1094,6 @@ blockquote cite {
 }
 
 @media only screen and (min-width: 1024px) {
-  .breadcrumb-container {
-    padding: 1rem 0 0;
-  }
   .search-result .breadcrumb-container {
     padding: 0;
   }
@@ -1968,7 +1965,13 @@ article .share-icons--hide-mobile {
 }
 
 .wrapper--article {
-  margin: 2rem auto 4rem;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 1024px) {
+  .wrapper--article {
+    margin: 2rem auto 4rem;
+  }
 }
 
 .wrapper--article > * {
@@ -2908,6 +2911,22 @@ article .share-icons--hide-mobile {
   z-index: -1;
 }
 
+@media only screen and (min-width: 768px) {
+  .hero--article-image {
+    position: relative;
+    padding-bottom: 50.632911392405063%;
+    /* ratio of image height to width */
+    height: 0;
+    overflow: hidden;
+  }
+  .hero--article-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+
 .hero--search {
   background: url("../images/search-hero.png") no-repeat;
   background-size: cover;
@@ -3045,7 +3064,13 @@ article .share-icons--hide-mobile {
 }
 
 .hero__image--top-space {
-  margin-top: 30px;
+  margin-top: 0;
+}
+
+@media only screen and (min-width: 1172px) {
+  .hero__image--top-space {
+    margin-top: 1rem;
+  }
 }
 
 .hero__video {

@@ -37,7 +37,11 @@
     }
 
     &--article {
-        margin: 2rem auto 4rem;
+        margin: 0 auto;
+
+        @include media-query(tablet-landscape) {
+            margin: 2rem auto 4rem;
+        }
 
         > * {
             max-width: $body-width;
