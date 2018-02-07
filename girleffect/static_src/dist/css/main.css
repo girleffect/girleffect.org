@@ -2919,12 +2919,6 @@ article .share-icons--hide-mobile {
     height: 0;
     overflow: hidden;
   }
-  .hero--article-image img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
 }
 
 .hero--search {
