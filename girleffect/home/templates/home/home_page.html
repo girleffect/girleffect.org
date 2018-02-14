@@ -5,9 +5,11 @@
     {# Hero section - section includes links #}
     {% include "includes/hero_video_section.html" %}
 
-    <div class="wrapper wrapper--body wrapper--top-bottom-space large-text">
-        <p>{{ page.introduction|richtext }}</p>
-    </div>
+    {% if page.introduction %}
+      <div class="wrapper wrapper--body wrapper--top-bottom-space large-text">
+          <p>{{ page.introduction|richtext }}</p>
+      </div>
+    {% endif %}
 
     {# Streamfield options #}
     <section class="section section--body">

@@ -157,12 +157,15 @@
 */
 
 @mixin background-container {
-    margin-bottom: 1rem;
-    padding: 2rem 0;
+    padding: 0 0 2rem;
     background-size: cover;
     background-position: 50% 50%;
 
     @include media-query(tablet-portrait) {
-        padding: 3rem 0;
+        padding-bottom: 3rem;
+    }
+
+    @include media-query(container) {
+        padding-bottom: 4rem;
     }
 }

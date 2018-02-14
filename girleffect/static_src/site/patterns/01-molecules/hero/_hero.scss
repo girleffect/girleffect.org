@@ -12,6 +12,15 @@
         }
     }
 
+    @include media-query(tablet-portrait) {
+      &--article-image {
+          position: relative;
+          padding-bottom: 50.632911392405063%; /* ratio of image height to width */
+          height: 0;
+          overflow: hidden;
+      }
+    }
+
     &--search {
         background: url('../images/search-hero.png') no-repeat;
         background-size: cover;
@@ -105,7 +114,11 @@
         }
 
         &--top-space {
-            margin-top: 30px;
+            margin-top: 0;
+
+            @include media-query(container) {
+                margin-top: 1rem;
+            }
         }
     }
 

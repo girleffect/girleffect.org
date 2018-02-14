@@ -2,6 +2,10 @@
     min-height: 340px;
     position: relative;
     margin: 2rem 0;
+
+    @include media-query(tablet-landscape) {
+        margin-bottom: 4rem;
+      }
 }
 
 .slider {

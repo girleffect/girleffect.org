@@ -21,13 +21,15 @@
     }
 
     &--top-bottom-space {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
+      margin-top: 1rem;
 
-        @include media-query(tablet-landscape) {
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-        }
+      @include media-query(tablet-portrait) {
+          margin-top: 3rem;
+      }
+
+      @include media-query(container) {
+          margin-top: 4rem;
+      }
     }
 
     &--bottom-space {
@@ -35,11 +37,35 @@
     }
 
     &--article {
-        margin: 2rem auto 4rem;
+        margin: 0 auto;
+
+        @include media-query(tablet-landscape) {
+            margin: 2rem auto 4rem;
+        }
 
         > * {
             max-width: $body-width;
             margin: 0 auto;
+        }
+    }
+
+
+    &--article-inner {
+        max-width: 100%;
+        margin: 0 1rem;
+        
+        @include media-query(tablet-portrait) {
+            max-width: 673px;
+            margin: 0 auto;
+        }
+
+        @include media-query(container) {
+            max-width: $body-width;
+            margin: 0 auto;
+        }
+
+        .body-text-container {
+          margin-bottom: 0;
         }
     }
 
@@ -49,13 +75,17 @@
 
     &--bottom-space-xl {
         margin-bottom: 4rem;
+
+        @include media-query(tablet-portrait) {
+            margin-top: 2rem;;
+        }
     }
 
     &--people {
-        padding: 2rem 0;
+        padding: 0 0 2rem;
 
         @include media-query(tablet-portrait) {
-            padding: 2rem 0 4rem;
+            padding: 0 0 4rem;
         }
     }
 }

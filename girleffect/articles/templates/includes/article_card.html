@@ -20,7 +20,7 @@
             <span class="article-card__date">{{ article.publication_date|date:"d.m.y" }}</span>
             <div class="article-card__title"><a href="{{ article.url }}">{{ article.title }}</a></div>
         </div>
-        <a class="link link--with-arrow" href="{{ article.get_parent.url }}?category={{ article.categories.first.category.id }}" >
+        <a class="link link--with-arrow" href="{{ article.url }}">
             Read more
             <div class="link__arrow"></div>
         </a>
