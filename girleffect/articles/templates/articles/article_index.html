@@ -11,7 +11,7 @@
              style="{% if intro_background %}background:url({{ intro_background.url }});{% endif %}
                     {% if page.introduction_customisations.background_hex %}background:{{ page.introduction_customisations.background_hex }};{% endif %}">
             {# Intro is RichText #}
-            {{ page.introduction|richtext }}
+            <h4>{{ page.introduction|richtext }}</h4>
         </div>
 
         <div class="wrapper wrapper--mid wrapper--bottom-space">
@@ -44,7 +44,7 @@
                                         </a>
                                     </span>
                                 {% endif %}
-                                <span class="article-card__date">{{ article.publication_date|date:"d.m.y H:i" }}</span>
+                                <span class="article-card__date">{{ article.publication_date|date:"d.m.y" }}</span>
                                 {% if article.listing_title %}
                                     <div class="article-card__title"><a href="{% pageurl article %}">{{ article.listing_title }}</a></div>
                                 {% else %}
@@ -62,10 +62,7 @@
                     </div>
                 {% endfor %}
             </div>
-
-            <div class="wrapper wrapper--mid">
-                {% include "includes/pagination.html" with subpages=articles %}
-            </div>
+            {% include "includes/pagination.html" with subpages=articles %}
         {% else %}
             {# no items #}
         {% endif %}

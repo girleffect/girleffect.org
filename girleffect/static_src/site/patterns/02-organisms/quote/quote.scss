@@ -2,16 +2,19 @@
     @include mid-container;
     display: flex;
     flex-direction: row;
-    margin: 0 auto;
     align-items: stretch;
     flex-wrap: wrap;
 }
 
 .quote {
-    min-height: 300px;
-    max-height: 300px;
+    $quotation-offset-mobile: 20px;
+    $quotation-offset-tablet: 50px;
+
     width: 100%;
-    align-self: stretch;
+    height: 320px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
     position: relative;
     margin-bottom: 1rem;
     overflow: hidden;
@@ -19,7 +22,8 @@
     background: $light-grey;
 
     @include media-query(tablet-landscape) {
-        margin-bottom: 2rem;
+        margin-bottom: 4rem;
+        height: 360px;
     }
 
     &:nth-child(odd) {
@@ -33,10 +37,14 @@
             width: 100%;
             margin-right: 0;
 
-            .quote__content {
-                @include media-query(tablet-portrait) {
-                    padding: 2rem 10rem;
-                }
+            @include media-query(tablet-portrait) {
+                .quote__content {
+                    padding: 2rem 5rem;
+                  }
+
+                  img {
+                    height: auto;
+                  }
             }
         }
     }
@@ -81,7 +89,7 @@
 
     &__copy {
         position: relative;
-        margin: 0 0 1rem;
+        margin: 0 0 0.5rem;
         border: 0;
         color: inherit;
         padding: 0;
@@ -91,6 +99,14 @@
             margin-bottom: 0;
             text-shadow: inherit;
             font-size: inherit;
+        }
+
+        > * {
+            padding-right: $quotation-offset-mobile;
+
+            @include media-query(tablet-landscape) {
+                padding-right: $quotation-offset-tablet;
+            }
         }
 
         &::before,
@@ -122,8 +138,13 @@
         }
 
         &::after {
-            padding-left: 5px;
+            margin-left: -($quotation-offset-mobile);
+
             content: '”';
+
+            @include media-query(tablet-landscape) {
+                margin-left: -($quotation-offset-tablet);
+            }
         }
     }
 
@@ -150,8 +171,8 @@
         &::before {
             background: linear-gradient(
                 to bottom,
-                transparent 60%,
-                $black-70 90%
+                transparent 20%,
+                $black-80 90%
             );
             content: '';
             position: absolute;
@@ -164,17 +185,9 @@
     }
 
     img {
+        flex: none;
         max-width: inherit;
-        height: auto;
+        height: 100%;
         width: auto;
-        margin-top: 50%;
-        margin-left: 50%;
-        transform: translate(-50%, -50%);
-
-        @include media-query(mob-landscape) {
-            margin-top: 0;
-            margin-left: 0;
-            transform: translate(0, 0);
-        }
     }
 }

@@ -7,7 +7,7 @@
         {% endif %}
 
         <div class="media-block__content">
-            <h4>{{ partner.title }}</h4>
+            <h4 class="media-block__heading">{{ partner.title }}</h4>
             <p>{{ partner.description }}</p>
             {% if partner.internal_link %}
                 <a class="link link--with-arrow" href="{{ partner.internal_link.url }}">Learn more about {{ partner.title }}

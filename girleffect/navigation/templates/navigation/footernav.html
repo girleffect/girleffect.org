@@ -2,13 +2,22 @@
 <nav role="navigation" aria-label="Tertiary">
     <ul class="footer__nav footer-links">
         {% for block in footer_nav_blocks %}
-            {% if block.block_type == 'item' and block.value.page.live and not block.value.page.is_private %}
+            {% if block.block_type == 'item' %}
+                {% if block.value.page and block.value.page.live and not block.value.page.is_private %}
                 <li class="footer__nav-item">
                     {% pageurl page=block.value.page as menu_item_url %}
                     <a href="{{ menu_item_url }}">
                         {{ block.value.title|default:block.value.page.title }}
                     </a>
                 </li>
+                {% elif block.value.external_url %}
+                    <li class="footer__nav-item">
+                    {% pageurl page=block.value.external_url as menu_item_url %}
+                    <a href="{{ menu_item_url }}">
+                        {{ block.value.title }}
+                    </a>
+                </li>
+                {% endif %}
             {% endif %}
         {% endfor %}
     </ul>

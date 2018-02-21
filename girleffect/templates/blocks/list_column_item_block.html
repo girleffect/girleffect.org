@@ -1,9 +1,9 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
-    <div class="list-item">
-        {% image value.image fill-360x360 class="list-item__image" %}
+<div class="list-item">
+    {% image value.image fill-360x360 class="list-item__image" %}
 
+    <div class="list-item__content">
         <h4 class="list-item__title" {% if heading_hex %}style="color:{{ heading_hex }};"{% endif %}>{{ value.title }}</h4>
-
         {# description is RichText #}
         {{ value.description }}
 
@@ -14,6 +14,6 @@
             {% include_block value.link %}
         {% elif value.link.document_link %}
             {% include_block value.link %}
-        {% else %}
         {% endif %}
     </div>
+</div>

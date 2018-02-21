@@ -1,10 +1,10 @@
 {% load wagtailimages_tags %}
-{% image value.customisation.background_image max-200x200 as bg_img %}
+{% image value.customisation.background_image max-1800x400 as bg_img %}
 
 {# StreamField customisations in parent DIV to blocks, include rich text headings #}
 <div class="extendable-body-container"
      style="{% if bg_img %}background-image:url({{ bg_img.url }});{% endif %}
-                {% if value.customisation.background_hex %}background:{{ value.customisation.background_hex }};{% endif %}
+                {% if value.customisation.background_hex %}background-color:{{ value.customisation.background_hex }};{% endif %}
                 {% if value.customisation.body_heading_hex %}color:{{value.customisation.body_heading_hex}}{% endif %}">
     <div class="extendable-body">
         <div class="extendable-body__content">

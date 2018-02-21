@@ -5,7 +5,7 @@ from wagtail.wagtailadmin.edit_handlers import (
     StreamFieldPanel
 )
 
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
@@ -19,7 +19,11 @@ from girleffect.utils.models import (
 
 
 class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
-    introduction = models.TextField(blank=True)
+    introduction = RichTextField(
+        blank=True,
+        null=True,
+        features=['bold', 'italic', 'link', 'justify']
+    )
     body = StreamField(StoryBlock())
     call_to_action = models.ForeignKey(
         'utils.CallToActionSnippet',
@@ -46,10 +50,16 @@ class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
 
 class StandardIndex(Page, HeroImageFields, SocialFields):
     body = StreamField(StoryBlock(), blank=True)
+    exclude_from_navigation = models.BooleanField(
+        blank=True,
+        default=False,
+        help_text="Check to prevent linking to this page in the navigation and breadcrumbs,\
+            for example if the page is empty."
+    )
 
     content_panels = Page.content_panels + HeroImageFields.content_panels + [
         StreamFieldPanel('body'),
-
+        FieldPanel('exclude_from_navigation'),
     ]
 
     search_fields = Page.search_fields + HeroImageFields.search_fields + [

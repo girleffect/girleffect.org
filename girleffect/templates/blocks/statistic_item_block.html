@@ -3,8 +3,8 @@
 <div class="stat-block">
     <div class="stat-block__content">
         <p class="stat-block__label"
-        {% if value.statistic_customisations.heading_hex %}
-            style="color: {{ value.statistic_customisations.heading_hex }}"{% endif %}>{{ value.title }}</p>
+        {% if heading_hex %}
+            style="color: {{ heading_hex }}"{% endif %}>{{ value.title }}</p>
         <div class="stat-block__copy">
             <div>
                 <h4>{{ value.description|richtext }}</h4>

@@ -1,7 +1,7 @@
 .article-info {
     @include small-text;
     color: $green;
-    padding: 50px 0;
+    padding: 1rem 0 .5rem;
 
     &__author {
         color: $mid-grey;

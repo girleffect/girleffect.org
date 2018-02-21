@@ -12,8 +12,10 @@
         <div class="hero hero--article">
             {% include "navigation/breadcrumbs.html" %}
             <div class="wrapper wrapper--mid">
-                {% image page.hero_image fill-790x400 as hero_image %}
-                <img class="hero__image hero__image--top-space" src="{{ hero_image.url }}">
+                <div class="hero--article-image">
+                    {% image page.hero_image fill-790x400 as hero_image %}
+                    <img class="hero__image hero__image--top-space" src="{{ hero_image.url }}">
+                </div>
             </div>
         </div>
     {% else %}
@@ -41,13 +43,19 @@
 
     {# Title, introduction and Streamfields #}
     <section class="section wrapper wrapper--article">
-        <h3 class="heading heading--squashed">{{ page.title }}</h3>
+        <div class="wrapper--article-inner">
+          <h3 class="heading heading--squashed">
+              {% if page.hero_strapline %}
+                  {{ page.hero_strapline }}
+              {% endif %}
+          </h3>
 
-        <div class="article-info">
-            <p class="article-info__author">{% if page.author %}<span>By {{ page.author }}</span>{% endif %} {{ page.display_date|date }}</p>
+          <div class="article-info">
+              <p class="article-info__author">{% if page.author %}<span>By {{ page.author }}</span>{% endif %} {{ page.display_date|date }}</p>
+          </div>
+
+          <p class="large-text">{{ page.introduction|richtext }}</p>
         </div>
-
-        <p class="large-text">{{ page.introduction }}</p>
         {{ page.body }}
 
         <div class="wrapper wrapper--mid">

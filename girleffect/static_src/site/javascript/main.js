@@ -154,15 +154,18 @@ $(function() {
     });
 
     // Sticky share icons on the article page
-    if ($('.js-share-icons').length) {
-        $('.js-share-icons').scrollToFixed({
-            marginTop: 30,
-            limit:
-                $($('.footer')).offset().top -
-                $('.js-share-icons').outerHeight(true) -
-                30
-        });
-    }
+    $(function() {
+        if ($('.js-share-icons').length) {
+            $('.js-share-icons').scrollToFixed({
+                marginTop: 30,
+                limit:
+                    $($('.footer')).offset().top -
+                    $('.js-share-icons').outerHeight(true) -
+                    30
+            });
+        }
+    });
+    
 
     // Desktop navigation
     if (window.matchMedia('(min-width: 1024px)').matches) {
@@ -290,5 +293,123 @@ $(function() {
         $('.extendable-body--collapsible').slideToggle();
         $('.extendable-body--open').toggle();
         $('.extendable-body--close').toggle();
+    });
+
+    // Article Page Filter Setup
+    function constructFilter(filter) {
+        filter.addClass('article-select--hidden');
+        filter.wrap('<div class="article-select"></div>');
+        filter.after('<div class="article-select--styled"></div>');
+    }
+
+    function defaultFilterItem(filter) {
+        var styledArticleFilter = filter.next('div.article-select--styled');
+        styledArticleFilter.text(
+            $('option[selected]').text() ||
+                filter
+                    .children('option')
+                    .eq(0)
+                    .text()
+        );
+
+        return styledArticleFilter;
+    }
+
+    function createFilterListItems(
+        articleFilter,
+        articleFilterOptionsCount,
+        filterList
+    ) {
+        for (var i = 0; i < articleFilterOptionsCount; i++) {
+            $('<li />', {
+                text: articleFilter
+                    .children('option')
+                    .eq(i)
+                    .text(),
+                rel: articleFilter
+                    .children('option')
+                    .eq(i)
+                    .val(),
+                class:
+                    articleFilter
+                        .children('option')
+                        .eq(i)
+                        .val() === $('option[selected]').val()
+                        ? 'is-selected'
+                        : null
+            }).appendTo(filterList);
+        }
+    }
+
+    function createFilterList(styledArticleFilter) {
+        return $('<ul />', {
+            class: 'article-select__options'
+        }).insertAfter(styledArticleFilter);
+    }
+
+    function setDefaultSelectedFilterItem(filterList) {
+        var selectedItems = filterList.children('.is-selected');
+        if (selectedItems.length === 0) {
+            $(filterList.children('li')[0]).addClass('is-selected');
+        }
+    }
+
+    $('.js-article-filter').each(function() {
+        const articleFilter = $(this);
+        const articleFilterOptionsCount = articleFilter.children('option')
+            .length;
+        constructFilter(articleFilter);
+        const styledArticleFilter = defaultFilterItem(articleFilter);
+        const filterList = createFilterList(styledArticleFilter);
+        createFilterListItems(
+            articleFilter,
+            articleFilterOptionsCount,
+            filterList
+        );
+        const filterListItems = filterList.children('li');
+        setDefaultSelectedFilterItem(filterList);
+
+        styledArticleFilter.click(function(e) {
+            e.stopPropagation();
+            $('div.article-select--styled.is-active')
+                .not(this)
+                .each(function() {
+                    $(this)
+                        .removeClass('is-active')
+                        .next('ul.select__options')
+                        .hide();
+                });
+            $(this)
+                .toggleClass('is-active')
+                .next('ul.article-select__options')
+                .toggle();
+        });
+
+        filterListItems.click(function(e) {
+            e.stopPropagation();
+            styledArticleFilter.text($(this).text()).removeClass('is-active');
+            $(articleFilter.children('option[selected]')).attr(
+                'selected',
+                false
+            );
+            if ($(this).attr('rel')) {
+                $(`option[value=${$(this).attr('rel')}]`).attr(
+                    'selected',
+                    'selected'
+                );
+            } else {
+                $(filterListItems[0]).attr('selected', 'selected');
+            }
+
+            $('form').submit();
+        });
+
+        // NOTE Close select box if clicked anywhere else on page
+        $(document).click(function() {
+            styledArticleFilter.removeClass('is-active');
+            if (isMobileScreen()) {
+                filterList.hide();
+            }
+        });
     });
 });
