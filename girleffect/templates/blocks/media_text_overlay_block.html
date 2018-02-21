@@ -17,12 +17,8 @@
             {{ value.text }}
 
             <span class="media-card__link">
-                {% if value.link.external_link %}
+                {% if value.link.external_link or value.link.internal_link or value.link.document_link %}
                     {# template for this is in textbox_link_block.html #}
-                    {% include_block value.link %}
-                {% elif value.link.internal_link %}
-                    {% include_block value.link %}
-                {% elif value.link.document_link %}
                     {% include_block value.link %}
                 {% endif %}
             </span>

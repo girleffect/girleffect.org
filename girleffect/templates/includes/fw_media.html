@@ -1,43 +1,27 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 {% image value.media_customisations.image max-100x100 as bg_img %}
-<div class="media-card"
-     style="{% if bg_img %}background:url({{ bg_img.url }});{% endif %}
-            {% if value.media_customisations.background_hex %}background:{{ value.media_customisations.background_hex }};{% endif %}
-     ">
-    {% image value.image fill-1020x500 as fw_image %}
-    <img src="{{ fw_image.url }}" alt="{{ fw_image.alt }}" class="media-card__image">
-
-    {% if value.external_link %}
-        <a class="media-card__content" href="{{ value.external_link }}">
-    {% elif value.internal_link %}
-        <a class="media-card__content" href="{{ value.internal_link.url}}">
-    {% elif value.document_link %}
-        <a class="media-card__content" href="{{ value.document_link.url }}">
-    {% else %}
+<div class="media-card-container" style="{% if bg_img %}background:url({{ bg_img.url }});{% endif %}
+        {% if value.media_customisations.background_hex %}background:{{ value.media_customisations.background_hex }};{% endif %}">
+    <div class="media-card">
+        {% image value.image fill-1020x500 as fw_image %}
+        <img src="{{ fw_image.url }}" alt="{{ fw_image.alt }}" class="media-card__image">
         <div class="media-card__content">
-    {% endif %}
+            {% if value.title %}
+                <h3 class="media-card__title">{{ value.title }}</h3>
+            {% elif value.logo %}
+                {% image value.logo max-300x75 as logo %}
+                <img class="media-card__logo" src="{{ logo.url }}" alt="{{ logo.alt }}">
+            {% endif %}
 
+            {# text is RichText #}
+            {{ value.text|richtext }}
 
-    {% if value.title %}
-        <h3 class="media-card__title">{{ value.title }}</h3>
-    {% elif value.logo %}
-        {% image value.logo max-300x75 as logo %}
-         <img class="media-card__logo" src="{{ logo.url }}" alt="{{ logo.alt }}">
-    {% endif %}
-
-    {# text is RichText #}
-    {{ value.text }}
-
-    {% if value.external_link %}
-        <div class="media-card__link link__arrow"></div>
-        </a>
-    {% elif value.internal_link %}
-        <div class="media-card__link link__arrow"></div>
-        </a>
-    {% elif value.document_link %}
-        <div class="media-card__link link__arrow"></div>
-        </a>
-    {% else %}
+            <span class="media-card__link">
+                {% if value.link_page or value.link_url %}
+                    {# use the block template blocks/link_block.html #}
+                    {% include 'blocks/link_block.html' with link_is_external=value.link_is_external link_url=value.get_link_url link_text=value.get_link_text %}
+                {% endif %}
+            </span>
         </div>
-    {% endif %}
+    </div>
 </div>

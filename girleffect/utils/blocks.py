@@ -161,6 +161,10 @@ class LinkBlock(blocks.StructBlock):
         else:
             context['link_is_external'] = False
 
+        # Add link text, so we can make the template includable by
+        # non-streamblock entities
+        context['link_text'] = value['link_text']
+
         return context
 
     def clean(self, value):

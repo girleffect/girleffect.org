@@ -272,6 +272,12 @@ class FullWidthMediaAndTextSnippet(ClusterableModel, LinkFields):
     def __str__(self):
         return self.title
 
+    def get_link_url(self):
+        return self.link_url or self.link_page and self.link_page.url
+
+    def link_is_external(self):
+        return bool(self.link_url)
+
 
 @register_snippet
 class CallToActionSnippet(EmailLinkFields):
