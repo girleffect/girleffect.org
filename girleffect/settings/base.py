@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'girleffect.esi',
     'girleffect.home',
     'girleffect.images',
+    'girleffect.jobs',
     'girleffect.navigation',
     'girleffect.articles',
     'girleffect.partners',
