@@ -5,26 +5,22 @@ from django.utils.translation import ugettext_lazy as _
 
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
-
-from wagtail.wagtailadmin.edit_handlers import (
-    FieldPanel,
-    InlinePanel,
-    MultiFieldPanel,
-    PageChooserPanel
-)
+from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
+                                                MultiFieldPanel,
+                                                PageChooserPanel)
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailembeds import oembed_providers
 from wagtail.wagtailembeds.embeds import get_embed
 from wagtail.wagtailembeds.exceptions import EmbedException
-from wagtail.wagtailembeds.finders.oembed import OEmbedFinder as OEmbedFinder
+from wagtail.wagtailembeds.finders.oembed import OEmbedFinder
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
-from wagtail.contrib.settings.models import BaseSetting, register_setting
-from wagtailmedia.models import AbstractMedia
 from wagtailmedia.edit_handlers import MediaChooserPanel
+from wagtailmedia.models import AbstractMedia
 
 from girleffect.images.models import CustomImage
 
