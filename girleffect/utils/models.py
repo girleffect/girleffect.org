@@ -242,7 +242,7 @@ class FullWidthMediaAndTextSnippetCustomisableHeading(CustomisableFeature):
 
 @register_snippet
 class FullWidthMediaAndTextSnippet(ClusterableModel, LinkFields):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, blank=True)
     image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     logo = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     text = RichTextField(
@@ -273,6 +273,15 @@ class FullWidthMediaAndTextSnippet(ClusterableModel, LinkFields):
 
     def link_is_external(self):
         return bool(self.link_url)
+
+    def clean(self):
+        if self.title and self.logo:
+            error_messages = ["Please choose only one of logo or title."]
+            raise ValidationError({'title': error_messages, 'logo': error_messages})
+        if not self.title and not self.logo:
+            error_messages = ["Please choose a logo or title."]
+            raise ValidationError({'title': error_messages, 'logo': error_messages})
+        return super().clean()
 
 
 @register_snippet
