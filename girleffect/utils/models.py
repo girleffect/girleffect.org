@@ -5,26 +5,22 @@ from django.utils.translation import ugettext_lazy as _
 
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
-
-from wagtail.wagtailadmin.edit_handlers import (
-    FieldPanel,
-    InlinePanel,
-    MultiFieldPanel,
-    PageChooserPanel
-)
+from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
+                                                MultiFieldPanel,
+                                                PageChooserPanel)
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailembeds import oembed_providers
 from wagtail.wagtailembeds.embeds import get_embed
 from wagtail.wagtailembeds.exceptions import EmbedException
-from wagtail.wagtailembeds.finders.oembed import OEmbedFinder as OEmbedFinder
+from wagtail.wagtailembeds.finders.oembed import OEmbedFinder
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
-from wagtail.contrib.settings.models import BaseSetting, register_setting
-from wagtailmedia.models import AbstractMedia
 from wagtailmedia.edit_handlers import MediaChooserPanel
+from wagtailmedia.models import AbstractMedia
 
 from girleffect.images.models import CustomImage
 
@@ -246,7 +242,7 @@ class FullWidthMediaAndTextSnippetCustomisableHeading(CustomisableFeature):
 
 @register_snippet
 class FullWidthMediaAndTextSnippet(ClusterableModel, LinkFields):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, blank=True)
     image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     logo = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     text = RichTextField(
@@ -277,6 +273,15 @@ class FullWidthMediaAndTextSnippet(ClusterableModel, LinkFields):
 
     def link_is_external(self):
         return bool(self.link_url)
+
+    def clean(self):
+        if self.title and self.logo:
+            error_messages = ["Please choose only one of logo or title."]
+            raise ValidationError({'title': error_messages, 'logo': error_messages})
+        if not self.title and not self.logo:
+            error_messages = ["Please choose a logo or title."]
+            raise ValidationError({'title': error_messages, 'logo': error_messages})
+        return super().clean()
 
 
 @register_snippet
