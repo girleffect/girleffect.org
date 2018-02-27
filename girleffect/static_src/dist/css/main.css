@@ -1636,7 +1636,8 @@ blockquote cite {
 .rich-text ul,
 .rich-text ol {
   padding-left: 20px;
-  list-style-position: inside;
+  margin-left: 1rem;
+  list-style-position: outside;
 }
 
 .rich-text ul {
