@@ -532,12 +532,12 @@ select:last-of-type {
 }
 
 .locate-me {
-  margin-right: 0;
+  margin-left: 0;
 }
 
 @media only screen and (min-width: 768px) {
   .locate-me {
-    left: 20px;
+    margin-left: 20px;
   }
 }
 

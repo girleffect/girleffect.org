@@ -291,10 +291,10 @@ select {
 }
 
 .locate-me {
-    margin-right: 0;
+    margin-left: 0;
 
     @include media-query(tablet-portrait) {
-        left: 20px;
+        margin-left: 20px;
     }
 }
 
