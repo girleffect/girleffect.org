@@ -4540,6 +4540,10 @@ article .share-icons--hide-mobile {
   right: -20px;
 }
 
+.media-card__link a {
+  margin-top: 1rem;
+}
+
 .quote-container {
   margin-left: 1rem;
   margin-right: 1rem;
