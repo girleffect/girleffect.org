@@ -1624,6 +1624,10 @@ blockquote cite {
   }
 }
 
+.rich-text p:last-child {
+  margin-bottom: 0;
+}
+
 .rich-text a {
   border-bottom: 2px solid #ffc700;
   font-weight: 700;
