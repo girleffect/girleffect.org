@@ -1,9 +1,20 @@
 {% load wagtailimages_tags %}
-{% image feature fill-1700x960 as feature_image %}
+
+{% if request.user_agent.is_pc %}
+    {% image feature fill-1700x960 as feature_image %}
+{% else %}
+    {% image feature fill-850x490 as feature_image %}
+{% endif %}
+
 {% if video %}
-<video class="hero__video" autoplay loop muted preload poster="{{ feature_image.url }}">
-    <source src="{{ video.file.url }}" type="video/mp4">
-</video>
+  {% if request.user_agent.is_pc %}
+    <video class="hero__video" autoplay loop muted preload poster="{{ feature_image.url }}">
+  {% else %}
+      <video class="hero__video" controls playsinline loop muted preload="none" poster="{{ feature_image.url }}">
+  {% endif %}
+        <source src="{{ video.file.url }}" type="video/mp4">
+    </video>
+
 {% elif feature_image %}
 <img class="hero__image" src="{{ feature_image.url }}">
 {% endif %}

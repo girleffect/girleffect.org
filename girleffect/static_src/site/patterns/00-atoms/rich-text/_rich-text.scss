@@ -12,6 +12,10 @@
         &:last-child {
             margin-bottom: 0;
         }
+
+        @include media-query(tablet-portrait-max) {
+            text-align: left !important; // sass-lint:disable-line no-important
+        }
     }
 
     a {
@@ -22,7 +26,8 @@
     ul,
     ol {
         padding-left: 20px;
-        list-style-position: inside;
+        margin-left: 1rem;
+        list-style-position: outside;
     }
 
     ul {

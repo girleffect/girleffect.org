@@ -98,9 +98,14 @@ h4 {
     }
 }
 
+ul,
+ol {
+    margin-left: 1rem;
+    list-style-position: outside;
+}
+
 ul {
-    padding: 0;
-    list-style: none;
+    list-style-type: disc;
 }
 
 p {
