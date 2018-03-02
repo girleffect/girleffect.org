@@ -1628,6 +1628,12 @@ blockquote cite {
   margin-bottom: 0;
 }
 
+@media only screen and (max-width: 768px) {
+  .rich-text p {
+    text-align: left !important;
+  }
+}
+
 .rich-text a {
   border-bottom: 2px solid #ffc700;
   font-weight: 700;
@@ -1663,8 +1669,34 @@ blockquote cite {
 }
 
 .section__title {
+  margin-left: 1rem;
+  margin-right: 1rem;
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .section__title {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media only screen and (min-width: 1172px) {
+  .section__title {
+    margin: 0 auto;
+    max-width: 768px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .section__title {
+    margin-bottom: 3rem;
+  }
+}
+
+.section--partners {
+  background: #f4f4f3;
 }
 
 .section--statistics {
@@ -1672,6 +1704,8 @@ blockquote cite {
   background-size: cover;
   background-position: 50% 50%;
   background-color: #ffc700;
+  padding: 1rem;
+  margin-bottom: 3em;
 }
 
 @media only screen and (min-width: 768px) {
@@ -1686,13 +1720,10 @@ blockquote cite {
   }
 }
 
-.section--partners {
-  background: #f4f4f3;
-}
-
-.section--statistics {
-  padding: 40px;
-  margin-bottom: 3em;
+@media only screen and (min-width: 768px) {
+  .section--statistics {
+    padding: 2rem;
+  }
 }
 
 @media only screen and (min-width: 1172px) {
@@ -1707,9 +1738,9 @@ blockquote cite {
 }
 
 .section--intro {
-  padding: 0;
   margin-left: 1rem;
   margin-right: 1rem;
+  padding: 0;
   margin-top: 1rem;
   margin-bottom: 1rem;
   max-width: 100%;
@@ -2205,7 +2236,7 @@ article .share-icons--hide-mobile {
   .carousel {
     position: relative;
     overflow: hidden;
-    min-height: 700px;
+    min-height: 500px;
     margin: 0 auto 2rem;
     padding-top: 4rem;
   }
@@ -2217,6 +2248,12 @@ article .share-icons--hide-mobile {
     left: 0;
     right: 0;
     bottom: 0;
+  }
+}
+
+@media only screen and (min-width: 768px) and (min-width: 1172px) {
+  .carousel {
+    min-height: 700px;
   }
 }
 
@@ -2586,6 +2623,12 @@ article .share-icons--hide-mobile {
 @media only screen and (min-width: 768px) {
   .carousel__overview {
     display: none;
+    margin-top: 2rem;
+  }
+}
+
+@media only screen and (min-width: 1366px) {
+  .carousel__overview {
     margin-top: 4rem;
   }
 }
@@ -2599,6 +2642,7 @@ article .share-icons--hide-mobile {
     position: absolute;
     right: 0;
     bottom: 0;
+    margin: 0 1rem;
     z-index: 2;
   }
   .carousel__controls:hover {
@@ -2987,6 +3031,7 @@ article .share-icons--hide-mobile {
   bottom: 0;
   left: 0;
   text-align: center;
+  pointer-events: none;
 }
 
 @media only screen and (min-width: 768px) {
@@ -3053,12 +3098,6 @@ article .share-icons--hide-mobile {
   width: 100%;
   min-height: 225px;
   object-fit: cover;
-}
-
-@media only screen and (min-width: 480px) {
-  .hero__image {
-    min-height: 150px;
-  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -3208,6 +3247,10 @@ article .share-icons--hide-mobile {
 .list-item__content {
   padding: 1.5rem;
   background-color: #fff;
+}
+
+.list-item .link--with-arrow {
+  margin-top: 1rem;
 }
 
 .modal--hidden {
@@ -3646,10 +3689,10 @@ article .share-icons--hide-mobile {
     margin-bottom: 2rem;
   }
   .stat-block:nth-child(2n + 1) {
-    padding: 0 1.5rem 20px 0;
+    padding: 0 0.75rem 20px 0;
   }
   .stat-block:nth-child(2n + 2) {
-    padding: 0 0 20px 1.5rem;
+    padding: 0 0 1rem 0.75rem;
   }
   .stat-block:last-child {
     padding-right: 0;
@@ -3681,12 +3724,17 @@ article .share-icons--hide-mobile {
 
 .stat-block__copy {
   background: #fff;
-  border: 5 px solid green;
-  padding: 2rem;
+  padding: 1rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+@media only screen and (min-width: 768px) {
+  .stat-block__copy {
+    padding: 2rem;
+  }
 }
 
 .stat-block__copy h2,
@@ -3695,6 +3743,12 @@ article .share-icons--hide-mobile {
 .stat-block__copy .stat-block__content b, .stat-block__content
 .stat-block__copy b {
   margin-bottom: 0.5rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .stat-block__copy h2 {
+    font-size: 30px;
+  }
 }
 
 .stat-block__content {
@@ -4396,6 +4450,12 @@ article .share-icons--hide-mobile {
   max-width: 50%;
 }
 
+@media only screen and (max-width: 768px) {
+  .media-block:only-child {
+    max-width: 90%;
+  }
+}
+
 @media only screen and (min-width: 1366px) {
   .media-block:only-child {
     flex-direction: row-reverse;
@@ -4502,7 +4562,6 @@ article .share-icons--hide-mobile {
 }
 
 .media-card__image {
-  min-height: 300px;
   object-fit: cover;
 }
 

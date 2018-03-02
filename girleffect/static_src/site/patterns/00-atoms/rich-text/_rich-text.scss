@@ -12,6 +12,10 @@
         &:last-child {
             margin-bottom: 0;
         }
+
+        @include media-query(tablet-portrait-max) {
+            text-align: left !important; // sass-lint:disable-line no-important
+        }
     }
 
     a {
