@@ -73,6 +73,10 @@
             text-align: center;
             pointer-events: none;
         }
+
+        .link {
+            pointer-events: auto;
+        }
     }
 
     &__strapline {
