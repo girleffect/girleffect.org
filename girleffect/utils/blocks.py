@@ -1,17 +1,18 @@
 import re
+
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 
 from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.wagtailembeds import oembed_providers
+from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailembeds.finders.oembed import OEmbedFinder as OEmbedFinder
 from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
-from .models import CallToActionSnippet, Statistic
+from .models import (CallToActionSnippet, FullWidthMediaAndTextSnippet,
+                     Statistic)
 
 
 def validate_hex(value):
@@ -159,6 +160,10 @@ class LinkBlock(blocks.StructBlock):
             context['link_is_external'] = True
         else:
             context['link_is_external'] = False
+
+        # Add link text, so we can make the template includable by
+        # non-streamblock entities
+        context['link_text'] = value['link_text']
 
         return context
 
@@ -547,6 +552,11 @@ class StoryBlock(blocks.StreamBlock):
     carousel_block = CarouselBlock(min_num=2, max_num=3, label="Carousel")
     media_text_overlay = MediaTextOverlayBlock(
         label="Full Width Media with Text Overlay"
+    )
+    image_text_overlay = SnippetChooserBlock(
+        FullWidthMediaAndTextSnippet,
+        template="includes/fw_media.html",
+        label="Full Width Media with Text Overlay Snippet",
     )
     list_block = ListColumnBlock()
     link_row = blocks.ListBlock(
