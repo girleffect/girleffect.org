@@ -1,3 +1,5 @@
+from urllib.parse import urljoin
+
 from django import template
 
 from wagtail.wagtailcore.utils import camelcase_to_underscore
@@ -27,3 +29,9 @@ def widget_type(bound_field):
 @register.filter(name='field_type')
 def field_type(bound_field):
     return camelcase_to_underscore(bound_field.field.__class__.__name__)
+
+
+# Intelligently join URLs
+@register.filter(name='urljoin')
+def urljoin_filter(base_url, url):
+    return urljoin(base_url, url)
