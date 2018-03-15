@@ -52,11 +52,15 @@
         flex-direction: column;
         justify-content: space-between;
         background: $light-grey;
-        padding: 30px;
+        padding: 20px;
         flex-grow: 1;
         font-weight: $weight-medium;
         -webkit-font-smoothing: antialiased; // sass-lint:disable-line no-vendor-prefixes
         -moz-osx-font-smoothing: grayscale; // sass-lint:disable-line no-vendor-prefixes
+
+        @include media-query(mob-landscape) {
+            padding: 30px;
+        }
     }
 
     &__date {

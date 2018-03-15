@@ -93,9 +93,9 @@ h1 {
   line-height: 1.08;
 }
 
-@media (max-width: 1047.26667px) {
+@media (max-width: 910.66667px) {
   h1 {
-    font-size: 46px;
+    font-size: 40px;
   }
 }
 
@@ -110,9 +110,9 @@ h2 {
   line-height: 1.1;
 }
 
-@media (max-width: 1032.08889px) {
+@media (max-width: 910.66667px) {
   h2 {
-    font-size: 34px;
+    font-size: 30px;
   }
 }
 
@@ -127,9 +127,9 @@ h3 {
   line-height: 1.13;
 }
 
-@media (max-width: 1042.47368px) {
+@media (max-width: 790.84211px) {
   h3 {
-    font-size: 29px;
+    font-size: 22px;
   }
 }
 
@@ -145,9 +145,9 @@ h4 {
   line-height: 1.16;
 }
 
-@media (max-width: 1038.16px) {
+@media (max-width: 874.24px) {
   h4 {
-    font-size: 19px;
+    font-size: 16px;
   }
 }
 
@@ -162,9 +162,9 @@ blockquote {
   font-weight: 400;
 }
 
-@media (max-width: 1038.16px) {
+@media (max-width: 874.24px) {
   blockquote {
-    font-size: 19px;
+    font-size: 16px;
   }
 }
 
