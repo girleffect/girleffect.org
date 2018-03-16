@@ -73,6 +73,10 @@
             text-align: center;
             pointer-events: none;
         }
+
+        .link {
+            pointer-events: auto;
+        }
     }
 
     &__strapline {
@@ -103,7 +107,7 @@
 
     &__image {
         width: 100%;
-        min-height: 225px;
+        min-height: 150px;
         object-fit: cover;
 
         @include media-query(tablet-portrait) {
