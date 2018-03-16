@@ -878,13 +878,13 @@ cite {
   .article-select__options {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     position: static;
     border: none;
   }
   .article-select__options li {
     text-indent: 0;
     color: #767676;
+    margin-right: 2rem;
   }
   .article-select__options li:hover {
     background-color: transparent;
