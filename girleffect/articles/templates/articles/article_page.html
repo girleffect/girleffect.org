@@ -25,11 +25,12 @@
 
     {# Share Icons #}
     <div class="wrapper wrapper--mid">
+    {% with settings.utils.SocialMediaSettings as social_media_settings %}
         <div class="share-icons share-icons--vertical js-share-icons share-icons--hide-mobile">
             <a class="share-icons__link" href="https://www.facebook.com/sharer/sharer.php?u={{ request.site.hostname }}{{ page.url }}" target="_blank">
                 <svg class="share-icons__icon"><use xlink:href="#facebook"></use></svg>
             </a>
-            <a class="share-icons__link" href="http://www.twitter.com/share?url={{ request.site.hostname }}{{ page.url }}" target="_blank">
+            <a class="share-icons__link" href="https://twitter.com/intent/tweet?text={{ page.title|urlencode }}&amp;url={{ page.get_full_url|urlencode }}&amp;via={{ social_media_settings.twitter_handle|urlencode }}" target="_blank">
                 <svg class="share-icons__icon"><use xlink:href="#twitter"></use></svg>
             </a>
             <a class="share-icons__link" href="https://www.linkedin.com/cws/share?url={{ request.site.hostname }}{{ page.url }}" target="_blank">
@@ -39,6 +40,7 @@
                 <svg class="share-icons__icon"><use xlink:href="#email"></use></svg>
             </a>
         </div>
+    {% endwith %}
     </div>
 
     {# Title, introduction and Streamfields #}
@@ -59,11 +61,12 @@
         {{ page.body }}
 
         <div class="wrapper wrapper--mid">
+        {% with settings.utils.SocialMediaSettings as social_media_settings %}
             <div class="share-icons share-icons--horizontal share-icons--show-mobile">
                 <a class="share-icons__link" href="https://www.facebook.com/sharer/sharer.php?u={{ request.site.hostname }}{{ page.url }}" target="_blank">
                     <svg class="share-icons__icon"><use xlink:href="#facebook"></use></svg>
                 </a>
-                <a class="share-icons__link" href="http://www.twitter.com/share?url={{ request.site.hostname }}{{ page.url }}" target="_blank">
+                <a class="share-icons__link" href="https://twitter.com/intent/tweet?text={{ page.title|urlencode }}&amp;url={{ page.get_full_url|urlencode }}&amp;via={{ social_media_settings.twitter_handle|urlencode }}" target="_blank">
                     <svg class="share-icons__icon"><use xlink:href="#twitter"></use></svg>
                 </a>
                 <a class="share-icons__link" href="https://www.linkedin.com/cws/share?url={{ request.site.hostname }}{{ page.url }}" target="_blank">
@@ -73,6 +76,7 @@
                     <svg class="share-icons__icon"><use xlink:href="#email"></use></svg>
                 </a>
             </div>
+        {% endwith %}
         </div>
     </section>
 </article>
