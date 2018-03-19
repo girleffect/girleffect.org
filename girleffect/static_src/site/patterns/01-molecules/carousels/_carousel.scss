@@ -102,11 +102,11 @@
         &--main {
             opacity: 1;
             transition: opacity $transition;
-            visibility: hidden;
+            // visibility: hidden;
             z-index: -1;
 
             @include media-query(tablet-portrait) {
-                visibility: visible;
+                // visibility: visible;
             }
         }
 
@@ -316,7 +316,6 @@
     &__panel-content {
         color: $green;
         transition: opacity $transition;
-        margin-bottom: 1rem;
 
         @include media-query(tablet-portrait) {
             background: $white-90;
@@ -333,7 +332,7 @@
 
     &__panel-content-mobile {
         background: $white-90;
-        padding: 1.5rem;
+        padding: 1rem;
         position: absolute;
         bottom: 1rem;
         left: 1rem;
@@ -344,6 +343,7 @@
     &__home-title,
     &__home-text {
         @include mid-container;
+        margin: auto;
 
         @include media-query(tablet-portrait) {
             padding-right: calc(#{$mid-width} / 4);
@@ -401,6 +401,7 @@
             // TODO Have to overide hover colors with important because we are using inline styling
             &:hover {
                 cursor: pointer;
+
                 .carousel__icon {
                     stroke: $yellow !important;
                 }

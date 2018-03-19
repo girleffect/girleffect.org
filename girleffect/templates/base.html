@@ -1,4 +1,5 @@
-{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}<!doctype html>
+{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags compress %}
+<!doctype html>
 <html class="no-js" lang="">
     <head>
         <!-- TODO fallbacks if page is not defined e.g. for 404 page -->
@@ -71,12 +72,14 @@
         {% endwith %}
         <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
 
-        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        {% compress css %}
+        <link rel="stylesheet" type="text/css" media="all" href="{% static 'css/main.css' %}">
+        {% endcompress %}
 
         {% block extra_css %}{% endblock %}
     </head>
 
-    <body class="{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}">
+    <body class="{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %} {% if not request.user_agent.is_pc %}not-pc{% endif %}">
 
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQ8TM6V"
@@ -188,7 +191,9 @@
 
         </footer>
 
+        {% compress js %}
         <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+        {% endcompress %}
 
         {% block extra_js %}{% endblock %}
     </body>
