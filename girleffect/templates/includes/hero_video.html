@@ -3,7 +3,7 @@
 {% if request.user_agent.is_pc %}
     {% image feature fill-1700x960 as feature_image %}
 {% else %}
-    {% image feature fill-850x490 as feature_image %}
+    {% image feature fill-850x490 jpegquality-60 as feature_image %}
 {% endif %}
 
 {% if video %}

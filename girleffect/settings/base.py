@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'wagtailfontawesome',
     'wagtailmedia',
     'django_user_agents',
+    'compressor',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -165,6 +166,7 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesSto
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 ]
 
 STATICFILES_DIRS = [
@@ -232,6 +234,7 @@ WAGTAIL_SITE_NAME = "Girl Effect"
 WAGTAILIMAGES_IMAGE_MODEL = "images.CustomImage"
 WAGTAILMEDIA_MEDIA_MODEL = 'utils.CustomMedia'
 WAGTAILIMAGES_FEATURE_DETECTION_ENABLED = False
+WAGTAILIMAGES_JPEG_QUALITY = 25
 
 PASSWORD_REQUIRED_TEMPLATE = 'password_required.html'
 
@@ -242,3 +245,14 @@ ESI_ENABLED = False
 # Custom settings
 
 ENABLE_STYLEGUIDE = False
+
+# Django compressor 
+
+COMPRESS_ENABLED = True
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter'
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter'
+]

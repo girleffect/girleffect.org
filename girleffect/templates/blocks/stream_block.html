@@ -1,3 +1,4 @@
+{% load wagtailcore_tags %}
 {% for block in value %}
     {% if block.block_type == 'heading' %}
         <h3>{{ block.value }}</h3>
@@ -12,6 +13,6 @@
         {# large_text is a rich text field, limited to bold, italic, link, document link #}
         <div class="large-text">{{ block }}</div>
     {% else %}
-        {{ block }}
+        {% include_block block %}
     {% endif %}
 {% endfor %}
