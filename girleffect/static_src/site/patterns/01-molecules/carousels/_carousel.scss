@@ -102,11 +102,11 @@
         &--main {
             opacity: 1;
             transition: opacity $transition;
-            // visibility: hidden;
+            visibility: hidden;
             z-index: -1;
 
             @include media-query(tablet-portrait) {
-                // visibility: visible;
+                visibility: visible;
             }
         }
 
