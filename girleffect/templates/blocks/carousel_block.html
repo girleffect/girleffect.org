@@ -2,9 +2,16 @@
 
 <div class="carousel-container js-carousel-container">
     <div class="carousel js-carousel">
+      {% if request.user_agent.is_pc %}
+        {% for carousel_item in value %}
+            {% include_block carousel_item with type="desktop" %}
+            {# found in carousel_item_block.html #}
+        {% endfor %}
+      {% else %}
         {% for carousel_item in value %}
             {% include_block carousel_item %}
             {# found in carousel_item_block.html #}
         {% endfor %}
+      {% endif %}
     </div>
 </div>

@@ -1,6 +1,10 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
 
-{% image value.customisation.background_image max-1800x400 as bg_img %}
+{% if request.user_agent.is_pc %}
+    {% image value.customisation.background_image max-1800x400 as bg_img %}
+{% else %}
+    {% image value.customisation.background_image max-900x200 jpegquality-60 as bg_img %}
+{% endif %}
 <div class="list-item-container" style="{% if bg_img %}background-image:url({{ bg_img.url }});{% endif %}
        {% if value.customisation.background_hex %}background-color:{{ value.customisation.background_hex }};{% endif %}">
     <div class="grid grid--three wrapper wrapper--mid">
