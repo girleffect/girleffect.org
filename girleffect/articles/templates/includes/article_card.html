@@ -1,6 +1,6 @@
 {% load wagtailimages_tags %}
 
-{% if request.user_agent.is_pc %}
+{% if type == "desktop" %}
     {% image article.listing_image|default:article.hero_image fill-770x510 as article_image %}
 {% else %}
     {% image article.listing_image|default:article.hero_image fill-385x255 jpegquality-60 as article_image %}
