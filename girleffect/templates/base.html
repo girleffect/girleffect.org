@@ -1,4 +1,4 @@
-{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags compress %}
+{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -72,9 +72,7 @@
         {% endwith %}
         <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
 
-        {% compress css %}
         <link rel="stylesheet" type="text/css" media="all" href="{% static 'css/main.css' %}">
-        {% endcompress %}
 
         {% block extra_css %}{% endblock %}
     </head>
@@ -191,9 +189,7 @@
 
         </footer>
 
-        {% compress js %}
         <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-        {% endcompress %}
 
         {% block extra_js %}{% endblock %}
     </body>
