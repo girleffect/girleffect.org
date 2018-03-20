@@ -13,12 +13,12 @@
     }
 
     @include media-query(tablet-portrait) {
-      &--article-image {
-          position: relative;
-          padding-bottom: 50.632911392405063%; /* ratio of image height to width */
-          height: 0;
-          overflow: hidden;
-      }
+        &--article-image {
+            position: relative;
+            padding-bottom: 50.632911392405063%; /* ratio of image height to width */
+            height: 0;
+            overflow: hidden;
+        }
     }
 
     &--search {

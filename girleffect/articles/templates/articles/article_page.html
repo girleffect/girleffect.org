@@ -58,7 +58,7 @@
 
           <p class="large-text">{{ page.introduction|richtext }}</p>
         </div>
-        {{ page.body }}
+        {% include_block page.body %}
 
         <div class="wrapper wrapper--mid">
         {% with settings.utils.SocialMediaSettings as social_media_settings %}
