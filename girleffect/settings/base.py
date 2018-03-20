@@ -242,3 +242,7 @@ ESI_ENABLED = False
 # Custom settings
 
 ENABLE_STYLEGUIDE = False
+
+# Django User Ugent Cache
+
+USER_AGENTS_CACHE = 'default'
