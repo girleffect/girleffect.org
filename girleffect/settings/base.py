@@ -242,3 +242,14 @@ ESI_ENABLED = False
 # Custom settings
 
 ENABLE_STYLEGUIDE = False
+
+# Django User Ugent cache backend
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+USER_AGENTS_CACHE = 'default'
