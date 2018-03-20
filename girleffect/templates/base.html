@@ -77,7 +77,7 @@
         {% block extra_css %}{% endblock %}
     </head>
 
-    <body class="{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %} {% if not request.user_agent.is_pc %}not-pc{% endif %}">
+    <body class="{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}">
 
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQ8TM6V"

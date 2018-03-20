@@ -1,4 +1,5 @@
 {% load wagtailcore_tags %}
+
 {% for block in value %}
     {% if block.block_type == 'heading' %}
         <h3>{{ block.value }}</h3>

@@ -68,6 +68,6 @@
         {% endif %}
     </section>
     <section class="section wrapper wrapper--article">
-        {{ page.body }}
+        {% include_block page.body %}
     </section>
 {% endblock %}

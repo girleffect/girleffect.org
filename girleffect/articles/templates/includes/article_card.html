@@ -1,9 +1,11 @@
 {% load wagtailimages_tags %}
+
 {% if request.user_agent.is_pc %}
     {% image article.listing_image|default:article.hero_image fill-770x510 as article_image %}
 {% else %}
     {% image article.listing_image|default:article.hero_image fill-385x255 jpegquality-60 as article_image %}
 {% endif %}
+
 <div class="article-card {% if featured %}article-card--featured{% endif %}" >
     {# Single article #}
     {% if article.listing_image or article.hero_image|default:settings.utils.SocialMediaSettings.default_sharing_image %}

@@ -56,7 +56,7 @@
 
           <p class="large-text">{{ page.introduction|richtext }}</p>
         </div>
-        {{ page.body }}
+        {% include_block page.body %}
 
         <div class="wrapper wrapper--mid">
             <div class="share-icons share-icons--horizontal share-icons--show-mobile">
