@@ -15,7 +15,6 @@ django-storages==1.6.5
 boto3==1.4.8
 user-agents==1.1.0
 django-user-agents==0.3.2
-python-memcached==1.59
 
 # Production dependencies
 dj-database-url==0.4.1
