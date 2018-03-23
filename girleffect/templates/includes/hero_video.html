@@ -1,15 +1,15 @@
 {% load wagtailimages_tags %}
 
-{% if request.user_agent.is_pc %}
+{% if request.user_agent.is_pc or request.user_agent.is_tablet %}
     {% image feature fill-1700x960 as feature_image %}
-{% else %}
+{% elif request.user_agent.is_mobile %}
     {% image feature fill-850x490 jpegquality-60 as feature_image %}
 {% endif %}
 
 {% if video %}
-  {% if request.user_agent.is_pc %}
+  {% if request.user_agent.is_pc or request.user_agent.is_tablet %}
     <video class="hero__video" autoplay loop muted preload poster="{{ feature_image.url }}">
-  {% else %}
+  {% elif request.user_agent.is_mobile %}
       <video class="hero__video" controls playsinline loop muted preload="none" poster="{{ feature_image.url }}">
   {% endif %}
         <source src="{{ video.file.url }}" type="video/mp4">

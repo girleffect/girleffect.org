@@ -12,11 +12,11 @@
         {% include "includes/article_card.html" with article=page.featured_article featured=True %}
     {% endif %}
     <div class="article-container grid grid--three wrapper wrapper--mid">
-      {% if request.user_agent.is_pc %}
+      {% if request.user_agent.is_pc or request.user_agent.is_tablet %}
         {% for article in page.articles %}
-            {% include "includes/article_card.html" with type="desktop"  %}
+            {% include "includes/article_card.html" with desktop=True  %}
         {% endfor %}
-      {% else %}
+      {% elif request.user_agent.is_mobile %}
         {% for article in page.articles %}
             {% include "includes/article_card.html"  %}
         {% endfor %}

@@ -2,12 +2,12 @@
 
 <div class="carousel-container js-carousel-container">
     <div class="carousel js-carousel">
-      {% if request.user_agent.is_pc %}
+      {% if request.user_agent.is_pc or request.user_agent.is_tablet %}
         {% for carousel_item in value %}
-            {% include_block carousel_item with type="desktop" %}
+            {% include_block carousel_item with desktop=True %}
             {# found in carousel_item_block.html #}
         {% endfor %}
-      {% else %}
+      {% elif request.user_agent.is_mobile %}
         {% for carousel_item in value %}
             {% include_block carousel_item %}
             {# found in carousel_item_block.html #}

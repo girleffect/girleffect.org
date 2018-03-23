@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
 
-{% if type == "desktop" %}
+{% if desktop %}
     {% image value.image fill-1600x800 as carousel_image %}
 {% else %}
     {% image value.image fill-800x400 jpegquality-60 as carousel_image %}
