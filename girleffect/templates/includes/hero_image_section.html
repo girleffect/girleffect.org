@@ -1,8 +1,8 @@
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-{% if request.user_agent.is_pc %}
+{% if request.user_agent.is_pc or request.user_agent.is_tablet %}
     {% image page.hero_image fill-1800x400 as hero_image %}
-{% else %}
+{% elif request.user_agent.is_mobile %}
     {% image page.hero_image fill-900x200 jpegquality-60 as hero_image %}
 {% endif %}
 

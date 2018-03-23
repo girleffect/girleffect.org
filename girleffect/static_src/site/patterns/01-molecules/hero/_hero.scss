@@ -12,13 +12,15 @@
         }
     }
 
-    @include media-query(tablet-portrait) {
-        &--article-image {
+    &--article-image {
+        margin-top: 1rem;
+
+        @include media-query(tablet-portrait) {
             position: relative;
             padding-bottom: 50.632911392405063%; /* ratio of image height to width */
             height: 0;
             overflow: hidden;
-        }
+      }
     }
 
     &--search {
