@@ -153,13 +153,18 @@ class LinkBlock(blocks.StructBlock):
             if anchor:
                 context['link_url'] += '#' + anchor
         elif document_link:
-            context['link_url'] = document_link.url
+            context['link_url'] = document_link.file.url
 
         # External link?
         if external_link:
             context['link_is_external'] = True
         else:
             context['link_is_external'] = False
+
+        if document_link:
+            context['link_is_document'] = True
+        else:
+            context['link_is_document'] = False
 
         # Add link text, so we can make the template includable by
         # non-streamblock entities
