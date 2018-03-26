@@ -25,6 +25,7 @@ INSTALLED_APPS += (
 # setting. See urls.py
 CACHE_CONTROL_MAX_AGE = 600
 
+
 # Configuration from environment variables
 # Alternatively, you can set these in a local.py file on the server
 
