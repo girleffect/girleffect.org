@@ -28,7 +28,6 @@
     max-width: $mid-width;
 
     &__image {
-        min-height: 300px;
         object-fit: cover;
 
         @include media-query(tablet-portrait) {
@@ -62,6 +61,10 @@
     &__link {
         #{$root}__content:hover & {
             right: -20px;
+        }
+
+        a {
+            margin-top: 1rem;
         }
     }
 

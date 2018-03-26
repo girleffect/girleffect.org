@@ -71,6 +71,11 @@
             bottom: 0;
             left: 0;
             text-align: center;
+            pointer-events: none;
+        }
+
+        .link {
+            pointer-events: auto;
         }
     }
 
@@ -104,10 +109,6 @@
         width: 100%;
         min-height: 225px;
         object-fit: cover;
-
-        @include media-query(mob-landscape) {
-            min-height: 150px;
-        }
 
         @include media-query(tablet-portrait) {
             min-height: 400px;

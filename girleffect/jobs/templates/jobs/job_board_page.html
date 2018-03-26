@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+
+    {# Hero section #}
+    {% include "includes/hero_image_section.html" %}
+
+    {% block breadcrumbs %}
+        {% include "navigation/breadcrumbs.html" %}
+    {% endblock %}
+
+    {% if page.introduction %}
+        {# Introduction #}
+        <section class="section section--intro large-text">
+            {{ page.introduction|richtext }}
+        </section>    
+    {% endif %}
+
+    {# Streamfield options - rich text #}
+    <section class="section section--body">
+        {{ page.body }}
+        <div id="grnhse_app"></div>
+    </section>
+
+    {# Call to action #}
+    {% if page.call_to_action %}
+        <section class="cta">
+            {% include "includes/call_to_action.html" %}
+        </section>
+    {% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://boards.greenhouse.io/embed/job_board/js?for=girleffect"></script>
+{% endblock %}

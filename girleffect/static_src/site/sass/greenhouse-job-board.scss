@@ -1,0 +1,383 @@
+/* ============================================
+   Greenhouse job board overide styles ---- 
+   We dont have any control of the template so a LOT of specificity issues
+   and forced overrides, the linter isn't happy :(
+*/
+@import 'abstracts/mixins';
+@import 'abstracts/variables';
+@import 'base/fonts';
+@import 'base/typography';
+
+* {
+    box-sizing: border-box;
+
+    &::before,
+    &::after {
+        box-sizing: border-box;
+    }
+}
+
+html,
+body {
+    @include font-size(16px, 21px);
+    height: 100%;
+    font-family: 'Cabin', sans-serif;
+    font-weight: normal;
+    line-height: 1.29;
+    letter-spacing: 0.5px;
+    color: $color--primary;
+    -webkit-font-smoothing: antialiased; // sass-lint:disable-line no-vendor-prefixes
+    -moz-osx-font-smoothing: grayscale; // sass-lint:disable-line no-vendor-prefixes
+    text-shadow: inherit;
+}
+
+img,
+svg {
+    vertical-align: top;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+svg {
+    * {
+        fill: inherit;
+        stroke: inherit;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $color--primary;
+    margin: 0;
+    font-weight: $weight-bold;
+}
+
+h1 {
+    @include font-size(29px, 38px);
+    font-weight: $weight-bold;
+    line-height: 1.13;
+    margin-bottom: 1rem;
+
+    @include media-query(tablet-portrait) {
+        margin-bottom: 2rem;
+    }
+}
+
+h2 {
+    @include font-size(21px, 25px);
+    line-height: 1.16;
+}
+
+h3 {
+    @include font-size(18px, 23px);
+    line-height: 1.16;
+}
+
+h4 {
+    @include font-size(16px, 21px);
+    line-height: 1;
+}
+
+.section {
+    &--body {
+        > h3 {
+            @include body-container;
+            margin-bottom: 1rem;
+
+            @include media-query(tablet-portrait) {
+                margin-bottom: 2rem;
+            }
+        }
+    }
+}
+
+ul,
+ol {
+    margin-left: 1rem;
+    list-style-position: outside;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+p {
+    margin: 0 0 1rem;
+}
+
+a {
+    color: $green;
+    text-decoration: none;
+    border-bottom: 2px solid $yellow;
+    font-weight: $weight-bold;
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: none;
+    }
+}
+
+b,
+strong {
+    font-weight: $weight-bold;
+}
+
+#main_fields div.field label { // sass-lint:disable-line force-element-nesting no-ids
+    float: left;
+    min-width: 140px;
+    width: auto;
+    text-align: left;
+    margin-right: 20px;
+}
+
+#eeoc_fields div.field label { // sass-lint:disable-line force-element-nesting no-ids
+    float: left;
+    min-width: 140px;
+    width: auto;
+    text-align: left;
+    margin-right: 20px;
+}
+
+#main_fields div.field label, // sass-lint:disable-line force-element-nesting no-ids
+#custom_fields div.field label, // sass-lint:disable-line force-element-nesting no-ids
+#eeoc_fields div.field label, // sass-lint:disable-line force-element-nesting no-ids
+#main_fields a { // sass-lint:disable-line force-element-nesting no-ids
+    font-size: 19px;
+    line-height: 37px;
+}
+
+#custom_fields div.field { // sass-lint:disable-line force-element-nesting no-ids
+    input[type='text'],
+    textarea,
+    .text-field,
+    .select2-container-multi {
+        margin-top: 6px;
+        width: 514px;
+        height: 40px;
+    }
+}
+
+#application { // sass-lint:disable-line no-ids
+    padding: 25px 30px 30px;
+    background-color: $light-grey;
+    max-width: 100%;
+
+    .heading {
+        float: left;
+        font-size: 23px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+}
+
+input[type='text'] {
+    width: 100%;
+    clear: both;
+    background-color: $white;
+    border: 2px solid $brand-grey;
+    box-sizing: border-box;
+    color: $black-70;
+    font-size: 16px;
+    line-height: 1.2em;
+    outline: medium none;
+    padding: 0.5em;
+    transition-duration: 3.4s;
+    transition-property: border-color, background-color;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+    height: 40px;
+}
+
+fieldset {
+    input {
+        &[type='password'],
+        &[type='email'] {
+            width: 100%;
+            clear: both;
+            background-color: $white;
+            border: 2px solid $brand-grey;
+            box-sizing: border-box;
+            color: $black-70;
+            font-size: 16px;
+            line-height: 1.2em;
+            outline: medium none;
+            padding: 0.5em;
+            transition-duration: 3.4s;
+            transition-property: border-color, background-color;
+            transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+            height: 40px;
+        }
+    }
+}
+
+select {
+    color: $green;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: capitalize;
+    border: 2px solid $brand-grey;
+    width: auto;
+    height: 40px;
+    -webkit-border-radius: 0; // sass-lint:disable-line no-vendor-prefixes
+    -webkit-appearance: none; // sass-lint:disable-line no-vendor-prefixes
+    -moz-appearance: none; // sass-lint:disable-line no-vendor-prefixes
+    appearance: none;
+    text-indent: 7px;
+    min-width: 150px;
+    background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIzMXB4IiBoZWlnaHQ9IjE4cHgiIHZpZXdCb3g9IjAgMCAzMSAxOCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4gICAgICAgIDx0aXRsZT5BcnRib2FyZDwvdGl0bGU+ICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPiAgICA8ZGVmcz48L2RlZnM+ICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+ICAgICAgICA8ZyBpZD0iQXJ0Ym9hcmQiIHN0cm9rZT0iI0ZGQzcwMCIgc3Ryb2tlLXdpZHRoPSIzIj4gICAgICAgICAgICA8ZyBpZD0iR3JvdXAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIuMDAwMDAwLCAyLjAwMDAwMCkiPiAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMTMuNSwxMy41IEwwLjUsMC41IiBpZD0iTGluZSI+PC9wYXRoPiAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMTMuNSwxMy41IEwyNi41LDAuNSIgaWQ9IkxpbmUtMiI+PC9wYXRoPiAgICAgICAgICAgIDwvZz4gICAgICAgIDwvZz4gICAgPC9nPjwvc3ZnPg==') 96% / 17px no-repeat $white;
+
+    &:last-of-type {
+        margin-bottom: 1rem;
+
+        @include media-query(tablet-portrait) {
+            margin-bottom: 2rem;
+        }
+    }
+}
+
+.button {
+    background-image: none;
+    background-color: transparent;
+    color: $green;
+    display: inline-block;
+    padding: 1rem;
+    position: relative;
+
+    &:hover {
+        background-image: none;
+        background-color: transparent;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        height: 2px;
+        background: $yellow;
+        left: 0;
+        right: 0;
+        transition: left, right, width, 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.4s;
+    }
+
+    &:hover::after {
+        left: 0;
+        right: 0;
+        transition: left, right, width, 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+    }
+}
+
+#submit_app { // sass-lint:disable-line no-ids
+    font-family: inherit;
+    color: inherit;
+    text-align: center;
+    text-shadow: none;
+    cursor: pointer;
+    border: 0;
+    padding: 7px 16px 18px;
+    font-size: 16px;
+    border-bottom: 2px solid $yellow;
+
+    &:disabled {
+        color: $black-40;
+    }
+}
+
+#apply_button { // sass-lint:disable-line no-ids
+    top: 35px;
+}
+
+.location {
+    color: $mid-grey;
+    margin: 12px -1px;
+    font-size: 18px;
+}
+
+.locate-me {
+    margin-left: 0;
+
+    @include media-query(tablet-portrait) {
+        margin-left: 20px;
+    }
+}
+
+.company-name {
+    font-size: 20px;
+}
+
+#content { // sass-lint:disable-line no-ids
+    strong,
+    b {
+        font-weight: bold;
+        font-size: 23px;
+  }
+}
+
+.addthis_toolbox { // sass-lint:disable-line class-name-format
+    a {
+        text-decoration: none !important; // sass-lint:disable-line no-important
+    }
+}
+
+#wrapper { // sass-lint:disable-line no-ids
+    max-width: 100%;
+    overflow: auto;
+    padding: 0 !important; // sass-lint:disable-line no-important
+    min-height: 100%;
+}
+
+#main { // sass-lint:disable-line no-ids
+    max-width: 100%;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    @include media-query(tablet-portrait) {
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
+
+    @include media-query(container) {
+        max-width: 768px;
+        margin: 0 auto;
+    }
+}
+
+#logo { // sass-lint:disable-line no-ids
+    display: none;
+}
+
+#app_body { // sass-lint:disable-line no-ids
+    padding: 0 !important; // sass-lint:disable-line no-important
+    max-width: 768px;
+}
+
+#disability_status_header { // sass-lint:disable-line no-ids
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 2rem;
+}
+
+.opening {
+    margin-bottom: 0.5rem;
+
+    a {
+        font-size: 18px;
+    }
+
+    &:last-of-type {
+        margin-bottom: 1.5rem;
+    }
+}
+
+.level-0 {
+    h2 {
+        padding-bottom: 0.5rem;
+    }
+}

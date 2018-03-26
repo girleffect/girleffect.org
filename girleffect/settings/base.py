@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'girleffect.esi',
     'girleffect.home',
     'girleffect.images',
+    'girleffect.jobs',
     'girleffect.navigation',
     'girleffect.articles',
     'girleffect.partners',
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
     'wagtailcaptcha',
     'wagtailfontawesome',
     'wagtailmedia',
+    'django_user_agents',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -84,6 +86,7 @@ MIDDLEWARE_CLASSES = [
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
     'girleffect.esi.middleware.ESIMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'girleffect.urls'
