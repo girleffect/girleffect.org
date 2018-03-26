@@ -6,14 +6,14 @@
     {% include "includes/hero_video_section.html" %}
 
     {% if page.introduction %}
-      <div class="wrapper wrapper--body wrapper--top-bottom-space large-text">
+      <div class="wrapper wrapper--body wrapper--top-bottom-space">
           <p>{{ page.introduction|richtext }}</p>
       </div>
     {% endif %}
 
     {# Streamfield options #}
     <section class="section section--body">
-        {{ page.body }}
+        {% include_block page.body %}
     </section>
 
     {# Latest articles, limited to three most recent, link to all articles index #}

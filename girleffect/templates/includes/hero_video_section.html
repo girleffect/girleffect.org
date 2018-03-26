@@ -9,9 +9,9 @@
                 {% image page.hero_logo max-700x120 as hero_logo %}
                 <img class="hero__logo" src="{{ hero_logo.url }}" alt="">
             {% elif page.hero_strapline %}
-                <h2 class="hero__strapline" {% if page.hero_strapline_hex %}style="color:{{ page.hero_strapline_hex }};"{% endif %}>
+                <h1 class="hero__strapline" {% if page.hero_strapline_hex %}style="color:{{ page.hero_strapline_hex }};"{% endif %}>
                     {{ page.hero_strapline }}
-                </h2>
+                </h1>
             {% endif %}
 
             {# Link field to video or page #}

@@ -1,4 +1,5 @@
-{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}<!doctype html>
+{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
+<!doctype html>
 <html class="no-js" lang="">
     <head>
         <!-- TODO fallbacks if page is not defined e.g. for 404 page -->
@@ -71,7 +72,7 @@
         {% endwith %}
         <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
 
-        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" type="text/css" media="all" href="{% static 'css/main.css' %}">
 
         {% block extra_css %}{% endblock %}
     </head>
@@ -173,7 +174,7 @@
                         <svg class="footer__icon"><use xlink:href="#linkedin"></use></svg>
                     </a>
                     <a class="footer__link" href="https://www.youtube.com/user/girleffect/" target="_blank">
-                        <svg class="header__icon"><use xlink:href="#youtube"></use></svg>
+                        <svg class="footer__icon"><use xlink:href="#youtube"></use></svg>
                     </a>
                 </div>
             </div>

@@ -1,9 +1,9 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% if request.user_agent.is_pc %}
+{% if request.user_agent.is_pc or request.user_agent.is_tablet %}
     {% image page.call_to_action.image fill-1800x600 as cta_image %}
-{% else %}
-    {% image page.call_to_action.image fill-900x300 as cta_image %}
+{% elif request.user_agent.is_mobile %}
+    {% image page.call_to_action.image fill-900x300 jpegquality-60 as cta_image %}
 {% endif %}
 
 <div class="cta">

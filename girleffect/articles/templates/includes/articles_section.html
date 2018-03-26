@@ -12,9 +12,15 @@
         {% include "includes/article_card.html" with article=page.featured_article featured=True %}
     {% endif %}
     <div class="article-container grid grid--three wrapper wrapper--mid">
+      {% if request.user_agent.is_pc or request.user_agent.is_tablet %}
         {% for article in page.articles %}
-            {% include "includes/article_card.html" %}
+            {% include "includes/article_card.html" with desktop=True  %}
         {% endfor %}
+      {% elif request.user_agent.is_mobile %}
+        {% for article in page.articles %}
+            {% include "includes/article_card.html"  %}
+        {% endfor %}
+      {% endif %}
     </div>
     <div class="wrapper wrapper--center">
         <a class="link link--boxed link--center" href="/articles">

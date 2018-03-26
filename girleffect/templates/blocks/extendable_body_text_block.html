@@ -1,5 +1,10 @@
 {% load wagtailimages_tags %}
-{% image value.customisation.background_image max-1800x400 as bg_img %}
+
+{% if request.user_agent.is_pc or request.user_agent.is_tablet %}
+    {% image value.customisation.background_image max-1800x400 as bg_img %}
+{% elif request.user_agent.is_mobile %}
+    {% image value.customisation.background_image max-900x200 jpegquality-60 as bg_img %}
+{% endif %}
 
 {# StreamField customisations in parent DIV to blocks, include rich text headings #}
 <div class="extendable-body-container"
