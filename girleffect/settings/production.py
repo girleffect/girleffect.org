@@ -31,6 +31,21 @@ CACHE_CONTROL_MAX_AGE = 600
 
 env = os.environ.copy()
 
+# Get running app details from DC/OS is available
+_MARATHON_DOCKER_IMAGE = env.get('MARATHON_APP_DOCKER_IMAGE', None)
+_MESOS_TASK_ID = env.get('MESOS_TASK_ID', None)
+if _MARATHON_DOCKER_IMAGE:
+    # get the docker image tag
+    _RELEASE_VERSION = _MARATHON_DOCKER_IMAGE.split(':')[1]
+else:
+    _RELEASE_VERSION = raven.fetch_git_sha(BASE_DIR)
+if _MESOS_TASK_ID:
+    _SERVER_NAME = _MESOS_TASK_ID
+else:
+    # use the defait
+    import socket
+    _SERVER_NAME = socket.gethostname()
+
 # On Torchbox servers, many environment variables are prefixed with "CFG_"
 for key, value in os.environ.items():
     if key.startswith('CFG_'):
@@ -114,9 +129,8 @@ if all(v in env for v in ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'AWS_STO
 if 'SENTRY_DSN' in env:
     RAVEN_CONFIG = {
         'dsn': env['SENTRY_DSN'],
-        # If you are using git, you can also automatically configure the
-        # release based on the git info.
-        'release': raven.fetch_git_sha(BASE_DIR),
+        'release': _RELEASE_VERSION,
+        'name': _SERVER_NAME,
     }
 
 # Database
