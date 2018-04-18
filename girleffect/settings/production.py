@@ -31,7 +31,7 @@ CACHE_CONTROL_MAX_AGE = 600
 
 env = os.environ.copy()
 
-# Get running app details from DC/OS is available
+# Get running app details from DC/OS if available
 _MARATHON_DOCKER_IMAGE = env.get('MARATHON_APP_DOCKER_IMAGE', None)
 _MESOS_TASK_ID = env.get('MESOS_TASK_ID', None)
 if _MARATHON_DOCKER_IMAGE:
@@ -45,7 +45,7 @@ else:
 if _MESOS_TASK_ID:
     _SERVER_NAME = _MESOS_TASK_ID
 else:
-    # use the defait
+    # use the default
     import socket
     _SERVER_NAME = socket.gethostname()
 
