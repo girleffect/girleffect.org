@@ -17,7 +17,7 @@
 
         @include media-query(tablet-portrait) {
             position: relative;
-            padding-bottom: 50.632911392405063%; /* ratio of image height to width */
+            padding-bottom: 51%; /* ratio of image height to width rounded off */
             height: 0;
             overflow: hidden;
       }
