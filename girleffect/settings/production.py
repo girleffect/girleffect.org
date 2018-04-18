@@ -36,7 +36,10 @@ _MARATHON_DOCKER_IMAGE = env.get('MARATHON_APP_DOCKER_IMAGE', None)
 _MESOS_TASK_ID = env.get('MESOS_TASK_ID', None)
 if _MARATHON_DOCKER_IMAGE:
     # get the docker image tag
-    _RELEASE_VERSION = _MARATHON_DOCKER_IMAGE.split(':')[1]
+    try:
+        _RELEASE_VERSION = _MARATHON_DOCKER_IMAGE.split(':')[1]
+    except IndexError:
+        _RELEASE_VERSION = raven.fetch_git_sha(BASE_DIR)
 else:
     _RELEASE_VERSION = raven.fetch_git_sha(BASE_DIR)
 if _MESOS_TASK_ID:
