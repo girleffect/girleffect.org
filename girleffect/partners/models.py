@@ -40,14 +40,19 @@ class Partner(Orderable, models.Model):
     internal_link = models.ForeignKey('wagtailcore.Page', related_name='+',
                                       on_delete=models.SET_NULL, null=True,
                                       blank=True)
-
     external_link = models.URLField(blank=True)
+    link_label = models.CharField(
+        blank=False,
+        max_length=255,
+        default='Learn more about '
+    )
     show_on_index = models.BooleanField(verbose_name="Show on Partner Index")
 
     panels = [
         ImageChooserPanel('logo'),
         FieldPanel('title'),
         FieldPanel('description'),
+        FieldPanel('link_label'),
         PageChooserPanel('internal_link'),
         FieldPanel('external_link'),
         FieldPanel('show_on_index')
