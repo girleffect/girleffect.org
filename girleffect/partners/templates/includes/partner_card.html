@@ -11,11 +11,11 @@
             <h4 class="media-block__heading">{{ partner.title }}</h4>
             <p>{{ partner.description }}</p>
             {% if partner.internal_link %}
-                <a class="media-block__link link link--with-arrow" href="{{ partner.internal_link.url }}">Learn more about {{ partner.title }}
+                <a class="media-block__link link link--with-arrow" href="{{ partner.internal_link.url }}">{{ partner.link_label }}{{ partner.title }}
                     <div class="link__arrow"></div>
                 </a>
             {% elif partner.external_link %}
-                <a class="media-block__link link link--with-arrow" href="{{ partner.external_link }}" target="_blank">Learn more about {{ partner.title }}
+                <a class="media-block__link link link--with-arrow" href="{{ partner.external_link }}" target="_blank">{{ partner.link_label }}{{ partner.title }}
                     <div class="link__arrow"></div>
                 </a>
             {% endif %}
