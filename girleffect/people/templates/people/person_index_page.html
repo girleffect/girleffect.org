@@ -14,6 +14,13 @@
         {{ page.introduction|richtext }}
     </section>
 
+    {% if page.body %}
+    {# Streamfield options #}
+    <section class="section section--body">
+        {% include_block page.body %}
+    </section>
+    {% endif %}
+
     {# People listed by Category #}
     {% image page.people_customisations.image max-100x100 as people_background %}
     <section style="{% if people_background %}background:url({{ people_background.url }});{% endif %}

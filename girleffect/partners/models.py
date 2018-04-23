@@ -9,15 +9,17 @@ from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
     InlinePanel,
     MultiFieldPanel,
-    PageChooserPanel
+    PageChooserPanel,
+    StreamFieldPanel
 )
 
-from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
+from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
     CustomisableFeature,
     HeroImageFields,
@@ -87,6 +89,7 @@ class PartnerIndexPage(Page, HeroImageFields, SocialFields):
         null=True,
         features=['bold', 'italic', 'link', 'justify']
     )
+    body = StreamField(StoryBlock(), null=True, blank=True)
     call_to_action = models.ForeignKey(
         'utils.CallToActionSnippet',
         null=True,
@@ -98,6 +101,7 @@ class PartnerIndexPage(Page, HeroImageFields, SocialFields):
     content_panels = Page.content_panels + HeroImageFields.content_panels + [
         MultiFieldPanel([
             FieldPanel('introduction'),
+            StreamFieldPanel('body'),
             InlinePanel('introduction_customisation', label="Introduction Customisation", max_num=1),
         ], 'Introduction'),
         MultiFieldPanel([
