@@ -328,6 +328,11 @@ class SocialMediaSettings(BaseSetting):
         blank=True,
         help_text='Your LinkedIn handle. For example, if your LinkedIn URL is "https://www.linkedin.com/company/girleffect/" then this field should be set to "girleffect" (case sensitive)'
     )
+    youtube_handle = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text='Your Youtube handle. For example, if your Youtube URL is "https://www.youtube.com/user/girleffect/" then this field should be set to "girleffect" (case sensitive)'
+    )
     default_sharing_text = models.CharField(
         max_length=255,
         blank=True,
@@ -353,6 +358,7 @@ class SocialMediaSettings(BaseSetting):
         FieldPanel('facebook_page_handle'),
         FieldPanel('instagram_handle'),
         FieldPanel('linkedin_handle'),
+        FieldPanel('youtube_handle'),
         FieldPanel('default_sharing_text'),
         FieldPanel('site_name'),
         ImageChooserPanel('default_sharing_image')
