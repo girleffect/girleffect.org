@@ -376,6 +376,17 @@ class BrandingSettings(BaseSetting):
     ]
 
 
+@register_setting
+class AnalyticsSettings(BaseSetting):
+    google_tag_manager_id = models.CharField(
+        max_length=20, blank=True, help_text='Id will be like GTM-PQ8TM6V'
+    )
+
+    panels = [
+        FieldPanel('google_tag_manager_id'),
+    ]
+
+
 @register_snippet
 class PartnerWithUsSnippet(CallToActionSnippet):
 
