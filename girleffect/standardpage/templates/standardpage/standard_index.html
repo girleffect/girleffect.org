@@ -6,15 +6,15 @@
     {# Hero section #}
     {% include "includes/hero_image_section.html" %}
 
-    <div class="wrapper wrapper--bottom-space">
-        {% block breadcrumbs %}
-            {% include "navigation/breadcrumbs.html" %}
-        {% endblock %}
-    </div>
+
+    {% block breadcrumbs %}
+        {% include "navigation/breadcrumbs.html" %}
+    {% endblock %}
+
 
     {# Streamfield options #}
     <section class="section section--body">
-        {{ page.body }}
+        {% include_block page.body %}
     </section>
 
 {% endblock %}

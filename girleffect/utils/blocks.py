@@ -1,17 +1,18 @@
 import re
+
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 
 from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.wagtailembeds import oembed_providers
+from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailembeds.finders.oembed import OEmbedFinder as OEmbedFinder
 from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
-from .models import CallToActionSnippet, Statistic
+from .models import (CallToActionSnippet, FullWidthMediaAndTextSnippet,
+                     Statistic)
 
 
 def validate_hex(value):
@@ -152,13 +153,22 @@ class LinkBlock(blocks.StructBlock):
             if anchor:
                 context['link_url'] += '#' + anchor
         elif document_link:
-            context['link_url'] = document_link.url
+            context['link_url'] = document_link.file.url
 
         # External link?
         if external_link:
             context['link_is_external'] = True
         else:
             context['link_is_external'] = False
+
+        if document_link:
+            context['link_is_document'] = True
+        else:
+            context['link_is_document'] = False
+
+        # Add link text, so we can make the template includable by
+        # non-streamblock entities
+        context['link_text'] = value['link_text']
 
         return context
 
@@ -212,7 +222,7 @@ class MediaTextOverlayBlock(blocks.StructBlock):
     text = blocks.RichTextBlock(
         max_length=75,
         required=False,
-        features=["bold", "italic", "ol", "ul", "link", "document-link"]
+        features=["bold", "italic", "ol", "ul", "link", "document-link", "justify"]
     )
     link = LinkBlock(required=False)
     customisation = CustomisationBlock(required=False)
@@ -242,7 +252,7 @@ class YouTubeEmbed(blocks.StructBlock):
     text = blocks.RichTextBlock(
         max_length=255,
         required=False,
-        features=["bold", "italic", "ol", "ul", "link", "document-link"]
+        features=["bold", "italic", "ol", "ul", "link", "document-link", "justify"]
     )
     youtube_embed = EmbedBlock(
         label="YouTube Video URL",
@@ -274,7 +284,7 @@ class QuoteBlock(blocks.StructBlock):
     text = blocks.RichTextBlock(
         max_length=255,
         required=True,
-        features=["bold", "italic", "ol", "ul", "link", "document-link"]
+        features=["bold", "italic", "ol", "ul", "link", "document-link", "justify"]
     )
     citation = blocks.CharBlock(
         required=False,
@@ -312,7 +322,7 @@ class ListItemBlock(blocks.StructBlock):
     title = blocks.CharBlock(max_length=255, required=False)
     description = blocks.RichTextBlock(
         max_length=250,
-        features=["bold", "italic", "link", "document-link"],
+        features=["bold", "italic", "link", "document-link", "justify"],
         required=False,
         icon="pilcrow"
     )
@@ -360,7 +370,7 @@ class BlockQuote(blocks.StructBlock):
 class LargeTextBlock(blocks.StructBlock):
     body = blocks.RichTextBlock(
         label="Large Text",
-        features=["bold", "italic", "link", "document-link"],
+        features=["bold", "italic", "link", "document-link", "justify"],
         required=False,
     )
     customisation = BodyHeadingCustomisationBlock(
@@ -378,7 +388,7 @@ class BodyTextBlock(blocks.StructBlock):
         features=[
             "h2", "h3", "h4",
             "bold", "italic", "link",
-            "ol", "ul", "hr"
+            "ol", "ul", "hr", "justify"
         ],
     )
     customisation = BodyHeadingCustomisationBlock(
@@ -396,7 +406,7 @@ class ExtendableBodyTextBlock(blocks.StructBlock):
         features=[
             "h2", "h3", "h4",
             "bold", "italic", "link",
-            "ol", "ul", "hr"
+            "ol", "ul", "hr", "justify"
         ],
     )
     extend_button_text = blocks.CharBlock(
@@ -415,7 +425,7 @@ class ExtendableBodyTextBlock(blocks.StructBlock):
         features=[
             "h2", "h3", "h4",
             "bold", "italic", "link",
-            "ol", "ul", "hr"
+            "ol", "ul", "hr", "justify"
         ],
     )
 
@@ -547,6 +557,11 @@ class StoryBlock(blocks.StreamBlock):
     carousel_block = CarouselBlock(min_num=2, max_num=3, label="Carousel")
     media_text_overlay = MediaTextOverlayBlock(
         label="Full Width Media with Text Overlay"
+    )
+    image_text_overlay = SnippetChooserBlock(
+        FullWidthMediaAndTextSnippet,
+        template="includes/fw_media.html",
+        label="Full Width Media with Text Overlay Snippet",
     )
     list_block = ListColumnBlock()
     link_row = blocks.ListBlock(

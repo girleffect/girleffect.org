@@ -122,7 +122,7 @@
 
 .owl-dot {
     flex: 1;
-    margin-right: 2px;
+    margin-right: 3px;
 
     &:last-child {
         margin-right: 0;
@@ -135,7 +135,7 @@
     }
 
     span {
-        height: 5px;
+        height: 10px;
         width: 100%;
         display: block;
         background: $brand-grey;

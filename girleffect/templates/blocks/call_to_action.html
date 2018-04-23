@@ -1,7 +1,12 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% if request.user_agent.is_pc %}
+    {% image page.call_to_action.image fill-1800x600 as cta_image %}
+{% else %}
+    {% image page.call_to_action.image fill-900x300 jpegquality-60 as cta_image %}
+{% endif %}
+
 <div class="cta">
-    {% image value.image fill-1800x600 class="cta__image" %}
 
     <div class="cta__content">
         <h3 class="cta__title">{{ value.title }}</h3>

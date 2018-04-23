@@ -1,4 +1,5 @@
-{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}<!doctype html>
+{% load static wagtailuserbar wagtailcore_tags wagtailimages_tags navigation_tags util_tags %}
+<!doctype html>
 <html class="no-js" lang="">
     <head>
         <!-- TODO fallbacks if page is not defined e.g. for 404 page -->
@@ -39,39 +40,39 @@
         {% endwith %}
         {% if page.social_image  %}
             {% image page.social_image width-320 as social_img %}
-            <meta name="twitter:image" content="{{ request.site.root_url }}{{ social_img.url }}">
+            <meta name="twitter:image" content="{{ request.site.root_url|urljoin:social_img.url }}">
         {% elif page.hero_image %}
-            <meta name="twitter:image" content="{{ request.site.root_url }}{{ page.hero_image.file.url }}">
+            <meta name="twitter:image" content="{{ request.site.root_url|urljoin:page.hero_image.file.url }}">
         {% elif page.hero_fallback_image %}
-            <meta name="twitter:image" content="{{ request.site.root_url }}{{ page.hero_fallback_image.file.url }}">
+            <meta name="twitter:image" content="{{ request.site.root_url|urljoin:page.hero_fallback_image.file.url }}">
         {% else %}
-            <meta name="twitter:image" content="{{ request.site.hostname }}{{ settings.utils.SocialMediaSettings.default_sharing_image.file.url }}">
+            <meta name="twitter:image" content="{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}">
         {% endif %}
 
         <!--facebook opengraph tags-->
         <meta property="fb:app_id" content="{{ settings.utils.SocialMediaSettings.facebook_app_id }}" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="{{ request.site.hostname }}{{ page.url }}" />
+        <meta property="og:url" content="{{ page.get_full_url }}" />
         {% if page %}
             <meta property="og:title" content="{{ page.social_title|default:page.seo_title|default:page.title }}" />
         {% else %}
             <meta property="og:title" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
         {% endif %}
         {% if page.social_image %}
-            <meta property="og:image" content="{{ request.site.hostname }}{{ social_img.url }}" />
+            <meta property="og:image" content="{{ request.site.root_url|urljoin:social_img.url }}" />
         {% elif page.hero_image %}
-            <meta property="og:image" content="{{ request.site.root_url }}{{ page.hero_image.file.url }}">
+            <meta property="og:image" content="{{ request.site.root_url|urljoin:page.hero_image.file.url }}">
         {% elif page.hero_fallback_image %}
-            <meta property="og:image" content="{{ request.site.root_url }}{{ page.hero_fallback_image.file.url }}">
+            <meta property="og:image" content="{{ request.site.root_url|urljoin:page.hero_fallback_image.file.url }}">
         {% else %}
-            <meta property="og:image" content="{{ request.site.hostname }}{{ settings.utils.SocialMediaSettings.default_sharing_image.file.url }}" />
+            <meta property="og:image" content="{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}" />
         {% endif %}
         {% with page.introduction as page_intro %}
 
         {% endwith %}
         <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
 
-        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" type="text/css" media="all" href="{% static 'css/main.css' %}">
 
         {% block extra_css %}{% endblock %}
     </head>
@@ -146,6 +147,11 @@
                             <svg class="header__icon"><use xlink:href="#linkedin"></use></svg>
                         </a>
                     {% endif %}
+                    {% if settings.utils.SocialMediaSettings.youtube_handle %}
+                        <a class="header__link" href="https://www.youtube.com/user/{{ settings.utils.SocialMediaSettings.youtube_handle }}/" target="_blank">
+                            <svg class="header__icon"><use xlink:href="#youtube"></use></svg>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -187,6 +193,11 @@
                     {% if settings.utils.SocialMediaSettings.linkedin_handle %}
                         <a class="footer__link" href="https://www.linkedin.com/company/{{ settings.utils.SocialMediaSettings.linkedin_handle }}/">
                             <svg class="footer__icon"><use xlink:href="#linkedin"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.youtube_handle %}
+                        <a class="footer__link" href="https://www.youtube.com/user/{{ settings.utils.SocialMediaSettings.youtube_handle }}/" target="_blank">
+                            <svg class="footer__icon"><use xlink:href="#youtube"></use></svg>
                         </a>
                     {% endif %}
                 </div>

@@ -1,17 +1,19 @@
+{% load wagtailcore_tags %}
+
 {% for block in value %}
     {% if block.block_type == 'heading' %}
         <h3>{{ block.value }}</h3>
     {% elif block.block_type == 'body_text' %}
-        <div class="body-text">{{ block }}</div>
+        {% include_block block %}
     {% elif block.block_type == 'large_text' %}
         {# large_text is a rich text field, limited to bold, italic, link, document link #}
-        <div class="large-text">{{ block }}</div>
+        {% include_block block %}
     {% elif block.block_type == 'body_text_new' %}
-        <div class="body-text">{{ block }}</div>
+        <div class="body-text">{% include_block block %}</div>
     {% elif block.block_type == 'large_text_new' %}
         {# large_text is a rich text field, limited to bold, italic, link, document link #}
-        <div class="large-text">{{ block }}</div>
+        <div class="large-text">{% include_block block %}</div>
     {% else %}
-        {{ block }}
+        {% include_block block %}
     {% endif %}
 {% endfor %}

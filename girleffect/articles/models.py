@@ -5,11 +5,11 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel
-from wagtail.wagtailcore.models import Page
+from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailadmin.edit_handlers import (
     StreamFieldPanel, FieldPanel, InlinePanel
 )
@@ -80,7 +80,11 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
         blank=True,
         max_length=255,
         help_text="Optional Author name.")
-    introduction = models.TextField(blank=True, max_length=350)
+    introduction = RichTextField(
+        blank=True,
+        null=True,
+        features=['bold', 'italic', 'link', 'justify']
+    )
     body = StreamField(ArticleBlock())
 
     search_fields = Page.search_fields + HeroImageFields.search_fields + [
@@ -89,10 +93,7 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
         index.SearchField('body')
     ]
 
-    content_panels = Page.content_panels + [
-        MultiFieldPanel([
-            ImageChooserPanel('hero_image'),
-        ], 'Hero Image'),
+    content_panels = Page.content_panels + HeroImageFields.content_panels + [
         FieldPanel('publication_date'),
         FieldPanel('author'),
         FieldPanel('introduction'),
@@ -130,20 +131,38 @@ class ArticleIndexCustomisableArticles(CustomisableFeature):
     )
 
 
+class ArticleIndexCategory(Orderable):
+    page = ParentalKey(
+        'articles.ArticleIndex',
+        related_name='categories'
+    )
+    category = models.ForeignKey(
+        'articles.ArticleCategory',
+        related_name='+',
+        on_delete=models.CASCADE
+    )
+
+    panels = [
+        SnippetChooserPanel('category')
+    ]
+
+
 class ArticleIndex(Page, HeroImageFields, SocialFields):
-    introduction = models.TextField(max_length=350, blank=True)
+    introduction = RichTextField(
+        blank=True,
+        null=True,
+        features=['bold', 'italic', 'link', 'justify']
+    )
     body = StreamField(StoryBlock(), blank=True)
 
-    content_panels = Page.content_panels + [
-        MultiFieldPanel([
-            ImageChooserPanel('hero_image'),
-        ], 'Hero Image'),
+    content_panels = Page.content_panels + HeroImageFields.content_panels + [
         MultiFieldPanel([
             FieldPanel('introduction'),
             InlinePanel('introduction_customisation', label="Introduction Customisation", max_num=1),
         ], 'Introduction'),
         InlinePanel('article_customisation', label="Article Listing Customisation", max_num=1),
-        StreamFieldPanel('body')
+        StreamFieldPanel('body'),
+        InlinePanel('categories', label="Article Index Categories")
     ]
 
     search_fields = Page.search_fields + HeroImageFields.search_fields + [
@@ -180,7 +199,7 @@ class ArticleIndex(Page, HeroImageFields, SocialFields):
         context.update(
             articles=articles,
             # Only show categories that have been used
-            categories=ArticlePageCategory.objects.all().values_list(
+            categories=self.categories.values_list(
                 'category__pk', 'category__title'
             ).distinct()
         )

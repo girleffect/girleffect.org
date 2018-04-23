@@ -31,6 +31,24 @@ CACHE_CONTROL_MAX_AGE = 600
 
 env = os.environ.copy()
 
+# Get running app details from DC/OS if available
+_MARATHON_DOCKER_IMAGE = env.get('MARATHON_APP_DOCKER_IMAGE', None)
+_MESOS_TASK_ID = env.get('MESOS_TASK_ID', None)
+if _MARATHON_DOCKER_IMAGE:
+    # get the docker image tag
+    try:
+        _RELEASE_VERSION = _MARATHON_DOCKER_IMAGE.split(':')[1]
+    except IndexError:
+        _RELEASE_VERSION = raven.fetch_git_sha(BASE_DIR)
+else:
+    _RELEASE_VERSION = raven.fetch_git_sha(BASE_DIR)
+if _MESOS_TASK_ID:
+    _SERVER_NAME = _MESOS_TASK_ID
+else:
+    # use the default
+    import socket
+    _SERVER_NAME = socket.gethostname()
+
 # On Torchbox servers, many environment variables are prefixed with "CFG_"
 for key, value in os.environ.items():
     if key.startswith('CFG_'):
@@ -64,6 +82,18 @@ if 'EMAIL_SUBJECT_PREFIX' in env:
 
 if 'EMAIL_HOST' in env:
     EMAIL_HOST = env['EMAIL_HOST']
+
+if 'EMAIL_HOST_USER' in env:
+    EMAIL_HOST_USER = env['EMAIL_HOST_USER']
+
+if 'EMAIL_HOST_PASSWORD' in env:
+    EMAIL_HOST_PASSWORD = env['EMAIL_HOST_PASSWORD']
+
+if 'EMAIL_PORT' in env:
+    EMAIL_PORT = env['EMAIL_PORT']
+
+if 'EMAIL_USE_TLS' in env:
+    EMAIL_USE_TLS = True
 
 if 'CACHE_PURGE_URL' in env:
     INSTALLED_APPS += ('wagtail.contrib.wagtailfrontendcache', )  # noqa
@@ -102,9 +132,8 @@ if all(v in env for v in ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'AWS_STO
 if 'SENTRY_DSN' in env:
     RAVEN_CONFIG = {
         'dsn': env['SENTRY_DSN'],
-        # If you are using git, you can also automatically configure the
-        # release based on the git info.
-        'release': raven.fetch_git_sha(BASE_DIR),
+        'release': _RELEASE_VERSION,
+        'name': _SERVER_NAME,
     }
 
 # Database

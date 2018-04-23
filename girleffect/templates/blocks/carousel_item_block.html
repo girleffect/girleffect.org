@@ -1,7 +1,14 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
+
+{% if desktop %}
+    {% image value.image fill-1600x800 as carousel_image %}
+{% else %}
+    {% image value.image fill-800x400 jpegquality-60 as carousel_image %}
+{% endif %}
+
 <div class="carousel__block-item">
     <div class="carousel__panel-desktop">
-        {% image value.image fill-1600x800  %}
+        <img alt="carousel_image.alt" src="{{ carousel_image.url }}">
         <div class="carousel__overview">
             <h3 class="carousel__home-title"
                 style="{% if value.overview_title_shadow.text_hex %}color: {{ value.overview_title_shadow.text_hex }};{% endif %}
@@ -45,7 +52,7 @@
         </div>
     </div>
     <div class="carousel__panel-mobile">
-        {% image value.image fill-1600x800 class="carousel__image" %}
+        <img alt="carousel_image.alt" class="carousel__image" src="{{ carousel_image.url }}">
         <h3 class="carousel__home-title carousel__home-title--mobile"
             style="{% if value.overview_title_shadow.text_hex %}color: {{ value.overview_title_shadow.text_hex }};{% endif %}
                    {% if value.overview_title_shadow.drop_shadow_is_on %}text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);{% endif %}"

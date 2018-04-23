@@ -18,7 +18,7 @@
 
     {# Streamfield options #}
     <section class="section section--body">
-        {{ page.body }}
+        {% include_block page.body %}
     </section>
 
     {# Latest articles, limited to three most recent, link to all articles index #}
@@ -32,10 +32,14 @@
                     {% if page.partners_customisations.background_hex %}background:{{ page.partners_customisations.background_hex }};{% endif %}">
         <h2 class="section__title"
             {% if page.partners_customisations.heading_hex %}style="color:{{ page.partners_customisations.heading_hex }};"{% endif %}>
-            Partnerships in {{ page.title }}
+            {% if page.partners_title %}
+                {{ page.partners_title }}
+            {% else %}
+                Partnerships in {{ page.title }}
+            {% endif %}
         </h2>
         <div class="wrapper wrapper--mid wrapper--bottom-space">
-            <p>{{ page.partners_description }}</p>
+            <p>{{ page.partners_description|richtext }}</p>
         </div>
 
         <div class="media-block-container">

@@ -8,6 +8,12 @@
         font-weight: $weight-bold;
     }
 
+    p {
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
     a {
         border-bottom: 2px solid $yellow;
         font-weight: $weight-bold;
@@ -16,7 +22,8 @@
     ul,
     ol {
         padding-left: 20px;
-        list-style-position: inside;
+        margin-left: 1rem;
+        list-style-position: outside;
     }
 
     ul {

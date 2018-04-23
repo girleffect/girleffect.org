@@ -5,26 +5,22 @@ from django.utils.translation import ugettext_lazy as _
 
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
-
-from wagtail.wagtailadmin.edit_handlers import (
-    FieldPanel,
-    InlinePanel,
-    MultiFieldPanel,
-    PageChooserPanel
-)
+from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
+                                                MultiFieldPanel,
+                                                PageChooserPanel)
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailembeds import oembed_providers
 from wagtail.wagtailembeds.embeds import get_embed
 from wagtail.wagtailembeds.exceptions import EmbedException
-from wagtail.wagtailembeds.finders.oembed import OEmbedFinder as OEmbedFinder
+from wagtail.wagtailembeds.finders.oembed import OEmbedFinder
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.models import register_snippet
-from wagtail.contrib.settings.models import BaseSetting, register_setting
-from wagtailmedia.models import AbstractMedia
 from wagtailmedia.edit_handlers import MediaChooserPanel
+from wagtailmedia.models import AbstractMedia
 
 from girleffect.images.models import CustomImage
 
@@ -232,6 +228,62 @@ class ListingFields(models.Model):
     ]
 
 
+class FullWidthMediaAndTextSnippetCustomisableHeading(CustomisableFeature):
+    media = ParentalKey(
+        'FullWidthMediaAndTextSnippet',
+        related_name='media_customisation'
+    )
+
+    content_panels = [
+        ImageChooserPanel('image'),
+        FieldPanel('background_hex'),
+    ]
+
+
+@register_snippet
+class FullWidthMediaAndTextSnippet(ClusterableModel, LinkFields):
+    title = models.CharField(max_length=255, blank=True)
+    image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    logo = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    text = RichTextField(
+        null=True,
+        blank=True,
+        features=["bold", "italic", "ol", "ul", "link", "document-link"]
+    )
+
+    @cached_property
+    def media_customisations(self):
+        return self.media_customisation.first()
+
+    panels = [
+        FieldPanel('title'),
+        ImageChooserPanel('image'),
+        ImageChooserPanel('logo'),
+        FieldPanel('text'),
+        MultiFieldPanel([
+            InlinePanel('media_customisation', label="Media Customisation", max_num=1),
+        ], 'Customisations'),
+    ] + LinkFields.content_panels
+
+    def __str__(self):
+        return self.title
+
+    def get_link_url(self):
+        return self.link_url or self.link_page and self.link_page.url
+
+    def link_is_external(self):
+        return bool(self.link_url)
+
+    def clean(self):
+        if self.title and self.logo:
+            error_messages = ["Please choose only one of logo or title."]
+            raise ValidationError({'title': error_messages, 'logo': error_messages})
+        if not self.title and not self.logo:
+            error_messages = ["Please choose a logo or title."]
+            raise ValidationError({'title': error_messages, 'logo': error_messages})
+        return super().clean()
+
+
 @register_snippet
 class CallToActionSnippet(EmailLinkFields):
     title = models.CharField(max_length=255)
@@ -352,7 +404,7 @@ class Statistic(ClusterableModel, LinkFields):
         help_text="The statistic. For example, '66% of girls complete primary school'",
         features=[
             "bold", "italic", "link", "document-link",
-            "h2", "h3", "h4", "h5", "h6"
+            "h2", "h3", "h4", "h5", "h6", "justify"
         ]
     )
     citation_text = models.CharField(max_length=80, blank=True)
@@ -412,8 +464,14 @@ class HeroVideoFields(models.Model):
     hero_strapline = models.TextField(
         blank=True,
         max_length=255,
-        help_text="Shows text over the hero."
+        help_text="Shows text over the hero. If no strapline is entered, no page title will show."
     )
+    hero_strapline_hex = models.CharField(
+        blank=True,
+        max_length=7,
+        help_text="Add valid hex to change colour of strapline."
+    )
+
     link_page = models.ForeignKey(
         Page,
         blank=True,
@@ -443,6 +501,7 @@ class HeroVideoFields(models.Model):
             MediaChooserPanel('hero_video'),
             ImageChooserPanel('hero_fallback_image'),
             FieldPanel('hero_strapline'),
+            FieldPanel('hero_strapline_hex'),
             MultiFieldPanel([
                 PageChooserPanel('link_page'),
                 FieldPanel('link_youtube'),
@@ -452,6 +511,12 @@ class HeroVideoFields(models.Model):
     ]
 
     def clean(self):
+        from girleffect.utils.blocks import validate_hex
+
+        if self.hero_strapline_hex:
+            if not validate_hex(self.hero_strapline_hex):
+                raise ValidationError({'hero_strapline_hex': _('Please enter a valid hex code')})
+
         # Validating if URL is a valid YouTube URL
         youtube_embed = self.link_youtube
         if youtube_embed:
@@ -508,6 +573,7 @@ class HeroVideoFieldsLogo(HeroVideoFields):
             ImageChooserPanel('hero_fallback_image'),
             ImageChooserPanel('hero_logo'),
             FieldPanel('hero_strapline'),
+            FieldPanel('hero_strapline_hex'),
             MultiFieldPanel([
                 PageChooserPanel('link_page'),
                 FieldPanel('link_youtube'),
@@ -529,7 +595,16 @@ class HeroImageFields(models.Model):
         help_text="Hero Image to be used as full width feature image for page.",
         on_delete=models.SET_NULL
     )
-    hero_strapline = models.CharField(blank=True, max_length=255)
+    hero_strapline = models.CharField(
+        blank=True,
+        help_text='Shows text over the hero. If no strapline is entered, no page title will show.',
+        max_length=255
+    )
+    hero_strapline_hex = models.CharField(
+        blank=True,
+        max_length=7,
+        help_text="Add valid hex to change colour of strapline."
+    )
 
     search_fields = Page.search_fields + [
         index.SearchField('hero_strapline'),
@@ -539,8 +614,18 @@ class HeroImageFields(models.Model):
         MultiFieldPanel([
             ImageChooserPanel('hero_image'),
             FieldPanel('hero_strapline'),
+            FieldPanel('hero_strapline_hex'),
         ], 'Hero Image'),
     ]
+
+    def clean(self):
+        from girleffect.utils.blocks import validate_hex
+
+        if self.hero_strapline_hex:
+            if not validate_hex(self.hero_strapline_hex):
+                raise ValidationError({'hero_strapline_hex': _('Please enter a valid hex code')})
+
+        return super(HeroImageFields, self).clean()
 
     class Meta:
         abstract = True

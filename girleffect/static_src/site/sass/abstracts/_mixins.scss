@@ -117,6 +117,11 @@
     line-height: 1;
 }
 
+@mixin smallest-text {
+    font-size: 14px;
+    line-height: 1;
+}
+
 /* ============================================
    Container widths
 */
@@ -150,5 +155,22 @@
     @include media-query(container) {
         margin: 0 auto;
         max-width: $body-width;
+    }
+}
+/* ============================================
+   Container background
+*/
+
+@mixin background-container {
+    padding: 0 0 2rem;
+    background-size: cover;
+    background-position: 50% 50%;
+
+    @include media-query(tablet-portrait) {
+        padding-bottom: 3rem;
+    }
+
+    @include media-query(container) {
+        padding-bottom: 4rem;
     }
 }

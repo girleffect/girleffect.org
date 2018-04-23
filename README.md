@@ -17,7 +17,7 @@ a fabfile for running common commands with Fabric.
 To set up a new build:
 
 ``` bash
-git clone git@git.torchbox.com:praekelt/girleffect.git
+git clone git@github.com:girleffect/girleffect.org.git
 cd girleffect
 vagrant up
 vagrant ssh

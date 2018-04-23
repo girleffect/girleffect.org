@@ -1,4 +1,4 @@
-<a class="link link--with-arrow" href="{{ link_url }}" {% if link_is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>
-    {{ value.link_text }}
+<a class="link link--with-arrow" href="{{ link_url }}" {% if link_is_external or link_is_document %}target="_blank" {% endif %}{% if link_is_external %} rel="noopener noreferrer"{% endif %}>
+    {{ link_text }}
     <div class="link__arrow"></div>
 </a>

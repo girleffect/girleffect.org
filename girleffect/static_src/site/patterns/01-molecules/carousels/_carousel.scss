@@ -1,11 +1,19 @@
 .carousel-container {
     position: relative;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+
+    @include media-query(tablet-portrait) {
+        margin-bottom: 3rem;
+    }
+
+    @include media-query(container) {
+        margin-bottom: 4rem;
+    }
 }
 
 .carousel {
     $mobile-panel-height: 530px;
-    margin: 2rem auto;
+    margin: 0 auto 2rem;
     display: block;
     position: relative;
 
@@ -21,8 +29,8 @@
     @include media-query(tablet-portrait) {
         position: relative;
         overflow: hidden;
-        min-height: 700px;
-        margin: 4rem auto;
+        min-height: 500px;
+        margin: 0 auto 2rem;
         padding-top: 4rem;
 
         &::after {
@@ -37,6 +45,10 @@
             left: 0;
             right: 0;
             bottom: 0;
+        }
+
+        @include media-query(container) {
+            min-height: 700px;
         }
     }
 
@@ -304,7 +316,6 @@
     &__panel-content {
         color: $green;
         transition: opacity $transition;
-        margin-bottom: 1rem;
 
         @include media-query(tablet-portrait) {
             background: $white-90;
@@ -321,7 +332,7 @@
 
     &__panel-content-mobile {
         background: $white-90;
-        padding: 1.5rem;
+        padding: 1rem;
         position: absolute;
         bottom: 1rem;
         left: 1rem;
@@ -332,6 +343,7 @@
     &__home-title,
     &__home-text {
         @include mid-container;
+        margin: auto;
 
         @include media-query(tablet-portrait) {
             padding-right: calc(#{$mid-width} / 4);
@@ -366,6 +378,10 @@
     &__overview {
         @include media-query(tablet-portrait) {
             display: none;
+            margin-top: 2rem;
+        }
+
+        @include media-query(desktop) {
             margin-top: 4rem;
         }
     }
@@ -379,11 +395,13 @@
             position: absolute;
             right: 0;
             bottom: 0;
+            margin: 0 1rem;
             z-index: 2;
 
             // TODO Have to overide hover colors with important because we are using inline styling
             &:hover {
                 cursor: pointer;
+
                 .carousel__icon {
                     stroke: $yellow !important;
                 }
