@@ -36,7 +36,8 @@ class Partner(Orderable, models.Model):
         related_name='+',
         on_delete=models.SET_NULL
     )
-
+    text_hex = models.CharField(max_length=7, null=True, blank=True)
+    background_hex = models.CharField(max_length=7, null=True, blank=True)
     internal_link = models.ForeignKey('wagtailcore.Page', related_name='+',
                                       on_delete=models.SET_NULL, null=True,
                                       blank=True)
