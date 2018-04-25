@@ -1,3 +1,11 @@
+.list-item-container {
+    @include background-container;
+
+    @include media-query(tablet-landscape) {
+          padding-top: 2rem;
+      }
+}
+
 .list-item {
     $padding: 1.5rem;
     $padding-small: ($padding / 2);
@@ -33,7 +41,6 @@
     }
 
     &__image {
-        margin-bottom: 1rem;
         width: 100%;
         height: auto;
 
@@ -52,5 +59,14 @@
 
     &__title {
         margin-bottom: 0.5rem;
+    }
+
+    &__content {
+        padding: 1.5rem;
+        background-color: $white;
+    }
+
+    .link--with-arrow {
+      margin-top: 1rem;
     }
 }

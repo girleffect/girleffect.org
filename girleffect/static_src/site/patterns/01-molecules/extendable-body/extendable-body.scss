@@ -1,10 +1,10 @@
 .extendable-body-container {
-    margin: 1rem 0;
+    @include background-container;
+    background-position: 0 0;
 }
 
 .extendable-body {
     @include body-container;
-    padding: 2rem 0;
 
     h2,
     h3,

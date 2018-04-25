@@ -108,7 +108,8 @@ class Migration(migrations.Migration):
         ('standardpage', '0028_auto_20171214_1350'),
         ('countries', '0042_auto_20171214_1350'),
         ('solutions', '0039_auto_20171214_1350'),
-        ('people', '0028_auto_20171214_1350')
+        ('people', '0028_auto_20171214_1350'),
+        ('utils', '0013_p1_changes'),
     ]
 
     operations = [

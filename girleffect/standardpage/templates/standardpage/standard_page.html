@@ -12,14 +12,14 @@
 
     {% if page.introduction %}
         {# Introduction #}
-        <section class="wrapper wrapper--mid wrapper--top-bottom-space large-text">
-            <p>{{ page.introduction }}</p>
+        <section class="section section--intro large-text">
+            {{ page.introduction|richtext }}
         </section>    
     {% endif %}
 
     {# Streamfield options - rich text #}
     <section class="section section--body">
-        {{ page.body }}
+        {% include_block page.body %}
     </section>
 
     {# Call to action #}

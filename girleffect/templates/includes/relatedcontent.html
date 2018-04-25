@@ -12,12 +12,12 @@
                 {% for related_document in page.related_documents.all %} {% with related_document.document as document %}
                     <li>
                         {% if related_document.title %}
-                            <a href="{{ document.url }}">
+                            <a href="{{ document.file.url }}" target="_blank">
                                 {{ related_document.title }}
                             </a>
                             <span>{{ document.file_extension }}</span>
                         {% else %}
-                            <a href="{{ document.url }}">
+                            <a href="{{ document.file.url }}" target="_blank">
                                 {{ document.filename }}
                             </a> {% endif %}
                     </li>

@@ -2,6 +2,8 @@
 .DS_Store
 *.swp
 *.sql
+*.gz
+*.csv
 /venv/
 /static/
 /media/

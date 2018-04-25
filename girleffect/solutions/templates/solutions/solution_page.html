@@ -18,7 +18,7 @@
 
     {# Streamfield options #}
     <section class="section section--body">
-        {{ page.body }}
+        {% include_block page.body %}
     </section>
 
     {# Related partners #}
@@ -28,7 +28,16 @@
                  style="{% if partners_image %}background:url({{ partners_image.url }});{% endif %}
                         {% if page.partners_customisations.background_hex %}background:{{ page.partners_customisations.background_hex }};{% endif %}">
             <h2 class="section__title"
-                {% if page.partners_customisations.heading_hex %}style="color:{{ page.partners_customisations.heading_hex }};"{% endif %}>Our partners</h2>
+                {% if page.partners_customisations.heading_hex %}style="color:{{ page.partners_customisations.heading_hex }};"{% endif %}>
+                {% if page.partners_title %}
+                    {{ page.partners_title }}
+                {% else %}
+                    Partnerships in {{ page.title }}
+                {% endif %}
+            </h2>
+            <div class="wrapper wrapper--mid wrapper--bottom-space">
+                <p>{{ page.partners_description|richtext }}</p>
+            </div>
             <div class="media-block-container">
                 {% for partner in page.partners %}
                     {# Partner card here #}

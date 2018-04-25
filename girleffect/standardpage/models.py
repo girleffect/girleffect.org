@@ -5,7 +5,7 @@ from wagtail.wagtailadmin.edit_handlers import (
     StreamFieldPanel
 )
 
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
 from girleffect.wagtailsnippets.edit_handlers import SnippetChooserPanel
@@ -19,7 +19,11 @@ from girleffect.utils.models import (
 
 
 class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
-    introduction = models.TextField(blank=True)
+    introduction = RichTextField(
+        blank=True,
+        null=True,
+        features=['bold', 'italic', 'link', 'justify']
+    )
     body = StreamField(StoryBlock())
     call_to_action = models.ForeignKey(
         'utils.CallToActionSnippet',

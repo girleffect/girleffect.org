@@ -116,7 +116,7 @@ class PersonIndexPage(Page, HeroImageFields):
     introduction = RichTextField(
         null=True,
         blank=True,
-        features=['bold', 'italic', 'link']
+        features=['bold', 'italic', 'link', 'justify']
     )
     call_to_action = models.ForeignKey(
         'utils.CallToActionSnippet',
@@ -182,7 +182,11 @@ class PersonPage(Page):
         on_delete=models.SET_NULL
     )
     job_title = models.CharField(max_length=255)
-    introduction = models.TextField(blank=True)
+    introduction = RichTextField(
+        blank=True,
+        null=True,
+        features=['bold', 'italic', 'link', 'justify']
+    )
     website = models.URLField(blank=True, max_length=255)
     biography = StreamField(StoryBlock(), blank=True)
     email = models.EmailField(blank=True)

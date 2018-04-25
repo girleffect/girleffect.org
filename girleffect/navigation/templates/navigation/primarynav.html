@@ -29,11 +29,16 @@
                                     <ul class="header__nav-tertiary" role="menu">
                                     {% for secondary_subpage in subpage.sub_items %}
                                         <li class="header__nav-item-tertiary" role="presentation">
-                                            <a class="header__link-tertiary" href="{{ secondary_subpage.page.url|default:'#' }}" role="menuitem">
-                                                {% if secondary_subpage.title %}                                      
+                                            
+                                            <a class="header__link-tertiary" 
+
+                                            href="{% if secondary_subpage.page.exists %}{{ secondary_subpage.page.url|default:'#' }}{% else %}{{ secondary_subpage.page.url|default:'#' }}{% endif %}" 
+
+                                            role="menuitem">
+                                                {% if secondary_subpage.external_link %}                                      
                                                     {{ secondary_subpage.title }}
                                                 {% else %}
-                                                    {{ secondary_subpage.page.title|default:" " }}
+                                                    {{ secondary_subpage.title|default:secondary_subpage.page.title }}
                                                 {% endif %}
                                             </a>
                                         </li>

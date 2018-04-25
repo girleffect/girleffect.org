@@ -6,12 +6,13 @@
     }
 
     &__title {
+        @include body-container;
         text-align: center;
-        margin-bottom: 3rem;
-    }
+        margin-bottom: 2rem;
 
-    &--statistics {
-        background: $yellow;
+        @include media-query(tablet-portrait) {
+            margin-bottom: 3rem;
+        }
     }
 
     &--partners {
@@ -19,7 +20,18 @@
     }
 
     &--statistics {
-        padding: 40px;
+        @include background-container;
+        background-color: $yellow;
+        padding: 1rem;
+        margin-bottom: 3em;
+
+        @include media-query(tablet-portrait) {
+            padding: 2rem;
+        }
+
+        @include media-query(container) {
+            margin-bottom: 4rem;
+        }
 
         > h3 {
             text-align: center;
@@ -27,18 +39,40 @@
         }
     }
 
-    &--body {
+    &--intro {
+        @include body-container;
         padding: 0;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        max-width: 100%;
+
+        @include media-query(tablet-portrait) {
+            margin-top: 2em;
+        }
+    }
+
+    &--body {
+        padding: 1rem 0 0;
+
+        @include media-query(tablet-portrait) {
+            padding-top: 2em;
+        }
+
+        @include media-query(container) {
+            padding-top: 4rem;
+        }
 
         > h3 {
             @include body-container;
-            margin-top: 1rem;
             margin-bottom: 1rem;
 
             @include media-query(tablet-portrait) {
-                margin-top: 2em;
                 margin-bottom: 2rem;
             }
+        }
+
+        .template-job-board-page & {
+            font-family: 'Cabin', sans-serif;
         }
     }
 
@@ -47,32 +81,53 @@
     }
 
     &--articles {
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+
+        @media (min-width: 2000px) {
+            background-size: contain;
+        }
+
         .template-ni-nyampinga & {
-            background: url('../images/ni-nyampinga-pattern.png') no-repeat;
+            background-image: url('../images/ni-nyampinga-pattern.png');
         }
 
         .template-tega & {
-            background: url('../images/tega-pattern.png') no-repeat;
+            background-image: url('../images/tega-pattern.png');
         }
 
         .template-girls-connect & {
-            background: url('../images/girls-connect-pattern.png') no-repeat;
+            background-image: url('../images/girls-connect-pattern.png');
         }
 
         .template-zathu & {
-            background: url('../images/zathu-pattern.png') no-repeat;
+            background-image: url('../images/zathu-pattern.png');
         }
 
         .template-yegna & {
-            background: url('../images/yegna-pattern.png') no-repeat;
+            background-image: url('../images/yegna-pattern.png');
         }
 
         .template-springster & {
-            background: url('../images/springster-pattern.png') no-repeat;
+            background-image: url('../images/springster-pattern.png');
         }
     }
 
     &--top-bottom-space {
         padding: 5rem 0;
+    }
+
+    &--bottom-space-no-padding {
+        margin: 0 0 4rem;
+        padding: 0;
+
+        .template-solution-page &, .template-country-page & {
+            padding-top: 2rem;
+
+            @include media-query(tablet-portrait) {
+                padding-top: 4rem;
+            }
+        }
     }
 }

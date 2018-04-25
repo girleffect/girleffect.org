@@ -1,17 +1,26 @@
 {% load wagtailimages_tags %}
-{% if page.articles %}
+{% if page.articles or page.featured_article %}
 {% image customisations.image max-100x100 as articles_image %}
-<section class="section section--articles section--top-bottom-space"
+<section class="section section--articles section--bottom-space-no-padding"
          style="{% if articles_image %}background:url({{ articles_image.url }});{% endif %}
                 {% if customisations.background_hex %}background:{{ customisations.background_hex }};{% endif %}">
     <h2 class="section__title"
         {% if customisations.heading_hex %}style="color:{{ customisations.heading_hex }};"{% endif %}>
         {{ title }}
     </h2>
+    {% if page.featured_article %}
+        {% include "includes/article_card.html" with article=page.featured_article featured=True %}
+    {% endif %}
     <div class="article-container grid grid--three wrapper wrapper--mid">
+      {% if request.user_agent.is_pc or request.user_agent.is_tablet %}
         {% for article in page.articles %}
-            {% include "includes/article_card.html" %}
+            {% include "includes/article_card.html" with desktop=True  %}
         {% endfor %}
+      {% elif request.user_agent.is_mobile %}
+        {% for article in page.articles %}
+            {% include "includes/article_card.html"  %}
+        {% endfor %}
+      {% endif %}
     </div>
     <div class="wrapper wrapper--center">
         <a class="link link--boxed link--center" href="/articles">
