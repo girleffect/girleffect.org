@@ -5,6 +5,7 @@ from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core import urlresolvers
+from django.utils.safestring import mark_safe
 from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailadmin.menu import MenuItem
@@ -42,10 +43,26 @@ def editor_js():
     return format_html(
         """
             <script src="{0}"></script>
-            <script>window.chooserUrls.snippetChooser = '{1}';</script>
+            {1}
         """,
         static('wagtailsnippets/js/snippet-chooser.js'),
-        urlresolvers.reverse('wagtailsnippets:choose_generic', args=[1])  # FIXME
+        mark_safe(
+            """
+            <script>
+                window.chooserUrls.snippetChooser = '%s';
+                $.ajax({
+                    url: '%s',
+                    dataType: 'json',
+                    success: function (data) {
+                      window.chooserUrls.snippetChooser += (data.site_id + '/');
+                    }
+                });
+            </script>
+            """ % (
+                urlresolvers.reverse('wagtailsnippets:choose_generic'),
+                urlresolvers.reverse('wagtailsnippets:current_site_id'),
+            )
+        ),
     )
 
 

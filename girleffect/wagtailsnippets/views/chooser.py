@@ -16,7 +16,7 @@ from wagtail.wagtailsearch.index import class_is_indexed
 from .snippets import get_snippet_model_from_url_params, get_editable_sites, get_site
 
 
-def choose(request, app_label, model_name, site_id):
+def choose(request, site_id, app_label, model_name):
     model = get_snippet_model_from_url_params(app_label, model_name)
     site = get_site(get_editable_sites(request.user), site_id)
     items = model.objects.filter(site=site)

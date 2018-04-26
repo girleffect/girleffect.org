@@ -8,9 +8,15 @@ urlpatterns = [
     url(r'^$', snippets.index_redirect, name='index'),
     url(r'^(\d+)/$', snippets.index, name='index'),
 
-    url(r'^choose/(\d+)/$', chooser.choose, name='choose_generic'),
-    url(r'^choose/(\w+)/(\w+)/(\d+)/$', chooser.choose, name='choose'),
+    url(r'^choose/$', chooser.choose, name='choose_generic'),
+    url(r'^choose/(\d+)/(\w+)/(\w+)/$', chooser.choose, name='choose'),
     url(r'^choose/(\w+)/(\w+)/(\d+)/(\d+)/$', chooser.chosen, name='chosen'),
+
+    url(
+        r'^chooser/current-site-id/$',
+        snippets.get_current_site_id_for_snippet_chooser,
+        name='current_site_id'
+    ),
 
     url(r'^(\w+)/(\w+)/(\d+)/$', snippets.list, name='list'),
     url(r'^(\w+)/(\w+)/(\d+)/add/$', snippets.create, name='add'),

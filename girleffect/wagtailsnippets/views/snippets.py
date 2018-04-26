@@ -2,7 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.apps import apps
 from django.core.urlresolvers import reverse
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
@@ -308,3 +308,9 @@ def usage(request, app_label, model_name, site_id, id):
         'instance': instance,
         'used_by': used_by
     })
+
+
+def get_current_site_id_for_snippet_chooser(request):
+    data = {'site_id': request.site.id}
+
+    return JsonResponse(data)
