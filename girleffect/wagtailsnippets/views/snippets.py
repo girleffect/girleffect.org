@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
 from wagtail.utils.pagination import paginate
+from wagtail.wagtailcore.models import Page
 from wagtail.wagtailadmin import messages
 from wagtail.wagtailadmin.edit_handlers import (
     ObjectList, extract_panel_definitions_from_model_class)
@@ -311,6 +312,13 @@ def usage(request, app_label, model_name, site_id, id):
 
 
 def get_current_site_id_for_snippet_chooser(request):
-    data = {'site_id': request.site.id}
+    page_id = request.GET.get('page', None)
+    data = {}
+    if page_id:
+        try:
+            page_obj = Page.objects.get(id=page_id)
+            data['site_id'] = page_obj.get_site().id
+        except Page.DoesNotExist:
+            return JsonResponse(data)
 
     return JsonResponse(data)

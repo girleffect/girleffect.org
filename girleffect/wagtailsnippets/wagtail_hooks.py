@@ -50,8 +50,14 @@ def editor_js():
             """
             <script>
                 window.chooserUrls.snippetChooser = '%s';
+                var current_page_data = (document.location.pathname.match(/(\d+)/g) || []);
+                var current_page_id = current_page_data[current_page_data.length-1];
+
                 $.ajax({
                     url: '%s',
+                    data: {
+                      'page': current_page_id
+                    },
                     dataType: 'json',
                     success: function (data) {
                       window.chooserUrls.snippetChooser += (data.site_id + '/');
