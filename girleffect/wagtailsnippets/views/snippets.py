@@ -318,7 +318,7 @@ def get_current_site_id_for_snippet_chooser(request):
         try:
             page_obj = Page.objects.get(id=page_id)
             data['site_id'] = page_obj.get_site().id
-        except Page.DoesNotExist:
-            return JsonResponse(data)
+        except (Page.DoesNotExist, AttributeError):
+            data['site_id'] = request.site.id
 
     return JsonResponse(data)
