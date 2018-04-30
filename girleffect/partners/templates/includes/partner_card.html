@@ -6,15 +6,16 @@
             <img class="media-block__image" src="{{ partner_logo.url }}" alt="{{ partner.title }}">
         {% endif %}
 
-        <div class="media-block__content">
+        <div class="media-block__content" style="{% if value.background_hex %}background:{{ value.background_hex }};{% endif %}
+                                                 {% if value.text_hex %}color:{{ value.text_hex }};{% endif %}">
             <h4 class="media-block__heading">{{ partner.title }}</h4>
             <p>{{ partner.description }}</p>
             {% if partner.internal_link %}
-                <a class="link link--with-arrow" href="{{ partner.internal_link.url }}">Learn more about {{ partner.title }}
+                <a class="media-block__link link link--with-arrow" href="{{ partner.internal_link.url }}">Learn more about {{ partner.title }}
                     <div class="link__arrow"></div>
                 </a>
             {% elif partner.external_link %}
-                <a class="link link--with-arrow" href="{{ partner.external_link }}" target="_blank">Learn more about {{ partner.title }}
+                <a class="media-block__link link link--with-arrow" href="{{ partner.external_link }}" target="_blank">Learn more about {{ partner.title }}
                     <div class="link__arrow"></div>
                 </a>
             {% endif %}
