@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
 <div class="slider-container {% if value.slider_width == 'mid-width' %}slider-container--mid-width{% endif %}" data-delay="{{ value.slider_delay }}">
-    <div class="js-slider--full-width slider owl-slider">
+    <div class="js-slider slider owl-slider">
     {% for slider_item in value.slider_items %}
         {% include_block slider_item %}
         {# found in slider_item_block.html #}
