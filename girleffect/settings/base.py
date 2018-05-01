@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'wagtail.wagtailembeds',
     'wagtail.wagtailsites',
     'wagtail.wagtailusers',
-    'wagtail.wagtailsnippets',
+    'girleffect.wagtailsnippets',
     'wagtail.wagtaildocs',
     'wagtail.wagtailimages',
     'wagtail.wagtailsearch',

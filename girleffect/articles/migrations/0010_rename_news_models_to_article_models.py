@@ -10,7 +10,7 @@ import wagtail.wagtailcore.blocks
 import wagtail.wagtailcore.fields
 import wagtail.wagtailembeds.blocks
 import wagtail.wagtailimages.blocks
-import wagtail.wagtailsnippets.blocks
+import girleffect.wagtailsnippets.blocks
 
 
 class Migration(migrations.Migration):
