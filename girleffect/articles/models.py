@@ -7,8 +7,8 @@ from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtail.wagtailsnippets.models import register_snippet
+from girleffect.wagtailsnippets.edit_handlers import SnippetChooserPanel
+from girleffect.wagtailsnippets.models import SiteSpecificSnippetMixin, register_snippet
 from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailadmin.edit_handlers import (
     StreamFieldPanel, FieldPanel, InlinePanel
@@ -26,7 +26,7 @@ DEFAULT_ARTICLES_PER_PAGE = 15
 
 
 @register_snippet
-class ArticleCategory(models.Model):
+class ArticleCategory(SiteSpecificSnippetMixin, models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(
         blank=True,

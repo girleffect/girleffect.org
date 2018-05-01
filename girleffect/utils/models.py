@@ -18,9 +18,9 @@ from wagtail.wagtailembeds.exceptions import EmbedException
 from wagtail.wagtailembeds.finders.oembed import OEmbedFinder
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
-from wagtail.wagtailsnippets.models import register_snippet
-from wagtailmedia.edit_handlers import MediaChooserPanel
+from girleffect.wagtailsnippets.models import SiteSpecificSnippetMixin, register_snippet
 from wagtailmedia.models import AbstractMedia
+from wagtailmedia.edit_handlers import MediaChooserPanel
 
 from girleffect.images.models import CustomImage
 
@@ -285,7 +285,7 @@ class FullWidthMediaAndTextSnippet(ClusterableModel, LinkFields):
 
 
 @register_snippet
-class CallToActionSnippet(EmailLinkFields):
+class CallToActionSnippet(SiteSpecificSnippetMixin, EmailLinkFields):
     title = models.CharField(max_length=255)
     summary = models.CharField(blank=True, max_length=80, verbose_name="Description")
     image = models.ForeignKey(CustomImage, null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
@@ -406,7 +406,7 @@ class StatisticCustomisableHeading(CustomisableFeature):
 
 
 @register_snippet
-class Statistic(ClusterableModel, LinkFields):
+class Statistic(SiteSpecificSnippetMixin, ClusterableModel, LinkFields):
     title = models.CharField(max_length=255)
     cms_title = models.CharField(
         max_length=225,

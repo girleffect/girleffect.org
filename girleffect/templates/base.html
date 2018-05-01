@@ -47,7 +47,7 @@
             <meta name="twitter:image" content="{{ request.site.root_url|urljoin:page.hero_image.file.url }}">
         {% elif page.hero_fallback_image %}
             <meta name="twitter:image" content="{{ request.site.root_url|urljoin:page.hero_fallback_image.file.url }}">
-        {% else %}
+        {% elif settings.utils.SocialMediaSettings.default_sharing_image %}
             <meta name="twitter:image" content="{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}">
         {% endif %}
 
@@ -66,7 +66,7 @@
             <meta property="og:image" content="{{ request.site.root_url|urljoin:page.hero_image.file.url }}">
         {% elif page.hero_fallback_image %}
             <meta property="og:image" content="{{ request.site.root_url|urljoin:page.hero_fallback_image.file.url }}">
-        {% else %}
+        {% elif settings.utils.SocialMediaSettings.default_sharing_image %}
             <meta property="og:image" content="{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}" />
         {% endif %}
         {% with page.introduction as page_intro %}
