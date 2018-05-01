@@ -9,13 +9,15 @@
         <meta name="description" content="{% if page.search_description %}{{ page.search_description }}{% else %}{{ page.listing_summary }}{% endif %}" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <!-- Google Tag Manager -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-PQ8TM6V');</script>
-        <!-- End Google Tag Manager -->
+        {% if settings.utils.AnalyticsSettings.google_tag_manager_id %}
+            <!-- Google Tag Manager -->
+            <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','{{ settings.utils.AnalyticsSettings.google_tag_manager_id }}');</script>
+            <!-- End Google Tag Manager -->
+        {% endif %}
 
         <!-- favicons -->
         {% comment %}
@@ -79,10 +81,12 @@
 
     <body class="{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}">
 
-        <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQ8TM6V"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
+        {% if settings.utils.AnalyticsSettings.google_tag_manager_id %}
+            <!-- Google Tag Manager (noscript) -->
+            <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ settings.utils.AnalyticsSettings.google_tag_manager_id }}"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+            <!-- End Google Tag Manager (noscript) -->
+        {% endif %}
 
         {% include "includes/sprites.html" %}
 
@@ -100,7 +104,11 @@
             </div>
 
             <a href="/" class="header__logo">
-                <img src="{% static "images/girl-effect-logo.jpg" %}" alt="Girl Effect Logo">
+                {% if settings.utils.BrandingSettings.logo_image %}
+                    {% image settings.utils.BrandingSettings.logo_image max-170x112 %}
+                {% else %}
+                    <img src="{% static "images/girl-effect-logo.jpg" %}" alt="Girl Effect Logo">
+                {% endif %}
             </a>
 
             <div class="header__mobile-icons">
@@ -123,21 +131,31 @@
                 </a>
 
                 <div class="header__social-icons">
-                    <a class="header__link" href="https://www.facebook.com/girleffect/" target="_blank">
-                        <svg class="header__icon"><use xlink:href="#facebook"></use></svg>
-                    </a>
-                    <a class="header__link" href="https://www.instagram.com/girleffect/" target="_blank">
-                        <svg class="header__icon"><use xlink:href="#instagram"></use></svg>
-                    </a>
-                    <a class="header__link" href="https://twitter.com/girleffect/" target="_blank">
-                        <svg class="header__icon"><use xlink:href="#twitter"></use></svg>
-                    </a>
-                    <a class="header__link" href="https://www.linkedin.com/company/girl-effect/" target="_blank">
-                        <svg class="header__icon"><use xlink:href="#linkedin"></use></svg>
-                    </a>
-                    <a class="header__link" href="https://www.youtube.com/user/girleffect/" target="_blank">
-                        <svg class="header__icon"><use xlink:href="#youtube"></use></svg>
-                    </a>
+                    {% if settings.utils.SocialMediaSettings.facebook_page_handle %}
+                        <a class="header__link" href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_page_handle }}/">
+                            <svg class="header__icon"><use xlink:href="#facebook"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.instagram_handle %}
+                        <a class="header__link" href="https://www.instagram.com/{{ settings.utils.SocialMediaSettings.instagram_handle }}/">
+                            <svg class="header__icon"><use xlink:href="#instagram"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.twitter_handle %}
+                        <a class="header__link" href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}/">
+                            <svg class="header__icon"><use xlink:href="#twitter"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.linkedin_handle %}
+                        <a class="header__link" href="https://www.linkedin.com/company/{{ settings.utils.SocialMediaSettings.linkedin_handle }}/">
+                            <svg class="header__icon"><use xlink:href="#linkedin"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.youtube_handle %}
+                        <a class="header__link" href="https://www.youtube.com/user/{{ settings.utils.SocialMediaSettings.youtube_handle }}/" target="_blank">
+                            <svg class="header__icon"><use xlink:href="#youtube"></use></svg>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -161,29 +179,38 @@
             <div class="footer-row">
                 {% secondarynav %}
                 <div class="footer__social-icons">
-                    <a class="footer__link" href="https://www.facebook.com/girleffect/" target="_blank">
-                        <svg class="footer__icon"><use xlink:href="#facebook"></use></svg>
-                    </a>
-                    <a class="footer__link" href="https://www.instagram.com/girleffect/" target="_blank">
-                        <svg class="footer__icon"><use xlink:href="#instagram"></use></svg>
-                    </a>
-                    <a class="footer__link" href="https://twitter.com/girleffect/" target="_blank">
-                        <svg class="footer__icon"><use xlink:href="#twitter"></use></svg>
-                    </a>
-                    <a class="footer__link" href="https://www.linkedin.com/company/girl-effect/" target="_blank">
-                        <svg class="footer__icon"><use xlink:href="#linkedin"></use></svg>
-                    </a>
-                    <a class="footer__link" href="https://www.youtube.com/user/girleffect/" target="_blank">
-                        <svg class="footer__icon"><use xlink:href="#youtube"></use></svg>
-                    </a>
+                    {% if settings.utils.SocialMediaSettings.facebook_page_handle %}
+                        <a class="footer__link" href="https://www.facebook.com/{{ settings.utils.SocialMediaSettings.facebook_page_handle }}/">
+                            <svg class="footer__icon"><use xlink:href="#facebook"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.instagram_handle %}
+                        <a class="footer__link" href="https://www.instagram.com/{{ settings.utils.SocialMediaSettings.instagram_handle }}/">
+                            <svg class="footer__icon"><use xlink:href="#instagram"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.twitter_handle %}
+                        <a class="footer__link" href="https://twitter.com/{{ settings.utils.SocialMediaSettings.twitter_handle }}/">
+                            <svg class="footer__icon"><use xlink:href="#twitter"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.linkedin_handle %}
+                        <a class="footer__link" href="https://www.linkedin.com/company/{{ settings.utils.SocialMediaSettings.linkedin_handle }}/">
+                            <svg class="footer__icon"><use xlink:href="#linkedin"></use></svg>
+                        </a>
+                    {% endif %}
+                    {% if settings.utils.SocialMediaSettings.youtube_handle %}
+                        <a class="footer__link" href="https://www.youtube.com/user/{{ settings.utils.SocialMediaSettings.youtube_handle }}/" target="_blank">
+                            <svg class="footer__icon"><use xlink:href="#youtube"></use></svg>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
 
             <div class="footer-row footer-row--small">
                 {% footernav %}
                 <div class="footer-row" role="contentinfo">
-                    <p>Company No.07516619</p>
-                    <p>Charity No.1141155</p>
+                    {{ settings.utils.BrandingSettings.footer_text|linebreaks }}
                 </div>
             </div>
 

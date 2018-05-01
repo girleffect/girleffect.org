@@ -313,6 +313,26 @@ class SocialMediaSettings(BaseSetting):
         blank=True,
         help_text='Your Facebook app ID.',
     )
+    facebook_page_handle = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text='Your Facebook page handle. For example, if your Facebook page URL is "https://www.facebook.com/girleffect/" then this field should be set to "girleffect" (case sensitive)'
+    )
+    instagram_handle = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text='Your Instagram handle. For example, if your Instagram URL is "https://www.instagram.com/girleffect/" then this field should be set to "girleffect" (case sensitive)'
+    )
+    linkedin_handle = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text='Your LinkedIn handle. For example, if your LinkedIn URL is "https://www.linkedin.com/company/girleffect/" then this field should be set to "girleffect" (case sensitive)'
+    )
+    youtube_handle = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text='Your Youtube handle. For example, if your Youtube URL is "https://www.youtube.com/user/girleffect/" then this field should be set to "girleffect" (case sensitive)'
+    )
     default_sharing_text = models.CharField(
         max_length=255,
         blank=True,
@@ -335,9 +355,35 @@ class SocialMediaSettings(BaseSetting):
     panels = [
         FieldPanel('twitter_handle'),
         FieldPanel('facebook_app_id'),
+        FieldPanel('facebook_page_handle'),
+        FieldPanel('instagram_handle'),
+        FieldPanel('linkedin_handle'),
+        FieldPanel('youtube_handle'),
         FieldPanel('default_sharing_text'),
         FieldPanel('site_name'),
         ImageChooserPanel('default_sharing_image')
+    ]
+
+
+@register_setting
+class BrandingSettings(BaseSetting):
+    logo_image = models.ForeignKey('images.CustomImage', null=True, blank=True, on_delete=models.SET_NULL)
+    footer_text = models.TextField(blank=True)
+
+    panels = [
+        ImageChooserPanel('logo_image'),
+        FieldPanel('footer_text'),
+    ]
+
+
+@register_setting
+class AnalyticsSettings(BaseSetting):
+    google_tag_manager_id = models.CharField(
+        max_length=20, blank=True, help_text='Id will be like GTM-PQ8TM6V'
+    )
+
+    panels = [
+        FieldPanel('google_tag_manager_id'),
     ]
 
 
