@@ -86,4 +86,9 @@
             z-index: 2;
         }
     }
+
+    &__heading,
+    &__link {
+        color: inherit;
+    }
 }

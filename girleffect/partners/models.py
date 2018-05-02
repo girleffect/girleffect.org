@@ -36,7 +36,16 @@ class Partner(Orderable, models.Model):
         related_name='+',
         on_delete=models.SET_NULL
     )
-
+    block_text_hex = models.CharField(
+        max_length=7, null=True, blank=True,
+        verbose_name='Text colour hex value',
+        help_text='Partner block text colour hex value'
+    )
+    block_background_hex = models.CharField(
+        max_length=7, null=True, blank=True,
+        verbose_name='Background colour hex value',
+        help_text='Partner block background colour hex value'
+    )
     internal_link = models.ForeignKey('wagtailcore.Page', related_name='+',
                                       on_delete=models.SET_NULL, null=True,
                                       blank=True)
@@ -50,6 +59,8 @@ class Partner(Orderable, models.Model):
         FieldPanel('description'),
         PageChooserPanel('internal_link'),
         FieldPanel('external_link'),
+        FieldPanel('block_text_hex'),
+        FieldPanel('block_background_hex'),
         FieldPanel('show_on_index')
     ]
 
