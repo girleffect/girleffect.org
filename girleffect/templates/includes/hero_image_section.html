@@ -14,7 +14,7 @@
     {% if page.hero_strapline %}
     <h1 class="hero__heading"
         {% if page.hero_strapline_hex %}style="color:{{ page.hero_strapline_hex }};"{% endif %}>
-            {{ page.hero_strapline }}       
+            {{ page.hero_strapline|richtext }}
     </h1>
     {% endif %}
 </section>

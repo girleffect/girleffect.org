@@ -490,6 +490,7 @@ class HeroVideoFields(models.Model):
         help_text="Add valid hex to change colour of strapline."
     )
 
+
     link_page = models.ForeignKey(
         Page,
         blank=True,
@@ -613,10 +614,11 @@ class HeroImageFields(models.Model):
         help_text="Hero Image to be used as full width feature image for page.",
         on_delete=models.SET_NULL
     )
-    hero_strapline = models.CharField(
+    hero_strapline = RichTextField(
         blank=True,
+        null=True,
         help_text='Shows text over the hero. If no strapline is entered, no page title will show.',
-        max_length=255
+        features=['bold', 'italic', 'link', 'justify']
     )
     hero_strapline_hex = models.CharField(
         blank=True,
