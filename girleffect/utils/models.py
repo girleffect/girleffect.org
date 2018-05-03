@@ -379,7 +379,8 @@ class BrandingSettings(BaseSetting):
 @register_setting
 class AnalyticsSettings(BaseSetting):
     google_tag_manager_id = models.CharField(
-        max_length=20, blank=True, help_text='Id will be like GTM-PQ8TM6V'
+        max_length=20, blank=True,
+        help_text='Your GTM ID is found on the Admin page of your GTM account.'
     )
 
     panels = [
