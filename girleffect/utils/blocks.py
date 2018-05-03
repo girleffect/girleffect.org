@@ -11,6 +11,7 @@ from wagtail.wagtailembeds.finders.oembed import OEmbedFinder as OEmbedFinder
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 
+from girleffect.utils import constants
 from .models import (CallToActionSnippet, FullWidthMediaAndTextSnippet,
                      Statistic)
 
@@ -486,6 +487,11 @@ class SliderBlock(blocks.StructBlock):
         help_text="Enter the milliseconds of the delay between each slide"
     )
     slider_items = blocks.ListBlock(SliderItemBlock())
+    slider_width = blocks.ChoiceBlock(
+        choices=constants.SLIDER_WIDTH,
+        help_text="Allow the editor to select between Full width (current) or mid width.",
+        required=False
+    )
 
     class Meta:
         template = "blocks/slider_block.html"
