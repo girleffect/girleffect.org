@@ -85,7 +85,7 @@ $(function() {
     });
 
     // Full width slider streamfield
-    $('.js-slider--full-width').owlCarousel({
+    $('.js-slider').owlCarousel({
         items: 1,
         nav: true,
         dots: true,
