@@ -17,6 +17,14 @@
                     {% if page.introduction_customisations.background_hex %}background:{{ page.introduction_customisations.background_hex }};{% endif %}">
             <p>{{ page.introduction|richtext }}</p>
         </div>
+
+        {% if page.body %}
+        {# Streamfield options #}
+        <section class="section section--body">
+            {% include_block page.body %}
+        </section>
+        {% endif %}
+
         {% if page.partners.exists %}
             {% image page.partner_customisations.image max-100x100 as partner_background %}
             <div class="media-block-container media-block-container--partners"
