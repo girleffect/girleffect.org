@@ -100,7 +100,11 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
         StreamFieldPanel('body'),
         InlinePanel('categories', label="Category", max_num=1),
         InlinePanel('related_documents', label="Related documents"),
-        InlinePanel('related_pages', label="Related pages"),
+        InlinePanel(
+            'related_pages',
+            label='Show on these pages',
+            help_text='Related pages where this article need to be shown'
+        ),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels + \
@@ -108,6 +112,11 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
 
     subpage_types = []
     parent_page_types = ['ArticleIndex']
+
+    @property
+    def related_reverse_pages(self):
+        pages = ArticlePageRelatedPage.objects.filter(page_id=self.id)
+        return pages
 
     @property
     def display_date(self):

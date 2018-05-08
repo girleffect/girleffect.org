@@ -15,13 +15,13 @@ from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
     HeroImageFields,
     ListingFields,
-    SocialFields, RelatedArticle)
+    SocialFields, RelatedPage)
 
 
-class StandardPageRelatedArticles(RelatedArticle):
+class StandardPageRelatedPages(RelatedPage):
     source_page = ParentalKey(
         'standardpage.StandardPage',
-        related_name='related_articles'
+        related_name='related_pages'
     )
 
 
@@ -49,10 +49,19 @@ class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
         SnippetChooserPanel('call_to_action'),
-        InlinePanel('related_articles', label="Related Articles")
+        InlinePanel(
+            'related_pages',
+            label='Show on these pages',
+            help_text='Related pages where this page need to be shown'
+        ),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels
+
+    @property
+    def related_reverse_pages(self):
+        pages = StandardPageRelatedPages.objects.filter(page_id=self.id)
+        return pages
 
 
 class StandardIndex(Page, HeroImageFields, SocialFields):

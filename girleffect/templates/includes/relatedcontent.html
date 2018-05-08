@@ -33,16 +33,16 @@
 
 
 
-{% if page.related_pages %}
+{% if page.related_reverse_pages.exists %}
 
     <section class="section section--articles">
         <h2 class="section__title">Related News &amp; Stories</h2>
         <div class="article-container wrapper wrapper--mid">
             {# Related pages #}
-            {% for related_page in page.related_pages.all %}
+            {% for related_page in page.related_reverse_pages %}
                 {% if related_page.page.live %}
                     {# a related_page object links to the original page (related_page.source_page) and a related one (related_page.page) #}
-                    {% with related_page.page as specific_related_page %}
+                    {% with related_page.source_page as specific_related_page %}
 
                     <div class="article-card">
                         {% if specific_related_page.listing_image %}

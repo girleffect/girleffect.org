@@ -1,28 +1,28 @@
 {% load wagtailcore_tags wagtailimages_tags %}
-{% if page.related_articles.exists %}
+{% if page.related_reverse_pages.exists %}
     <section class="section section--articles">
-        <h2 class="section__title">Related News &amp; Stories</h2>
+        <h2 class="section__title">Related Pages</h2>
         <div class="article-container wrapper wrapper--mid">
             {# Related pages #}
-            {% for related_article in page.related_articles.all %}
-                {% if related_article.article.live %}
+            {% for related_page in page.related_reverse_pages %}
+                {% if related_page.page.live %}
                     {# a related_page object links to the original page (related_page.source_page) and a related one (related_page.page) #}
-                    {% with related_article.article as specific_related_article %}
+                    {% with related_page.source_page as specific_related_page %}
 
                     <div class="article-card">
-                        {% if specific_related_article.listing_image %}
-                            {% image specific_related_article.listing_image fill-380x225 %}
+                        {% if specific_related_page.listing_image %}
+                            {% image specific_related_page.listing_image fill-380x225 %}
                         {% endif %}
                         <div class="article-card__copy">
-                            <a class="article-card__link" href="{% pageurl specific_related_article %}">
-                                {% if specific_related_article.listing_title %}
-                                    {{ specific_related_article.listing_title }}
+                            <a class="article-card__link" href="{% pageurl specific_related_page %}">
+                                {% if specific_related_page.listing_title %}
+                                    {{ specific_related_page.listing_title }}
                                 {% else %}
-                                    {{ specific_related_article.title }}
+                                    {{ specific_related_page.title }}
                                 {% endif %}
 
-                                {% if specific_related_article.listing_summary %}
-                                    <p>{{ specific_related_article.listing_summary }}</p>
+                                {% if specific_related_page.listing_summary %}
+                                    <p>{{ specific_related_page.listing_summary }}</p>
                                 {% endif %}
                              </a>
                              <div class="arrow"></div>
