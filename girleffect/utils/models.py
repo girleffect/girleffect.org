@@ -118,6 +118,19 @@ class PageLinkFields(LinkFields):
         abstract = True
 
 
+# Related articles
+class RelatedArticle(Orderable, models.Model):
+    article = models.ForeignKey('articles.ArticlePage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+
+    class Meta:
+        abstract = True
+        ordering = ['sort_order']
+
+    panels = [
+        PageChooserPanel('article'),
+    ]
+
+
 # Related pages
 class RelatedPage(Orderable, models.Model):
     page = models.ForeignKey('wagtailcore.Page', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')

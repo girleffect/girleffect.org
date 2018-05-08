@@ -1,21 +1,28 @@
 from django.db import models
+from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
-    StreamFieldPanel
-)
+    StreamFieldPanel, InlinePanel)
 
 from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
+
 from girleffect.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
     HeroImageFields,
     ListingFields,
-    SocialFields
-)
+    SocialFields, RelatedArticle)
+
+
+class StandardPageRelatedArticles(RelatedArticle):
+    source_page = ParentalKey(
+        'standardpage.StandardPage',
+        related_name='related_articles'
+    )
 
 
 class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
@@ -42,7 +49,7 @@ class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
         SnippetChooserPanel('call_to_action'),
-
+        InlinePanel('related_articles', label="Related Articles")
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels

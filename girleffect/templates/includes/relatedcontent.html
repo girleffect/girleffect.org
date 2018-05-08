@@ -33,38 +33,40 @@
 
 
 
-{% if page.related_pages.live.public %}
+{% if page.related_pages %}
 
     <section class="section section--articles">
         <h2 class="section__title">Related News &amp; Stories</h2>
         <div class="article-container wrapper wrapper--mid">
             {# Related pages #}
-            {% for related_page in page.related_pages.live %}
-                {# a related_page object links to the original page (related_page.source_page) and a related one (related_page.page) #}
-                {% with related_page.page as specific_related_page %}
+            {% for related_page in page.related_pages.all %}
+                {% if related_page.page.live %}
+                    {# a related_page object links to the original page (related_page.source_page) and a related one (related_page.page) #}
+                    {% with related_page.page as specific_related_page %}
 
-                <div class="article-card">
-                    {% if specific_related_page.listing_image %}
-                        {% image specific_related_page.listing_image fill-380x225 %}
-                    {% endif %}
-                    <div class="article-card__copy">
-                        <a class="article-card__link" href="{% pageurl specific_related_page %}">
-                            {% if specific_related_page.listing_title %}
-                                {{ specific_related_page.listing_title }}
-                            {% else %}
-                                {{ specific_related_page.title }}
-                            {% endif %}
+                    <div class="article-card">
+                        {% if specific_related_page.listing_image %}
+                            {% image specific_related_page.listing_image fill-380x225 %}
+                        {% endif %}
+                        <div class="article-card__copy">
+                            <a class="article-card__link" href="{% pageurl specific_related_page %}">
+                                {% if specific_related_page.listing_title %}
+                                    {{ specific_related_page.listing_title }}
+                                {% else %}
+                                    {{ specific_related_page.title }}
+                                {% endif %}
 
-                            {% if specific_related_page.listing_summary %}
-                                <p>{{ specific_related_page.listing_summary }}</p>
-                            {% endif %}
+                                {% if specific_related_page.listing_summary %}
+                                    <p>{{ specific_related_page.listing_summary }}</p>
+                                {% endif %}
 
-                         </a>
-                         <div class="arrow"></div>
-                     </div>
-                </div>
+                             </a>
+                             <div class="arrow"></div>
+                         </div>
+                    </div>
 
-                {% endwith %}
+                    {% endwith %}
+                {% endif %}
             {% endfor %}
         </div>
 
