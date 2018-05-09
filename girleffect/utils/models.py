@@ -131,6 +131,13 @@ class RelatedPage(Orderable, models.Model):
     ]
 
 
+class RelatedPages(RelatedPage):
+    source_page = ParentalKey(
+        'wagtailcore.Page',
+        related_name='show_related_pages'
+    )
+
+
 # Related documents
 class RelatedDocument(Orderable, models.Model):
     title = models.CharField(max_length=255, help_text="Document name")

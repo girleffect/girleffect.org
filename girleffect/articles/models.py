@@ -6,7 +6,6 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel
 from wagtail.wagtailcore.models import Orderable, Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from girleffect.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from girleffect.wagtailsnippets.models import SiteSpecificSnippetMixin, register_snippet
 from wagtail.wagtailcore.fields import StreamField, RichTextField
@@ -18,8 +17,8 @@ from wagtail.wagtailsearch import index
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
     HeroImageFields, ListingFields, SocialFields, RelatedPage,
-    RelatedDocument, CustomisableFeature
-)
+    RelatedDocument, CustomisableFeature,
+    RelatedPages)
 from girleffect.utils.blocks import ArticleBlock
 
 DEFAULT_ARTICLES_PER_PAGE = 15
@@ -101,9 +100,9 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
         InlinePanel('categories', label="Category", max_num=1),
         InlinePanel('related_documents', label="Related documents"),
         InlinePanel(
-            'related_pages',
+            'show_related_pages',
             label='Show on these pages',
-            help_text='Related pages where this article need to be shown'
+            help_text='Related pages where this page need to be shown'
         ),
     ]
 
@@ -115,7 +114,7 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
 
     @property
     def related_reverse_pages(self):
-        pages = ArticlePageRelatedPage.objects.filter(page_id=self.id)
+        pages = RelatedPages.objects.filter(page_id=self.id)
         return pages
 
     @property

@@ -7,7 +7,7 @@ from girleffect.utils.models import (
     ListingFields,
     SocialFields,
     HeroVideoFieldsLogo,
-)
+    RelatedPages)
 from girleffect.articles.models import ArticlePage
 
 from modelcluster.fields import ParentalKey
@@ -146,6 +146,11 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
     def partners_customisations(self):
         return self.partners_customisation.first()
 
+    @property
+    def related_reverse_pages(self):
+        pages = RelatedPages.objects.filter(page_id=self.id)
+        return pages
+
     search_fields = Page.search_fields + [
         index.SearchField('body'),
     ]
@@ -166,6 +171,11 @@ class SolutionPage(Page, HeroVideoFieldsLogo, SocialFields, ListingFields):
             InlinePanel('articles_customisation', label="Articles Listing Customisation", max_num=1),
             PageChooserPanel('featured_article'),
         ], 'Articles Listing'),
+        InlinePanel(
+            'show_related_pages',
+            label='Show on these pages',
+            help_text='Related pages where this page need to be shown'
+        )
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels \

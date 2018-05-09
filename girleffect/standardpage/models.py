@@ -1,5 +1,4 @@
 from django.db import models
-from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
@@ -15,14 +14,7 @@ from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
     HeroImageFields,
     ListingFields,
-    SocialFields, RelatedPage)
-
-
-class StandardPageRelatedPages(RelatedPage):
-    source_page = ParentalKey(
-        'standardpage.StandardPage',
-        related_name='related_pages'
-    )
+    SocialFields, RelatedPages)
 
 
 class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
@@ -50,7 +42,7 @@ class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
         StreamFieldPanel('body'),
         SnippetChooserPanel('call_to_action'),
         InlinePanel(
-            'related_pages',
+            'show_related_pages',
             label='Show on these pages',
             help_text='Related pages where this page need to be shown'
         ),
@@ -60,7 +52,7 @@ class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
 
     @property
     def related_reverse_pages(self):
-        pages = StandardPageRelatedPages.objects.filter(page_id=self.id)
+        pages = RelatedPages.objects.filter(page_id=self.id)
         return pages
 
 
