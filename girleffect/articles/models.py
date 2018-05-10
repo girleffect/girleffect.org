@@ -1,12 +1,12 @@
 from django.db import models
 from django.db.models.functions import Coalesce
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.utils.functional import cached_property
 
 from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel
 from wagtail.wagtailcore.models import Orderable, Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from girleffect.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from girleffect.wagtailsnippets.models import SiteSpecificSnippetMixin, register_snippet
 from wagtail.wagtailcore.fields import StreamField, RichTextField
@@ -18,8 +18,8 @@ from wagtail.wagtailsearch import index
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
     HeroImageFields, ListingFields, SocialFields, RelatedPage,
-    RelatedDocument, CustomisableFeature
-)
+    RelatedDocument, CustomisableFeature,
+    PageRelatedPage)
 from girleffect.utils.blocks import ArticleBlock
 
 DEFAULT_ARTICLES_PER_PAGE = 15
@@ -100,7 +100,11 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
         StreamFieldPanel('body'),
         InlinePanel('categories', label="Category", max_num=1),
         InlinePanel('related_documents', label="Related documents"),
-        InlinePanel('related_pages', label="Related pages"),
+        InlinePanel(
+            'show_related_pages',
+            label='Show on these pages',
+            help_text='Related pages where this page need to be shown'
+        ),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels + \
@@ -108,6 +112,11 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
 
     subpage_types = []
     parent_page_types = ['ArticleIndex']
+
+    @cached_property
+    def related_reverse_pages(self):
+        pages = PageRelatedPage.objects.filter(page_id=self.id)
+        return pages
 
     @property
     def display_date(self):

@@ -18,7 +18,7 @@ from girleffect.wagtailsnippets.models import SiteSpecificSnippetMixin, register
 from girleffect.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from girleffect.utils.blocks import StoryBlock
-from girleffect.utils.models import HeroImageFields, CustomisableFeature
+from girleffect.utils.models import HeroImageFields, CustomisableFeature, PageRelatedPage
 
 
 class SocialMediaProfile(models.Model):
@@ -202,6 +202,11 @@ class PersonPage(Page):
         ]
         return categories
 
+    @cached_property
+    def related_reverse_pages(self):
+        pages = PageRelatedPage.objects.filter(page_id=self.id)
+        return pages
+
     content_panels = Page.content_panels + [
         MultiFieldPanel([
             FieldPanel('first_name'),
@@ -218,7 +223,12 @@ class PersonPage(Page):
         ], heading='Contact information'),
         InlinePanel('category_relationships', label='Categories'),
         FieldPanel('introduction'),
-        StreamFieldPanel('biography')
+        StreamFieldPanel('biography'),
+        InlinePanel(
+            'show_related_pages',
+            label='Show on these pages',
+            help_text='Related pages where this page need to be shown'
+        )
     ]
 
     parent_page_types = ['PersonIndexPage']

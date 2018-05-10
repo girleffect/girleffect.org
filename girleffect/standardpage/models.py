@@ -1,21 +1,21 @@
 from django.db import models
+from django.utils.functional import cached_property
 
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
-    StreamFieldPanel
-)
+    StreamFieldPanel, InlinePanel)
 
 from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
+
 from girleffect.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
     HeroImageFields,
     ListingFields,
-    SocialFields
-)
+    SocialFields, PageRelatedPage)
 
 
 class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
@@ -42,10 +42,19 @@ class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
         SnippetChooserPanel('call_to_action'),
-
+        InlinePanel(
+            'show_related_pages',
+            label='Show on these pages',
+            help_text='Related pages where this page need to be shown'
+        ),
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels
+
+    @cached_property
+    def related_reverse_pages(self):
+        pages = PageRelatedPage.objects.filter(page_id=self.id)
+        return pages
 
 
 class StandardIndex(Page, HeroImageFields, SocialFields):

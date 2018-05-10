@@ -69,4 +69,5 @@
     {# Latest articles, limited to three most recent, link to all articles index #}
     {% include "includes/articles_section.html" with title="Latest from "|add:page.title customisations=page.article_customisations %}
 
+    {% include "includes/relatedpages.html" %}
 {% endblock %}

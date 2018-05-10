@@ -4,8 +4,8 @@ from django.utils.functional import cached_property
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
     PageChooserPanel,
-    StreamFieldPanel
-)
+    StreamFieldPanel,
+    InlinePanel)
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import StreamField, RichTextField
@@ -15,8 +15,8 @@ from girleffect.articles.models import ArticlePage
 from girleffect.utils.models import (
     CallToActionSnippet,
     HeroVideoFields,
-    SocialFields
-)
+    SocialFields,
+    PageRelatedPage)
 
 from girleffect.utils.blocks import StoryBlock
 
@@ -43,7 +43,12 @@ class HomePage(Page, HeroVideoFields, SocialFields):
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
         PageChooserPanel('featured_article'),
-        SnippetChooserPanel('call_to_action')
+        SnippetChooserPanel('call_to_action'),
+        InlinePanel(
+            'show_related_pages',
+            label='Show on these pages',
+            help_text='Related pages where this page need to be shown'
+        )
     ]
 
     @cached_property
@@ -52,6 +57,11 @@ class HomePage(Page, HeroVideoFields, SocialFields):
         if self.featured_article_id:
             all_articles = all_articles.exclude(pk=self.featured_article_id)
         return all_articles[:6]
+
+    @cached_property
+    def related_reverse_pages(self):
+        pages = PageRelatedPage.objects.filter(page_id=self.id)
+        return pages
 
     promote_panels = (
         Page.promote_panels +  # slug, seo_title, show_in_menus, search_description

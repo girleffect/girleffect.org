@@ -8,7 +8,7 @@ from girleffect.utils.models import (
     HeroImageFields,
     ListingFields,
     SocialFields,
-)
+    PageRelatedPage)
 
 from modelcluster.fields import ParentalKey
 
@@ -121,6 +121,11 @@ class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
     def partners_customisations(self):
         return self.partners_customisation.first()
 
+    @cached_property
+    def related_reverse_pages(self):
+        pages = PageRelatedPage.objects.filter(page_id=self.id)
+        return pages
+
     search_fields = Page.search_fields + HeroImageFields.search_fields + [
         index.SearchField('body')
     ]
@@ -138,6 +143,11 @@ class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
             InlinePanel('partners_customisation', label="Partners Customisation", max_num=1),
         ], 'Partners Listing'),
         SnippetChooserPanel('call_to_action'),
+        InlinePanel(
+            'show_related_pages',
+            label='Show on these pages',
+            help_text='Related pages where this page need to be shown'
+        )
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels \
