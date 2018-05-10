@@ -8,7 +8,7 @@ from girleffect.utils.models import (
     HeroImageFields,
     ListingFields,
     SocialFields,
-    RelatedPages)
+    PageRelatedPage)
 
 from modelcluster.fields import ParentalKey
 
@@ -121,9 +121,9 @@ class CountryPage(Page, HeroImageFields, SocialFields, ListingFields):
     def partners_customisations(self):
         return self.partners_customisation.first()
 
-    @property
+    @cached_property
     def related_reverse_pages(self):
-        pages = RelatedPages.objects.filter(page_id=self.id)
+        pages = PageRelatedPage.objects.filter(page_id=self.id)
         return pages
 
     search_fields = Page.search_fields + HeroImageFields.search_fields + [

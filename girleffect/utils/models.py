@@ -131,7 +131,7 @@ class RelatedPage(Orderable, models.Model):
     ]
 
 
-class RelatedPages(RelatedPage):
+class PageRelatedPage(RelatedPage):
     source_page = ParentalKey(
         'wagtailcore.Page',
         related_name='show_related_pages'

@@ -18,7 +18,7 @@ from girleffect.wagtailsnippets.models import SiteSpecificSnippetMixin, register
 from girleffect.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from girleffect.utils.blocks import StoryBlock
-from girleffect.utils.models import HeroImageFields, CustomisableFeature, RelatedPages
+from girleffect.utils.models import HeroImageFields, CustomisableFeature, PageRelatedPage
 
 
 class SocialMediaProfile(models.Model):
@@ -200,9 +200,9 @@ class PersonPage(Page):
         ]
         return categories
 
-    @property
+    @cached_property
     def related_reverse_pages(self):
-        pages = RelatedPages.objects.filter(page_id=self.id)
+        pages = PageRelatedPage.objects.filter(page_id=self.id)
         return pages
 
     content_panels = Page.content_panels + [

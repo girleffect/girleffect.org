@@ -22,7 +22,7 @@ class Command(BaseCommand):
         from girleffect.home.models import HomePage
         from girleffect.standardpage.models import StandardPage
         from girleffect.solutions.models import SolutionPage
-        from girleffect.utils.models import RelatedPages
+        from girleffect.utils.models import PageRelatedPage
 
         old_related_pages = 0
         created_related_pages = 0
@@ -40,7 +40,7 @@ class Command(BaseCommand):
                         try:
                             article_page = ArticlePage.objects.get(id=page.page_id)
                             if options['create']:
-                                obj = RelatedPages.objects.create(
+                                obj = PageRelatedPage.objects.create(
                                     page_id=article.id, source_page_id=article_page.id
                                 )
                         except Exception as e:
@@ -49,7 +49,7 @@ class Command(BaseCommand):
                         try:
                             solution_page = SolutionPage.objects.get(id=page.page_id)
                             if options['create']:
-                                obj = RelatedPages.objects.create(
+                                obj = PageRelatedPage.objects.create(
                                     page_id=article.id, source_page_id=solution_page.id
                                 )
                         except Exception as e:
@@ -58,7 +58,7 @@ class Command(BaseCommand):
                         try:
                             standard_page = StandardPage.objects.get(id=page.page_id)
                             if options['create']:
-                                obj = RelatedPages.objects.create(
+                                obj = PageRelatedPage.objects.create(
                                     page_id=article.id, source_page_id=standard_page.id
                                 )
                         except Exception as e:
@@ -67,7 +67,7 @@ class Command(BaseCommand):
                         try:
                             country_page = CountryPage.objects.get(id=page.page_id)
                             if options['create']:
-                                obj = RelatedPages.objects.create(
+                                obj = PageRelatedPage.objects.create(
                                     page_id=article.id, source_page_id=country_page.id
                                 )
                         except Exception as e:
@@ -76,7 +76,7 @@ class Command(BaseCommand):
                         try:
                             home_page = HomePage.objects.get(id=page.page_id)
                             if options['create']:
-                                obj = RelatedPages.objects.create(
+                                obj = PageRelatedPage.objects.create(
                                     page_id=article.id, source_page_id=home_page.id
                                 )
                         except Exception as e:

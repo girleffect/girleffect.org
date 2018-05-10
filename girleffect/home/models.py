@@ -16,7 +16,7 @@ from girleffect.utils.models import (
     CallToActionSnippet,
     HeroVideoFields,
     SocialFields,
-    RelatedPages)
+    PageRelatedPage)
 
 from girleffect.utils.blocks import StoryBlock
 
@@ -58,9 +58,9 @@ class HomePage(Page, HeroVideoFields, SocialFields):
             all_articles = all_articles.exclude(pk=self.featured_article_id)
         return all_articles[:6]
 
-    @property
+    @cached_property
     def related_reverse_pages(self):
-        pages = RelatedPages.objects.filter(page_id=self.id)
+        pages = PageRelatedPage.objects.filter(page_id=self.id)
         return pages
 
     promote_panels = (

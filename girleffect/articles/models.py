@@ -18,7 +18,7 @@ from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
     HeroImageFields, ListingFields, SocialFields, RelatedPage,
     RelatedDocument, CustomisableFeature,
-    RelatedPages)
+    PageRelatedPage)
 from girleffect.utils.blocks import ArticleBlock
 
 DEFAULT_ARTICLES_PER_PAGE = 15
@@ -112,9 +112,9 @@ class ArticlePage(Page, HeroImageFields, SocialFields, ListingFields):
     subpage_types = []
     parent_page_types = ['ArticleIndex']
 
-    @property
+    @cached_property
     def related_reverse_pages(self):
-        pages = RelatedPages.objects.filter(page_id=self.id)
+        pages = PageRelatedPage.objects.filter(page_id=self.id)
         return pages
 
     @property

@@ -14,7 +14,7 @@ from girleffect.utils.blocks import StoryBlock
 from girleffect.utils.models import (
     HeroImageFields,
     ListingFields,
-    SocialFields, RelatedPages)
+    SocialFields, PageRelatedPage)
 
 
 class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
@@ -50,9 +50,9 @@ class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels
 
-    @property
+    @cached_property
     def related_reverse_pages(self):
-        pages = RelatedPages.objects.filter(page_id=self.id)
+        pages = PageRelatedPage.objects.filter(page_id=self.id)
         return pages
 
 
