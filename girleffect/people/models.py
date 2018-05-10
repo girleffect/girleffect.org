@@ -118,6 +118,7 @@ class PersonIndexPage(Page, HeroImageFields):
         blank=True,
         features=['bold', 'italic', 'link', 'justify']
     )
+    body = StreamField(StoryBlock(), null=True, blank=True)
     call_to_action = models.ForeignKey(
         'utils.CallToActionSnippet',
         null=True,
@@ -131,6 +132,7 @@ class PersonIndexPage(Page, HeroImageFields):
     content_panels = Page.content_panels + HeroImageFields.content_panels + [
         MultiFieldPanel([
             FieldPanel('introduction'),
+            StreamFieldPanel('body'),
             InlinePanel('introduction_customisation', label="Introduction Customisation", max_num=1),
         ], 'Introduction'),
         MultiFieldPanel([
