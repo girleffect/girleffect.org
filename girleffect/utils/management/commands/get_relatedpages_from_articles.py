@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
     help = """
-    The command creates new RelatedPages objects 
+    The command creates new PageRelatedPage objects 
     ( with the '--create' argument ) from ArticlePage related pages
     """
 
@@ -12,7 +12,7 @@ class Command(BaseCommand):
             '--create',
             action='store_true',
             dest='create',
-            help='Creates the relatedpages in all the models'
+            help='Creates the PageRelatedPage objects in all the models'
         )
 
     def handle(self, *args, **options):
