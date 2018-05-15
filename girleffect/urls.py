@@ -12,10 +12,17 @@ from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
 from girleffect.esi import views as esi_views
 from girleffect.search import views as search_views
+from girleffect.utils.views import custom_settings_edit_view
 
 
 urlpatterns = [
     url(r'^django-admin/', include(admin.site.urls)),
+
+    # Custom settings edit view
+    url(
+        r'^admin/settings/(\w+)/(\w+)/(\d+)/$',
+        custom_settings_edit_view, name='settings_edit'
+    ),
     url(r'^admin/', include(wagtailadmin_urls)),
 
     url(r'^documents/', include(wagtaildocs_urls)),
