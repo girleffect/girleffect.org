@@ -35,7 +35,7 @@ jobs:
         - python manage.py test
 
     - stage: build
-      if: branch IN (master, staging)
+      if: branch IN (master, staging, core-infra-integration)
       sudo: required
       services:
         - docker
@@ -61,3 +61,7 @@ jobs:
           script: dcd --tag $TAG --tag latest -- "$image"
           on:
             branch: master
+        - provider: script  # Temporary deploy. Should be removed when core infrastructure integration is done.
+          script: dcd --tag $TAG --tag core-infra-integration -- "$image"
+          on:
+            branch: core-infra-integration
