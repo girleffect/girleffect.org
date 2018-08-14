@@ -11,11 +11,30 @@ from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 
 from girleffect.esi import views as esi_views
+from girleffect.oidc_integration.views import LoginRedirectWithQueryStringView, LogoutRedirectView
 from girleffect.search import views as search_views
 
 
 urlpatterns = [
+    url(r'^oidc/', include('mozilla_django_oidc.urls')),
+
+    # General login and logout URLs
+    url(r'^login/', LoginRedirectWithQueryStringView.as_view(), name="login"),
+    url(r'^logout/', LogoutRedirectView.as_view(), name="logout"),
+
+    # Override default Django admin login
+    url(r'^django-admin/login/', LoginRedirectWithQueryStringView.as_view()),
+    url(r'^django-admin/logout/', LogoutRedirectView.as_view()),
     url(r'^django-admin/', include(admin.site.urls)),
+
+    # Custom settings edit view
+    url(
+        r'^admin/settings/(\w+)/(\w+)/(\d+)/$',
+        custom_settings_edit_view, name='settings_edit'
+    ),
+    # Override default Wagtail admin login and logout
+    url(r'^admin/login/', LoginRedirectWithQueryStringView.as_view()),
+    url(r'^admin/logout/', LogoutRedirectView.as_view()),
     url(r'^admin/', include(wagtailadmin_urls)),
 
     url(r'^documents/', include(wagtaildocs_urls)),
