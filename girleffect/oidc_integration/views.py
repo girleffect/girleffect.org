@@ -1,6 +1,6 @@
+from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import redirect
-from django.urls import reverse
 from django.views.generic import RedirectView
 from mozilla_django_oidc.views import OIDCLogoutView
 
@@ -23,7 +23,7 @@ class LoginRedirectWithQueryStringView(RedirectView):
             # Since the user is already logged in, we take them to the home page.
             messages.info(self.request, "You are already logged in, but may not have the "
                                         "required permissions.")
-            return redirect(reverse("home"))
+            return redirect(settings.LOGOUT_REDIRECT_URL)
 
         return super().dispatch(request, *args, **kwargs)
 
