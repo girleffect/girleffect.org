@@ -14,17 +14,22 @@ from girleffect.esi import views as esi_views
 from girleffect.oidc_integration.views import LoginRedirectWithQueryStringView, LogoutRedirectView
 from girleffect.search import views as search_views
 
-
+# When OIDC is enabled, the login and logout related URLs must be defined before the other
+# URL patterns since it overrides functionality provided by Django admin and Wagtail.
 urlpatterns = [
     url(r'^oidc/', include('mozilla_django_oidc.urls')),
-
     # General login and logout URLs
     url(r'^login/', LoginRedirectWithQueryStringView.as_view(), name="login"),
     url(r'^logout/', LogoutRedirectView.as_view(), name="logout"),
-
     # Override default Django admin login
     url(r'^django-admin/login/', LoginRedirectWithQueryStringView.as_view()),
     url(r'^django-admin/logout/', LogoutRedirectView.as_view()),
+    # Override default Wagtail admin login and logout
+    url(r'^admin/login/', LoginRedirectWithQueryStringView.as_view()),
+    url(r'^admin/logout/', LogoutRedirectView.as_view()),
+] if settings.OIDC_ENABLED else []
+
+urlpatterns.extend([
     url(r'^django-admin/', include(admin.site.urls)),
 
     # Custom settings edit view
@@ -32,16 +37,13 @@ urlpatterns = [
         r'^admin/settings/(\w+)/(\w+)/(\d+)/$',
         custom_settings_edit_view, name='settings_edit'
     ),
-    # Override default Wagtail admin login and logout
-    url(r'^admin/login/', LoginRedirectWithQueryStringView.as_view()),
-    url(r'^admin/logout/', LogoutRedirectView.as_view()),
     url(r'^admin/', include(wagtailadmin_urls)),
 
     url(r'^documents/', include(wagtaildocs_urls)),
     url(r'^search/$', search_views.search, name='search'),
     url(r'^esi/(.*)/$', esi_views.esi, name='esi'),
     url('^sitemap\.xml$', sitemap),
-]
+])
 
 
 if settings.DEBUG:

@@ -259,23 +259,28 @@ ENABLE_STYLEGUIDE = False
 
 USER_AGENTS_CACHE = 'default'
 
-# Mozilla Django OIDC Settings
-OIDC_STORE_ID_TOKEN = True  # Used by girleffect.oidc_integration.utils.provider_logout_url()
+if os.environ.get("USE_OIDC", False):
+    OIDC_ENABLED = True
 
-OIDC_RP_CLIENT_ID = os.environ['OIDC_RP_CLIENT_ID']
-OIDC_RP_CLIENT_SECRET = os.environ['OIDC_RP_CLIENT_SECRET']
-OIDC_RP_SCOPES = 'openid profile site roles'
-OIDC_OP_AUTHORIZATION_ENDPOINT = os.environ['OIDC_OP_AUTHORIZATION_ENDPOINT']
-OIDC_OP_TOKEN_ENDPOINT = os.environ['OIDC_OP_TOKEN_ENDPOINT']
-OIDC_OP_USER_ENDPOINT = os.environ['OIDC_OP_USER_ENDPOINT']
-# A method that will construct a logout URL for the Authentication Service.
-# This is only required if the user needs to be logged out of the Authentication Service as well
-# as this application.
-OIDC_OP_LOGOUT_URL_METHOD = 'girleffect.oidc_integration.utils.provider_logout_url'
-OIDC_OP_LOGOUT_URL = os.environ['OIDC_OP_LOGOUT_URL']
-# Redirect URL required by Auth Service post logout.
-WAGTAIL_REDIRECT_URL = os.environ['WAGTAIL_REDIRECT_URL']
+    # Mozilla Django OIDC Settings
+    OIDC_STORE_ID_TOKEN = True  # Used by girleffect.oidc_integration.utils.provider_logout_url()
 
-LOGIN_URL = reverse_lazy('login')
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+    OIDC_RP_CLIENT_ID = os.environ['OIDC_RP_CLIENT_ID']
+    OIDC_RP_CLIENT_SECRET = os.environ['OIDC_RP_CLIENT_SECRET']
+    OIDC_RP_SCOPES = 'openid profile site roles'
+    OIDC_OP_AUTHORIZATION_ENDPOINT = os.environ['OIDC_OP_AUTHORIZATION_ENDPOINT']
+    OIDC_OP_TOKEN_ENDPOINT = os.environ['OIDC_OP_TOKEN_ENDPOINT']
+    OIDC_OP_USER_ENDPOINT = os.environ['OIDC_OP_USER_ENDPOINT']
+    # A method that will construct a logout URL for the Authentication Service.
+    # This is only required if the user needs to be logged out of the Authentication Service as well
+    # as this application.
+    OIDC_OP_LOGOUT_URL_METHOD = 'girleffect.oidc_integration.utils.provider_logout_url'
+    OIDC_OP_LOGOUT_URL = os.environ['OIDC_OP_LOGOUT_URL']
+    # Redirect URL required by Auth Service post logout.
+    WAGTAIL_REDIRECT_URL = os.environ['WAGTAIL_REDIRECT_URL']
+
+    LOGIN_URL = reverse_lazy('login')
+    LOGIN_REDIRECT_URL = '/'
+    LOGOUT_REDIRECT_URL = '/'
+else:
+    OIDC_ENABLED = False
