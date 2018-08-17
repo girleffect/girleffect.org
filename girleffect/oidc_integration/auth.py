@@ -73,7 +73,7 @@ def _update_user_from_claims(user, claims):
 
     if "tech_admin" in roles or "product_tech_admin" in roles:
         # Tech admins are linked to all groups
-        groups_from_roles = [group.name for group in Group.objects.all()]
+        groups_from_roles = set([group.name for group in Group.objects.all()])
     else:
         groups_from_roles = set(itertools.chain.from_iterable(
             CORE_ROLES_TO_GROUP_MAP.get(role, []) for role in roles
