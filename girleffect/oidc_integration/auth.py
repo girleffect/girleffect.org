@@ -3,17 +3,42 @@ This package contains customisations specific to the Girl Effect project.
 The technical background can be found here:
 https://mozilla-django-oidc.readthedocs.io/en/stable/installation.html#additional-optional-configuration
 """
+import itertools
 import logging
 
 from django.contrib import messages
 from django.contrib.auth.models import Group
-from django.contrib.sites.shortcuts import get_current_site
 from mozilla_django_oidc.auth import OIDCAuthenticationBackend
 
 USERNAME_FIELD = "username"
 EMAIL_FIELD = "email"
 
 LOGGER = logging.getLogger(__name__)
+
+
+class CorporateSiteGroup:
+    """
+    The members of this class maps to the text representation (case sensitive) of the
+    groups defined in the application.
+    """
+    ADMINISTRATOR = "Administrator"
+    SITE_ADMIN = "Site admin"
+    SITE_EDITOR = "Site editor"
+    SITE_VIEWER = "Site viewer"
+
+
+CORE_ROLES_TO_GROUP_MAP = {
+    "tech_admin": [CorporateSiteGroup.ADMINISTRATOR, CorporateSiteGroup.SITE_ADMIN],
+    "product_tech_admin": [CorporateSiteGroup.ADMINISTRATOR, CorporateSiteGroup.SITE_ADMIN],
+    "governance_admin": [CorporateSiteGroup.ADMINISTRATOR, CorporateSiteGroup.SITE_ADMIN],
+    "data_admin": [CorporateSiteGroup.ADMINISTRATOR, CorporateSiteGroup.SITE_ADMIN],
+    "content_admin": [CorporateSiteGroup.ADMINISTRATOR, CorporateSiteGroup.SITE_ADMIN],
+    "data_editor": [CorporateSiteGroup.SITE_EDITOR],
+    "content_editor": [CorporateSiteGroup.SITE_EDITOR],
+    "governance_viewer": [CorporateSiteGroup.SITE_VIEWER],
+    "data_viewer": [CorporateSiteGroup.SITE_VIEWER],
+    "content_viewer": [CorporateSiteGroup.SITE_VIEWER]
+}
 
 
 def _update_user_from_claims(user, claims):
@@ -36,26 +61,30 @@ def _update_user_from_claims(user, claims):
     # Synchronise the roles that the user has. The list of roles may contain more or less roles
     # than the previous time the user logged in.
     roles = set(claims.get("roles", []))
-    groups = set(group.name for group in user.groups.all())
 
     if roles:
         user.is_staff = True
-        if "tech_admin" in roles:
+        if "tech_admin" in roles or "product_tech_admin" in roles:
             user.is_superuser = True
     else:
         user.is_staff = False
         user.is_superuser = False
     user.save()
 
-    groups_to_add = roles - groups
-    groups_to_remove = groups - roles
+    groups_from_roles = set(itertools.chain.from_iterable(
+        CORE_ROLES_TO_GROUP_MAP.get(role, []) for role in roles
+    ))
+    groups_currently_assigned = set(group.name for group in user.groups.all())
+    groups_to_add = groups_from_roles - groups_currently_assigned
+    groups_to_remove = groups_currently_assigned - groups_from_roles
 
     for group_name in groups_to_add:
-        group, created = Group.objects.get_or_create(name=group_name)
-        if created:
-            LOGGER.debug("Created new group: {}".format(group_name))
-        user.groups.add(group)
-    LOGGER.debug("Added groups to user {}: {}".format(user, groups_to_add))
+        try:
+            group = Group.objects.get(name=group_name)
+            user.groups.add(group)
+            LOGGER.debug("Added user to group {}: {}".format(user, group_name))
+        except Group.DoesNotExist:
+            LOGGER.error("Cannot link user to non-existed group: {}".format(group_name))
 
     args = [Group.objects.get(name=group_name) for group_name in groups_to_remove]
     user.groups.remove(*args)
