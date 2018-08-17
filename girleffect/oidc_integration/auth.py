@@ -71,9 +71,13 @@ def _update_user_from_claims(user, claims):
         user.is_superuser = False
     user.save()
 
-    groups_from_roles = set(itertools.chain.from_iterable(
-        CORE_ROLES_TO_GROUP_MAP.get(role, []) for role in roles
-    ))
+    if "tech_admin" in roles or "product_tech_admin" in roles:
+        # Tech admins are linked to all groups
+        groups_from_roles = [group.name for group in Group.objects.all()]
+    else:
+        groups_from_roles = set(itertools.chain.from_iterable(
+            CORE_ROLES_TO_GROUP_MAP.get(role, []) for role in roles
+        ))
     groups_currently_assigned = set(group.name for group in user.groups.all())
     groups_to_add = groups_from_roles - groups_currently_assigned
     groups_to_remove = groups_currently_assigned - groups_from_roles
