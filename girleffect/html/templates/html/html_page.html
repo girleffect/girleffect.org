@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block content %}
+    {% if page.title %}
+      <div class="wrapper wrapper--body wrapper--top-bottom-space">
+          <p>{{ page.title|richtext }}</p>
+      </div>
+    {% endif %}
+
+    {% if page.body %}
+    {# Streamfield options #}
+    <section class="section section--body">
+        {% include_block page.body %}
+    </section>
+    {% endif %}
+{% endblock %}
