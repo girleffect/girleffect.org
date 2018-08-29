@@ -14,7 +14,7 @@ from wagtail.wagtailadmin.edit_handlers import (
 )
 from wagtail.wagtailsearch import index
 
-from girleffect.utils.blocks import StoryBlock
+from girleffect.utils.blocks import ArticleIndexBlock
 from girleffect.utils.models import (
     HeroImageFields, ListingFields, SocialFields, RelatedPage,
     RelatedDocument, CustomisableFeature
@@ -152,7 +152,7 @@ class ArticleIndex(Page, HeroImageFields, SocialFields):
         null=True,
         features=['bold', 'italic', 'link', 'justify']
     )
-    body = StreamField(StoryBlock(), blank=True)
+    body = StreamField(ArticleIndexBlock(), blank=True)
 
     content_panels = Page.content_panels + HeroImageFields.content_panels + [
         MultiFieldPanel([

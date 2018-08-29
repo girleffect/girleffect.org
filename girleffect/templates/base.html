@@ -46,7 +46,7 @@
         {% elif page.hero_fallback_image %}
             <meta name="twitter:image" content="{{ request.site.root_url|urljoin:page.hero_fallback_image.file.url }}">
         {% else %}
-        Nope
+            <meta name="twitter:image" content="{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}">
         {% endif %}
 
         <!--facebook opengraph tags-->
@@ -65,7 +65,7 @@
         {% elif page.hero_fallback_image %}
             <meta property="og:image" content="{{ request.site.root_url|urljoin:page.hero_fallback_image.file.url }}">
         {% else %}
-            Nope
+            <meta property="og:image" content="{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}" />
         {% endif %}
         {% with page.introduction as page_intro %}
 
