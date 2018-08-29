@@ -572,6 +572,7 @@ class StoryBlock(blocks.StreamBlock):
     anchor = AnchorBlock()
     statistic = StatisticBlock(label="Statistic Block")
     call_to_action = SnippetChooserBlock(CallToActionSnippet, template="blocks/call_to_action.html")
+    html = blocks.RawHTMLBlock(label="HTML Editor")
 
     class Meta:
         template = "blocks/stream_block.html"

@@ -6,7 +6,6 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel
 from wagtail.wagtailcore.models import Orderable, Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailcore.fields import StreamField, RichTextField
@@ -196,13 +195,14 @@ class ArticleIndex(Page, HeroImageFields, SocialFields):
             articles = paginator.page(paginator.num_pages)
 
         context = super().get_context(request, *args, **kwargs)
-        context.update(
-            articles=articles,
-            # Only show categories that have been used
-            categories=self.categories.values_list(
-                'category__pk', 'category__title'
-            ).distinct()
-        )
+        context.update(articles=articles)
+        if self.categories.all():
+            context.update(
+                # Only show categories that have been used
+                categories=self.categories.values_list(
+                    'category__pk', 'category__title'
+                ).distinct()
+            )
         return context
 
     subpage_types = ['ArticlePage']
