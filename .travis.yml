@@ -61,7 +61,7 @@ jobs:
           script: dcd --tag $TAG --tag latest -- "$image"
           on:
             branch: master
-        - provider: script  # Temporary deploy. Should be removed when QA on GEINFRA-171 is done.
-          script: dcd --tag $TAG --tag GEINFRA-171 -- "$image"
+        - provider: script  # Temporary deploy. Should be removed when QA on feature/GEINFRA-171-M is done.
+          script: dcd --tag $TAG --tag feature/GEINFRA-171-M -- "$image"
           on:
             branch: feature/GEINFRA-171-M
