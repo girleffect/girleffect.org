@@ -196,13 +196,25 @@ class ArticleIndex(Page, HeroImageFields, SocialFields):
 
         context = super().get_context(request, *args, **kwargs)
         context.update(articles=articles)
-        if self.categories.all():
-            context.update(
-                # Only show categories that have been used
-                categories=self.categories.values_list(
-                    'category__pk', 'category__title'
-                ).distinct()
-            )
+        if self.categories.exists():
+            categories = self.categories.values_list('category')
+            # In page preview, the values_list returns a list and the category object
+            # however in live view, the values_list returns a QuerySet with the category id and the category fields
+            # can be easily requested. A check for the list is made to distinguish between a preview or live view.
+            if isinstance(categories, list):
+                # Get unique categories
+                categories = set(categories)
+                context.update(
+                    categories=[
+                        (category[0].id, category[0].title) for category in categories]
+                )
+            else:
+                context.update(
+                    # Only show categories that have been used
+                    categories=categories.values_list(
+                        'category__pk', 'category__title'
+                    ).distinct()
+                )
         return context
 
     subpage_types = ['ArticlePage']
