@@ -267,7 +267,7 @@ if os.environ.get("USE_OIDC", False):
 
     OIDC_RP_CLIENT_ID = os.environ['OIDC_RP_CLIENT_ID']
     OIDC_RP_CLIENT_SECRET = os.environ['OIDC_RP_CLIENT_SECRET']
-    OIDC_RP_SCOPES = 'openid profile site roles'
+    OIDC_RP_SCOPES = 'openid profile email site roles'
     OIDC_OP_AUTHORIZATION_ENDPOINT = os.environ['OIDC_OP_AUTHORIZATION_ENDPOINT']
     OIDC_OP_TOKEN_ENDPOINT = os.environ['OIDC_OP_TOKEN_ENDPOINT']
     OIDC_OP_USER_ENDPOINT = os.environ['OIDC_OP_USER_ENDPOINT']
