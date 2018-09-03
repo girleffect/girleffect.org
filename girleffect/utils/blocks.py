@@ -584,6 +584,6 @@ class ArticleBlock(StoryBlock):
         template = "blocks/stream_block.html"
 
 
-class ArticleIndexBlock(StoryBlock):
+class StandardPageBlock(StoryBlock):
     html = blocks.RawHTMLBlock(label="HTML Editor")
 
