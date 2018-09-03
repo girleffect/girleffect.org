@@ -21,23 +21,32 @@ class CorporateSiteGroup:
     The members of this class maps to the text representation (case sensitive) of the
     groups defined in the application.
     """
-    ADMINISTRATOR = "Administrator"
     SITE_ADMIN = "Site admin"
     SITE_EDITOR = "Site editor"
     SITE_VIEWER = "Site viewer"
 
 
 CORE_ROLES_TO_GROUP_MAP = {
-    "tech_admin": [CorporateSiteGroup.ADMINISTRATOR, CorporateSiteGroup.SITE_ADMIN],
-    "product_tech_admin": [CorporateSiteGroup.ADMINISTRATOR, CorporateSiteGroup.SITE_ADMIN],
-    "governance_admin": [CorporateSiteGroup.ADMINISTRATOR, CorporateSiteGroup.SITE_ADMIN],
-    "data_admin": [CorporateSiteGroup.ADMINISTRATOR, CorporateSiteGroup.SITE_ADMIN],
-    "content_admin": [CorporateSiteGroup.ADMINISTRATOR, CorporateSiteGroup.SITE_ADMIN],
+    "tech_admin": [CorporateSiteGroup.SITE_ADMIN],
+    "product_tech_admin": [CorporateSiteGroup.SITE_ADMIN],
+    "governance_admin": [CorporateSiteGroup.SITE_ADMIN],
+    "data_admin": [CorporateSiteGroup.SITE_ADMIN],
+    "content_admin": [CorporateSiteGroup.SITE_ADMIN],
     "data_editor": [CorporateSiteGroup.SITE_EDITOR],
     "content_editor": [CorporateSiteGroup.SITE_EDITOR],
     "governance_viewer": [CorporateSiteGroup.SITE_VIEWER],
     "data_viewer": [CorporateSiteGroup.SITE_VIEWER],
     "content_viewer": [CorporateSiteGroup.SITE_VIEWER]
+}
+
+
+# A set of roles that should have "is_superuser=True"
+SUPERUSER_ROLES = {
+    "tech_admin",
+    "product_tech_admin",
+    "governance_admin",
+    "data_admin",
+    "content_admin"
 }
 
 
@@ -64,7 +73,7 @@ def _update_user_from_claims(user, claims):
 
     if roles:
         user.is_staff = True
-        if "tech_admin" in roles or "product_tech_admin" in roles:
+        if roles.intersection(SUPERUSER_ROLES):
             user.is_superuser = True
     else:
         user.is_staff = False
