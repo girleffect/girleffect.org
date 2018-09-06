@@ -31,12 +31,6 @@ urlpatterns = [
 
 urlpatterns.extend([
     url(r'^django-admin/', include(admin.site.urls)),
-
-    # Custom settings edit view
-    url(
-        r'^admin/settings/(\w+)/(\w+)/(\d+)/$',
-        custom_settings_edit_view, name='settings_edit'
-    ),
     url(r'^admin/', include(wagtailadmin_urls)),
 
     url(r'^documents/', include(wagtaildocs_urls)),
