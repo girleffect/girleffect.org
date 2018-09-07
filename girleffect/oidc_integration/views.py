@@ -1,10 +1,13 @@
 from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
 from django.views.generic import RedirectView
 from mozilla_django_oidc.views import OIDCLogoutView
 
 
+@method_decorator(never_cache, "dispatch")
 class LoginRedirectWithQueryStringView(RedirectView):
     """
     This view is used when a user needs to be redirected to the Authentication Service
@@ -28,6 +31,7 @@ class LoginRedirectWithQueryStringView(RedirectView):
         return super().dispatch(request, *args, **kwargs)
 
 
+@method_decorator(never_cache, "get")
 class LogoutRedirectView(OIDCLogoutView):
 
     def get(self, request):
