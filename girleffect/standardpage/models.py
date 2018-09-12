@@ -10,7 +10,7 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
-from girleffect.utils.blocks import StoryBlock
+from girleffect.utils.blocks import StandardPageBlock, StoryBlock
 from girleffect.utils.models import (
     HeroImageFields,
     ListingFields,
@@ -24,7 +24,7 @@ class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
         null=True,
         features=['bold', 'italic', 'link', 'justify']
     )
-    body = StreamField(StoryBlock())
+    body = StreamField(StandardPageBlock())
     call_to_action = models.ForeignKey(
         'utils.CallToActionSnippet',
         null=True,
@@ -42,7 +42,6 @@ class StandardPage(Page, HeroImageFields, SocialFields, ListingFields):
         FieldPanel('introduction'),
         StreamFieldPanel('body'),
         SnippetChooserPanel('call_to_action'),
-
     ]
 
     promote_panels = Page.promote_panels + SocialFields.promote_panels + ListingFields.promote_panels

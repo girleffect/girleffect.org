@@ -6,7 +6,6 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import MultiFieldPanel
 from wagtail.wagtailcore.models import Orderable, Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailcore.fields import StreamField, RichTextField
@@ -196,13 +195,26 @@ class ArticleIndex(Page, HeroImageFields, SocialFields):
             articles = paginator.page(paginator.num_pages)
 
         context = super().get_context(request, *args, **kwargs)
-        context.update(
-            articles=articles,
-            # Only show categories that have been used
-            categories=self.categories.values_list(
-                'category__pk', 'category__title'
-            ).distinct()
-        )
+        context.update(articles=articles)
+        if self.categories.exists():
+            categories = self.categories.values_list('category')
+            # In page preview, the values_list returns a list and the category object
+            # however in live view, the values_list returns a QuerySet with the category id and the category fields
+            # can be easily requested. A check for the list is made to distinguish between a preview or live view.
+            if isinstance(categories, list):
+                # Get unique categories
+                categories = set(categories)
+                context.update(
+                    categories=[
+                        (category[0].id, category[0].title) for category in categories]
+                )
+            else:
+                context.update(
+                    # Only show categories that have been used
+                    categories=categories.values_list(
+                        'category__pk', 'category__title'
+                    ).distinct()
+                )
         return context
 
     subpage_types = ['ArticlePage']
