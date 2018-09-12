@@ -35,7 +35,7 @@ jobs:
         - python manage.py test
 
     - stage: build
-      if: branch IN (master, staging, geinfra-171)
+      if: branch IN (master, staging)
       sudo: required
       services:
         - docker
@@ -61,7 +61,3 @@ jobs:
           script: dcd --tag $TAG --tag latest -- "$image"
           on:
             branch: master
-        - provider: script  # Temporary deploy. Should be removed when QA on geinfra-171 is done.
-          script: dcd --tag $TAG --tag geinfra-171 -- "$image"
-          on:
-            branch: geinfra-171
