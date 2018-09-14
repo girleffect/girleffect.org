@@ -579,6 +579,12 @@ class StoryBlock(blocks.StreamBlock):
 
 class ArticleBlock(StoryBlock):
     blockquote = BlockQuote()
+    html = blocks.RawHTMLBlock(label="HTML Editor")
 
     class Meta:
         template = "blocks/stream_block.html"
+
+
+class StandardPageBlock(StoryBlock):
+    html = blocks.RawHTMLBlock(label="HTML Editor")
+
