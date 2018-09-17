@@ -18,6 +18,7 @@ from django.urls import reverse_lazy
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
+OIDC_ENABLED = os.environ.get("USE_OIDC", False)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -74,9 +75,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'mozilla_django_oidc',  # Must be loaded after django.contrib.auth
 ]
+
+if OIDC_ENABLED:
+    INSTALLED_APPS = ["girleffect.oidc_integration"] + INSTALLED_APPS + [
+        'mozilla_django_oidc',  # Must be loaded after django.contrib.auth
+    ]
 
 AUTHENTICATION_BACKENDS = [
     'girleffect.oidc_integration.auth.GirlEffectOIDCBackend',
@@ -259,8 +263,7 @@ ENABLE_STYLEGUIDE = False
 
 USER_AGENTS_CACHE = 'default'
 
-if os.environ.get("USE_OIDC", False):
-    OIDC_ENABLED = True
+if OIDC_ENABLED:
 
     # Mozilla Django OIDC Settings
     OIDC_STORE_ID_TOKEN = True  # Used by girleffect.oidc_integration.utils.provider_logout_url()

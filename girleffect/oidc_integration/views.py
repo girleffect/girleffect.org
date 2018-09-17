@@ -1,9 +1,10 @@
 from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, TemplateView
 from mozilla_django_oidc.views import OIDCLogoutView
 
 
@@ -23,10 +24,9 @@ class LoginRedirectWithQueryStringView(RedirectView):
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
-            # Since the user is already logged in, we take them to the home page.
-            messages.info(self.request, "You are already logged in, but may not have the "
-                                        "required permissions.")
-            return redirect(settings.LOGOUT_REDIRECT_URL)
+            # If a logged in user ends up here, it is because they do not have the necessary
+            # permission to have accessed the page where they were trying to navigate to.
+            return redirect(reverse("permission_denied"))
 
         return super().dispatch(request, *args, **kwargs)
 
@@ -36,3 +36,7 @@ class LogoutRedirectView(OIDCLogoutView):
 
     def get(self, request):
         return self.post(request)
+
+
+class PermissionDeniedView(TemplateView):
+    template_name = "oidc_integration/permission_denied.html"
