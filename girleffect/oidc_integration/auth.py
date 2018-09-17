@@ -21,22 +21,22 @@ class CorporateSiteGroup:
     The members of this class maps to the text representation (case sensitive) of the
     groups defined in the application.
     """
-    SITE_ADMIN = "Site admin"
-    SITE_EDITOR = "Site editor"
-    SITE_VIEWER = "Site viewer"
+    CONTENT_ADMIN = "Content admin"
+    CONTENT_EDITOR = "Content editor"
+    CONTENT_VIEWER = "Content viewer"
 
 
 CORE_ROLES_TO_GROUP_MAP = {
-    "tech_admin": [CorporateSiteGroup.SITE_ADMIN],
-    "product_tech_admin": [CorporateSiteGroup.SITE_ADMIN],
-    "governance_admin": [CorporateSiteGroup.SITE_ADMIN],
-    "data_admin": [CorporateSiteGroup.SITE_ADMIN],
-    "content_admin": [CorporateSiteGroup.SITE_ADMIN],
-    "data_editor": [CorporateSiteGroup.SITE_EDITOR],
-    "content_editor": [CorporateSiteGroup.SITE_EDITOR],
-    "governance_viewer": [CorporateSiteGroup.SITE_VIEWER],
-    "data_viewer": [CorporateSiteGroup.SITE_VIEWER],
-    "content_viewer": [CorporateSiteGroup.SITE_VIEWER]
+    "tech_admin": [CorporateSiteGroup.CONTENT_ADMIN],
+    "product_tech_admin": [CorporateSiteGroup.CONTENT_ADMIN],
+    "governance_admin": [CorporateSiteGroup.CONTENT_ADMIN],
+    "data_admin": [CorporateSiteGroup.CONTENT_ADMIN],
+    "content_admin": [CorporateSiteGroup.CONTENT_ADMIN],
+    "data_editor": [CorporateSiteGroup.CONTENT_EDITOR],
+    "content_editor": [CorporateSiteGroup.CONTENT_EDITOR],
+    "governance_viewer": [CorporateSiteGroup.CONTENT_VIEWER],
+    "data_viewer": [CorporateSiteGroup.CONTENT_VIEWER],
+    "content_viewer": [CorporateSiteGroup.CONTENT_VIEWER]
 }
 
 
