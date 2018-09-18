@@ -44,9 +44,6 @@ CORE_ROLES_TO_GROUP_MAP = {
 SUPERUSER_ROLES = {
     "tech_admin",
     "product_tech_admin",
-    "governance_admin",
-    "data_admin",
-    "content_admin"
 }
 
 
