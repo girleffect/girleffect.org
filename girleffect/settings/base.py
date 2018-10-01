@@ -81,10 +81,13 @@ if OIDC_ENABLED:
     INSTALLED_APPS = ["girleffect.oidc_integration"] + INSTALLED_APPS + [
         'mozilla_django_oidc',  # Must be loaded after django.contrib.auth
     ]
-
-AUTHENTICATION_BACKENDS = [
-    'girleffect.oidc_integration.auth.GirlEffectOIDCBackend',
-]
+    AUTHENTICATION_BACKENDS = [
+        'girleffect.oidc_integration.auth.GirlEffectOIDCBackend',
+    ]
+else:
+    AUTHENTICATION_BACKENDS = [
+        'django.contrib.auth.backends.ModelBackend',
+    ]
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
