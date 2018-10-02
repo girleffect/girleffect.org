@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Permission denied{% endblock %}
+
+{% block body_class %}template-404{% endblock %}
+
+{% block content %}
+    <div class="wrapper wrapper--top-bottom-space wrapper--mid wrapper--center">
+        <h2>Permission denied</h2>
+        <h4 class="heading heading--bottom-space">You do not have permission to the page you tried to access.</h4>
+        <p><a class="link link--underlined" href="/">Go to the homepage</a></p>
+        <p><a class="link link--underlined" href="/search/">Search this site</a></p>
+        <p><a class="link link--underlined" href="{% url 'logout' %}">Log out</a></p>
+    </div>
+{% endblock %}

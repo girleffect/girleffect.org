@@ -1,3 +1,5 @@
+import dj_database_url
+
 from .base import *  # noqa
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -15,13 +17,19 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTH_PASSWORD_VALIDATORS = []
 
+# Database
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {'default': dj_database_url.config()}
+
+if 'ALLOWED_HOSTS' in os.environ:
+    ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(',')
 
 # Use Redis as the cache backend for extra performance
 
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': '127.0.0.1:6379',
+        'LOCATION': os.environ.get('REDIS', '127.0.0.1:6379'),
         'KEY_PREFIX': 'girleffect',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
