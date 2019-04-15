@@ -1,4 +1,4 @@
-Django==1.11.3
+django>=1.11.19,<2.0
 wagtail==1.13.1
 psycopg2==2.7
 django-redis==4.3.0
