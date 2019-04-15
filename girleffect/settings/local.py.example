@@ -4,8 +4,6 @@ CACHES = {
     }
 }
 
-#SILENCED_SYSTEM_CHECKS = ['6LelrggUAAAAANL1b4NcQpJxjgoWQEugpoGqeq2q','6LelrggUAAAAAD2gDgs43P9NSa9ScvkU6ZmBAW_F']
-
 # On staging, uncomment the following to enable the styleguide
 # ENABLE_STYLEGUIDE = True
 
