@@ -9,7 +9,7 @@ DEBUG = True
 
 SECRET_KEY = 'CHANGEME!!!'
 
-INTERNAL_IPS = ('127.0.0.1', '10.0.2.2')
+INTERNAL_IPS = ('127.0.0.1', '10.0.2.2','kaios.test','192.168.101.248')
 
 BASE_URL = 'http://localhost:8000'
 

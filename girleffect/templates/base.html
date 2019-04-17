@@ -80,7 +80,6 @@
         <!--Facebook opengraph tags-->
         <meta property="fb:app_id" content="{{ settings.utils.SocialMediaSettings.facebook_app_id }}" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="{{ page.get_full_url }}" />
         {% if page %}
             <meta property="og:title" content="{{ page.social_title|default:page.seo_title|default:page.title }}" />
         {% else %}
@@ -95,6 +94,8 @@
         {% else %}
             <meta property="og:image" content="{% if settings.utils.SocialMediaSettings.default_sharing_image.file %}{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}{% endif %}" />
         {% endif %}
+        <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% else %}{{ page.listing_summary }}{% endif %}">
+        <meta property="og:url" content="{{ page.get_full_url }}" />
         {% with page.introduction as page_intro %}{% endwith %}
         <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
         <link rel="stylesheet" type="text/css" media="all" href="{% static 'css/main.css' %}">
