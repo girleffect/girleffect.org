@@ -33,7 +33,7 @@
             <a class="share-icons__link" href="https://twitter.com/intent/tweet?text={{ page.hero_strapline }}&url={{ request.site.hostname }}{{ page.url }}" target="_blank">
               <svg class="share-icons__icon"><use xlink:href="#twitter"></use></svg>
             </a>
-            <a class="share-icons__link" href="https://www.linkedin.com/cws/share?title={{ page.hero_strapline }}&url={{ request.site.hostname }}{{ page.url }}" target="_blank">
+            <a class="share-icons__link" href="https://www.linkedin.com/shareArticle?mini=true&title={{ page.hero_strapline }}&url={{ request.site.hostname }}{{ page.url }}" target="_blank">
               <svg class="share-icons__icon"><use xlink:href="#linkedin"></use></svg>
             </a>
             <a class="share-icons__link" href="mailto:?subject=Thought%20you%20might%20be%20interested&body={{ request.site.hostname }}{{ page.url }}" target="_blank">
@@ -41,7 +41,6 @@
             </a>
         </div>
     </div>
-
     {# Title, introduction and Streamfields #}
     <section class="section wrapper wrapper--article">
         <div class="wrapper--article-inner">

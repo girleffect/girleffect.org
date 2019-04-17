@@ -94,7 +94,7 @@
         {% else %}
             <meta property="og:image" content="{% if settings.utils.SocialMediaSettings.default_sharing_image.file %}{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}{% endif %}" />
         {% endif %}
-        <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% else %}{{ page.listing_summary }}{% endif %}">
+        <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% elif page.listing_summary %}{{ page.listing_summary }}{% else %}{{ page.social_title|default:page.seo_title|default:page.title }}{% endif %}">
         <meta property="og:url" content="{{ page.get_full_url }}" />
         {% with page.introduction as page_intro %}{% endwith %}
         <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
