@@ -27,20 +27,20 @@
     <div class="wrapper wrapper--mid">
         <div class="share-icons share-icons--vertical js-share-icons share-icons--hide-mobile">
             <a class="share-icons__link" href="https://www.facebook.com/sharer/sharer.php?u={{ request.site.hostname }}{{ page.url }}" target="_blank">
-                <svg class="share-icons__icon"><use xlink:href="#facebook"></use></svg>
+              <svg class="share-icons__icon"><use xlink:href="#facebook"></use></svg>
             </a>
-            <a class="share-icons__link" href="http://www.twitter.com/share?url={{ request.site.hostname }}{{ page.url }}" target="_blank">
-                <svg class="share-icons__icon"><use xlink:href="#twitter"></use></svg>
+
+            <a class="share-icons__link" href="https://twitter.com/intent/tweet?text={{ page.hero_strapline }}&url={{ request.site.hostname }}{{ page.url }}" target="_blank">
+              <svg class="share-icons__icon"><use xlink:href="#twitter"></use></svg>
             </a>
-            <a class="share-icons__link" href="https://www.linkedin.com/cws/share?url={{ request.site.hostname }}{{ page.url }}" target="_blank">
-                <svg class="share-icons__icon"><use xlink:href="#linkedin"></use></svg>
+            <a class="share-icons__link" href="https://www.linkedin.com/shareArticle?mini=true&title={{ page.hero_strapline }}&url={{ request.site.hostname }}{{ page.url }}" target="_blank">
+              <svg class="share-icons__icon"><use xlink:href="#linkedin"></use></svg>
             </a>
             <a class="share-icons__link" href="mailto:?subject=Thought%20you%20might%20be%20interested&body={{ request.site.hostname }}{{ page.url }}" target="_blank">
-                <svg class="share-icons__icon"><use xlink:href="#email"></use></svg>
+              <svg class="share-icons__icon"><use xlink:href="#email"></use></svg>
             </a>
         </div>
     </div>
-
     {# Title, introduction and Streamfields #}
     <section class="section wrapper wrapper--article">
         <div class="wrapper--article-inner">
