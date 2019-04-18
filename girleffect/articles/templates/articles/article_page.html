@@ -12,8 +12,7 @@
             {% include "navigation/breadcrumbs.html" %}
             <div class="wrapper wrapper--mid">
                 <div class="hero--article-image">
-                  {#fill-790x400#}
-                  {% image page.hero_image width-790 as hero_image %}
+                  {% image page.hero_image fill-790x400 as hero_image %}
                     <img class="hero__image hero__image--top-space" src="{{ hero_image.url }}">
                 </div>
             </div>
