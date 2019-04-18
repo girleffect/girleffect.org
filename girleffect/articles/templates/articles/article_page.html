@@ -12,8 +12,7 @@
             {% include "navigation/breadcrumbs.html" %}
             <div class="wrapper wrapper--mid">
                 <div class="hero--article-image">
-                  {#fill-790x400#}
-                  {% image page.hero_image width-790 as hero_image %}
+                  {% image page.hero_image fill-790x400 as hero_image %}
                     <img class="hero__image hero__image--top-space" src="{{ hero_image.url }}">
                 </div>
             </div>
@@ -24,19 +23,22 @@
     {% endblock %}
 
     {# Share Icons #}
+    {% comment %}
+      <!-- Prod / QA: {{ page.url }} Returns full URL {{ request.site.hostname }} Included  -->
+    {% endcomment %}
     <div class="wrapper wrapper--mid">
         <div class="share-icons share-icons--vertical js-share-icons share-icons--hide-mobile">
-            <a class="share-icons__link" href="https://www.facebook.com/sharer/sharer.php?u={{ request.site.hostname }}{{ page.url }}" target="_blank">
+            <a class="share-icons__link" href="https://www.facebook.com/sharer/sharer.php?u={% if page.url %}{{ page.url }}{% else %}{{ request.site.hostname }}{% endif %}" target="_blank">
               <svg class="share-icons__icon"><use xlink:href="#facebook"></use></svg>
             </a>
 
-            <a class="share-icons__link" href="https://twitter.com/intent/tweet?text={{ page.hero_strapline }}&url={{ request.site.hostname }}{{ page.url }}" target="_blank">
+            <a class="share-icons__link" href="https://twitter.com/intent/tweet?text={{ page.hero_strapline }}&url={% if page.url %}{{ page.url }}{% else %}{{ request.site.hostname }}{% endif %}" target="_blank">
               <svg class="share-icons__icon"><use xlink:href="#twitter"></use></svg>
             </a>
-            <a class="share-icons__link" href="https://www.linkedin.com/shareArticle?mini=true&title={{ page.hero_strapline }}&url={{ request.site.hostname }}{{ page.url }}" target="_blank">
+            <a class="share-icons__link" href="https://www.linkedin.com/shareArticle?mini=true&title={{ page.hero_strapline }}&url={% if page.url %}{{ page.url }}{% else %}{{ request.site.hostname }}{% endif %}" target="_blank">
               <svg class="share-icons__icon"><use xlink:href="#linkedin"></use></svg>
             </a>
-            <a class="share-icons__link" href="mailto:?subject=Thought%20you%20might%20be%20interested&body={{ request.site.hostname }}{{ page.url }}" target="_blank">
+            <a class="share-icons__link" href="mailto:?subject=Thought%20you%20might%20be%20interested&body={% if page.url %}{{ page.url }}{% else %}{{ request.site.hostname }}{% endif %}" target="_blank">
               <svg class="share-icons__icon"><use xlink:href="#email"></use></svg>
             </a>
         </div>
@@ -60,16 +62,16 @@
 
         <div class="wrapper wrapper--mid">
             <div class="share-icons share-icons--horizontal share-icons--show-mobile">
-                <a class="share-icons__link" href="https://www.facebook.com/sharer/sharer.php?u={{ request.site.hostname }}{{ page.url }}" target="_blank">
+                <a class="share-icons__link" href="https://www.facebook.com/sharer/sharer.php?u={% if page.url %}{{ page.url }}{% else %}{{ request.site.hostname }}{% endif %}" target="_blank">
                     <svg class="share-icons__icon"><use xlink:href="#facebook"></use></svg>
                 </a>
-                <a class="share-icons__link" href="https://twitter.com/intent/tweet?text={{ page.hero_strapline }}&url={{ request.site.hostname }}{{ page.url }}" target="_blank">
+                <a class="share-icons__link" href="https://twitter.com/intent/tweet?text={{ page.hero_strapline }}&url={% if page.url %}{{ page.url }}{% else %}{{ request.site.hostname }}{% endif %}" target="_blank">
                     <svg class="share-icons__icon"><use xlink:href="#twitter"></use></svg>
                 </a>
-                <a class="share-icons__link" href="https://www.linkedin.com/shareArticle?mini=true&title={{ page.hero_strapline }}&url={{ request.site.hostname }}{{ page.url }}" target="_blank">
+                <a class="share-icons__link" href="https://www.linkedin.com/shareArticle?mini=true&title={{ page.hero_strapline }}&url={% if page.url %}{{ page.url }}{% else %}{{ request.site.hostname }}{% endif %}" target="_blank">
                     <svg class="share-icons__icon"><use xlink:href="#linkedin"></use></svg>
                 </a>
-                <a class="share-icons__link" href="mailto:?subject=Thought%20you%20might%20be%20interested&body={{ request.site.hostname }}{{ page.url }}" target="_blank">
+                <a class="share-icons__link" href="mailto:?subject=Thought%20you%20might%20be%20interested&body={% if page.url %}{{ page.url }}{% else %}{{ request.site.hostname }}{% endif %}" target="_blank">
                     <svg class="share-icons__icon"><use xlink:href="#email"></use></svg>
                 </a>
             </div>
