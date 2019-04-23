@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
     <div class="slider__item">
-        {% image value.image original class="slider__image" %}
+        {% image value.image original jpegquality-60 class="slider__image" %}
         <div class="slider__content">
             <h3 class="slider__title"
                 style="{% if value.overview_title_shadow.text_hex %}color:{{ value.overview_title_shadow.text_hex }};{% endif %}

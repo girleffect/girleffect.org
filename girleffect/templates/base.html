@@ -4,10 +4,59 @@
     <head>
         <!-- TODO fallbacks if page is not defined e.g. for 404 page -->
         <meta charset="utf-8" />
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
         <title>{% block title_prefix %}{{ TITLE_PREFIX }}{% endblock %}{% block title %}{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% endblock %}{% block title_suffix %}{{ TITLE_SUFFIX }}{% endblock %}</title>
-        <meta name="description" content="{% if page.search_description %}{{ page.search_description }}{% else %}{{ page.listing_summary }}{% endif %}" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="{% if page.search_description %}{{ page.search_description }}{% else %}{{ page.listing_summary }}{% endif %}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!-- Twitter summary card - see https://dev.twitter.com/cards/types/summary -->
+        <!-- and https://dev.twitter.com/cards/getting-started -->
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:site" content="@{{ settings.utils.SocialMediaSettings.twitter_handle }}"/>
+        {% if page %}
+          <meta name="twitter:title" content="{{ page.social_title|default:page.seo_title|default:page.title }}"/>
+        {% else %}
+          <meta name="twitter:title" content="{{ settings.utils.SocialMediaSettings.site_name }}"/>
+        {% endif %}
+        {% if page.social_image  %}
+          {% image page.social_image width-320 as social_img %}
+          <meta name="twitter:image" content="{{ request.site.root_url|urljoin:social_img.url }}"/>
+        {% elif page.hero_image %}
+          <meta name="twitter:image" content="{{ request.site.root_url|urljoin:page.hero_image.file.url }}"/>
+        {% elif page.hero_fallback_image %}
+          <meta name="twitter:image" content="{{ request.site.root_url|urljoin:page.hero_fallback_image.file.url }}"/>
+        {% else %}
+          <meta name="twitter:image" content="{% if settings.utils.SocialMediaSettings.default_sharing_image.file %}{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}{% endif %}"/>
+        {% endif %}
+        <!--Facebook opengraph tags-->
+        <meta property="fb:app_id" content="{{ settings.utils.SocialMediaSettings.facebook_app_id }}"/>
+        <meta property="og:type" content="website" />
+        {% if page %}
+            <meta property="og:title" content="{{ page.social_title|default:page.seo_title|default:page.title }}"/>
+        {% else %}
+            <meta property="og:title" content="{{ settings.utils.SocialMediaSettings.site_name }}"/>
+        {% endif %}
+        {% if page.social_image %}
+            <meta property="og:image" content="{{ request.site.root_url|urljoin:social_img.url }}"/>
+        {% elif page.hero_image %}
+            <meta property="og:image" content="{{ request.site.root_url|urljoin:page.hero_image.file.url }}"/>
+        {% elif page.hero_fallback_image %}
+            <meta property="og:image" content="{{ request.site.root_url|urljoin:page.hero_fallback_image.file.url }}"/>
+        {% else %}
+            <meta property="og:image" content="{% if settings.utils.SocialMediaSettings.default_sharing_image.file %}{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}{% endif %}"/>
+        {% endif %}
+        <meta property="og:image:width" content="1080"/>
+        <meta property="og:image:height" content="1920"/>
+        <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% elif page.listing_summary %}{{ page.listing_summary }}{% else %}{{ page.social_title|default:page.seo_title|default:page.title }}{% endif %}"/>
+        <meta property="og:url" content="{{ page.get_full_url }}"/>
+        <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="{% static 'css/main.css' %}"/>
+        <!-- Favicons -->
+        {% comment %}
+          {% with page.introduction as page_intro %}{% endwith %}
+            Generate favicons by http://realfavicongenerator.net using the following path: settings.STATIC_URL + img/favicons.
+            Then favicon.ico should be copied to a directory called "public" in the application root and puppet does some magic to serve it up at the site root.
+        {% endcomment %}
+        <link rel="icon" type="image/x-icon" href="{% static "images/favicon.ico" %}" sizes="32x32"/>
 
         <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -16,15 +65,16 @@
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-PQ8TM6V');</script>
         <!-- End Google Tag Manager -->
+
         <!-- Twitter universal website tag code -->
-          <script>
+        <script>
           !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
           },s.version='1.1',s.queue=[]‌,u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
           a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
           // Insert Twitter Pixel ID and Standard Event data below
           twq('init','o165j');
           twq('track','PageView');
-          </script>
+        </script>
         <!-- End Twitter universal website tag code -->
 
         <!-- Facebook & instagram Pixel Code -->
@@ -42,64 +92,8 @@
         fbq('init', '219832368961055');
         fbq('track', 'PageView');
         </script>
-        <noscript><img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=219832368961055&ev=PageView&noscript=1"
-        /></noscript>
+        <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=219832368961055&ev=PageView&noscript=1"/></noscript>
         <!-- End Facebook Pixel Code -->
-
-        <!-- Favicons -->
-        {% comment %}
-            Generate favicons by http://realfavicongenerator.net using the following path: settings.STATIC_URL + img/favicons.
-            Then favicon.ico should be copied to a directory called "public" in the application root and puppet does some magic to serve it up at the site root.
-        {% endcomment %}
-        <link rel="icon" type="image/x-icon" href="{% static "images/favicon.ico" %}" sizes="32x32">
-
-        <!-- Twitter summary card - see https://dev.twitter.com/cards/types/summary -->
-        <!--  and https://dev.twitter.com/cards/getting-started -->
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@{{ settings.utils.SocialMediaSettings.twitter_handle }}" />
-        {% if page %}
-            <meta name="twitter:title" content="{{ page.social_title|default:page.seo_title|default:page.title }}" />
-        {% else %}
-            <meta name="twitter:title" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
-        {% endif %}
-
-        {% with page.introduction as page_intro %}{% endwith %}
-        {% if page.social_image  %}
-          {% image page.social_image width-320 as social_img %}
-          <meta name="twitter:image" content="{{ request.site.root_url|urljoin:social_img.url }}">
-        {% elif page.hero_image %}
-          <meta name="twitter:image" content="{{ request.site.root_url|urljoin:page.hero_image.file.url }}">
-        {% elif page.hero_fallback_image %}
-          <meta name="twitter:image" content="{{ request.site.root_url|urljoin:page.hero_fallback_image.file.url }}">
-        {% else %}
-          <meta name="twitter:image" content="{% if settings.utils.SocialMediaSettings.default_sharing_image.file %}{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}{% endif %}">
-        {% endif %}
-
-        <!--Facebook opengraph tags-->
-        <meta property="fb:app_id" content="{{ settings.utils.SocialMediaSettings.facebook_app_id }}" />
-        <meta property="og:type" content="website" />
-        {% if page %}
-            <meta property="og:title" content="{{ page.social_title|default:page.seo_title|default:page.title }}" />
-        {% else %}
-            <meta property="og:title" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
-        {% endif %}
-        {% if page.social_image %}
-            <meta property="og:image" content="{{ request.site.root_url|urljoin:social_img.url }}" />
-        {% elif page.hero_image %}
-            <meta property="og:image" content="{{ request.site.root_url|urljoin:page.hero_image.file.url }}">
-        {% elif page.hero_fallback_image %}
-            <meta property="og:image" content="{{ request.site.root_url|urljoin:page.hero_fallback_image.file.url }}">
-        {% else %}
-            <meta property="og:image" content="{% if settings.utils.SocialMediaSettings.default_sharing_image.file %}{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}{% endif %}" />
-        {% endif %}
-        <meta property="og:image:width" content="1080">
-        <meta property="og:image:height" content="1920">
-        <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% elif page.listing_summary %}{{ page.listing_summary }}{% else %}{{ page.social_title|default:page.seo_title|default:page.title }}{% endif %}">
-        <meta property="og:url" content="{{ page.get_full_url }}" />
-        {% with page.introduction as page_intro %}{% endwith %}
-        <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}" />
-        <link rel="stylesheet" type="text/css" media="all" href="{% static 'css/main.css' %}">
 
         <!-- Linkedin Pixel Code -->
         <script type="text/javascript">
@@ -110,122 +104,117 @@
           (function()
           {var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);}
           )();
-          </script>
-          <noscript>
-            <img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=680225&fmt=gif" />
-        </noscript>
+        </script>
+        <noscript><img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=680225&fmt=gif"/></noscript>
         <!-- End Linkedin Pixel Code -->
     </head>
     <body class="{% block body_class %}template-{{ page.get_verbose_name|slugify }}{% endblock %}">
         <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQ8TM6V"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQ8TM6V" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
 
         {% include "includes/sprites.html" %}
-
         {% wagtailuserbar %}
 
         <header class="header">
-            <div class="header__search-bar header__search-bar--mobile">
-                <div class="js-close-search-mobile header__icon header__icon--close">&#215;</div>
-                <form class="form form--search" action="{% url 'search' %}" method="get" role="search">
-                    <input class="input input--search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
-                    <button class="button" type="submit">
-                        <svg class="button--search-icon"><use xlink:href="#magnifying-glass"></use></svg>
-                    </button>
-                </form>
-            </div>
+          <div class="header__search-bar header__search-bar--mobile">
+            <div class="js-close-search-mobile header__icon header__icon--close">&#215;</div>
+            <form class="form form--search" action="{% url 'search' %}" method="get" role="search">
+                <input class="input input--search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+                <button class="button" type="submit">
+                    <svg class="button--search-icon"><use xlink:href="#magnifying-glass"></use></svg>
+                </button>
+            </form>
+          </div>
 
-            <a href="/" class="header__logo">
-                <img src="{% static "images/girl-effect-logo.jpg" %}" alt="Girl Effect Logo">
+          <a href="/" class="header__logo">
+            <img src="{% static "images/girl-effect-logo.jpg" %}" alt="Girl Effect Logo">
+          </a>
+
+          <div class="header__mobile-icons">
+            <a class="js-search-mobile" aria-label="search">
+                <svg class="header__icon header__icon--search-mobile"><use xlink:href="#magnifying-glass"></use></svg>
+            </a>
+            <button class="js-hamburger hamburger" aria-haspopup="true">
+                <span class="hamburger__line"></span>
+                <span class="hamburger__line"></span>
+                <span class="hamburger__line"></span>
+                <span class="hamburger__line"></span>
+            </button>
+          </div>
+
+          <div class="header__row">
+            {% primarynav %}
+
+            <a class="js-search-desktop header__link header__link--search" aria-label="search">
+              <svg class="header__icon"><use xlink:href="#magnifying-glass"></use></svg>
             </a>
 
-            <div class="header__mobile-icons">
-                <a class="js-search-mobile" aria-label="search">
-                    <svg class="header__icon header__icon--search-mobile"><use xlink:href="#magnifying-glass"></use></svg>
-                </a>
-                <button class="js-hamburger hamburger" aria-haspopup="true">
-                    <span class="hamburger__line"></span>
-                    <span class="hamburger__line"></span>
-                    <span class="hamburger__line"></span>
-                    <span class="hamburger__line"></span>
-                </button>
+            <div class="header__social-icons">
+              <a class="header__link" href="https://www.facebook.com/girleffect/" target="_blank">
+                  <svg class="header__icon"><use xlink:href="#facebook"></use></svg>
+              </a>
+              <a class="header__link" href="https://www.instagram.com/girleffect/" target="_blank">
+                  <svg class="header__icon"><use xlink:href="#instagram"></use></svg>
+              </a>
+              <a class="header__link" href="https://twitter.com/girleffect/" target="_blank">
+                  <svg class="header__icon"><use xlink:href="#twitter"></use></svg>
+              </a>
+              <a class="header__link" href="https://www.linkedin.com/company/girl-effect/" target="_blank">
+                  <svg class="header__icon"><use xlink:href="#linkedin"></use></svg>
+              </a>
+              <a class="header__link" href="https://www.youtube.com/user/girleffect/" target="_blank">
+                  <svg class="header__icon"><use xlink:href="#youtube"></use></svg>
+              </a>
             </div>
+          </div>
 
-            <div class="header__row">
-                {% primarynav %}
-
-                <a class="js-search-desktop header__link header__link--search" aria-label="search">
-                    <svg class="header__icon"><use xlink:href="#magnifying-glass"></use></svg>
-                </a>
-
-                <div class="header__social-icons">
-                    <a class="header__link" href="https://www.facebook.com/girleffect/" target="_blank">
-                        <svg class="header__icon"><use xlink:href="#facebook"></use></svg>
-                    </a>
-                    <a class="header__link" href="https://www.instagram.com/girleffect/" target="_blank">
-                        <svg class="header__icon"><use xlink:href="#instagram"></use></svg>
-                    </a>
-                    <a class="header__link" href="https://twitter.com/girleffect/" target="_blank">
-                        <svg class="header__icon"><use xlink:href="#twitter"></use></svg>
-                    </a>
-                    <a class="header__link" href="https://www.linkedin.com/company/girl-effect/" target="_blank">
-                        <svg class="header__icon"><use xlink:href="#linkedin"></use></svg>
-                    </a>
-                    <a class="header__link" href="https://www.youtube.com/user/girleffect/" target="_blank">
-                        <svg class="header__icon"><use xlink:href="#youtube"></use></svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="header__search-bar header__search-bar--desktop">
-                <form class="form form--search" action="{% url 'search' %}" method="get" role="search">
-                    <input class="input input--search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
-                    <button class="button" type="submit">
-                        <svg class="button--search-icon"><use xlink:href="#magnifying-glass"></use></svg>
-                    </button>
-                </form>
-            </div>
-            <div class="header__nav-overlay"></div>
+          <div class="header__search-bar header__search-bar--desktop">
+            <form class="form form--search" action="{% url 'search' %}" method="get" role="search">
+              <input class="input input--search" type="text" placeholder="Search" name="query"{% if search_query %} value="{{ search_query }}{% endif %}">
+              <button class="button" type="submit">
+                  <svg class="button--search-icon"><use xlink:href="#magnifying-glass"></use></svg>
+              </button>
+            </form>
+          </div>
+          <div class="header__nav-overlay"></div>
         </header>
 
         <main>
-            {% block content %}{% endblock %}
+          {% block content %}{% endblock %}
         </main>
 
         <footer class="footer">
-
-            <div class="footer-row">
-                {% secondarynav %}
-                <div class="footer__social-icons">
-                    <a class="footer__link" href="https://www.facebook.com/girleffect/" target="_blank">
-                        <svg class="footer__icon"><use xlink:href="#facebook"></use></svg>
-                    </a>
-                    <a class="footer__link" href="https://www.instagram.com/girleffect/" target="_blank">
-                        <svg class="footer__icon"><use xlink:href="#instagram"></use></svg>
-                    </a>
-                    <a class="footer__link" href="https://twitter.com/girleffect/" target="_blank">
-                        <svg class="footer__icon"><use xlink:href="#twitter"></use></svg>
-                    </a>
-                    <a class="footer__link" href="https://www.linkedin.com/company/girl-effect/" target="_blank">
-                        <svg class="footer__icon"><use xlink:href="#linkedin"></use></svg>
-                    </a>
-                    <a class="footer__link" href="https://www.youtube.com/user/girleffect/" target="_blank">
-                        <svg class="footer__icon"><use xlink:href="#youtube"></use></svg>
-                    </a>
-                </div>
+          <div class="footer-row">
+            {% secondarynav %}
+            <div class="footer__social-icons">
+              <a class="footer__link" href="https://www.facebook.com/girleffect/" target="_blank">
+                  <svg class="footer__icon"><use xlink:href="#facebook"></use></svg>
+              </a>
+              <a class="footer__link" href="https://www.instagram.com/girleffect/" target="_blank">
+                  <svg class="footer__icon"><use xlink:href="#instagram"></use></svg>
+              </a>
+              <a class="footer__link" href="https://twitter.com/girleffect/" target="_blank">
+                  <svg class="footer__icon"><use xlink:href="#twitter"></use></svg>
+              </a>
+              <a class="footer__link" href="https://www.linkedin.com/company/girl-effect/" target="_blank">
+                  <svg class="footer__icon"><use xlink:href="#linkedin"></use></svg>
+              </a>
+              <a class="footer__link" href="https://www.youtube.com/user/girleffect/" target="_blank">
+                  <svg class="footer__icon"><use xlink:href="#youtube"></use></svg>
+              </a>
             </div>
+          </div>
 
-            <div class="footer-row footer-row--small">
-                {% footernav %}
-                <div class="footer-row" role="contentinfo">
-                    <p>Company No.07516619</p>
-                    <p>Charity No.1141155</p>
-                </div>
+          <div class="footer-row footer-row--small">
+            {% footernav %}
+            <div class="footer-row" role="contentinfo">
+              <p>Company No.07516619</p>
+              <p>Charity No.1141155</p>
             </div>
-
+          </div>
         </footer>
+        
         <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
         <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
         {% block extra_js %}
