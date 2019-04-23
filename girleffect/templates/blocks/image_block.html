@@ -2,6 +2,6 @@
 {% image value.customisation.background_image max-100x100 as bg_img %}
 <div class="image-embed image-embed--full-width"
      {% if bg_img %}style="background:url({{ bg_img.url }});"{% endif %}>
-    {% image value.image max-1400x930 class="image-embed__image" %}
+    {% image value.image max-1400x930 jpegquality-60 class="image-embed__image" %}
     <p class="image-embed__caption">{{ value.caption }}</p>
 </div>

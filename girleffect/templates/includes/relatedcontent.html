@@ -45,7 +45,7 @@
 
                 <div class="article-card">
                     {% if specific_related_page.listing_image %}
-                        {% image specific_related_page.listing_image fill-380x225 %}
+                        {% image specific_related_page.listing_image fill-380x225 jpegquality-60 %}
                     {% endif %}
                     <div class="article-card__copy">
                         <a class="article-card__link" href="{% pageurl specific_related_page %}">

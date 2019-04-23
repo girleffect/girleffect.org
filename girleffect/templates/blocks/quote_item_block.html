@@ -5,7 +5,7 @@
     {% if value.drop_shadow_options.text_hex %}style="color: {{ value.drop_shadow_options.text_hex }};"{% endif %}
     {% if value.quote_mark_hex %} style="--quote-mark-hex: {{value.quote_mark_hex}};"" {% endif %}>
         {% if value.image %}
-            {% image value.image fill-790x400 class="quote__image" %}
+            {% image value.image fill-790x400 jpegquality-60 class="quote__image" %}
         {% endif %}
 
         <div class="quote__content

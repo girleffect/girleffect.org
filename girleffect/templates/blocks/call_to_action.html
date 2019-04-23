@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% if request.user_agent.is_pc %}
-    {% image page.call_to_action.image fill-1800x600 as cta_image %}
+    {% image page.call_to_action.image fill-1800x600 jpegquality-60 as cta_image %}
 {% else %}
     {% image page.call_to_action.image fill-900x300 jpegquality-60 as cta_image %}
 {% endif %}

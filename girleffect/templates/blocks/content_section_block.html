@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
 <div class="content-section">
-    {% image value.image original as content_section_image %}
+    {% image value.image original jpegquality-60 as content_section_image %}
     {% if content_section_image %}
         <img src="{{ content_section_image.url }}" alt="{{ content_section_image.alt }}" class="content-section__image"/>
     {% endif %}

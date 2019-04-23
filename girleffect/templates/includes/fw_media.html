@@ -3,7 +3,7 @@
 <div class="media-card-container" style="{% if bg_img %}background:url({{ bg_img.url }});{% endif %}
         {% if value.media_customisations.background_hex %}background:{{ value.media_customisations.background_hex }};{% endif %}">
     <div class="media-card">
-        {% image value.image fill-1020x500 as fw_image %}
+        {% image value.image fill-1020x500 jpegquality-60 as fw_image %}
         <img src="{{ fw_image.url }}" alt="{{ fw_image.alt }}" class="media-card__image">
         <div class="media-card__content">
             {% if value.title %}
