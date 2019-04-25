@@ -44,8 +44,8 @@
         {% else %}
             <meta property="og:image" content="{% if settings.utils.SocialMediaSettings.default_sharing_image.file %}{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}{% endif %}"/>
         {% endif %}
-        <meta property="og:image:width" content="1080"/>
-        <meta property="og:image:height" content="1920"/>
+        <meta property="og:image:width" content="1920"/>
+        <meta property="og:image:height" content="1080"/>
         <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% elif page.listing_summary %}{{ page.listing_summary }}{% else %}{{ page.social_title|default:page.seo_title|default:page.title }}{% endif %}"/>
         <meta property="og:url" content="{{ page.get_full_url }}"/>
         <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}"/>
@@ -214,7 +214,7 @@
             </div>
           </div>
         </footer>
-        
+
         <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
         <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
         {% block extra_js %}
