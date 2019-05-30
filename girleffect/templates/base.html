@@ -6,7 +6,9 @@
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge"/>
         <title>{% block title_prefix %}{{ TITLE_PREFIX }}{% endblock %}{% block title %}{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% endblock %}{% block title_suffix %}{{ TITLE_SUFFIX }}{% endblock %}</title>
-        <meta name="description" content="{% if page.search_description %}{{ page.search_description }}{% else %}{{ page.listing_summary }}{% endif %}"/>
+        {% if page %}
+          <meta name="description" content="{% if page.search_description %}{{ page.search_description }}{% else %}{{ page.listing_summary }}{% endif %}"/>
+        {% endif %}
         <meta name="google-site-verification" content="QVp6ZJMoDI0o9MToVlSiC2EJtAtVgYAyddId7WL2698" />
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <!-- Twitter summary card - see https://dev.twitter.com/cards/types/summary -->
@@ -18,15 +20,17 @@
         {% else %}
           <meta name="twitter:title" content="{{ settings.utils.SocialMediaSettings.site_name }}"/>
         {% endif %}
-        {% if page.social_image  %}
-          {% image page.social_image width-320 as social_img %}
-          <meta name="twitter:image" content="{{ request.site.root_url|urljoin:social_img.url }}"/>
-        {% elif page.hero_image %}
-          <meta name="twitter:image" content="{{ request.site.root_url|urljoin:page.hero_image.file.url }}"/>
-        {% elif page.hero_fallback_image %}
-          <meta name="twitter:image" content="{{ request.site.root_url|urljoin:page.hero_fallback_image.file.url }}"/>
-        {% else %}
-          <meta name="twitter:image" content="{% if settings.utils.SocialMediaSettings.default_sharing_image.file %}{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}{% endif %}"/>
+        {% if page %}
+          {% if page.social_image  %}
+            {% image page.social_image width-320 as social_img %}
+            <meta name="twitter:image" content="{{ request.site.root_url|urljoin:social_img.url }}"/>
+          {% elif page.hero_image %}
+            <meta name="twitter:image" content="{{ request.site.root_url|urljoin:page.hero_image.file.url }}"/>
+          {% elif page.hero_fallback_image %}
+            <meta name="twitter:image" content="{{ request.site.root_url|urljoin:page.hero_fallback_image.file.url }}"/>
+          {% else %}
+            <meta name="twitter:image" content="{% if settings.utils.SocialMediaSettings.default_sharing_image.file %}{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}{% endif %}"/>
+          {% endif %}
         {% endif %}
         <!--Facebook opengraph tags-->
         <meta property="fb:app_id" content="{{ settings.utils.SocialMediaSettings.facebook_app_id }}"/>
@@ -36,26 +40,32 @@
         {% else %}
             <meta property="og:title" content="{{ settings.utils.SocialMediaSettings.site_name }}"/>
         {% endif %}
-        {% if page.social_image %}
-            <meta property="og:image" content="{{ request.site.root_url|urljoin:social_img.url }}"/>
-        {% elif page.hero_image %}
-            <meta property="og:image" content="{{ request.site.root_url|urljoin:page.hero_image.file.url }}"/>
-        {% elif page.hero_fallback_image %}
-            <meta property="og:image" content="{{ request.site.root_url|urljoin:page.hero_fallback_image.file.url }}"/>
-        {% else %}
-            <meta property="og:image" content="{% if settings.utils.SocialMediaSettings.default_sharing_image.file %}{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}{% endif %}"/>
+        {% if page %}
+          {% if page.social_image %}
+              <meta property="og:image" content="{{ request.site.root_url|urljoin:social_img.url }}"/>
+          {% elif page.hero_image %}
+              <meta property="og:image" content="{{ request.site.root_url|urljoin:page.hero_image.file.url }}"/>
+          {% elif page.hero_fallback_image %}
+              <meta property="og:image" content="{{ request.site.root_url|urljoin:page.hero_fallback_image.file.url }}"/>
+          {% else %}
+              <meta property="og:image" content="{% if settings.utils.SocialMediaSettings.default_sharing_image.file %}{{ request.site.root_url|urljoin:settings.utils.SocialMediaSettings.default_sharing_image.file.url }}{% endif %}"/>
+          {% endif %}
         {% endif %}
         <meta property="og:image:width" content="1920"/>
         <meta property="og:image:height" content="1080"/>
-        <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% elif page.listing_summary %}{{ page.listing_summary }}{% else %}{{ page.social_title|default:page.seo_title|default:page.title }}{% endif %}"/>
-        <meta property="og:url" content="{{ page.get_full_url }}"/>
+        {% if page %}
+          <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% elif page.listing_summary %}{{ page.listing_summary }}{% else %}{{ page.social_title|default:page.seo_title|default:page.title }}{% endif %}"/>
+          <meta property="og:url" content="{{ page.get_full_url }}"/>
+        {% endif %}
         <meta property="og:site_name" content="{{ settings.utils.SocialMediaSettings.site_name }}"/>
         <link rel="stylesheet" type="text/css" media="all" href="{% static 'css/main.css' %}"/>
         <!-- Favicons -->
         {% comment %}
-          {% with page.introduction as page_intro %}{% endwith %}
-            Generate favicons by http://realfavicongenerator.net using the following path: settings.STATIC_URL + img/favicons.
-            Then favicon.ico should be copied to a directory called "public" in the application root and puppet does some magic to serve it up at the site root.
+          {% if page %}
+            {% with page.introduction as page_intro %}{% endwith %}
+              Generate favicons by http://realfavicongenerator.net using the following path: settings.STATIC_URL + img/favicons.
+              Then favicon.ico should be copied to a directory called "public" in the application root and puppet does some magic to serve it up at the site root.
+          {% endif %}
         {% endcomment %}
         <link rel="icon" type="image/x-icon" href="{% static "images/favicon.ico" %}" sizes="32x32"/>
 
