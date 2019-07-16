@@ -2154,7 +2154,7 @@ blockquote {
     flex-direction: column;
     text-align: center;
     pointer-events: none;
-    margin: 2em 1rem 2.5em 1rem; }
+    padding: 2em 1rem 2.5em 1rem; }
     @media only screen and (min-width: 768px) {
       .hero__content--centered {
         background: transparent;
