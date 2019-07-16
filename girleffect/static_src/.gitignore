@@ -1,5 +1,5 @@
 dploy.yaml
-node_modules
+node_modules/*
 .sass-cache
 .tmp
 .DS_Store

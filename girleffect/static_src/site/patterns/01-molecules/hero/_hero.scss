@@ -1,5 +1,6 @@
 .hero {
     position: relative;
+    overflow: auto;
 
     &--article {
         &::before {
@@ -62,18 +63,28 @@
 
     &__content {
         &--centered {
-            @include mid-container;
+            background: $light-grey;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
             text-align: center;
             pointer-events: none;
+            margin: 2em 1rem 2.5em 1rem;
+            @include media-query(tablet-portrait) {
+              background: transparent;
+              margin: 1em 3rem 1em 3rem;
+              position: absolute;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+            }
+            //@include media-query(tablet-landscape) {}
+            @include media-query(container) {
+              margin: 0 auto;
+              max-width: $body-width;
+            }
         }
 
         .link {
@@ -83,13 +94,14 @@
 
     &__strapline {
         @include jumbo-text;
-        color: $white;
-        text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);
-
+        color: $green;
         @include media-query(mob-landscape) {
             margin-bottom: 1rem;
         }
-
+        @include media-query(tablet-portrait) {
+          color: $white;
+          text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.8);
+        }
         .template-home-page & {
             padding: 0 40px;
 
