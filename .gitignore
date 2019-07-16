@@ -34,3 +34,4 @@ wheels/
 *.egg
 
 settings/local.py
+/static_src/node_modules/*

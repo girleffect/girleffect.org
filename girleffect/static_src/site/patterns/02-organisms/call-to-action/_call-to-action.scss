@@ -52,6 +52,9 @@
     }
 
     .link {
+      color: $green;
+      @include media-query(tablet-landcsape) {
         color: $white;
+      }
     }
 }
