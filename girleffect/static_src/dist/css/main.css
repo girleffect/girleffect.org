@@ -1091,7 +1091,7 @@ blockquote {
   padding: 1rem;
   position: relative; }
   .hero .link--boxed {
-    color: #fff; }
+    color: #2f6165; }
   .link--boxed::after {
     content: '';
     position: absolute;
@@ -2701,7 +2701,7 @@ blockquote {
     .cta__summary .rich-text {
       font-size: inherit; }
   .cta .link {
-    color: #fff; }
+    color: #2f6165; }
 
 .footer {
   background: #e5e5e5;

@@ -3,9 +3,11 @@
         display: inline-block;
         padding: 1rem;
         position: relative;
-
         .hero & {
-          color: $white;
+          color: $green;
+          @include media-query(tablet-landcsape) {
+            color: $white;
+          }
         }
 
         &::after {
