@@ -69,7 +69,7 @@
             flex-direction: column;
             text-align: center;
             pointer-events: none;
-            margin: 2em 1rem 2.5em 1rem;
+            padding: 2em 1rem 2.5em 1rem;
             @include media-query(tablet-portrait) {
               background: transparent;
               margin: 1em 3rem 1em 3rem;
