@@ -2,3 +2,4 @@
 export/*
 public/*
 source/styleguide/*
+/static_src/node_modules/*
