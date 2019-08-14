@@ -62,7 +62,6 @@
 
     &__content {
         &--centered {
-            background: $light-grey;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -70,14 +69,14 @@
             text-align: center;
             pointer-events: none;
             padding: 2em 1rem 2.5em 1rem;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
             @include media-query(tablet-portrait) {
               background: transparent;
               margin: 1em 3rem 1em 3rem;
-              position: absolute;
-              top: 0;
-              right: 0;
-              bottom: 0;
-              left: 0;
             }
 
             @include media-query(container) {
