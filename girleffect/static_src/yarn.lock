@@ -1665,7 +1665,7 @@ dploy@^1.2.0:
     colors "~0.6.x"
     ftp "~0.3.x"
     glob-expand "0.0.2"
-    minimatch "~0.2.x"
+    minimatch "^3.0.2"
     prompt "~0.2.x"
     signals "~1.0.x"
     ssh2 "~0.2.x"
@@ -2610,7 +2610,7 @@ glob@~3.1.11, glob@~3.1.21:
   dependencies:
     graceful-fs "~1.2.0"
     inherits "1"
-    minimatch "~0.2.11"
+    minimatch "^3.0.2"
 
 globals@^11.0.1:
   version "11.12.0"
@@ -3720,14 +3720,6 @@ minimatch@^3.0.2, minimatch@^3.0.4, minimatch@~3.0.2:
   integrity sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
   dependencies:
     brace-expansion "^1.1.7"
-
-minimatch@~0.2.11:
-  version "0.2.14"
-  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-0.2.14.tgz#c74e780574f63c6f9a090e90efbe6ef53a6a756a"
-  integrity sha1-x054BXT2PG+aCQ6Q775u9TpqdWo=
-  dependencies:
-    lru-cache "2"
-    sigmund "~1.0.0"
 
 minimist@0.0.8:
   version "0.0.8"
