@@ -1,4 +1,4 @@
-django>=1.11.19,<2.0
+django==1.11.29
 wagtail==1.13.1
 psycopg2==2.7
 django-redis==4.10.0
@@ -16,6 +16,7 @@ boto3==1.4.8
 user-agents==1.1.0
 django-user-agents==0.3.2
 mozilla-django-oidc==1.1.1
+django-allauth~=0.41.0
 
 # Production dependencies
 dj-database-url==0.4.1

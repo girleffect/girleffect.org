@@ -41,9 +41,16 @@ INSTALLED_APPS = [
     'girleffect.solutions',
     'girleffect.standardpage',
     'girleffect.utils',
+    'girleffect.admins',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 
     'wagtail.contrib.postgres_search',
     'wagtail.contrib.wagtailsitemaps',
+    'wagtail.contrib.modeladmin',
     'wagtail.contrib.wagtailsearchpromotions',
     'wagtail.contrib.settings',
     'wagtail.wagtailforms',
@@ -69,6 +76,7 @@ INSTALLED_APPS = [
     'wagtailmedia',
     'django_user_agents',
 
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -104,6 +112,8 @@ MIDDLEWARE_CLASSES = [
     'girleffect.esi.middleware.ESIMiddleware',
     'django_user_agents.middleware.UserAgentMiddleware',
 ]
+
+SITE_ID = 1
 
 ROOT_URLCONF = 'girleffect.urls'
 
@@ -292,3 +302,43 @@ if OIDC_ENABLED:
     LOGOUT_REDIRECT_URL = '/'
 else:
     OIDC_ENABLED = False
+
+
+ENABLE_ALL_AUTH = os.environ.get('ENABLE_ALL_AUTH', False)
+
+if ENABLE_ALL_AUTH:
+    AUTHENTICATION_BACKENDS += [
+        'allauth.account.auth_backends.AuthenticationBackend',
+    ]
+
+ACCOUNT_ADAPTER = "girleffect.admins.adapter.StaffUserAdapter"
+
+SOCIALACCOUNT_ADAPTER = "girleffect.admins.adapter.StaffUserSocialAdapter"
+
+ACCOUNT_AUTHENTICATION_METHOD = "username"
+
+ACCOUNT_LOGIN_REDIRECT_URL = "wagtailadmin_home"
+
+ACCOUNT_LOGOUT_REDIRECT_URL = "/admin"
+
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+
+SOCIALACCOUNT_ENABLED = os.environ.get('SOCIAL_LOGIN_ENABLE', True)
+
+SOCIALACCOUNT_STORE_TOKENS = False
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'APP': {
+            'client_id': os.environ.get('GOOGLE_LOGIN_CLIENT_ID', ''),
+            'secret': os.environ.get('GOOGLE_LOGIN_SECRET', ''),
+        }
+    }
+}
