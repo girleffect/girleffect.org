@@ -22,8 +22,6 @@ class InviteAdmin(WagtailModelAdmin):
         def form_valid(self, form):
             if not form.instance.user:
                 form.instance.user = self.request.user
-            if not form.instance.site and hasattr(self.request, 'site'):
-                form.instance.site = self.request.site
             return super().form_valid(form)
 
     create_view_class = InviteCreateView
