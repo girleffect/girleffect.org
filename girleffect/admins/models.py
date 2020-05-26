@@ -9,7 +9,7 @@ from django.contrib.auth.models import User, Group, Permission
 from django.contrib.sites.models import Site
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 
-from settings import base as settings
+from girleffect.settings import base as settings
 
 from .forms import PermissionGroupCheckboxSelect
 
