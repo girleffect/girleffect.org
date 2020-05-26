@@ -45,7 +45,7 @@ class TestAllAuth(TestCase):
         req.user = self.user
 
         self.client.force_login(self.user)
-        url = '/admin/gem/invite/create/'
+        url = '/admin/admins/invite/create/'
         data = {
             'email': 'testinvite@test.com'
         }
@@ -74,7 +74,7 @@ class TestAllAuth(TestCase):
         invite = Invite.objects.create(email=data['email'], user=self.user)
         self.client.force_login(self.user)
 
-        url = '/admin/gem/invite/edit/{}/'.format(invite.pk)
+        url = '/admin/admins/invite/edit/{}/'.format(invite.pk)
         res = self.client.post(url, request=req)
         self.assertEqual(res.status_code, 200)
         self.assertContains(res, data['email'])
