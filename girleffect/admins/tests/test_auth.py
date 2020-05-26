@@ -2,7 +2,6 @@
 from django.core import mail
 from django.urls import reverse
 from django.conf import settings
-from django.contrib.sites.models import Site
 
 from django.contrib.auth import get_user_model
 from django.test.utils import override_settings
@@ -19,7 +18,6 @@ class TestAllAuth(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_superuser(
             username='superuser', email='superuser@email.com', password='pass')
-        self.site = Site.objects.create(name='test.com', domain='test.com')
 
     @override_settings(ENABLE_ALL_AUTH=True)
     def test_admin_login_view(self):
@@ -41,7 +39,6 @@ class TestAllAuth(TestCase):
     @override_settings(ENABLE_ALL_AUTH=True)
     def test_invite_create_view(self):
         req = RequestFactory()
-        req.site = self.site
         req.user = self.user
 
         self.client.force_login(self.user)
@@ -51,13 +48,13 @@ class TestAllAuth(TestCase):
         }
         res = self.client.post(url, data=data, request=req)
 
-        subject = '{}: Admin site invitation'.format(self.site)
+        subject = 'example.com: Admin site invitation'
         self.assertEqual(res.status_code, 302)
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].subject, subject)
         self.assertEqual(mail.outbox[0].to, [data['email']])
-        self.assertEqual(mail.outbox[0].from_email, 'no-reply@gehosting.org')
+        self.assertEqual(mail.outbox[0].from_email, 'webmaster@localhost')
 
         self.assertTrue(
             Invite.objects.filter(user=self.user).exists())
@@ -68,7 +65,6 @@ class TestAllAuth(TestCase):
             'email': 'testinvite@test.com'
         }
         req = RequestFactory()
-        req.site = self.site
         req.user = self.user
 
         invite = Invite.objects.create(email=data['email'], user=self.user)
@@ -90,7 +86,6 @@ class TestAllAuth(TestCase):
         Test a front-end user getting an invite to admin site
         """
         request = RequestFactory()
-        request.site = self.site
 
         adaptor = StaffUserSocialAdapter(request=request)
         user = get_user_model().objects.create_user(
@@ -125,7 +120,6 @@ class TestAllAuth(TestCase):
         Test a new user getting an invite to admin site
         """
         request = RequestFactory()
-        request.site = self.site
 
         adaptor = StaffUserSocialAdapter(request=request)
         user = get_user_model()(
@@ -158,7 +152,6 @@ class TestAllAuth(TestCase):
         Test a regular staff login
         """
         request = RequestFactory()
-        request.site = self.site
         adaptor = StaffUserSocialAdapter(request=request)
         user = get_user_model().objects.create_user(
             username='testuser',
@@ -192,7 +185,6 @@ class TestAllAuth(TestCase):
             is_superuser=True,
             password='pass'
         )
-        request.site = self.site
         sociallogin = SocialLogin(user=user)
         self.assertFalse(adaptor.is_open_for_signup(request, sociallogin))
         self.assertFalse(user.groups.all().exists())
@@ -216,7 +208,6 @@ class TestAllAuth(TestCase):
                 'username': user.username,
                 'password': user.password
             }, path=reverse('wagtailadmin_login'))
-        request.site = self.site
         self.assertFalse(adaptor.is_open_for_signup(request, None))
 
     def test_staff_user_adapter_front_end_user(self):
@@ -231,7 +222,6 @@ class TestAllAuth(TestCase):
                 'username': user.username,
                 'password': user.password
             }, path=reverse('wagtailadmin_login'))
-        request.site = self.site
         self.assertFalse(adaptor.is_open_for_signup(request, None))
 
     def test_staff_user_adapter_staff_user(self):
@@ -247,7 +237,6 @@ class TestAllAuth(TestCase):
                 'username': user.username,
                 'password': user.password
             }, path=reverse('wagtailadmin_login'))
-        request.site = self.site
         self.assertFalse(adaptor.is_open_for_signup(request, None))
 
     def test_staff_user_adapter_staff_user_perms(self):
@@ -267,7 +256,6 @@ class TestAllAuth(TestCase):
                 'username': user.username,
                 'password': user.password
             }, path=reverse('wagtailadmin_login'))
-        request.site = self.site
         self.assertFalse(adaptor.is_open_for_signup(request, None))
 
     def test_user_delete(self):
