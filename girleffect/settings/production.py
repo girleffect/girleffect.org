@@ -20,6 +20,9 @@ INSTALLED_APPS += (
     'raven.contrib.django.raven_compat',
 )
 
+# Enable Admin Social Login
+ENABLE_ALL_AUTH = os.environ.get('ENABLE_ALL_AUTH', True)
+
 # Cache everything for 10 minutes
 # This only applies to pages that do not have a more specific cache-control
 # setting. See urls.py
