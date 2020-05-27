@@ -31,7 +31,9 @@ class TestAllAuth(TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(settings.ENABLE_ALL_AUTH, True)
 
-    @override_settings(ENABLE_ALL_AUTH=True)
+    @override_settings(
+        ENABLE_ALL_AUTH=True,
+        SECURE_SSL_REDIRECT=False)
     def test_invite_create_view(self):
         req = RequestFactory()
         req.user = self.user
