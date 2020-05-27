@@ -38,7 +38,7 @@ class Invite(models.Model):
 def send_admin_invite_email(sender, **kwargs):
     invite = kwargs.get('instance')
     created = kwargs.get('created')
-    if created and settings.ENABLE_ALL_AUTH:
+    if created:
         user = invite.user
         site = Site.objects.get(pk=settings.SITE_ID)
         subject = _('{}: Admin site invitation'.format(site))
