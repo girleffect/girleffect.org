@@ -21,20 +21,15 @@ class TestAllAuth(TestCase):
 
     @override_settings(ENABLE_ALL_AUTH=True)
     def test_admin_login_view(self):
-        res = self.client.get(reverse('wagtailadmin_login'))
+        res = self.client.get(reverse('wagtailadmin_login'), follow=True)
         self.assertEqual(res.status_code, 200)
 
     @override_settings(ENABLE_ALL_AUTH=True)
     def test_admin_views_authed_user(self):
         self.client.force_login(self.user)
-
-        res = self.client.get(reverse('wagtailadmin_login'))
-        self.assertEqual(res.status_code, 302)
-        self.assertEqual(settings.ENABLE_ALL_AUTH, True)
-        self.assertEqual(res.url, '/admin/')
-
-        res = self.client.get(res.url)
+        res = self.client.get(reverse('wagtailadmin_login'), follow=True)
         self.assertEqual(res.status_code, 200)
+        self.assertEqual(settings.ENABLE_ALL_AUTH, True)
 
     @override_settings(ENABLE_ALL_AUTH=True)
     def test_invite_create_view(self):
@@ -46,10 +41,10 @@ class TestAllAuth(TestCase):
         data = {
             'email': 'testinvite@test.com'
         }
-        res = self.client.post(url, data=data, request=req)
+        res = self.client.post(url, data=data, request=req, follow=True)
 
         subject = 'example.com: Admin site invitation'
-        self.assertEqual(res.status_code, 302)
+        self.assertEqual(res.status_code, 200)
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].subject, subject)
@@ -71,12 +66,12 @@ class TestAllAuth(TestCase):
         self.client.force_login(self.user)
 
         url = '/admin/admins/invite/edit/{}/'.format(invite.pk)
-        res = self.client.post(url, request=req)
+        res = self.client.post(url, request=req, follow=True)
         self.assertEqual(res.status_code, 200)
         self.assertContains(res, data['email'])
-        res = self.client.post(url, data=data, request=req)
+        res = self.client.post(url, data=data, request=req, follow=True)
 
-        self.assertEqual(res.status_code, 302)
+        self.assertEqual(res.status_code, 200)
         # Note: email sent on creation of invite object by signal
         # testing that a duplicate email was not sent on update
         self.assertEqual(len(mail.outbox), 1)
@@ -274,6 +269,6 @@ class TestAllAuth(TestCase):
 
     @override_settings(ENABLE_ALL_AUTH=False)
     def test_login_all_auth_disabled(self):
-        res = self.client.get(reverse('wagtailadmin_login'))
+        res = self.client.get(reverse('wagtailadmin_login'), follow=True)
         self.assertEqual(res.status_code, 200)
         self.assertNotContains(res, '<span class="fa fa-google"></span>Google')
