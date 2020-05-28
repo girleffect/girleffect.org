@@ -33,6 +33,12 @@ urlpatterns = [
     url(r'^admin/logout/', LogoutRedirectView.as_view()),
 ] if settings.OIDC_ENABLED else []
 
+
+if settings.ENABLE_ALL_AUTH:
+    urlpatterns += [
+        url(r'^accounts/', include('allauth.urls')),
+    ]
+
 urlpatterns.extend([
     url(r'^django-admin/', include(admin.site.urls)),
     url(r'^admin/', include(wagtailadmin_urls)),
