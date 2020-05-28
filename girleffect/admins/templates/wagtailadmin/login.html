@@ -70,18 +70,17 @@
                     <button type="submit" class="button button-longrunning" tabindex="3" data-clicked-text="{% trans 'Signing in...' %}"><span class="icon icon-spinner"></span><em>{% trans 'Sign in' %}</em></button>
                     {% endblock %}
 
-
                         {% load socialaccount %}
+                        {% if settings.ENABLE_ALL_AUTH.ENABLE_ALL_AUTH or settings.ENABLE_ALL_AUTH  %}
                         {% get_providers as socialaccount_providers %}
                         {% if socialaccount_providers %}
-                        <div class="socialaccount_ballot">
-                          <div class="socialaccount_providers list-unstyled">
+
                             {% include "wagtailadmin/socialaccount_provider_list.html" with process="login" %}
-                          </div>
-                        </div>
+
                         {% include "socialaccount/snippets/login_extra.html" %}
                         {% endif %}
-                    
+                        {% endif %}
+
                 </li>
             </ul>
         {% endblock %}
