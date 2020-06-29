@@ -65,7 +65,7 @@ if env.get('SECURE_SSL_REDIRECT', 'true') == 'true':
     SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # enable HSTS only once the site is working properly on https with the actual live domain name
-# SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_SECONDS = 3600  # 1 hour
 
 if 'SECRET_KEY' in env:
     SECRET_KEY = env['SECRET_KEY']
