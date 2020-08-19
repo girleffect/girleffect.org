@@ -21,6 +21,9 @@
             </th>
             <th class="level">{% trans "Level" %}</th>
             <th class="status">{% trans "Status" %}</th>
+            {% if perms.auth.delete_user %}
+            <th class="status">&nbsp;</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -35,6 +38,13 @@
                 <td class="username" valign="top">{{ user.get_username }}</td>
                 <td class="level" valign="top">{% if user.is_superuser %}{% trans "Admin" %}{% endif %}</td>
                 <td class="status" valign="top"><div class="status-tag {% if user.is_active %}primary{% endif %}">{% if user.is_active %}{% trans "Active" %}{% else %}{% trans "Inactive" %}{% endif %}</div></td>
+                {% if perms.auth.delete_user %}
+                <td class="level" valign="top">
+                    <a class="button button-secondary button-small" href="{% url 'wagtailusers_users:delete' user.pk %}">
+                        {% trans "Delete" %}
+                    </a>
+                </td>
+                {% endif %}
             </tr>
         {% endfor %}
     </tbody>
