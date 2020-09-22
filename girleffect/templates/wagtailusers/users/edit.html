@@ -28,6 +28,12 @@
                         {% block extra_fields %}{% endblock extra_fields %}
 
                     {% endblock fields %}
+                    <li>
+                        <input type="submit" value="{% trans 'Save' %}" class="button" />
+                        {% if can_delete %}
+                            <a href="{% url 'wagtailusers_users:delete' user.pk %}" class="button button-secondary no">{% trans "Delete user" %}</a>
+                        {% endif %}
+                    </li>
                 </ul>
             </section>
             <section id="roles" class="nice-padding">
@@ -37,10 +43,14 @@
                     {% endif %}
 
                     {% include "wagtailadmin/shared/field_as_li.html" with field=form.groups %}
+                    <li>
+                        <input type="submit" value="{% trans 'Save' %}" class="button" />
+                        {% if can_delete %}
+                            <a href="{% url 'wagtailusers_users:delete' user.pk %}" class="button button-secondary no">{% trans "Delete user" %}</a>
+                        {% endif %}
+                    </li>
                 </ul>
             </section>
         </div>
-        <script>$('div[class="tab-content"]').find('input').attr('readonly','readonly');</script>
-        <script>$('div[class="tab-content"]').find('input').attr('onclick','return false');</script>
     </form>
 {% endblock %}
