@@ -23,8 +23,6 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" > /etc/
 WORKDIR /app
 ENV PYTHONPATH /app
 
-COPY site-redir-www-nonwww.conf /etc/nginx/conf.d/site-redir-www-nonwww.conf
-
 # Install requirements - done in a separate step so Docker can cache it.
 COPY requirements.txt /
 RUN pip install -r /requirements.txt
