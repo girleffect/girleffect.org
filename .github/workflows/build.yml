@@ -2,12 +2,31 @@ name: Python package
 
 on: [push]
 
+env:
+  DJANGO_SETTINGS_MODULE: girleffect.settings.production
+  CFG_SECRET_KEY: fake_secret_key_to_run_tests
+  DATABASE_URL: postgres://postgres@localhost/postgres
+  REPO: girleffect/girleffect.org
+  REGISTRY_USER: geautomation
+
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.6]
+        postgresql: [9.6]
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     - uses: actions/checkout@v2
