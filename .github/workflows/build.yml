@@ -8,6 +8,7 @@ env:
   DATABASE_URL: postgres://postgres@localhost/postgres
   REPO: girleffect/girleffect.org
   REGISTRY_USER: geautomation
+  PASSWORD: postgres
 
 jobs:
   build:
@@ -22,7 +23,7 @@ jobs:
         image: postgres
         # Provide the password for postgres
         env:
-          PASSWORD: postgres
+          POSTGRES_PASSWORD: postgres
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
