@@ -768,7 +768,7 @@ h4,
 }
 
 @media (max-width: 874.24px) {
-  
+
   h4,
   .stat-block__content b {
     font-size: 16px;
@@ -776,7 +776,7 @@ h4,
 }
 
 @media (min-width: 1366px) {
-  
+
   h4,
   .stat-block__content b {
     font-size: 25px;
@@ -4071,7 +4071,7 @@ article .share-icons--hide-mobile {
 
 @media only screen and (min-width: 1024px) {
   .header__logo {
-    flex-basis: 20%;
+    flex-basis: 10%;
     margin-right: 0;
     max-width: 100%;
   }
