@@ -3,10 +3,10 @@ FROM python:3.6.2-jessie
 
 # Install non-python dependencies
 # Step 1: Add the PGDG repo into the sources list
+RUN apt-get update
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
     # Step 2: Install wget and ca-certificates to be able to add a cert for PGDG
-    apt-get update && \
-    apt-get install ca-certificates && \
+    apt-get install -y --no-install-recommends wget ca-certificates && \
     # Step 3: Add the PDGD cert
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
     # Step 4: Install the postgresql-client package
