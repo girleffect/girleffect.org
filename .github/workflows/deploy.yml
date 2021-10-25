@@ -17,8 +17,8 @@ jobs:
         uses: docker/setup-buildx-action@v1
       - name: Add certificates
         run:
-          wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key
-          sudo apt-key add jenkins-ci.org.key
+          apt-get update
+          apt-get install ca-certificates
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v1
