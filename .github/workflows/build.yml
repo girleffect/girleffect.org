@@ -45,7 +45,7 @@ jobs:
         pip install -r requirements.txt
     - name: Test
       run: |
-        python manage.py collectstatic --verbosity 0 --noinput --clear
-        python manage.py check
-        python manage.py makemigrations --check --noinput
-        python manage.py test
+        python manage.py collectstatic --settings=girleffect.settings.production --verbosity 0 --noinput --clear
+        python manage.py check --settings=girleffect.settings.production
+        python manage.py makemigrations --settings=girleffect.settings.production --check --noinput
+        python manage.py test --settings=girleffect.settings.production
