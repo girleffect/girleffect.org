@@ -10,7 +10,6 @@ jobs:
       DATABASE_URL: postgres://postgres:postgres@localhost/postgres
       REPO: girleffect/girleffect.org
       REGISTRY_USER: geautomation
-      PASSWORD: postgres
     runs-on: ubuntu-latest
     strategy:
       matrix:
