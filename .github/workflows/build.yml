@@ -2,16 +2,15 @@ name: Python package
 
 on: [push]
 
-env:
-  DJANGO_SETTINGS_MODULE: girleffect.settings.production
-  CFG_SECRET_KEY: fake_secret_key_to_run_tests
-  DATABASE_URL: postgres://postgres@localhost/postgres
-  REPO: girleffect/girleffect.org
-  REGISTRY_USER: geautomation
-  PASSWORD: postgres
-
 jobs:
   build:
+    env:
+      DJANGO_SETTINGS_MODULE: girleffect.settings.production
+      CFG_SECRET_KEY: fake_secret_key_to_run_tests
+      DATABASE_URL: postgres://postgres@localhost/postgres
+      REPO: girleffect/girleffect.org
+      REGISTRY_USER: geautomation
+      PASSWORD: postgres
     runs-on: ubuntu-latest
     strategy:
       matrix:
