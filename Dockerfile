@@ -10,7 +10,7 @@ RUN echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ jessie-pgdg main
     # Step 3: Add the PDGD cert
     wget --no-check-certificate -qO - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add - && \
     # Step 4: Install the postgresql-client package
-    apt-get update && apt-get install -y --no-install-recommends \
+    apt-get update && apt-get install -y --force-yes --no-install-recommends \
     # We need postgresql-client to be able to use
     # `kubectl exec pg_dump` and `kubectl djnago-admin dbshell`
     postgresql-client-9.6 \
