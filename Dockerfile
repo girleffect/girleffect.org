@@ -28,6 +28,7 @@ COPY site-redir-www-nonwww.conf /etc/nginx/conf.d/site-redir-www-nonwww.conf
 
 # Install requirements - done in a separate step so Docker can cache it.
 COPY requirements.txt /
+RUN pip install --upgrade pip
 RUN pip install -r /requirements.txt
 
 # A wrapper script to run in the correct way (production/staging/review).
