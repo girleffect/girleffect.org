@@ -13,10 +13,8 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" > /etc/
     # Step 3: Add the PDGD cert
     wget --no-check-certificate -qO - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add - && \
     # Step 4: Install the postgresql-client package
-    apt-get update && apt-get install -y --no-install-recommends \
-    # We need postgresql-client to be able to use
-    # `kubectl exec pg_dump` and `kubectl djnago-admin dbshell`
-    postgresql-client-9.6 \
+    apt-get clean && cd /var/lib/apt && mv lists lists.old && mkdir -p lists/partial && apt-get clean && apt-get update && \
+    apt-get install -y --no-install-recommends postgresql-client-9.6 \
     # Install rsync to be able to fetch media files
     rsync && \
     # Step 5: Cleanup apt cache and lists
