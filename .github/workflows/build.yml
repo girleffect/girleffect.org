@@ -5,7 +5,7 @@ on: [push]
 env:
   DJANGO_SETTINGS_MODULE: girleffect.settings.production
   CFG_SECRET_KEY: fake_secret_key_to_run_tests
-  DATABASE_URL: postgres://postgres@localhost/postgres
+  # DATABASE_URL: postgres://postgres@localhost/postgres
   REPO: girleffect/girleffect.org
   REGISTRY_USER: geautomation
 
@@ -27,6 +27,9 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
 
     steps:
     - uses: actions/checkout@v2
@@ -38,6 +41,17 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Connect to PostgreSQL
+        # Runs a script that creates a PostgreSQL table, populates
+        # the table with data, and then retrieves the data
+        run: node client.js
+        # Environment variables used by the `client.js` script to create
+        # a new PostgreSQL table.
+        env:
+          # The hostname used to communicate with the PostgreSQL service container
+          POSTGRES_HOST: localhost
+          # The default PostgreSQL port
+          POSTGRES_PORT: 5432
     - name: Test
       run: |
         python manage.py collectstatic --verbosity 0 --noinput --clear
