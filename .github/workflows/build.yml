@@ -25,7 +25,7 @@ jobs:
           POSTGRES_DB: postgres
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          DATABASE_URL: postgres://postgres@localhost/postgres
+          DATABASE_URL: postgres://postgres:postgres@localhost/postgres
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
