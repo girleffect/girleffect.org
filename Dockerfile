@@ -6,7 +6,7 @@ FROM python:3.6.2-jessie
 RUN apt-get update
 RUN echo "deb http://apt-archive.postgresql.org/pub/repos/apt/ jessie-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
     # Step 2: Install wget and ca-certificates to be able to add a cert for PGDG
-    apt-get install -y --no-install-recommends wget ca-certificates && \
+    apt-get install -y --no-install-recommends apt-transport-https wget ca-certificates && \
     # Step 3: Add the PDGD cert
     wget --no-check-certificate -qO - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add - && \
     # Step 4: Install the postgresql-client package
