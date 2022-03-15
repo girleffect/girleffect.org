@@ -156,8 +156,8 @@ else:
 
 # Redis
 # django_cache_url defaults to memcache
-CACHE_URL = env.get('CACHE_URL', "")
-if 'CACHE_URL':
+CACHE_URL = env.get('CACHE_URL', '')
+if CACHE_URL:
     CACHES = {'default': django_cache_url.config()}
 
 
