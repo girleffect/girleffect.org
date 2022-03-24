@@ -130,6 +130,8 @@ if all(v in env for v in ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'AWS_STO
     }
     AWS_S3_FILE_OVERWRITE = False
     S3_USE_SIGV4 = True
+    if ('AWS_S3_ENDPOINT_URL') in env:
+        AWS_S3_ENDPOINT_URL = env['AWS_S3_ENDPOINT_URL']
 
 # Sentry Config
 if 'SENTRY_DSN' in env:
