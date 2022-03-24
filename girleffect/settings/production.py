@@ -134,6 +134,8 @@ if all(v in env for v in ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'AWS_STO
         AWS_S3_ENDPOINT_URL = env['AWS_S3_ENDPOINT_URL']
     if ('AWS_S3_CUSTOM_DOMAIN') in env:
         AWS_S3_CUSTOM_DOMAIN = env['AWS_S3_CUSTOM_DOMAIN']
+    if ('AWS_S3_SIGNATURE_VERSION') in env:
+        AWS_S3_SIGNATURE_VERSION = env['AWS_S3_SIGNATURE_VERSION']
 
 # Sentry Config
 if 'SENTRY_DSN' in env:
