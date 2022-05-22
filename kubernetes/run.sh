@@ -17,7 +17,9 @@ if [ "${REVIEW_APP}" = true ]; then
     SECURE_SSL_REDIRECT=false
     export SECURE_SSL_REDIRECT
 
-    django-admin.py migrate --noinput
+    if [ -n "$RUN_MIGRATIONS" ]; then
+        django-admin.py migrate --noinput
+    fi
 
     # Create a default admin/admin user.
     python bin/createsuperuser.py
@@ -31,7 +33,9 @@ else
 
     # Run database migrations on startup.  This won't work properly if there's
     # more than one replica.
-    django-admin.py migrate --noinput
+    if [ -n "$RUN_MIGRATIONS" ]; then
+        django-admin.py migrate --noinput
+    fi
 fi
 
 django-admin.py collectstatic --noinput --clear
