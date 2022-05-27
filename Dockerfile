@@ -35,7 +35,7 @@ RUN pip install -r /requirements.txt
 
 # A wrapper script to run in the correct way (production/staging/review).
 COPY kubernetes/run.sh /
-ENTRYPOINT [ "/run.sh" ]
+CMD [ "/run.sh" ]
 
 # Install application code.
 COPY . /app
